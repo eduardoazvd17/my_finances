@@ -18,6 +18,12 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('My Finances'),
+          centerTitle: true,
+        ),
+        body: Column(
+          children: [
+            Text('testing body...'),
+          ],
         ),
       ),
     );
