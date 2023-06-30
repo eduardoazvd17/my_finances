@@ -7,10 +7,7 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-
     return Scaffold(
-      appBar: AppBar(title: const AppLogo()),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
@@ -20,18 +17,7 @@ class WelcomePage extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 25.0),
-                      child: Text(
-                        'teste',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: nameController,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    AppLogo(verticalAlign: false),
                   ],
                 ),
               ),

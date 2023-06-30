@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     LocalJsonLocalization.delegate.directories = ['lib/i18n'];
 
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'app-name'.i18n(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

@@ -2,20 +2,39 @@ import 'package:flutter/cupertino.dart';
 import 'package:localization/localization.dart';
 
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key});
+  final double size;
+  final bool verticalAlign;
+
+  const AppLogo({
+    super.key,
+    this.size = 40,
+    this.verticalAlign = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Icon(CupertinoIcons.money_dollar_circle),
-        const SizedBox(width: 5),
-        Text(
-          'app-name'.i18n(),
-          style: const TextStyle(fontSize: 20),
-        ),
-      ],
-    );
+    final List<Widget> content = [
+      Icon(CupertinoIcons.money_dollar_circle, size: size),
+      SizedBox(
+        height: verticalAlign ? (size / 8) : 0,
+        width: verticalAlign ? 0 : (size / 8),
+      ),
+      Text(
+        'app-name'.i18n(),
+        style: TextStyle(fontSize: size / 2),
+      ),
+    ];
+
+    if (verticalAlign) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: content,
+      );
+    } else {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: content,
+      );
+    }
   }
 }
