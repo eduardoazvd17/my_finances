@@ -1,6 +1,10 @@
 {
     "app-name": "Minhas Finanças",
-    "send-button": "Enviar",
+    "welcome-text": "Bem-vindo ao aplicativo minhas finanças",
+    "slogan-text": "Empodere seu bolso com planejamento financeiro!",
+    "login-button-text": "Entre com sua conta",
+    "register-button-text": "Crie sua conta",
+    "name-textfield-label": "Como você se chama?",
     "next-button": "Avançar",
     "save-button": "Salvar",
     "cancel-button": "Cancelar"

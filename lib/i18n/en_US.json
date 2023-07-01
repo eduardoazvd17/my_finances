@@ -1,5 +1,10 @@
 {
     "app-name": "My Finances",
+    "welcome-text": "Welcome to my finance app",
+    "slogan-text": "Empower your pocket with financial planning!",
+    "login-button-text": "Login with your account",
+    "register-button-text": "Create your account",
+    "name-textfield-label": "What's your name?",
     "send-button": "Send",
     "next-button": "Next",
     "save-button": "Save",

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
 
-import 'src/features/welcome_page/presentation/pages/welcome_page.dart';
+import 'src/features/authentication/presentation/pages/welcome_page.dart';
 
 void main() {
   Get.lazyPut(() => I18nController(), fenix: true);
@@ -23,7 +23,7 @@ class MyApp extends GetWidget<I18nController> {
         supportedLocales: controller.supportedLocales,
         localeResolutionCallback: controller.localeResolutionCallback,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
           useMaterial3: true,
         ),
         home: const WelcomePage(),

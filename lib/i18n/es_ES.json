@@ -1,5 +1,10 @@
 {
     "app-name": "Mis Finanzas",
+    "welcome-text": "Bienvenido a mi aplicación de finanzas",
+    "slogan-text": "¡Potencia tu bolsillo con la planificación financiera!",
+    "login-button-text": "Inicia sesión con tu cuenta",
+    "register-button-text": "Crea tu cuenta",
+    "name-textfield-label": "¿Cuál es tu nombre?",
     "send-button": "Enviar",
     "next-button": "Siguiente",
     "save-button": "Guardar",
