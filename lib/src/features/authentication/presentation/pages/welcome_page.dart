@@ -33,26 +33,41 @@ class WelcomePage extends StatelessWidget {
                   style: const TextStyle(color: Colors.grey),
                 ),
               ),
-              TextButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    Theme.of(context).primaryColor,
-                  ),
-                  foregroundColor: MaterialStateProperty.all(
-                    Colors.white,
-                  ),
-                  overlayColor: MaterialStateProperty.all(
-                    Colors.grey.withOpacity(0.25),
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor,
+                          ),
+                          foregroundColor: MaterialStateProperty.all(
+                            Colors.white,
+                          ),
+                          overlayColor: MaterialStateProperty.all(
+                            Colors.grey.withOpacity(0.25),
+                          ),
+                        ),
+                        child: Text('login-button-text'.i18n()),
+                      ),
+                    ),
+                  ],
                 ),
-                child: Text('login-button-text'.i18n()),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text('register-button-text'.i18n()),
+                padding: const EdgeInsets.only(top: 10.0, right: 30, left: 30),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text('register-button-text'.i18n()),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
