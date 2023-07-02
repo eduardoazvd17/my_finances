@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/authentication/presentation/controllers/auth_controller.dart';
 
 class LoginPage extends GetWidget<AuthController> {
@@ -7,6 +9,13 @@ class LoginPage extends GetWidget<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return ScaffoldWidget(
+      appBar: AppBar(
+        title: Text('login-button'.i18n()),
+      ),
+      body: Column(
+        children: [],
+      ),
+    );
   }
 }
