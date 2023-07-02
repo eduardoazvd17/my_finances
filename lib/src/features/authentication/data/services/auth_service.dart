@@ -105,6 +105,10 @@ class AuthService {
     }
   }
 
+  Future<void> logout() async {
+    _database.credentialsManager.removeAllCredentials();
+  }
+
   String _md5Hash(String value) {
     return md5.convert(utf8.encode(value)).toString();
   }
