@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:credentials_manager/credentials_manager.dart';
+import 'package:crypto/crypto.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/errors/app_error.dart';
 import 'package:myfinances/src/core/data/models/database_model.dart';
@@ -40,7 +43,7 @@ class AuthService {
           .get();
       if (query.docs.isNotEmpty && query.docs.first.exists) {
         final UserModel userModel = UserModel.fromMap(query.docs.first.data());
-        if (userModel.password == password) {
+        if (userModel.password == _md5Hash(password)) {
           await _database.credentialsManager.removeAllCredentials();
           await _database.credentialsManager.saveCredential(
             CredentialModel(
@@ -72,6 +75,7 @@ class AuthService {
       final query = await _database.usersCollection
           .where('email', isEqualTo: email)
           .get();
+
       if (query.docs.isNotEmpty && query.docs.first.exists) {
         throw AppError(message: 'user-exists'.i18n());
       } else {
@@ -80,7 +84,7 @@ class AuthService {
           id: dbRef.id,
           name: name,
           email: email,
-          password: password,
+          password: _md5Hash(password),
         );
         await dbRef.set(userModel.toMap());
         await _database.credentialsManager.removeAllCredentials();
@@ -99,5 +103,9 @@ class AuthService {
     } catch (_) {
       throw AppError.generic();
     }
+  }
+
+  String _md5Hash(String value) {
+    return md5.convert(utf8.encode(value)).toString();
   }
 }
