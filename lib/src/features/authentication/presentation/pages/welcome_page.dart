@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 
-class WelcomePage extends StatelessWidget {
+import '../controllers/welcome_page_controller.dart';
+
+class WelcomePage extends GetWidget<WelcomePageController> {
   const WelcomePage({super.key});
 
   @override

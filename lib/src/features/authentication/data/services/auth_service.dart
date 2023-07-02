@@ -1,10 +1,13 @@
 import 'package:credentials_manager/credentials_manager.dart';
+import 'package:myfinances/src/core/data/models/database_model.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final SharedPreferences localDatabase;
-  AuthService({required this.localDatabase});
+  final DatabaseModel database;
+
+  AuthService({
+    required this.database,
+  });
 
   Future<UserModel> login(CredentialModel credential) async {
     return UserModel(
