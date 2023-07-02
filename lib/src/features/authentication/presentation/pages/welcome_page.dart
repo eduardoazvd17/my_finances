@@ -5,9 +5,9 @@ import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 
-import '../controllers/welcome_page_controller.dart';
+import '../controllers/auth_controller.dart';
 
-class WelcomePage extends GetWidget<WelcomePageController> {
+class WelcomePage extends GetWidget<AuthController> {
   const WelcomePage({super.key});
 
   @override
@@ -70,7 +70,7 @@ class WelcomePage extends GetWidget<WelcomePageController> {
                   text: 'login-button'.i18n(),
                   backgroundColor: Theme.of(context).primaryColor,
                   foregroundColor: Colors.white,
-                  onTap: () {},
+                  onTap: controller.goToLoginPage,
                 ),
               ),
             ],
@@ -83,7 +83,7 @@ class WelcomePage extends GetWidget<WelcomePageController> {
               Expanded(
                 child: ButtonWidget(
                   text: 'register-button'.i18n(),
-                  onTap: () {},
+                  onTap: controller.goToRegisterPage,
                 ),
               ),
             ],
