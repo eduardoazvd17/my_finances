@@ -5,6 +5,7 @@ import 'package:myfinances/src/core/data/errors/app_error.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
 import 'package:myfinances/src/core/data/utils/app_routes.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
+import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/authentication/data/services/auth_service.dart';
 
 class AuthController extends GetxController {
@@ -48,6 +49,8 @@ class AuthController extends GetxController {
 
   Future<void> makeLogin() async {
     try {
+      LoadingWidget.dialog();
+
       final String email = emailController.text.trim();
       final String password = passwordController.text.trim();
 
@@ -67,14 +70,19 @@ class AuthController extends GetxController {
       if (userModel != null) {
         appController.setUser(userModel);
         AppRoutes.goToFinancesPage();
+      } else {
+        throw AppError.generic();
       }
     } on AppError catch (appError) {
+      Get.close(1);
       appError.showDialog();
     }
   }
 
   Future<void> makeRegister() async {
     try {
+      LoadingWidget.dialog();
+
       final String name = nameController.text.trim();
       final String email = emailController.text.trim();
       final String password = passwordController.text.trim();
@@ -105,8 +113,11 @@ class AuthController extends GetxController {
       if (userModel != null) {
         appController.setUser(userModel);
         AppRoutes.goToFinancesPage();
+      } else {
+        throw AppError.generic();
       }
     } on AppError catch (appError) {
+      Get.close(1);
       appError.showDialog();
     }
   }
