@@ -51,7 +51,7 @@ class LoginPage extends GetWidget<AuthController> {
                         text: 'make-login-button'.i18n(),
                         backgroundColor: Theme.of(context).primaryColor,
                         foregroundColor: Colors.white,
-                        onTap: () {},
+                        onTap: controller.makeLogin,
                       ),
                     ),
                   ],

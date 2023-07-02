@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 
 class CustomDialog extends StatelessWidget {
   final String title;
@@ -7,9 +8,9 @@ class CustomDialog extends StatelessWidget {
   final String? content;
   final bool centerContent;
   final Widget? child;
-  final String confirmButtonText;
+  final String? confirmButtonText;
   final void Function()? onConfirm;
-  final String closeButtonText;
+  final String? closeButtonText;
   final void Function()? onClose;
 
   const CustomDialog({
@@ -19,9 +20,9 @@ class CustomDialog extends StatelessWidget {
     this.content,
     this.centerContent = true,
     this.child,
-    this.confirmButtonText = 'Sim',
+    this.confirmButtonText,
     this.onConfirm,
-    this.closeButtonText = 'Não',
+    this.closeButtonText,
     this.onClose,
   });
 
@@ -93,7 +94,7 @@ class CustomDialog extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            confirmButtonText,
+                            confirmButtonText ?? 'yes-button'.i18n(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -128,7 +129,9 @@ class CustomDialog extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          onConfirm == null ? 'Fechar' : closeButtonText,
+                          onConfirm == null
+                              ? 'close-button'.i18n()
+                              : closeButtonText ?? 'no-button'.i18n(),
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

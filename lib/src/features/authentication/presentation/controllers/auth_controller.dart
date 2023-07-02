@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/errors/app_error.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
 import 'package:myfinances/src/core/data/utils/app_routes.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
@@ -36,11 +38,76 @@ class AuthController extends GetxController {
 
   Future<void> _autoLogin() async {
     _isLoading.value = true;
-    final UserModel? user = await _authService.autoLogin();
+    final UserModel? userModel = await _authService.autoLogin();
     _isLoading.value = false;
-    if (user != null) {
-      appController.setUser(user);
+    if (userModel != null) {
+      appController.setUser(userModel);
       AppRoutes.goToFinancesPage();
+    }
+  }
+
+  Future<void> makeLogin() async {
+    try {
+      final String email = emailController.text.trim();
+      final String password = passwordController.text.trim();
+
+      if (!email.isEmail) {
+        throw AppError(message: 'login-email-validation'.i18n());
+      }
+
+      if (password.isEmpty) {
+        throw AppError(message: 'login-password-validation'.i18n());
+      }
+
+      final UserModel? userModel = await _authService.login(
+        email: email,
+        password: password,
+      );
+
+      if (userModel != null) {
+        appController.setUser(userModel);
+        AppRoutes.goToFinancesPage();
+      }
+    } on AppError catch (appError) {
+      appError.showDialog();
+    }
+  }
+
+  Future<void> makeRegister() async {
+    try {
+      final String name = nameController.text.trim();
+      final String email = emailController.text.trim();
+      final String password = passwordController.text.trim();
+      final String password2 = password2Controller.text.trim();
+
+      if (name.isEmpty) {
+        throw AppError(message: 'register-name-validation'.i18n());
+      }
+
+      if (!email.isEmail) {
+        throw AppError(message: 'register-email-validation'.i18n());
+      }
+
+      if (password.length < 8) {
+        throw AppError(message: 'register-password-validation'.i18n());
+      }
+
+      if (password != password2) {
+        throw AppError(message: 'register-password2-validation'.i18n());
+      }
+
+      final UserModel? userModel = await _authService.register(
+        name: name,
+        email: email,
+        password: password,
+      );
+
+      if (userModel != null) {
+        appController.setUser(userModel);
+        AppRoutes.goToFinancesPage();
+      }
+    } on AppError catch (appError) {
+      appError.showDialog();
     }
   }
 

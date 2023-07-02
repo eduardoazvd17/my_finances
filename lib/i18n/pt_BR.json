@@ -18,12 +18,22 @@
     "make-register-button": "Registrar-se",
     "login-button": "Entre com sua conta",
     "register-button": "Crie sua conta",
+    "yes-button": "Sim",
+    "no-button": "Não",
+    "close-button": "Fechar",
     "send-button": "Enviar",
     "next-button": "Avançar",
     "save-button": "Salvar",
     "cancel-button": "Cancelar",
+    "error-text": "Erro",
     "generic-error": "Ocorreu um problema de comunicação com os nossos servidores, tente novamente em alguns instantes.",
     "incorrect-email": "Não existe uma conta associada a este endereço de e-mail.",
     "incorrect-password": "A senha inserida está incorreta.",
-    "user-exists": "Já existe uma conta associada a este endereço de e-mail."
+    "user-exists": "Já existe uma conta associada a este endereço de e-mail.",
+    "login-email-validation": "Insira um endereço de e-mail válido.",
+    "login-password-validation": "Insira sua senha para fazer login.",
+    "register-name-validation": "Insira um nome válido.",
+    "register-email-validation": "Insira um endereço de e-mail válido.",
+    "register-password-validation": "Insira uma senha válida com 8 ou mais caracteres.",
+    "register-password2-validation": "A confirmação de senha deve ser igual a senha inserida anteriormente."
 }

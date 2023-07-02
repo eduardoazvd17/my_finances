@@ -63,7 +63,7 @@ class RegisterPage extends GetWidget<AuthController> {
                         text: 'make-register-button'.i18n(),
                         backgroundColor: Theme.of(context).primaryColor,
                         foregroundColor: Colors.white,
-                        onTap: () {},
+                        onTap: controller.makeRegister,
                       ),
                     ),
                   ],

@@ -13,7 +13,7 @@ class AppError implements Exception {
   Future<void> showDialog() async {
     await Get.dialog(
       CustomDialog(
-        title: 'Erro',
+        title: 'error-text'.i18n(),
         content: message,
       ),
       name: 'appError',

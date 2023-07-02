@@ -18,12 +18,22 @@
     "make-register-button": "Register",
     "login-button": "Login with your account",
     "register-button": "Create your account",
+    "yes-button": "Yes",
+    "no-button": "No",
+    "close-button": "Close",
     "send-button": "Send",
     "next-button": "Next",
     "save-button": "Save",
     "cancel-button": "Cancel",
+    "error-text": "Error",
     "generic-error": "There was a problem communicating with our servers, please try again in a moment.",
     "incorrect-email": "There is no account associated with this email address.",
     "incorrect-password": "The password entered is incorrect.",
-    "user-exists": "An account associated with this email address already exists."
+    "user-exists": "An account associated with this email address already exists.",
+    "login-email-validation": "Please enter a valid email address.",
+    "login-password-validation": "Enter your password to login.",
+    "register-name-validation": "Please enter a valid name.",
+    "register-email-validation": "Please enter a valid email address.",
+    "register-password-validation": "Please enter a valid password of 8 or more characters.",
+    "register-password2-validation": "The password confirmation must match the previously entered password."
 }
