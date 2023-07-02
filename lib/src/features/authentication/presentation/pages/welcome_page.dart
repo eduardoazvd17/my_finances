@@ -5,6 +5,7 @@ import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
+import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
 import '../controllers/auth_controller.dart';
 
@@ -15,14 +16,11 @@ class WelcomePage extends GetWidget<AuthController> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       body: Center(
-        child: SingleChildScrollView(
+        child: ScrollViewWidget(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const AppLogo(
-                verticalAlign: true,
-                size: 50,
-              ),
+              const AppLogo(verticalAlign: true),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(

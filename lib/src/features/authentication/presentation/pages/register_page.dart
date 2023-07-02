@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/features/authentication/presentation/controllers/auth_controller.dart';
 
+import '../../../../core/presentation/widgets/app_logo.dart';
+import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../../../core/presentation/widgets/scaffold_widget.dart';
+import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 
 class RegisterPage extends GetWidget<AuthController> {
@@ -16,34 +19,58 @@ class RegisterPage extends GetWidget<AuthController> {
       appBar: AppBar(
         title: Text('register-button'.i18n()),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TextFieldWidget(
-              icon: CupertinoIcons.person,
-              label: 'register-name-label'.i18n(),
-              hint: 'register-name-hint'.i18n(),
-              controller: controller.nameController,
-            ),
-            TextFieldWidget(
-              icon: CupertinoIcons.mail,
-              label: 'register-email-label'.i18n(),
-              hint: 'register-email-hint'.i18n(),
-              controller: controller.emailController,
-            ),
-            TextFieldWidget(
-              icon: CupertinoIcons.lock,
-              label: 'register-password-label'.i18n(),
-              hint: 'register-password-hint'.i18n(),
-              controller: controller.passwordController,
-            ),
-            TextFieldWidget(
-              icon: CupertinoIcons.lock_shield,
-              label: 'register-password2-label'.i18n(),
-              hint: 'register-password2-hint'.i18n(),
-              controller: controller.password2Controller,
-            ),
-          ],
+      body: Center(
+        child: ScrollViewWidget(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: 50.0, top: 16),
+                child: AppLogo(),
+              ),
+              TextFieldWidget(
+                icon: CupertinoIcons.person,
+                label: 'register-name-label'.i18n(),
+                hint: 'register-name-hint'.i18n(),
+                controller: controller.nameController,
+              ),
+              TextFieldWidget(
+                icon: CupertinoIcons.mail,
+                label: 'register-email-label'.i18n(),
+                hint: 'register-email-hint'.i18n(),
+                controller: controller.emailController,
+              ),
+              TextFieldWidget(
+                icon: CupertinoIcons.lock,
+                label: 'register-password-label'.i18n(),
+                hint: 'register-password-hint'.i18n(),
+                controller: controller.passwordController,
+              ),
+              TextFieldWidget(
+                icon: CupertinoIcons.lock_shield,
+                label: 'register-password2-label'.i18n(),
+                hint: 'register-password2-hint'.i18n(),
+                controller: controller.password2Controller,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  bottom: 16,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ButtonWidget(
+                        text: 'make-register-button'.i18n(),
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        onTap: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

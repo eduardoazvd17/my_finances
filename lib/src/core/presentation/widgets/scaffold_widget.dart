@@ -9,14 +9,19 @@ class ScaffoldWidget extends StatelessWidget {
     this.body,
   });
 
+  void _hideKeyboard() => FocusManager.instance.primaryFocus?.unfocus();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: body,
+    return GestureDetector(
+      onTap: _hideKeyboard,
+      child: Scaffold(
+        appBar: appBar,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: body,
+          ),
         ),
       ),
     );
