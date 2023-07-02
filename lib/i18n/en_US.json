@@ -2,15 +2,15 @@
     "app-name": "My Finances",
     "welcome-text": "Welcome to my finance app",
     "slogan-text": "Empower your pocket with financial planning!",
-    "login-button-text": "Login with your account",
-    "register-button-text": "Create your account",
-    "name-textfield-label": "What's your name?",
-    "generic-error": "There was a problem communicating with our servers, please try again in a moment.",
-    "incorret-email": "There is no account associated with this email address.",
-    "incorrect-password": "The password entered is incorrect.",
-    "user-exists": "An account associated with this email address already exists.",
+    "name-label": "What's your name?",
+    "login-button": "Login with your account",
+    "register-button": "Create your account",
     "send-button": "Send",
     "next-button": "Next",
     "save-button": "Save",
-    "cancel-button": "Cancel"
+    "cancel-button": "Cancel",
+    "generic-error": "There was a problem communicating with our servers, please try again in a moment.",
+    "incorrect-email": "There is no account associated with this email address.",
+    "incorrect-password": "The password entered is incorrect.",
+    "user-exists": "An account associated with this email address already exists."
 }

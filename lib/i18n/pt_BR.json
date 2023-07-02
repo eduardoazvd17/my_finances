@@ -2,15 +2,15 @@
     "app-name": "Minhas Finanças",
     "welcome-text": "Bem-vindo ao aplicativo minhas finanças",
     "slogan-text": "Empodere seu bolso com planejamento financeiro!",
-    "login-button-text": "Entre com sua conta",
-    "register-button-text": "Crie sua conta",
-    "name-textfield-label": "Como você se chama?",
-    "generic-error": "Ocorreu um problema de comunicação com os nossos servidores, tente novamente em alguns instantes.",
-    "incorrect-email": "Não existe uma conta associada a este endereço de e-mail.",
-    "incorrect-password": "A senha inserida está incorreta.",
-    "user-exists": "Já existe uma conta associada a este endereço de e-mail.",
+    "name-label": "Como você se chama?",
+    "login-button": "Entre com sua conta",
+    "register-button": "Crie sua conta",
     "send-button": "Enviar",
     "next-button": "Avançar",
     "save-button": "Salvar",
-    "cancel-button": "Cancelar"
+    "cancel-button": "Cancelar",
+    "generic-error": "Ocorreu um problema de comunicação com os nossos servidores, tente novamente em alguns instantes.",
+    "incorrect-email": "Não existe uma conta associada a este endereço de e-mail.",
+    "incorrect-password": "A senha inserida está incorreta.",
+    "user-exists": "Já existe uma conta associada a este endereço de e-mail."
 }

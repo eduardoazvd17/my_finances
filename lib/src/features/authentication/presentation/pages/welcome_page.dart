@@ -67,7 +67,7 @@ class WelcomePage extends GetWidget<WelcomePageController> {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  text: 'login-button-text'.i18n(),
+                  text: 'login-button'.i18n(),
                   backgroundColor: Theme.of(context).primaryColor,
                   foregroundColor: Colors.white,
                   onTap: () {},
@@ -82,7 +82,7 @@ class WelcomePage extends GetWidget<WelcomePageController> {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  text: 'register-button-text'.i18n(),
+                  text: 'register-button'.i18n(),
                   onTap: () {},
                 ),
               ),
