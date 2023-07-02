@@ -14,6 +14,8 @@
     "register-password-hint": "Type your password here...",
     "register-password2-label": "Retype your password:",
     "register-password2-hint": "Retype your password here...",
+    "make-login-button": "Login",
+    "make-register-button": "Register",
     "login-button": "Login with your account",
     "register-button": "Create your account",
     "send-button": "Send",

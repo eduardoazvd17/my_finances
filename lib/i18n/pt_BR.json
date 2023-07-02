@@ -14,6 +14,8 @@
     "register-password-hint": "Digite sua senha aqui...",
     "register-password2-label": "Digite novamente a sua senha:",
     "register-password2-hint": "Digite novamente sua senha aqui...",
+    "make-login-button": "Entrar",
+    "make-register-button": "Registrar-se",
     "login-button": "Entre com sua conta",
     "register-button": "Crie sua conta",
     "send-button": "Enviar",

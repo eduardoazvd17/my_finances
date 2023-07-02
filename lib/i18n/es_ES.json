@@ -14,6 +14,8 @@
     "register-password-hint": "Escriba su contraseña aquí...",
     "register-password2-label": "Reescribe tu contraseña:",
     "register-password2-hint": "Vuelve a escribir tu contraseña aquí...",
+    "make-login-button": "Iniciar sesión",
+    "make-register-button": "Registrarse",
     "login-button": "Inicia sesión con tu cuenta",
     "register-button": "Crea tu cuenta",
     "send-button": "Enviar",
