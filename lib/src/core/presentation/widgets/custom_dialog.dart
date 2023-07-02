@@ -79,6 +79,9 @@ class CustomDialog extends StatelessWidget {
                 if (onConfirm != null) ...[
                   Expanded(
                     child: InkWell(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                      ),
                       highlightColor: Colors.transparent,
                       onTap: () {
                         onConfirm?.call();
@@ -109,6 +112,12 @@ class CustomDialog extends StatelessWidget {
                 ],
                 Expanded(
                   child: InkWell(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: onConfirm == null
+                          ? const Radius.circular(20)
+                          : Radius.zero,
+                      bottomRight: const Radius.circular(20),
+                    ),
                     highlightColor: Colors.transparent,
                     onTap: () {
                       onClose?.call();
@@ -118,7 +127,7 @@ class CustomDialog extends StatelessWidget {
                       height: 40,
                       decoration: BoxDecoration(
                         color: onConfirm == null
-                            ? Colors.blue[300]!
+                            ? Theme.of(context).primaryColor.withAlpha(180)
                             : Colors.red[300],
                         borderRadius: BorderRadius.only(
                           bottomLeft: onConfirm == null
