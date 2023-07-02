@@ -3,13 +3,12 @@ import 'package:credentials_manager/credentials_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DatabaseModel {
+  final CredentialsManager credentialsManager;
   final FirebaseFirestore _firestore;
-  final CredentialsManager _credentialsManager;
   DatabaseModel({
+    required this.credentialsManager,
     required FirebaseFirestore firestore,
-    required CredentialsManager credentialsManager,
-  })  : _firestore = firestore,
-        _credentialsManager = credentialsManager;
+  }) : _firestore = firestore;
 
   Future<SharedPreferences> get sharedPreferences {
     return SharedPreferences.getInstance();
