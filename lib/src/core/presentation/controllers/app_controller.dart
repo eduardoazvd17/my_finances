@@ -10,12 +10,45 @@ class AppController extends GetxController {
     required AuthService authService,
   }) : _authService = authService;
 
+  @override
+  void onInit() {
+    _checkBiometricsSettings();
+    super.onInit();
+  }
+
   final Rx<UserModel?> _user = Rx<UserModel?>(null);
   UserModel? get user => _user.value;
   void setUser(UserModel? value) => _user.value = value;
+
   Future<void> logout() async {
     await _authService.logout();
     AppRoutes.goToWelcomePage();
     _user.value = null;
+  }
+
+  final RxBool _canEnableBiometrics = RxBool(false);
+  bool get canEnableBiometrics => _canEnableBiometrics.value;
+  final RxBool _isBiometricsEnabled = RxBool(false);
+  bool get isBiometricsEnabled => _isBiometricsEnabled.value;
+
+  Future<void> _checkBiometricsSettings() async {
+    final bool canEnable = await _authService.checkIfCanEnableBiometrics();
+    _canEnableBiometrics.value = canEnable;
+    if (canEnable) {
+      final bool isEnabled = await _authService.checkIfBiometricsIsEnabled();
+      _isBiometricsEnabled.value = isEnabled;
+    }
+  }
+
+  Future<void> setIsBiometricsEnabled(bool value) async {
+    if (!canEnableBiometrics) return;
+
+    if (value) {
+      final result = await _authService.enableBiometrics();
+      _isBiometricsEnabled.value = result;
+    } else {
+      _authService.disableBiometrics();
+      _isBiometricsEnabled.value = false;
+    }
   }
 }

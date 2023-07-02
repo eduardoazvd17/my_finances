@@ -106,7 +106,35 @@ class AuthService {
   }
 
   Future<void> logout() async {
-    _database.credentialsManager.removeAllCredentials();
+    await _database.credentialsManager.removeAllCredentials();
+    final prefs = await _database.sharedPreferences;
+    await prefs.clear();
+  }
+
+  Future<bool> checkIfCanEnableBiometrics() async {
+    return await _database.credentialsManager.canCheckBiometrics() &&
+        await _database.credentialsManager.isDeviceSupportedByAuth();
+  }
+
+  Future<bool> checkIfBiometricsIsEnabled() async {
+    final prefs = await _database.sharedPreferences;
+    return prefs.getBool('isBiometricsEnabled') ?? false;
+  }
+
+  Future<bool> enableBiometrics() async {
+    final result = await _database.credentialsManager.requestAuth(
+      authReasonMessage: 'enable-biometrics-button'.i18n(),
+    );
+    if (result) {
+      final prefs = await _database.sharedPreferences;
+      prefs.setBool('isBiometricsEnabled', true);
+    }
+    return result;
+  }
+
+  Future<void> disableBiometrics() async {
+    final prefs = await _database.sharedPreferences;
+    prefs.setBool('isBiometricsEnabled', false);
   }
 
   String _md5Hash(String value) {
