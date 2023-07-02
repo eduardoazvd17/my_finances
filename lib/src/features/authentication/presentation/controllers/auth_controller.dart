@@ -45,10 +45,11 @@ class AuthController extends GetxController {
   Future<void> _autoLogin() async {
     _isLoading.value = true;
     final UserModel? userModel = await _authService.autoLogin();
-    _isLoading.value = false;
     if (userModel != null) {
       appController.setUser(userModel);
       AppRoutes.goToFinancesPage();
+    } else {
+      _isLoading.value = false;
     }
   }
 
