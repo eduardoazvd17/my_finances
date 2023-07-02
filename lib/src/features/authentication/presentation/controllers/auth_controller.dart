@@ -30,6 +30,11 @@ class AuthController extends GetxController {
   final passwordController = TextEditingController();
   final password2Controller = TextEditingController();
 
+  final nameFocus = FocusNode();
+  final emailFocus = FocusNode();
+  final passwordFocus = FocusNode();
+  final password2Focus = FocusNode();
+
   void _clearAllFields() {
     nameController.clear();
     emailController.clear();
@@ -48,6 +53,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> makeLogin() async {
+    FocusNode? focusNode;
     try {
       LoadingWidget.dialog();
 
@@ -55,10 +61,12 @@ class AuthController extends GetxController {
       final String password = passwordController.text.trim();
 
       if (!email.isEmail) {
+        focusNode = emailFocus;
         throw AppError(message: 'login-email-validation'.i18n());
       }
 
       if (password.isEmpty) {
+        focusNode = passwordFocus;
         throw AppError(message: 'login-password-validation'.i18n());
       }
 
@@ -75,11 +83,14 @@ class AuthController extends GetxController {
       }
     } on AppError catch (appError) {
       Get.close(1);
-      appError.showDialog();
+      appError.showDialog().then((_) {
+        focusNode?.requestFocus();
+      });
     }
   }
 
   Future<void> makeRegister() async {
+    FocusNode? focusNode;
     try {
       LoadingWidget.dialog();
 
@@ -89,18 +100,22 @@ class AuthController extends GetxController {
       final String password2 = password2Controller.text.trim();
 
       if (name.isEmpty) {
+        focusNode = nameFocus;
         throw AppError(message: 'register-name-validation'.i18n());
       }
 
       if (!email.isEmail) {
+        focusNode = emailFocus;
         throw AppError(message: 'register-email-validation'.i18n());
       }
 
       if (password.length < 8) {
+        focusNode = passwordFocus;
         throw AppError(message: 'register-password-validation'.i18n());
       }
 
       if (password != password2) {
+        focusNode = password2Focus;
         throw AppError(message: 'register-password2-validation'.i18n());
       }
 
@@ -118,7 +133,9 @@ class AuthController extends GetxController {
       }
     } on AppError catch (appError) {
       Get.close(1);
-      appError.showDialog();
+      appError.showDialog().then((_) {
+        focusNode?.requestFocus();
+      });
     }
   }
 

@@ -5,6 +5,12 @@ class TextFieldWidget extends StatelessWidget {
   final String label;
   final String hint;
   final TextEditingController controller;
+  final TextCapitalization textCapitalization;
+  final TextInputType? textInputType;
+  final TextInputAction? textInputAction;
+  final FocusNode? focusNode;
+  final void Function(String?)? onSubmitted;
+  final bool obscureText;
 
   const TextFieldWidget({
     super.key,
@@ -12,6 +18,12 @@ class TextFieldWidget extends StatelessWidget {
     required this.label,
     required this.hint,
     required this.controller,
+    this.textCapitalization = TextCapitalization.none,
+    this.textInputType,
+    this.textInputAction,
+    this.focusNode,
+    this.onSubmitted,
+    this.obscureText = false,
   });
 
   @override
@@ -28,6 +40,12 @@ class TextFieldWidget extends StatelessWidget {
               hintText: hint,
               suffixIcon: icon != null ? Icon(icon) : null,
             ),
+            focusNode: focusNode,
+            keyboardType: textInputType,
+            onSubmitted: onSubmitted,
+            textInputAction: textInputAction,
+            obscureText: obscureText,
+            textCapitalization: textCapitalization,
           ),
         ],
       ),

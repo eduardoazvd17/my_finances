@@ -32,12 +32,21 @@ class LoginPage extends GetWidget<AuthController> {
                 label: 'login-email-label'.i18n(),
                 hint: 'login-email-hint'.i18n(),
                 controller: controller.emailController,
+                textInputType: TextInputType.emailAddress,
+                focusNode: controller.emailFocus,
+                textInputAction: TextInputAction.next,
+                onSubmitted: (_) => controller.passwordFocus.requestFocus(),
               ),
               TextFieldWidget(
                 icon: CupertinoIcons.lock,
                 label: 'login-password-label'.i18n(),
                 hint: 'login-password-hint'.i18n(),
                 controller: controller.passwordController,
+                textInputType: TextInputType.text,
+                obscureText: true,
+                focusNode: controller.passwordFocus,
+                textInputAction: TextInputAction.done,
+                onSubmitted: (_) => controller.makeLogin(),
               ),
               Padding(
                 padding: const EdgeInsets.only(
