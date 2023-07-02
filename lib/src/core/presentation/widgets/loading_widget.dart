@@ -28,21 +28,24 @@ class LoadingWidget extends StatelessWidget {
     );
   }
 
-  Widget get _progressWidget =>
-      const CircularProgressIndicator(color: Colors.blueGrey)
-          .animate()
-          .fade()
-          .slideY();
+  Widget _progressWidget(BuildContext context) {
+    return CircularProgressIndicator(color: Theme.of(context).primaryColor)
+        .animate()
+        .fade()
+        .slideY();
+  }
 
-  Widget get _textWidget => Text(
-        text,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          color: Colors.blueGrey,
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ).animate().fade();
+  Widget _textWidget(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Theme.of(context).primaryColor,
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+      ),
+    ).animate().fade();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +53,10 @@ class LoadingWidget extends StatelessWidget {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _progressWidget,
+          _progressWidget(context),
           Padding(
             padding: const EdgeInsets.only(left: 15.0),
-            child: _textWidget,
+            child: _textWidget(context),
           ),
         ],
       );
@@ -61,10 +64,10 @@ class LoadingWidget extends StatelessWidget {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _progressWidget,
+          _progressWidget(context),
           Padding(
             padding: const EdgeInsets.only(top: 15.0),
-            child: _textWidget,
+            child: _textWidget(context),
           ),
         ],
       );

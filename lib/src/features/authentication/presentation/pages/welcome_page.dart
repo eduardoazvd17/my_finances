@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
+import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 
 import '../controllers/welcome_page_controller.dart';
 
@@ -39,41 +40,56 @@ class WelcomePage extends GetWidget<WelcomePageController> {
                       style: const TextStyle(color: Colors.grey),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ButtonWidget(
-                            text: 'login-button-text'.i18n(),
-                            backgroundColor: Theme.of(context).primaryColor,
-                            foregroundColor: Colors.white,
-                            onTap: () {},
-                          ),
-                        ),
-                      ],
-                    ),
+                  Obx(
+                    () {
+                      if (controller.isLoading) {
+                        return const LoadingWidget(inline: false);
+                      } else {
+                        return _getLoginAndRegisterButtons(context);
+                      }
+                    },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 30),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ButtonWidget(
-                            text: 'register-button-text'.i18n(),
-                            onTap: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getLoginAndRegisterButtons(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                  text: 'login-button-text'.i18n(),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white,
+                  onTap: () {},
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30),
+          child: Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                  text: 'register-button-text'.i18n(),
+                  onTap: () {},
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

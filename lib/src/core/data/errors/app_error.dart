@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 
 import '../../presentation/widgets/custom_dialog.dart';
 
@@ -15,13 +16,11 @@ class AppError implements Exception {
         title: 'Erro',
         content: message,
       ),
+      name: 'appError',
     );
   }
 
   factory AppError.generic() {
-    return AppError(
-      message:
-          'Ocorreu um problema de comunicação com os nossos servidores, tente novamente em alguns instantes.',
-    );
+    return AppError(message: 'generic-error'.i18n());
   }
 }
