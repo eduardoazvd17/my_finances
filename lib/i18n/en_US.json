@@ -26,6 +26,7 @@
     "close-button": "Close",
     "logout-button": "Logout",
     "enable-biometrics-button": "Enable biometrics",
+    "continue-as-button": "Continue as %s",
     "unlock-button": "Unlock",
     "cancel-button": "Cancel",
     "error-text": "Error",

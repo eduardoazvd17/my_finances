@@ -40,10 +40,14 @@ class AuthController extends GetxController {
     password2Controller.clear();
   }
 
+  final Rx<String> _lastUserName = RxString('');
+  String get lastUserName => _lastUserName.value;
+
   Future<void> autoLogin() async {
     _isLoading.value = true;
     final UserModel? userModel = await _authService.autoLogin();
     if (userModel != null) {
+      _lastUserName.value = '\n${userModel.name}';
       if (await _checkBiometrics()) {
         AppController.instance.setUser(userModel);
         AppRoutes.goToFinancesPage();

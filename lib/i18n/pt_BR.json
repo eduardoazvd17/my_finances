@@ -26,6 +26,7 @@
     "close-button": "Fechar",
     "logout-button": "Finalizar sessão",
     "enable-biometrics-button": "Habilitar biometria",
+    "continue-as-button": "Continuar como %s",
     "unlock-button": "Desbloquear",
     "cancel-button": "Cancelar",
     "error-text": "Erro",

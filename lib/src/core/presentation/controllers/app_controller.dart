@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
+import 'package:myfinances/src/core/presentation/views/auth_overlay_view.dart';
 import 'package:myfinances/src/features/authentication/data/services/auth_service.dart';
 
 import '../../data/utils/app_routes.dart';
@@ -24,12 +25,14 @@ class AppController extends GetxController {
 
   Future<void> logout({bool withoutNavigate = false}) async {
     await _authService.logout();
+    setIsBiometricsEnabled(false);
     if (!withoutNavigate) {
       AppRoutes.goToWelcomePage();
     }
     _user.value = null;
   }
 
+  final RxBool _canShowAuthOverlay = RxBool(false);
   final RxBool _canEnableBiometrics = RxBool(false);
   bool get canEnableBiometrics => _canEnableBiometrics.value;
   final RxBool _isBiometricsEnabled = RxBool(false);
@@ -45,11 +48,15 @@ class AppController extends GetxController {
   }
 
   Future<void> setIsBiometricsEnabled(bool value) async {
-    if (!canEnableBiometrics) return;
-
-    if (value) {
+    if (value && canEnableBiometrics) {
       final result = await _authService.enableBiometrics();
       _isBiometricsEnabled.value = result;
+
+      if (result) {
+        Future.delayed(const Duration(seconds: 8)).then(
+          (value) => _canShowAuthOverlay.value = true,
+        );
+      }
     } else {
       _authService.disableBiometrics();
       _isBiometricsEnabled.value = false;
@@ -59,10 +66,44 @@ class AppController extends GetxController {
   }
 
   Future<bool> requestAuth() async {
+    _canShowAuthOverlay.value = false;
+
+    final bool result;
     if (isBiometricsEnabled && canEnableBiometrics) {
       final authResult = await _authService.requestAuth();
-      return authResult;
+      result = authResult;
+      if (authResult) {
+        Future.delayed(const Duration(seconds: 5)).then(
+          (value) => _canShowAuthOverlay.value = true,
+        );
+      }
+    } else {
+      result = true;
     }
-    return true;
+
+    return result;
+  }
+
+  Future<void> showAuthOverlay() async {
+    if (!Get.currentRoute.contains(AppRoutes.welcomeRoute) &&
+        user != null &&
+        isBiometricsEnabled &&
+        canEnableBiometrics &&
+        _canShowAuthOverlay.value) {
+      _canShowAuthOverlay.value = false;
+      const authOverlayView = AuthOverlayView();
+      Get.dialog(
+        authOverlayView,
+        barrierDismissible: false,
+        useSafeArea: false,
+      );
+    }
+  }
+
+  Future<void> closeAuthOverlay() async {
+    final result = await requestAuth();
+    if (result) {
+      Get.close(1);
+    }
   }
 }

@@ -11,6 +11,7 @@ import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dar
 
 import 'firebase_options.dart';
 import 'src/core/data/utils/app_routes.dart';
+import 'src/core/data/utils/life_cycle_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,7 @@ class MyApp extends GetWidget<I18nController> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      builder: (_, child) => LifeCycleHandler(child: child!),
       debugShowCheckedModeBanner: false,
       title: 'app-name'.i18n(),
       locale: controller.selectedLocale,

@@ -42,13 +42,16 @@ class ButtonWidget extends StatelessWidget {
             children: [
               if (icon != null)
                 Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: icon,
                 ),
-              Text(
-                text,
-                style: TextStyle(
-                  color: foregroundColor ?? Theme.of(context).primaryColor,
+              Expanded(
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color: foregroundColor ?? Theme.of(context).primaryColor,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ],

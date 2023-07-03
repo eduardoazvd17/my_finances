@@ -68,7 +68,7 @@ class WelcomePage extends GetWidget<AuthController> {
                     CupertinoIcons.lock_open,
                     color: Colors.white,
                   ),
-                  text: 'unlock-button'.i18n(),
+                  text: 'continue-as-button'.i18n([controller.lastUserName]),
                   backgroundColor: Theme.of(context).primaryColor,
                   foregroundColor: Colors.white,
                   onTap: controller.autoLogin,
