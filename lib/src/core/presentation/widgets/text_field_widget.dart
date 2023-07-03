@@ -36,20 +36,32 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   bool _hasFocus = false;
   bool _hasText = false;
 
+  void _focusNodeListener() {
+    setState(() {
+      _hasFocus = widget.focusNode.hasFocus;
+    });
+  }
+
+  void _controllerListener() {
+    setState(() {
+      _hasText = widget.controller.text.trim().isNotEmpty;
+    });
+  }
+
   @override
   void initState() {
-    widget.focusNode.addListener(() {
-      setState(() {
-        _hasFocus = widget.focusNode.hasFocus;
-      });
-    });
-
-    widget.controller.addListener(() {
-      setState(() {
-        _hasText = widget.controller.text.trim().isNotEmpty;
-      });
-    });
+    widget.focusNode.addListener(_focusNodeListener);
+    widget.controller.addListener(_controllerListener);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode.removeListener(_focusNodeListener);
+    widget.focusNode.dispose();
+    widget.controller.removeListener(_controllerListener);
+    widget.controller.dispose();
+    super.dispose();
   }
 
   @override
