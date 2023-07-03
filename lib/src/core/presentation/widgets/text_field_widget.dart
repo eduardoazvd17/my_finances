@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatelessWidget {
+class TextFieldWidget extends StatefulWidget {
   final IconData? icon;
   final String label;
   final String hint;
@@ -8,7 +8,7 @@ class TextFieldWidget extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
-  final FocusNode? focusNode;
+  final FocusNode focusNode;
   final void Function(String?)? onSubmitted;
   final bool obscureText;
   final Iterable<String>? autofillHints;
@@ -19,14 +19,38 @@ class TextFieldWidget extends StatelessWidget {
     required this.label,
     required this.hint,
     required this.controller,
+    required this.focusNode,
     this.textCapitalization = TextCapitalization.none,
     this.textInputType,
     this.textInputAction,
-    this.focusNode,
     this.onSubmitted,
     this.obscureText = false,
     this.autofillHints,
   });
+
+  @override
+  State<TextFieldWidget> createState() => _TextFieldWidgetState();
+}
+
+class _TextFieldWidgetState extends State<TextFieldWidget> {
+  bool _hasFocus = false;
+  bool _hasText = false;
+
+  @override
+  void initState() {
+    widget.focusNode.addListener(() {
+      setState(() {
+        _hasFocus = widget.focusNode.hasFocus;
+      });
+    });
+
+    widget.controller.addListener(() {
+      setState(() {
+        _hasText = widget.controller.text.trim().isNotEmpty;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +59,28 @@ class TextFieldWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label),
+          Text(widget.label),
           TextField(
-            autofillHints: autofillHints,
-            controller: controller,
+            autofillHints: widget.autofillHints,
+            controller: widget.controller,
             decoration: InputDecoration(
-              hintText: hint,
-              suffixIcon: icon != null ? Icon(icon) : null,
+              hintText: widget.hint,
+              suffixIcon: _hasFocus && _hasText
+                  ? InkWell(
+                      borderRadius: BorderRadius.circular(50),
+                      child: const Icon(Icons.close),
+                      onTap: () => widget.controller.clear(),
+                    )
+                  : (widget.icon != null)
+                      ? Icon(widget.icon)
+                      : null,
             ),
-            focusNode: focusNode,
-            keyboardType: textInputType,
-            onSubmitted: onSubmitted,
-            textInputAction: textInputAction,
-            obscureText: obscureText,
-            textCapitalization: textCapitalization,
+            focusNode: widget.focusNode,
+            keyboardType: widget.textInputType,
+            onSubmitted: widget.onSubmitted,
+            textInputAction: widget.textInputAction,
+            obscureText: widget.obscureText,
+            textCapitalization: widget.textCapitalization,
           ),
         ],
       ),
