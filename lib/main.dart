@@ -53,6 +53,15 @@ class MyApp extends GetWidget<I18nController> {
         ),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData(
+        primaryColor: Colors.indigo,
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+        ),
+        brightness: Brightness.dark,
+        useMaterial3: true,
+      ),
       initialBinding: AppBinding(),
       initialRoute: AppRoutes.welcomeRoute,
       getPages: AppRoutes.getGetPages(),
