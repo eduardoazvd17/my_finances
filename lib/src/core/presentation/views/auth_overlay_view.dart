@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
 import '../controllers/app_controller.dart';
-import '../widgets/app_logo.dart';
 import '../widgets/button_widget.dart';
 
 class AuthOverlayView extends StatelessWidget {
@@ -12,53 +11,68 @@ class AuthOverlayView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 80),
-              child: AppLogo(verticalAlign: true),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          icon: const Icon(
-                            CupertinoIcons.lock_open,
-                            color: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 80),
+                child: Column(
+                  children: [
+                    const Icon(CupertinoIcons.lock, size: 100),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Text(
+                        'auth-required-text'.i18n(),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ButtonWidget(
+                            icon: const Icon(
+                              CupertinoIcons.lock_open,
+                              color: Colors.white,
+                            ),
+                            text: 'unlock-button'.i18n(),
+                            backgroundColor: Theme.of(context).primaryColor,
+                            foregroundColor: Colors.white,
+                            onTap: AppController.instance.closeAuthOverlay,
                           ),
-                          text: 'unlock-button'.i18n(),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white,
-                          onTap: AppController.instance.closeAuthOverlay,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          text: 'cancel-button'.i18n(),
-                          borderColor: Colors.transparent,
-                          onTap: AppController.instance.logout,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 30),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ButtonWidget(
+                            text: 'cancel-button'.i18n(),
+                            borderColor: Colors.transparent,
+                            onTap: AppController.instance.logout,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
