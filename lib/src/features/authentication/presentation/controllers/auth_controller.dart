@@ -16,7 +16,9 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
-    autoLogin();
+    AppController.instance.checkBiometricsSettings().then((_) async {
+      await autoLogin();
+    });
     super.onInit();
   }
 

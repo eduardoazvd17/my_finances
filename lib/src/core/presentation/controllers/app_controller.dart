@@ -11,12 +11,6 @@ class AppController extends GetxController {
     required AuthService authService,
   }) : _authService = authService;
 
-  @override
-  void onInit() {
-    _checkBiometricsSettings();
-    super.onInit();
-  }
-
   static AppController get instance => Get.find<AppController>();
 
   final Rx<UserModel?> _user = Rx<UserModel?>(null);
@@ -38,7 +32,7 @@ class AppController extends GetxController {
   final RxBool _isBiometricsEnabled = RxBool(false);
   bool get isBiometricsEnabled => _isBiometricsEnabled.value;
 
-  Future<void> _checkBiometricsSettings() async {
+  Future<void> checkBiometricsSettings() async {
     final bool canEnable = await _authService.checkIfCanEnableBiometrics();
     _canEnableBiometrics.value = canEnable;
     if (canEnable) {
@@ -48,21 +42,24 @@ class AppController extends GetxController {
   }
 
   Future<void> setIsBiometricsEnabled(bool value) async {
+    _canShowAuthOverlay.value = false;
     if (value && canEnableBiometrics) {
       final result = await _authService.enableBiometrics();
       _isBiometricsEnabled.value = result;
 
       if (result) {
-        Future.delayed(const Duration(seconds: 8)).then(
+        Future.delayed(const Duration(seconds: 5)).then(
           (value) => _canShowAuthOverlay.value = true,
         );
+      } else {
+        _canShowAuthOverlay.value = false;
       }
     } else {
       _authService.disableBiometrics();
       _isBiometricsEnabled.value = false;
     }
 
-    await _checkBiometricsSettings();
+    await checkBiometricsSettings();
   }
 
   Future<bool> requestAuth() async {
@@ -95,6 +92,7 @@ class AppController extends GetxController {
         const AuthOverlayView(),
         barrierDismissible: false,
         useSafeArea: false,
+        name: 'authenticationRequired',
       );
     }
   }

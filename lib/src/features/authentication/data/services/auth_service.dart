@@ -139,7 +139,7 @@ class AuthService {
 
   Future<bool> requestAuth() async {
     return await _database.credentialsManager.requestAuth(
-      authReasonMessage: 'testing',
+      authReasonMessage: 'auth-required-text'.i18n(),
     );
   }
 
