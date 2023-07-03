@@ -9,10 +9,8 @@ import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/authentication/data/services/auth_service.dart';
 
 class AuthController extends GetxController {
-  final AppController appController;
   final AuthService _authService;
   AuthController({
-    required this.appController,
     required AuthService authService,
   }) : _authService = authService;
 
@@ -46,7 +44,7 @@ class AuthController extends GetxController {
     _isLoading.value = true;
     final UserModel? userModel = await _authService.autoLogin();
     if (userModel != null) {
-      appController.setUser(userModel);
+      AppController.instance.setUser(userModel);
       AppRoutes.goToFinancesPage();
     } else {
       _isLoading.value = false;
@@ -77,7 +75,7 @@ class AuthController extends GetxController {
       );
 
       if (userModel != null) {
-        appController.setUser(userModel);
+        AppController.instance.setUser(userModel);
         AppRoutes.goToFinancesPage();
       } else {
         throw AppError.generic();
@@ -127,7 +125,7 @@ class AuthController extends GetxController {
       );
 
       if (userModel != null) {
-        appController.setUser(userModel);
+        AppController.instance.setUser(userModel);
         AppRoutes.goToFinancesPage();
       } else {
         throw AppError.generic();

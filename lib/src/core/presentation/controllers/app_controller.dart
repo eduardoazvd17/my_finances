@@ -16,6 +16,8 @@ class AppController extends GetxController {
     super.onInit();
   }
 
+  static AppController get instance => Get.find<AppController>();
+
   final Rx<UserModel?> _user = Rx<UserModel?>(null);
   UserModel? get user => _user.value;
   void setUser(UserModel? value) => _user.value = value;
