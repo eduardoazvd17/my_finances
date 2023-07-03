@@ -69,7 +69,6 @@ class RegisterPage extends GetWidget<AuthController> {
                           controller.password2Focus.requestFocus(),
                     ),
                     TextFieldWidget(
-                      autofillHints: const [AutofillHints.password],
                       icon: CupertinoIcons.lock_shield,
                       label: 'register-password2-label'.i18n(),
                       hint: 'register-password2-hint'.i18n(),

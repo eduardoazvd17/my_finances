@@ -58,9 +58,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   void dispose() {
     widget.focusNode.removeListener(_focusNodeListener);
-    widget.focusNode.dispose();
     widget.controller.removeListener(_controllerListener);
-    widget.controller.dispose();
     super.dispose();
   }
 
