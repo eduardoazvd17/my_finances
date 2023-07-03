@@ -4,3 +4,4 @@
 */
 
 "CFBundleDisplayName" = "Minhas Finanças";
+"NSFaceIDUsageDescription" = "Autentique-se e proteja seus dados usando TouchID ou FaceID.";
