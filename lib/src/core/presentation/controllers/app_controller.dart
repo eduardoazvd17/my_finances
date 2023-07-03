@@ -22,9 +22,11 @@ class AppController extends GetxController {
   UserModel? get user => _user.value;
   void setUser(UserModel? value) => _user.value = value;
 
-  Future<void> logout() async {
+  Future<void> logout({bool withoutNavigate = false}) async {
     await _authService.logout();
-    AppRoutes.goToWelcomePage();
+    if (!withoutNavigate) {
+      AppRoutes.goToWelcomePage();
+    }
     _user.value = null;
   }
 
@@ -54,5 +56,13 @@ class AppController extends GetxController {
     }
 
     await _checkBiometricsSettings();
+  }
+
+  Future<bool> requestAuth() async {
+    if (isBiometricsEnabled && canEnableBiometrics) {
+      final authResult = await _authService.requestAuth();
+      return authResult;
+    }
+    return true;
   }
 }

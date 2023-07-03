@@ -26,6 +26,8 @@
     "close-button": "Close",
     "logout-button": "Logout",
     "enable-biometrics-button": "Enable biometrics",
+    "unlock-button": "Unlock",
+    "cancel-button": "Cancel",
     "error-text": "Error",
     "generic-error": "There was a problem communicating with our servers, please try again in a moment.",
     "incorrect-email": "There is no account associated with this email address.",

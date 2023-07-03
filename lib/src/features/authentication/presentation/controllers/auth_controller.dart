@@ -16,7 +16,7 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
-    _autoLogin();
+    autoLogin();
     super.onInit();
   }
 
@@ -40,15 +40,34 @@ class AuthController extends GetxController {
     password2Controller.clear();
   }
 
-  Future<void> _autoLogin() async {
+  Future<void> autoLogin() async {
     _isLoading.value = true;
     final UserModel? userModel = await _authService.autoLogin();
     if (userModel != null) {
-      AppController.instance.setUser(userModel);
-      AppRoutes.goToFinancesPage();
+      if (await _checkBiometrics()) {
+        AppController.instance.setUser(userModel);
+        AppRoutes.goToFinancesPage();
+      } else {
+        _showBiometricsTryAgainButton.value = true;
+      }
     } else {
+      _showBiometricsTryAgainButton.value = false;
       _isLoading.value = false;
     }
+  }
+
+  Future<void> cancelAutoLogin() async {
+    _showBiometricsTryAgainButton.value = false;
+    _isLoading.value = true;
+    await AppController.instance.logout(withoutNavigate: true);
+    _isLoading.value = false;
+  }
+
+  final RxBool _showBiometricsTryAgainButton = RxBool(false);
+  bool get showBiometricsTryAgainButton => _showBiometricsTryAgainButton.value;
+
+  Future<bool> _checkBiometrics() async {
+    return await AppController.instance.requestAuth();
   }
 
   Future<void> makeLogin() async {

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -38,7 +39,9 @@ class WelcomePage extends GetWidget<AuthController> {
               ),
               Obx(
                 () {
-                  if (controller.isLoading) {
+                  if (controller.showBiometricsTryAgainButton) {
+                    return _getBiometricsLoginForm(context);
+                  } else if (controller.isLoading) {
                     return const LoadingWidget(inline: false);
                   } else {
                     return _getLoginAndRegisterButtons(context);
@@ -49,6 +52,46 @@ class WelcomePage extends GetWidget<AuthController> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getBiometricsLoginForm(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                  icon: const Icon(
+                    CupertinoIcons.lock_open,
+                    color: Colors.white,
+                  ),
+                  text: 'unlock-button'.i18n(),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white,
+                  onTap: controller.autoLogin,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+          child: Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                  text: 'cancel-button'.i18n(),
+                  borderColor: Colors.transparent,
+                  onTap: controller.cancelAutoLogin,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -71,7 +114,7 @@ class WelcomePage extends GetWidget<AuthController> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
           child: Row(
             children: [
               Expanded(

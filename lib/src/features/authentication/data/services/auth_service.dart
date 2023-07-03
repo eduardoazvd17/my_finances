@@ -137,6 +137,12 @@ class AuthService {
     prefs.setBool('isBiometricsEnabled', false);
   }
 
+  Future<bool> requestAuth() async {
+    return await _database.credentialsManager.requestAuth(
+      authReasonMessage: 'testing',
+    );
+  }
+
   String _md5Hash(String value) {
     return md5.convert(utf8.encode(value)).toString();
   }

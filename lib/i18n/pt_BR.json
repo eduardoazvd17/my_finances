@@ -26,6 +26,8 @@
     "close-button": "Fechar",
     "logout-button": "Finalizar sessão",
     "enable-biometrics-button": "Habilitar biometria",
+    "unlock-button": "Desbloquear",
+    "cancel-button": "Cancelar",
     "error-text": "Erro",
     "generic-error": "Ocorreu um problema de comunicação com os nossos servidores, tente novamente em alguns instantes.",
     "incorrect-email": "Não existe uma conta associada a este endereço de e-mail.",
