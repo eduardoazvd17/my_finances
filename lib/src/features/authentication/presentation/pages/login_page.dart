@@ -27,26 +27,36 @@ class LoginPage extends GetWidget<AuthController> {
                 padding: EdgeInsets.only(bottom: 50.0, top: 16),
                 child: AppLogo(),
               ),
-              TextFieldWidget(
-                icon: CupertinoIcons.mail,
-                label: 'login-email-label'.i18n(),
-                hint: 'login-email-hint'.i18n(),
-                controller: controller.emailController,
-                textInputType: TextInputType.emailAddress,
-                focusNode: controller.emailFocus,
-                textInputAction: TextInputAction.next,
-                onSubmitted: (_) => controller.passwordFocus.requestFocus(),
-              ),
-              TextFieldWidget(
-                icon: CupertinoIcons.lock,
-                label: 'login-password-label'.i18n(),
-                hint: 'login-password-hint'.i18n(),
-                controller: controller.passwordController,
-                textInputType: TextInputType.text,
-                obscureText: true,
-                focusNode: controller.passwordFocus,
-                textInputAction: TextInputAction.done,
-                onSubmitted: (_) => controller.makeLogin(),
+              AutofillGroup(
+                child: Column(
+                  children: [
+                    TextFieldWidget(
+                      autofillHints: const [AutofillHints.email],
+                      icon: CupertinoIcons.mail,
+                      label: 'login-email-label'.i18n(),
+                      hint: 'login-email-hint'.i18n(),
+                      controller: controller.emailController,
+                      textInputType: TextInputType.emailAddress,
+                      focusNode: controller.emailFocus,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) {
+                        controller.passwordFocus.requestFocus();
+                      },
+                    ),
+                    TextFieldWidget(
+                      autofillHints: const [AutofillHints.password],
+                      icon: CupertinoIcons.lock,
+                      label: 'login-password-label'.i18n(),
+                      hint: 'login-password-hint'.i18n(),
+                      controller: controller.passwordController,
+                      textInputType: TextInputType.text,
+                      obscureText: true,
+                      focusNode: controller.passwordFocus,
+                      textInputAction: TextInputAction.done,
+                      onSubmitted: (_) => controller.makeLogin(),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(

@@ -11,6 +11,7 @@ class TextFieldWidget extends StatelessWidget {
   final FocusNode? focusNode;
   final void Function(String?)? onSubmitted;
   final bool obscureText;
+  final Iterable<String>? autofillHints;
 
   const TextFieldWidget({
     super.key,
@@ -24,6 +25,7 @@ class TextFieldWidget extends StatelessWidget {
     this.focusNode,
     this.onSubmitted,
     this.obscureText = false,
+    this.autofillHints,
   });
 
   @override
@@ -35,6 +37,7 @@ class TextFieldWidget extends StatelessWidget {
         children: [
           Text(label),
           TextField(
+            autofillHints: autofillHints,
             controller: controller,
             decoration: InputDecoration(
               hintText: hint,
