@@ -20,12 +20,15 @@ class AuthService {
           await _database.credentialsManager.getSavedCredentials();
       if (credentials.isNotEmpty) {
         final CredentialModel credential = credentials.first;
-        return UserModel(
+        final UserModel userModel = UserModel(
           id: credential.id,
           name: credential.name!,
           email: credential.loginOrEmail,
           password: credential.password,
         );
+
+        final bool result = await checkIfUserExists(userModel);
+        if (result) return userModel;
       }
       return null;
     } catch (_) {
@@ -103,6 +106,17 @@ class AuthService {
     } catch (_) {
       throw AppError.generic();
     }
+  }
+
+  Future<bool> checkIfUserExists(UserModel userModel) async {
+    final reference = await _database.usersCollection.doc(userModel.id).get();
+    if (reference.exists && reference.data() != null) {
+      final userFromDb = UserModel.fromMap(reference.data()!);
+      if (userFromDb.password == userModel.password) {
+        return true;
+      }
+    }
+    return false;
   }
 
   Future<void> logout() async {
