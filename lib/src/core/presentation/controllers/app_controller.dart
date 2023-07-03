@@ -91,9 +91,8 @@ class AppController extends GetxController {
         canEnableBiometrics &&
         _canShowAuthOverlay.value) {
       _canShowAuthOverlay.value = false;
-      const authOverlayView = AuthOverlayView();
       Get.dialog(
-        authOverlayView,
+        const AuthOverlayView(),
         barrierDismissible: false,
         useSafeArea: false,
       );
