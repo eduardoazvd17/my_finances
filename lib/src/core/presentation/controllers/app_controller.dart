@@ -55,8 +55,12 @@ class AppController extends GetxController {
         _canShowAuthOverlay.value = false;
       }
     } else {
-      _authService.disableBiometrics();
-      _isBiometricsEnabled.value = false;
+      final bool authResult =
+          isBiometricsEnabled ? (await _authService.requestAuth()) : true;
+      if (authResult) {
+        _authService.disableBiometrics();
+        _isBiometricsEnabled.value = false;
+      }
     }
 
     await checkBiometricsSettings();
