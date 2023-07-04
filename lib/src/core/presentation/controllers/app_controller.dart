@@ -19,7 +19,7 @@ class AppController extends GetxController {
 
   Future<void> logout({bool withoutNavigate = false}) async {
     await _authService.logout();
-    setIsBiometricsEnabled(false);
+    setIsBiometricsEnabled(false, disableAuthCheck: true);
     if (!withoutNavigate) {
       AppRoutes.goToWelcomePage();
     }
@@ -41,7 +41,10 @@ class AppController extends GetxController {
     }
   }
 
-  Future<void> setIsBiometricsEnabled(bool value) async {
+  Future<void> setIsBiometricsEnabled(
+    bool value, {
+    bool disableAuthCheck = false,
+  }) async {
     _canShowAuthOverlay.value = false;
     if (value && canEnableBiometrics) {
       final result = await _authService.enableBiometrics();
@@ -55,8 +58,9 @@ class AppController extends GetxController {
         _canShowAuthOverlay.value = false;
       }
     } else {
-      final bool authResult =
-          isBiometricsEnabled ? (await _authService.requestAuth()) : true;
+      final bool authResult = isBiometricsEnabled && !disableAuthCheck
+          ? (await _authService.requestAuth())
+          : true;
       if (authResult) {
         _authService.disableBiometrics();
         _isBiometricsEnabled.value = false;
