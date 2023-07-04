@@ -18,7 +18,7 @@ class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> content = [
-      if (showIcon) Icon(CupertinoIcons.money_dollar_circle, size: size),
+      if (showIcon) Image.asset('assets/images/logo.png', height: size),
       if (showIcon && showText)
         SizedBox(
           height: verticalAlign ? (size / 8) : 0,
