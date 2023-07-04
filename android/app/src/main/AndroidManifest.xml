@@ -3,8 +3,8 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     
     <application
-        android:label="@string/appName"
         android:name="${applicationName}"
+        android:label="@string/appName"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
