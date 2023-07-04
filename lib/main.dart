@@ -30,11 +30,11 @@ void main() async {
   );
 
   Get.lazyPut(() => I18nController(), fenix: true);
-  runApp(const MyApp());
+  runApp(const MyFinancesApp());
 }
 
-class MyApp extends GetWidget<I18nController> {
-  const MyApp({super.key});
+class MyFinancesApp extends GetWidget<I18nController> {
+  const MyFinancesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
