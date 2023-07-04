@@ -34,15 +34,16 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/icons
     - assets/images/
     - lib/i18n/
 
 flutter_launcher_icons:
   android: true
-  image_path_android: "assets/images/android-icon.png"
-  adaptive_icon_foreground: "assets/images/android-adaptive-icon.png"
-  adaptive_icon_background: "#ffd5d7db"
+  image_path_android: "assets/icons/android-icon.png"
+  adaptive_icon_foreground: "assets/icons/android-adaptive-icon.png"
+  adaptive_icon_background: "assets/icons/android-adaptive-icon-background.png"
   min_sdk_android: 26
   ios: true
-  image_path_ios: "assets/images/ios-icon.png"
+  image_path_ios: "assets/icons/ios-icon.png"
   remove_alpha_ios: true
