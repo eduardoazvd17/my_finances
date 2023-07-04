@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
-  final Drawer? drawer;
+  final FloatingBottomMenuWidget? floatingBottomMenu;
   const ScaffoldWidget({
     super.key,
     this.appBar,
     this.body,
-    this.drawer,
+    this.floatingBottomMenu,
   });
 
   void _hideKeyboard() => FocusManager.instance.primaryFocus?.unfocus();
@@ -19,11 +20,23 @@ class ScaffoldWidget extends StatelessWidget {
       onTap: _hideKeyboard,
       child: Scaffold(
         appBar: appBar,
-        drawer: drawer,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: body,
+            child: floatingBottomMenu != null
+                ? Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: floatingBottomMenu!,
+                        ),
+                      ),
+                      if (body != null) body!,
+                    ],
+                  )
+                : body,
           ),
         ),
       ),
