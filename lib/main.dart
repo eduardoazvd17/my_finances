@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:credentials_manager/credentials_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/bindings/app_binding.dart';
@@ -11,6 +10,7 @@ import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dar
 
 import 'firebase_options.dart';
 import 'src/core/data/utils/app_routes.dart';
+import 'src/core/data/utils/app_themes.dart';
 import 'src/core/data/utils/life_cycle_handler.dart';
 
 void main() async {
@@ -46,24 +46,8 @@ class MyApp extends GetWidget<I18nController> {
       localizationsDelegates: controller.localizationsDelegates,
       supportedLocales: controller.supportedLocales,
       localeResolutionCallback: controller.localeResolutionCallback,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-          centerTitle: true,
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        primaryColor: Colors.indigo,
-        scaffoldBackgroundColor: Colors.black,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
-          centerTitle: true,
-        ),
-        brightness: Brightness.dark,
-        useMaterial3: true,
-      ),
+      theme: AppThemes.light,
+      darkTheme: AppThemes.dark,
       initialBinding: AppBinding(),
       initialRoute: AppRoutes.welcomeRoute,
       getPages: AppRoutes.getGetPages(),
