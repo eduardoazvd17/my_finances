@@ -50,6 +50,7 @@ class MyApp extends GetWidget<I18nController> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
+          centerTitle: true,
         ),
         useMaterial3: true,
       ),
@@ -58,6 +59,7 @@ class MyApp extends GetWidget<I18nController> {
         scaffoldBackgroundColor: Colors.black,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
+          centerTitle: true,
         ),
         brightness: Brightness.dark,
         useMaterial3: true,
