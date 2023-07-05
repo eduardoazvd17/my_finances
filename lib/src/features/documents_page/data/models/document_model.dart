@@ -19,6 +19,23 @@ class DocumentModel {
     required this.isFavorite,
   });
 
+  DocumentModel copyWith(
+    String? id,
+    String? name,
+    DateTime? lastEditDate,
+    bool? isFavorite,
+  ) {
+    return DocumentModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      ownerId: ownerId,
+      creationDate: creationDate,
+      lastEditDate: lastEditDate ?? this.lastEditDate,
+      type: type,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

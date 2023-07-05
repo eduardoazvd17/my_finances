@@ -2,17 +2,17 @@ import 'package:get/get.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/login_page.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/register_page.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/welcome_page.dart';
-import 'package:myfinances/src/features/finances_page/presentation/pages/finances_page.dart';
+import 'package:myfinances/src/features/documents_page/presentation/pages/documents_page.dart';
 
 import '../../../features/authentication/data/bindings/auth_binding.dart';
-import '../../../features/finances_page/data/bindings/finances_binding.dart';
+import '../../../features/documents_page/data/bindings/documents_binding.dart';
 
 class AppRoutes {
   /// ROUTE NAMES
   static const String _welcome = "/welcome";
   static const String _login = "/login";
   static const String _register = "/register";
-  static const String _finances = "/finances";
+  static const String _documents = "/documents";
 
   /// INITIAL ROUTES
   static String get welcomeRoute => _welcome;
@@ -21,7 +21,7 @@ class AppRoutes {
   static void goToWelcomePage() => _navigate(_welcome, offAll: true);
   static void goToLoginPage() => _navigate(_login);
   static void goToRegisterPage() => _navigate(_register);
-  static void goToFinancesPage() => _navigate(_finances, offAll: true);
+  static void goToDocumentsPage() => _navigate(_documents, offAll: true);
 
   /// GET PAGES
   static List<GetPage> getGetPages() {
@@ -42,9 +42,9 @@ class AppRoutes {
         binding: AuthBinding(),
       ),
       GetPage(
-        name: _finances,
-        page: () => const FinancesPage(),
-        binding: FinancesBinding(),
+        name: _documents,
+        page: () => const DocumentsPage(),
+        binding: DocumentsBinding(),
       ),
     ];
   }

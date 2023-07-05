@@ -5,10 +5,10 @@ import 'package:myfinances/src/core/presentation/views/settings_view.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 
-import '../controllers/finances_controller.dart';
+import '../controllers/documents_controller.dart';
 
-class FinancesPage extends GetWidget<FinancesController> {
-  const FinancesPage({super.key});
+class DocumentsPage extends GetWidget<DocumentsController> {
+  const DocumentsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,6 @@ class FinancesPage extends GetWidget<FinancesController> {
           _settingsMenuButton(context),
         ],
       ),
-      body: Column(children: []),
     );
   }
 

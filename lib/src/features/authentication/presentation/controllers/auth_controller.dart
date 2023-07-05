@@ -52,7 +52,7 @@ class AuthController extends GetxController {
       _lastUserName.value = '\n${userModel.name}';
       if (await _checkBiometrics()) {
         AppController.instance.setUser(userModel);
-        AppRoutes.goToFinancesPage();
+        AppRoutes.goToDocumentsPage();
       } else {
         _showBiometricsTryAgainButton.value = true;
       }
@@ -101,7 +101,7 @@ class AuthController extends GetxController {
 
       if (userModel != null) {
         AppController.instance.setUser(userModel);
-        AppRoutes.goToFinancesPage();
+        AppRoutes.goToDocumentsPage();
       } else {
         throw AppError.generic();
       }
@@ -151,7 +151,7 @@ class AuthController extends GetxController {
 
       if (userModel != null) {
         AppController.instance.setUser(userModel);
-        AppRoutes.goToFinancesPage();
+        AppRoutes.goToDocumentsPage();
       } else {
         throw AppError.generic();
       }
