@@ -49,7 +49,7 @@ class MyFinancesApp extends GetWidget<I18nController> {
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
       initialBinding: AppBinding(),
-      initialRoute: AppRoutes.welcomeRoute,
+      initialRoute: AppRoutes.initialRoute,
       getPages: AppRoutes.getGetPages(),
     );
   }

@@ -90,7 +90,7 @@ class AppController extends GetxController {
   }
 
   Future<void> showAuthOverlay() async {
-    if (!Get.currentRoute.contains(AppRoutes.welcomeRoute) &&
+    if (!Get.currentRoute.contains(AppRoutes.initialRoute) &&
         user != null &&
         isBiometricsEnabled &&
         canEnableBiometrics &&

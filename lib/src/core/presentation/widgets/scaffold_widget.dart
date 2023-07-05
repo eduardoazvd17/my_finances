@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
-  final FloatingBottomMenuWidget? floatingBottomMenu;
+  final Widget? floatingBottomMenu;
   const ScaffoldWidget({
     super.key,
     this.appBar,

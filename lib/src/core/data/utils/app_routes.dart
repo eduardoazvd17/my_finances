@@ -6,24 +6,23 @@ import 'package:myfinances/src/features/documents_page/presentation/pages/docume
 
 import '../../../features/authentication/data/bindings/auth_binding.dart';
 import '../../../features/documents_page/data/bindings/documents_binding.dart';
+import '../../../features/documents_page/presentation/pages/add_document_page.dart';
 
 class AppRoutes {
-  /// ROUTE NAMES
   static const String _welcome = "/welcome";
   static const String _login = "/login";
   static const String _register = "/register";
   static const String _documents = "/documents";
+  static const String _addDocument = "/addDocument";
 
-  /// INITIAL ROUTES
-  static String get welcomeRoute => _welcome;
+  static String get initialRoute => _welcome;
 
-  /// NAVIGATE
   static void goToWelcomePage() => _navigate(_welcome, offAll: true);
   static void goToLoginPage() => _navigate(_login);
   static void goToRegisterPage() => _navigate(_register);
   static void goToDocumentsPage() => _navigate(_documents, offAll: true);
+  static void goToAddDocumentPage() => _navigate(_addDocument);
 
-  /// GET PAGES
   static List<GetPage> getGetPages() {
     return [
       GetPage(
@@ -44,6 +43,11 @@ class AppRoutes {
       GetPage(
         name: _documents,
         page: () => const DocumentsPage(),
+        binding: DocumentsBinding(),
+      ),
+      GetPage(
+        name: _addDocument,
+        page: () => const AddDocumentPage(),
         binding: DocumentsBinding(),
       ),
     ];

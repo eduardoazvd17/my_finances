@@ -21,13 +21,13 @@ class FloatingBottomMenuItem extends StatelessWidget {
   final IconData icon;
   final void Function() onTap;
   final Color? iconColor;
-  final String? tooltip;
+  final String tooltip;
   const FloatingBottomMenuItem({
     super.key,
     required this.icon,
     required this.onTap,
+    required this.tooltip,
     this.iconColor,
-    this.tooltip,
   });
 
   @override

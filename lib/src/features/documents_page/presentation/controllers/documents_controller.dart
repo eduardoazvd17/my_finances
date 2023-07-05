@@ -1,4 +1,6 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
 import 'package:myfinances/src/features/documents_page/data/services/documents_service.dart';
 
@@ -21,14 +23,26 @@ class DocumentsController extends GetxController {
 
   final RxList<DocumentModel> _userDocuments = RxList<DocumentModel>();
   List<DocumentModel> get userDocuments => _userDocuments.toList();
+
+  void _sortDocuments() {
+    _userDocuments.sort((a, b) => b.lastEditDate.compareTo(a.lastEditDate));
+  }
+
   Future<void> _loadUserDocuments() async {
     _isLoading.value = true;
     try {
       _userDocuments.value = await _financesService.getUserDocuments();
-      _userDocuments.sort((a, b) => b.lastEditDate.compareTo(a.lastEditDate));
+      _sortDocuments();
     } on AppError catch (appError) {
       appError.showDialog();
     }
     _isLoading.value = false;
   }
+
+  final TextEditingController nameController = TextEditingController();
+  final Rx<DocumentType> _selectedDocumentType =
+      Rx<DocumentType>(DocumentType.values.first);
+  DocumentType get selectedDocumentType => _selectedDocumentType.value;
+  set selectedDocumentType(DocumentType value) =>
+      _selectedDocumentType.value = value;
 }

@@ -7,7 +7,7 @@ import '../../../../core/data/models/database_model.dart';
 import '../enums/document_type.dart';
 
 class FinancesService {
-  final UserModel? userModel;
+  final UserModel userModel;
   final DatabaseModel _database;
 
   FinancesService({
@@ -16,11 +16,9 @@ class FinancesService {
   }) : _database = database;
 
   Future<List<DocumentModel>> getUserDocuments() async {
-    if (userModel == null) return [];
-
     try {
       final query = await _database.documentsCollection
-          .where('ownerId', isEqualTo: userModel!.id)
+          .where('ownerId', isEqualTo: userModel.id)
           .get();
 
       return query.docs
@@ -37,15 +35,13 @@ class FinancesService {
     required String name,
     required DocumentType documentType,
   }) async {
-    if (userModel == null) return;
-
     try {
       final DocumentReference docRef = _database.documentsCollection.doc();
       final DateTime dateTimeNow = DateTime.now();
       final DocumentModel documentModel = DocumentModel(
         id: docRef.id,
         name: name,
-        ownerId: userModel!.id,
+        ownerId: userModel.id,
         creationDate: dateTimeNow,
         lastEditDate: dateTimeNow,
         type: documentType,
@@ -60,8 +56,6 @@ class FinancesService {
   }
 
   Future<void> editDocument({required DocumentModel documentModel}) async {
-    if (userModel == null) return;
-
     try {
       await _database.documentsCollection
           .doc(documentModel.id)

@@ -10,7 +10,7 @@ class DocumentsBinding extends Bindings {
     Get.lazyPut(
       () => DocumentsController(
         financesService: FinancesService(
-          userModel: Get.find<AppController>().user,
+          userModel: AppController.instance.user!,
           database: Get.find<DatabaseModel>(),
         ),
       ),
