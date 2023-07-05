@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:myfinances/src/core/presentation/views/settings_view.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
+import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
 import '../controllers/documents_controller.dart';
 
@@ -20,6 +21,19 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           _settingsMenuButton(context),
         ],
       ),
+      body: Obx(() {
+        if (controller.userDocuments.isEmpty) {
+          return const Center(child: Text('Mensagem de item vazio'));
+        } else {
+          return ScrollViewWidget(
+            child: Column(
+              children: controller.userDocuments.map((e) {
+                return Container();
+              }).toList(),
+            ),
+          );
+        }
+      }),
     );
   }
 
