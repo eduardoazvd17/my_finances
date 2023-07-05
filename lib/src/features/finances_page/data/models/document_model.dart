@@ -7,6 +7,7 @@ class DocumentModel {
   final DateTime creationDate;
   final DateTime lastEditDate;
   final DocumentType type;
+  final bool isFavorite;
 
   DocumentModel({
     required this.id,
@@ -15,6 +16,7 @@ class DocumentModel {
     required this.creationDate,
     required this.lastEditDate,
     required this.type,
+    required this.isFavorite,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,6 +27,7 @@ class DocumentModel {
       'creationDate': creationDate.millisecondsSinceEpoch,
       'lastEditDate': lastEditDate.millisecondsSinceEpoch,
       'type': type.index,
+      'isFavorite': isFavorite,
     };
   }
 
@@ -36,6 +39,7 @@ class DocumentModel {
       creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
       lastEditDate: DateTime.fromMillisecondsSinceEpoch(map['lastEditDate']),
       type: DocumentType.values[map['type']],
+      isFavorite: map['isFavorite'],
     );
   }
 }

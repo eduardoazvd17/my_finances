@@ -20,6 +20,7 @@ class FinancesPage extends GetWidget<FinancesController> {
           _settingsMenuButton(context),
         ],
       ),
+      body: Column(children: []),
     );
   }
 
