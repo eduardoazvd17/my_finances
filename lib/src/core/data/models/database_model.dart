@@ -17,4 +17,8 @@ class DatabaseModel {
   CollectionReference<Map<String, dynamic>> get usersCollection {
     return _firestore.collection('users');
   }
+
+  CollectionReference<Map<String, dynamic>> get documentsCollection {
+    return _firestore.collection('documents');
+  }
 }
