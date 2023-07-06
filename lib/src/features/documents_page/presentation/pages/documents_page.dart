@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/views/settings_view.dart';
+import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
+import 'package:myfinances/src/core/presentation/widgets/grouping_widget.dart';
+import 'package:myfinances/src/core/presentation/widgets/icon_button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
@@ -21,19 +25,37 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           _settingsMenuButton(context),
         ],
       ),
-      body: Obx(() {
-        if (controller.userDocuments.isEmpty) {
-          return const Center(child: Text('Mensagem de item vazio'));
-        } else {
-          return ScrollViewWidget(
-            child: Column(
-              children: controller.userDocuments.map((e) {
-                return Container();
-              }).toList(),
-            ),
-          );
-        }
-      }),
+      body: GroupingWidget(
+        title: 'my-documents-text'.i18n(),
+        expandedContent: true,
+        action: IconButtonWidget(
+          tooltip: 'add-document-button'.i18n(),
+          onTap: controller.goToAddDocumentPage,
+          icon: CupertinoIcons.add,
+        ),
+        content: Obx(() {
+          if (controller.userDocuments.isEmpty) {
+            return Center(
+              child: AdviseMessageWidget(
+                icon: Icons.info_outline,
+                message: 'my-documents-empty-title-text'.i18n(),
+                description: 'my-documents-empty-description-text'.i18n(),
+                actionButtonText: 'add-document-button'.i18n(),
+                actionButtonIcon: CupertinoIcons.add,
+                onAction: controller.goToAddDocumentPage,
+              ),
+            );
+          } else {
+            return ScrollViewWidget(
+              child: Column(
+                children: controller.userDocuments.map((e) {
+                  return Container();
+                }).toList(),
+              ),
+            );
+          }
+        }),
+      ),
     );
   }
 

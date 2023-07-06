@@ -1,26 +1,131 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
+import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
+import 'package:myfinances/src/features/documents_page/presentation/controllers/documents_controller.dart';
 
+import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
+import '../../data/enums/document_type.dart';
 
-class AddDocumentPage extends StatelessWidget {
+class AddDocumentPage extends GetWidget<DocumentsController> {
   const AddDocumentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
-        title: const Text('Novo documento'),
+        title: Text('add-document-button'.i18n()),
       ),
-      body: Column(
-        children: [
-          TextFieldWidget(
-            label: 'Nome do arquivo',
-            hint: 'Digite aqui o nome do seu novo arquivo',
-            controller: TextEditingController(),
-            focusNode: FocusNode(),
-          ),
-        ],
+      body: ScrollViewWidget(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFieldWidget(
+              label: 'add-document-name-label'.i18n(),
+              hint: 'add-document-name-hint'.i18n(),
+              controller: TextEditingController(),
+              focusNode: FocusNode(),
+            ),
+            Text('add-document-type-label'.i18n()),
+            Obx(
+              () => Row(
+                children: [
+                  Expanded(
+                    child: DropdownButton<DocumentType?>(
+                      isExpanded: true,
+                      iconSize: 35,
+                      iconEnabledColor: Theme.of(context).primaryColor,
+                      iconDisabledColor: Colors.grey[600],
+                      elevation: 8,
+                      borderRadius: BorderRadius.circular(10),
+                      padding: const EdgeInsets.symmetric(vertical: 2.5),
+                      value: controller.selectedDocumentType,
+                      items: [
+                        DropdownMenuItem(
+                          value: null,
+                          enabled: false,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'add-document-type-label'.i18n(),
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                              const Divider(),
+                            ],
+                          ),
+                        ),
+                        ...DocumentType.values.map((documentType) {
+                          return DropdownMenuItem(
+                            value: documentType,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 5.0,
+                              ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 2.5,
+                                      right: 5.0,
+                                    ),
+                                    child: Icon(documentType.icon, size: 30),
+                                  ),
+                                  Expanded(child: Text(documentType.title)),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) {
+                          controller.selectedDocumentType = value;
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Obx(
+              () => Text(
+                controller.selectedDocumentType.description,
+                textAlign: TextAlign.justify,
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 16,
+                bottom: 16,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ButtonWidget(
+                      icon: const Icon(
+                        CupertinoIcons.add,
+                        color: Colors.white,
+                      ),
+                      text: 'add-button'.i18n(),
+                      backgroundColor: Theme.of(context).primaryColor,
+                      foregroundColor: Colors.white,
+                      onTap: () {},
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

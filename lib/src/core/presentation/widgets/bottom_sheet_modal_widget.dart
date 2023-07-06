@@ -23,7 +23,7 @@ class BottomSheetModalWidget extends StatelessWidget {
                 width: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey,
+                  color: Colors.grey[600],
                 ),
               ),
             ),

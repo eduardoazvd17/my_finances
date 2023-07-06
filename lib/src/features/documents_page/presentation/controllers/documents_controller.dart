@@ -5,6 +5,7 @@ import 'package:myfinances/src/features/documents_page/data/models/document_mode
 import 'package:myfinances/src/features/documents_page/data/services/documents_service.dart';
 
 import '../../../../core/data/errors/app_error.dart';
+import '../../../../core/data/utils/app_routes.dart';
 
 class DocumentsController extends GetxController {
   final FinancesService _financesService;
@@ -38,6 +39,8 @@ class DocumentsController extends GetxController {
     }
     _isLoading.value = false;
   }
+
+  void goToAddDocumentPage() => AppRoutes.goToAddDocumentPage();
 
   final TextEditingController nameController = TextEditingController();
   final Rx<DocumentType> _selectedDocumentType =
