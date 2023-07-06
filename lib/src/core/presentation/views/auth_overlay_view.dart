@@ -64,7 +64,10 @@ class AuthOverlayView extends StatelessWidget {
                             child: ButtonWidget(
                               text: 'cancel-button'.i18n(),
                               borderColor: Colors.transparent,
-                              onTap: AppController.instance.logout,
+                              onTap: () {
+                                //TODO: Dialogo de confirmação
+                                AppController.instance.logout();
+                              },
                             ),
                           ),
                         ],

@@ -67,4 +67,14 @@ class FinancesService {
       throw AppError.generic();
     }
   }
+
+  Future<void> deleteDocument({required DocumentModel documentModel}) async {
+    try {
+      await _database.documentsCollection.doc(documentModel.id).delete();
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
 }

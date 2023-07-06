@@ -81,4 +81,20 @@ class DocumentsController extends GetxController {
       appError.showDialog();
     }
   }
+
+  void openDocument(DocumentModel documentModel) {
+    //TODO: Abrir documento.
+  }
+
+  Future<void> deleteDocument(DocumentModel documentModel) async {
+    LoadingWidget.dialog();
+    try {
+      await _financesService.deleteDocument(documentModel: documentModel);
+      _userDocuments.remove(documentModel);
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+    }
+    Get.close(1);
+  }
 }

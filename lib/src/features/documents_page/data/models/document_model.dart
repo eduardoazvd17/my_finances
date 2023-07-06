@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import '../enums/document_type.dart';
 
-class DocumentModel {
+class DocumentModel extends Equatable {
   final String id;
   final String name;
   final String ownerId;
@@ -9,7 +11,7 @@ class DocumentModel {
   final DocumentType type;
   final bool isFavorite;
 
-  DocumentModel({
+  const DocumentModel({
     required this.id,
     required this.name,
     required this.ownerId,
@@ -59,4 +61,7 @@ class DocumentModel {
       isFavorite: map['isFavorite'],
     );
   }
+
+  @override
+  List<Object?> get props => [id];
 }
