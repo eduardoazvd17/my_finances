@@ -23,16 +23,37 @@ class LoadingWidget extends StatelessWidget {
           ),
         ),
       ),
+      barrierColor: Colors.black87,
       barrierDismissible: false,
       name: 'loading',
     );
   }
 
   Widget _progressWidget(BuildContext context) {
-    return CircularProgressIndicator(color: Theme.of(context).primaryColor)
-        .animate()
-        .fade()
-        .slideY();
+    const size = 70.0;
+    return Stack(
+      children: [
+        SizedBox(
+          height: size,
+          width: size,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Image.asset(
+              "assets/images/logo.png",
+              opacity: const AlwaysStoppedAnimation(0.5),
+            ).animate().fade().slideY(),
+          ),
+        ),
+        SizedBox(
+          height: size,
+          width: size,
+          child: CircularProgressIndicator(
+            color: Theme.of(context).primaryColor,
+            strokeWidth: 5,
+          ).animate().fade().slideY(),
+        ),
+      ],
+    );
   }
 
   Widget _textWidget(BuildContext context) {
