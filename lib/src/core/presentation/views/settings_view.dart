@@ -83,7 +83,10 @@ class SettingsView extends GetWidget<AppController> {
               isExpanded: true,
               value: i18nController.selectedLanguage,
               iconEnabledColor: Theme.of(context).primaryColor,
+              elevation: 8,
+              borderRadius: BorderRadius.circular(10),
               iconSize: 35,
+              itemHeight: 50,
               onChanged: (value) {
                 i18nController.setSelectedLanguage(value);
               },
