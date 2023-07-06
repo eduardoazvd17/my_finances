@@ -7,6 +7,7 @@ import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart
 import 'package:myfinances/src/features/documents_page/presentation/controllers/documents_controller.dart';
 
 import '../../../../core/presentation/widgets/button_widget.dart';
+import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../../data/enums/document_type.dart';
 
@@ -38,16 +39,16 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
               () => Row(
                 children: [
                   Expanded(
-                    child: DropdownButton<DocumentType?>(
+                    child: DropDownButtonWidget<DocumentType?>(
                       itemHeight: 70,
                       isExpanded: true,
-                      iconSize: 35,
-                      iconEnabledColor: Theme.of(context).primaryColor,
-                      iconDisabledColor: Colors.grey[600],
-                      elevation: 8,
-                      borderRadius: BorderRadius.circular(10),
                       focusNode: controller.typeFocus,
                       value: controller.selectedDocumentType,
+                      onChanged: (value) {
+                        if (value != null) {
+                          controller.selectedDocumentType = value;
+                        }
+                      },
                       items: [
                         DropdownMenuItem(
                           value: null,
@@ -94,11 +95,6 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                           );
                         }),
                       ],
-                      onChanged: (value) {
-                        if (value != null) {
-                          controller.selectedDocumentType = value;
-                        }
-                      },
                     ),
                   ),
                 ],

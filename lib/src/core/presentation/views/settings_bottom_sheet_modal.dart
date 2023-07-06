@@ -9,9 +9,10 @@ import 'package:myfinances/src/core/presentation/controllers/theme_controller.da
 
 import '../widgets/bottom_sheet_modal_widget.dart';
 import '../widgets/custom_dialog.dart';
+import '../widgets/drop_down_button_widget.dart';
 
-class SettingsView extends GetWidget<AppController> {
-  const SettingsView({super.key});
+class SettingsBottomSheetModal extends GetWidget<AppController> {
+  const SettingsBottomSheetModal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +35,37 @@ class SettingsView extends GetWidget<AppController> {
                 ],
               ),
             ),
-            if (controller.user == null) ...[
-              _languageTile(context),
-              const Divider(),
-              _themeTile(context),
-            ] else ...[
-              _biometricTile(context),
-              const Divider(),
-              _languageTile(context),
-              const Divider(),
-              _themeTile(context),
-              const Divider(),
-              _logoutTile(),
-            ],
+            if (controller.user == null)
+              _getNoAuthTiles(context)
+            else
+              _getAuthTiles(context),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _getNoAuthTiles(BuildContext context) {
+    return Column(
+      children: [
+        _languageTile(context),
+        const Divider(),
+        _themeTile(context),
+      ],
+    );
+  }
+
+  Widget _getAuthTiles(BuildContext context) {
+    return Column(
+      children: [
+        _biometricTile(context),
+        const Divider(),
+        _languageTile(context),
+        const Divider(),
+        _themeTile(context),
+        const Divider(),
+        _logoutTile(),
+      ],
     );
   }
 
@@ -85,14 +101,10 @@ class SettingsView extends GetWidget<AppController> {
                 ?.copyWith(fontWeight: FontWeight.normal),
           ),
           Expanded(
-            child: DropdownButton<AppLanguage?>(
+            child: DropDownButtonWidget<AppLanguage?>(
+              itemHeight: 50,
               isExpanded: true,
               value: i18nController.selectedLanguage,
-              iconEnabledColor: Theme.of(context).primaryColor,
-              elevation: 8,
-              borderRadius: BorderRadius.circular(10),
-              iconSize: 35,
-              itemHeight: 50,
               onChanged: (value) {
                 i18nController.setSelectedLanguage(value);
               },
@@ -129,14 +141,10 @@ class SettingsView extends GetWidget<AppController> {
                 ?.copyWith(fontWeight: FontWeight.normal),
           ),
           Expanded(
-            child: DropdownButton<AppTheme>(
+            child: DropDownButtonWidget<AppTheme>(
+              itemHeight: 50,
               isExpanded: true,
               value: themeController.selectedTheme,
-              iconEnabledColor: Theme.of(context).primaryColor,
-              elevation: 8,
-              borderRadius: BorderRadius.circular(10),
-              iconSize: 35,
-              itemHeight: 50,
               onChanged: (value) {
                 if (value != null) {
                   themeController.setSelectedTheme(value);

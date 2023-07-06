@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/views/settings_view.dart';
+import 'package:myfinances/src/core/presentation/views/settings_bottom_sheet_modal.dart';
 import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/grouping_widget.dart';
@@ -68,7 +68,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       icon: const Icon(CupertinoIcons.settings),
       onPressed: () => showModalBottomSheet(
         context: context,
-        builder: (_) => const SettingsView(),
+        builder: (_) => const SettingsBottomSheetModal(),
       ),
     );
   }
