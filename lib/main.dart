@@ -49,6 +49,7 @@ class MyFinancesApp extends GetWidget<I18nController> {
         localeResolutionCallback: controller.localeResolutionCallback,
         theme: AppThemes.light,
         darkTheme: AppThemes.dark,
+        themeMode: ThemeMode.system,
         initialBinding: AppBinding(),
         initialRoute: AppRoutes.initialRoute,
         getPages: AppRoutes.getGetPages(),
