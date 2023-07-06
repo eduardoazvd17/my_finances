@@ -17,8 +17,8 @@ class AppLogo extends StatelessWidget {
     final children = [
       Image.asset('assets/images/logo.png', height: size),
       SizedBox(
-        height: verticalAlign ? (size / 8) : 0,
-        width: verticalAlign ? 0 : (size / 8),
+        height: verticalAlign ? (size / 4) : 0,
+        width: verticalAlign ? 0 : (size / 4),
       ),
       Text(
         'app-name'.i18n(),
