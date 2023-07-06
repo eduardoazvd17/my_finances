@@ -78,7 +78,7 @@ class SettingsView extends GetWidget<AppController> {
       child: Row(
         children: [
           Text(
-            '${'app-language-label'.i18n()}  ',
+            '${'app-language-label'.i18n()}:  ',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
@@ -122,7 +122,7 @@ class SettingsView extends GetWidget<AppController> {
       child: Row(
         children: [
           Text(
-            '${'app-theme-label'.i18n()}  ',
+            '${'app-theme-label'.i18n()}:  ',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
