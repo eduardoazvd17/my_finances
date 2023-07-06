@@ -21,7 +21,7 @@ class WelcomePage extends GetWidget<AuthController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const AppLogo(verticalAlign: true),
+              AppLogo(verticalAlign: true),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(

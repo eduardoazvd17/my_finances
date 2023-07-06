@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/enums/app_language.dart';
 
 class I18nController extends GetxController {
   i18nController() {
     LocalJsonLocalization.delegate.directories = ['lib/i18n'];
   }
 
-  Iterable<Locale> get supportedLocales => const [
-        Locale('pt', 'BR'),
-        Locale('en', 'US'),
-        Locale('es', 'ES'),
-      ];
+  Iterable<Locale> get supportedLocales =>
+      AppLanguage.values.map((e) => e.locale);
 
   Iterable<LocalizationsDelegate<dynamic>> get localizationsDelegates => [
         GlobalMaterialLocalizations.delegate,
@@ -27,15 +25,24 @@ class I18nController extends GetxController {
           return locale;
         }
         if (locale?.languageCode == 'pt') {
-          return const Locale('pt', 'BR');
+          return AppLanguage.portuguese.locale;
         }
         if (locale?.languageCode == 'es') {
-          return const Locale('es', 'ES');
+          return AppLanguage.spanish.locale;
         }
-        return const Locale('en', 'US');
+        return AppLanguage.english.locale;
       };
 
-  final Rx<Locale?> _selectedLanguage = Rx<Locale?>(null);
-  Locale? get selectedLocale => _selectedLanguage.value;
-  set selectedLocale(Locale? value) => _selectedLanguage.value = value;
+  final Rx<AppLanguage?> _selectedLanguage = Rx<AppLanguage?>(null);
+  AppLanguage? get selectedLanguage => _selectedLanguage.value;
+  set selectedLanguage(AppLanguage? value) {
+    _selectedLanguage.value = value;
+    if (value != null) {
+      Get.updateLocale(value.locale);
+    } else if (Get.deviceLocale != null) {
+      Get.updateLocale(Get.deviceLocale!);
+    }
+  }
+
+  Locale? get selectedLocale => selectedLanguage?.locale ?? Get.deviceLocale;
 }

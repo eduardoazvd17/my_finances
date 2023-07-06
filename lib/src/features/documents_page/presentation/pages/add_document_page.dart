@@ -80,7 +80,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                                       left: 2.5,
                                       right: 5.0,
                                     ),
-                                    child: Icon(documentType.icon, size: 45),
+                                    child: Icon(documentType.icon, size: 40),
                                   ),
                                   Expanded(
                                     child: Text(

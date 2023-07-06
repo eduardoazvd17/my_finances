@@ -12,9 +12,9 @@ extension DocumentTypeExtension on DocumentType {
   String get description => "document-type-description-$index".i18n();
   IconData get icon {
     return switch (this) {
-      DocumentType.monthlyExpenseControl => CupertinoIcons.money_dollar_circle,
-      DocumentType.investmentControl => CupertinoIcons.chart_bar_circle,
-      DocumentType.annotation => CupertinoIcons.doc_circle,
+      DocumentType.monthlyExpenseControl => CupertinoIcons.money_dollar,
+      DocumentType.investmentControl => CupertinoIcons.chart_bar_alt_fill,
+      DocumentType.annotation => CupertinoIcons.doc_plaintext,
     };
   }
 }

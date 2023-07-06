@@ -9,6 +9,7 @@ import 'package:myfinances/src/core/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/icon_button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
+import 'package:myfinances/src/features/documents_page/presentation/widgets/document_tile_widget.dart';
 
 import '../controllers/documents_controller.dart';
 
@@ -19,7 +20,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
-        title: const AppLogo(size: 35),
+        title: AppLogo(size: 35),
         centerTitle: false,
         actions: [
           _settingsMenuButton(context),
@@ -48,8 +49,10 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           } else {
             return ScrollViewWidget(
               child: Column(
-                children: controller.userDocuments.map((e) {
-                  return Container();
+                children: controller.userDocuments.map((documentModel) {
+                  return DocumentTileWidget(
+                    documentModel: documentModel,
+                  );
                 }).toList(),
               ),
             );

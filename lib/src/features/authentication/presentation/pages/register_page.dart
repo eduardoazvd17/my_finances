@@ -24,8 +24,8 @@ class RegisterPage extends GetWidget<AuthController> {
         child: ScrollViewWidget(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 50.0, top: 16),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 50.0, top: 16),
                 child: AppLogo(),
               ),
               AutofillGroup(

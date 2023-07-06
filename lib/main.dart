@@ -38,19 +38,21 @@ class MyFinancesApp extends GetWidget<I18nController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      builder: (_, child) => LifeCycleHandler(child: child!),
-      debugShowCheckedModeBanner: false,
-      title: 'app-name'.i18n(),
-      locale: controller.selectedLocale,
-      localizationsDelegates: controller.localizationsDelegates,
-      supportedLocales: controller.supportedLocales,
-      localeResolutionCallback: controller.localeResolutionCallback,
-      theme: AppThemes.light,
-      darkTheme: AppThemes.dark,
-      initialBinding: AppBinding(),
-      initialRoute: AppRoutes.initialRoute,
-      getPages: AppRoutes.getGetPages(),
+    return Obx(
+      () => GetMaterialApp(
+        builder: (_, child) => LifeCycleHandler(child: child!),
+        debugShowCheckedModeBanner: false,
+        title: 'app-name'.i18n(),
+        locale: controller.selectedLocale,
+        localizationsDelegates: controller.localizationsDelegates,
+        supportedLocales: controller.supportedLocales,
+        localeResolutionCallback: controller.localeResolutionCallback,
+        theme: AppThemes.light,
+        darkTheme: AppThemes.dark,
+        initialBinding: AppBinding(),
+        initialRoute: AppRoutes.initialRoute,
+        getPages: AppRoutes.getGetPages(),
+      ),
     );
   }
 }

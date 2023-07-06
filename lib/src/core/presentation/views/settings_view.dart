@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/enums/app_language.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
+import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
 
 import '../widgets/bottom_sheet_modal_widget.dart';
 import '../widgets/custom_dialog.dart';
@@ -30,40 +32,84 @@ class SettingsView extends GetWidget<AppController> {
                 ],
               ),
             ),
-            SwitchListTile(
-              value: controller.canEnableBiometrics
-                  ? controller.isBiometricsEnabled
-                  : false,
-              onChanged: controller.canEnableBiometrics
-                  ? controller.setIsBiometricsEnabled
-                  : null,
-              title: Text('enable-biometrics-button'.i18n()),
-              subtitle: controller.canEnableBiometrics
-                  ? null
-                  : Text(
-                      "*${'cannot-enable-biometrics-text'.i18n()}",
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-            ),
+            _biometricTile(context),
             const Divider(),
-            ListTile(
-              onTap: () {
-                Get.dialog(
-                  CustomDialog(
-                    title: 'logout-button'.i18n(),
-                    content: 'logout-confirmation-text'.i18n(),
-                    onConfirm: controller.logout,
-                  ),
-                );
-              },
-              trailing: const Icon(Icons.exit_to_app),
-              iconColor: Colors.red,
-              title: Text('logout-button'.i18n()),
-              textColor: Colors.red,
-            ),
+            _languageTile(context),
+            const Divider(),
+            _logoutTile(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _biometricTile(BuildContext context) {
+    return SwitchListTile(
+      value: controller.canEnableBiometrics
+          ? controller.isBiometricsEnabled
+          : false,
+      onChanged: controller.canEnableBiometrics
+          ? controller.setIsBiometricsEnabled
+          : null,
+      title: Text('enable-biometrics-button'.i18n()),
+      subtitle: controller.canEnableBiometrics
+          ? null
+          : Text(
+              "*${'cannot-enable-biometrics-text'.i18n()}",
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+    );
+  }
+
+  Widget _languageTile(BuildContext context) {
+    final I18nController i18nController = Get.find<I18nController>();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Text(
+            'Idioma: ',
+            style: Theme.of(context).listTileTheme.titleTextStyle,
+          ),
+          Expanded(
+            child: DropdownButton<AppLanguage?>(
+              isExpanded: true,
+              value: i18nController.selectedLanguage,
+              onChanged: (value) => i18nController.selectedLanguage = value,
+              items: [
+                DropdownMenuItem(
+                  value: null,
+                  child: Text('app-language-null'.i18n()),
+                ),
+                ...AppLanguage.values.map(
+                  (language) => DropdownMenuItem(
+                    value: language,
+                    child: Text(language.title),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _logoutTile() {
+    return ListTile(
+      onTap: () {
+        Get.dialog(
+          CustomDialog(
+            title: 'logout-button'.i18n(),
+            content: 'logout-confirmation-text'.i18n(),
+            onConfirm: controller.logout,
+          ),
+        );
+      },
+      trailing: const Icon(Icons.exit_to_app),
+      iconColor: Colors.red,
+      title: Text('logout-button'.i18n()),
+      textColor: Colors.red,
     );
   }
 }
