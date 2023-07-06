@@ -18,6 +18,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: Atribuir onDelete e onEdit.
     return ScaffoldWidget(
       appBar: AppBar(
         title: AppLogo(size: 35),
