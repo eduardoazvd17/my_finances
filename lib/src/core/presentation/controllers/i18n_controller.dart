@@ -71,6 +71,7 @@ class I18nController extends GetxController {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final int? index = prefs.getInt('AppLanguage');
       if (index != null) {
+        await Future.delayed(const Duration(milliseconds: 300));
         setSelectedLanguage(
           AppLanguage.values[index],
           withoutSaving: true,
