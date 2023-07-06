@@ -8,6 +8,8 @@ enum AppLanguage {
 }
 
 extension AppLanguageExtension on AppLanguage {
+  String get localeString => '${locale.languageCode}_${locale.countryCode}';
+
   Locale get locale {
     return switch (this) {
       AppLanguage.english => const Locale('en', 'US'),

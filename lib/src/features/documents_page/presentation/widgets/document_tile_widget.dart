@@ -39,8 +39,8 @@ class DocumentTileWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      DateTimeUtils.formatLocale(
-                        date: documentModel.lastEditDate,
+                      DateTimeUtils.formatFullDateByLocale(
+                        documentModel.lastEditDate,
                       ),
                       style: TextStyle(color: Colors.grey[600]),
                     ),
