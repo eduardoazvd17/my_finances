@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/enums/app_language.dart';
+import 'package:myfinances/src/core/data/enums/app_theme.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
 import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
+import 'package:myfinances/src/core/presentation/controllers/theme_controller.dart';
 
 import '../widgets/bottom_sheet_modal_widget.dart';
 import '../widgets/custom_dialog.dart';
@@ -32,12 +34,16 @@ class SettingsView extends GetWidget<AppController> {
                 ],
               ),
             ),
-            if (controller.user == null)
-              _languageTile(context)
-            else ...[
+            if (controller.user == null) ...[
+              _languageTile(context),
+              const Divider(),
+              _themeTile(context),
+            ] else ...[
               _biometricTile(context),
               const Divider(),
               _languageTile(context),
+              const Divider(),
+              _themeTile(context),
               const Divider(),
               _logoutTile(),
             ],
@@ -72,7 +78,7 @@ class SettingsView extends GetWidget<AppController> {
       child: Row(
         children: [
           Text(
-            '${'app-language-label'.i18n()}: ',
+            '${'app-language-label'.i18n()}  ',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
@@ -102,6 +108,48 @@ class SettingsView extends GetWidget<AppController> {
                   ),
                 )
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _themeTile(BuildContext context) {
+    final ThemeController themeController = Get.find<ThemeController>();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Text(
+            '${'app-theme-label'.i18n()}  ',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.normal),
+          ),
+          Expanded(
+            child: DropdownButton<AppTheme>(
+              isExpanded: true,
+              value: themeController.selectedTheme,
+              iconEnabledColor: Theme.of(context).primaryColor,
+              elevation: 8,
+              borderRadius: BorderRadius.circular(10),
+              iconSize: 35,
+              itemHeight: 50,
+              onChanged: (value) {
+                if (value != null) {
+                  themeController.setSelectedTheme(value);
+                }
+              },
+              items: AppTheme.values
+                  .map(
+                    (theme) => DropdownMenuItem(
+                      value: theme,
+                      child: Text(theme.title),
+                    ),
+                  )
+                  .toList(),
             ),
           ),
         ],

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/bindings/app_binding.dart';
+import 'package:myfinances/src/core/data/enums/app_theme.dart';
 import 'package:myfinances/src/core/data/models/database_model.dart';
 import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
 
@@ -12,6 +13,7 @@ import 'firebase_options.dart';
 import 'src/core/data/utils/app_routes.dart';
 import 'src/core/data/utils/app_themes.dart';
 import 'src/core/data/utils/life_cycle_handler.dart';
+import 'src/core/presentation/controllers/theme_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,7 @@ void main() async {
   );
 
   Get.lazyPut(() => I18nController(), fenix: true);
+  Get.lazyPut(() => ThemeController(), fenix: true);
   runApp(const MyFinancesApp());
 }
 
@@ -49,7 +52,7 @@ class MyFinancesApp extends GetWidget<I18nController> {
         localeResolutionCallback: controller.localeResolutionCallback,
         theme: AppThemes.light,
         darkTheme: AppThemes.dark,
-        themeMode: ThemeMode.system,
+        themeMode: Get.find<ThemeController>().selectedTheme.themeMode,
         initialBinding: AppBinding(),
         initialRoute: AppRoutes.initialRoute,
         getPages: AppRoutes.getGetPages(),

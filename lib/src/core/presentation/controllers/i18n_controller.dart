@@ -13,7 +13,7 @@ class I18nController extends GetxController {
 
   @override
   void onInit() {
-    loadSelectedLanguage();
+    _loadSelectedLanguage();
     super.onInit();
   }
 
@@ -66,7 +66,7 @@ class I18nController extends GetxController {
     if (!withoutSaving) Get.close(1);
   }
 
-  Future<void> loadSelectedLanguage() async {
+  Future<void> _loadSelectedLanguage() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final int? index = prefs.getInt('AppLanguage');
