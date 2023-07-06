@@ -53,6 +53,8 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                   return DocumentTileWidget(
                     documentModel: documentModel,
                     onTap: () => controller.openDocument(documentModel),
+                    onEdit: () => controller.editDocument(documentModel),
+                    onDelete: () => controller.deleteDocument(documentModel),
                   );
                 }).toList(),
               ),

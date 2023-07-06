@@ -97,4 +97,8 @@ class DocumentsController extends GetxController {
       appError.showDialog();
     }
   }
+
+  Future<void> editDocument(DocumentModel documentModel) async {
+    //TODO: Editar documento.
+  }
 }

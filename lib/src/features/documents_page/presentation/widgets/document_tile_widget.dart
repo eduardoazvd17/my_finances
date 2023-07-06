@@ -8,10 +8,14 @@ import 'package:myfinances/src/features/documents_page/data/models/document_mode
 class DocumentTileWidget extends StatelessWidget {
   final DocumentModel documentModel;
   final void Function() onTap;
+  final void Function() onEdit;
+  final void Function() onDelete;
   const DocumentTileWidget({
     super.key,
     required this.documentModel,
     required this.onTap,
+    required this.onEdit,
+    required this.onDelete,
   });
 
   @override
