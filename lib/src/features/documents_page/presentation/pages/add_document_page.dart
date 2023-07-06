@@ -26,8 +26,12 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
             TextFieldWidget(
               label: 'add-document-name-label'.i18n(),
               hint: 'add-document-name-hint'.i18n(),
-              controller: TextEditingController(),
-              focusNode: FocusNode(),
+              controller: controller.nameController,
+              focusNode: controller.nameFocus,
+              textCapitalization: TextCapitalization.sentences,
+              textInputType: TextInputType.text,
+              textInputAction: TextInputAction.next,
+              onSubmitted: (_) => controller.typeFocus.requestFocus(),
             ),
             Text('add-document-type-label'.i18n()),
             Obx(
@@ -35,13 +39,14 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                 children: [
                   Expanded(
                     child: DropdownButton<DocumentType?>(
+                      itemHeight: 70,
                       isExpanded: true,
                       iconSize: 35,
                       iconEnabledColor: Theme.of(context).primaryColor,
                       iconDisabledColor: Colors.grey[600],
                       elevation: 8,
                       borderRadius: BorderRadius.circular(10),
-                      padding: const EdgeInsets.symmetric(vertical: 2.5),
+                      focusNode: controller.typeFocus,
                       value: controller.selectedDocumentType,
                       items: [
                         DropdownMenuItem(
@@ -75,9 +80,14 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                                       left: 2.5,
                                       right: 5.0,
                                     ),
-                                    child: Icon(documentType.icon, size: 30),
+                                    child: Icon(documentType.icon, size: 45),
                                   ),
-                                  Expanded(child: Text(documentType.title)),
+                                  Expanded(
+                                    child: Text(
+                                      documentType.title,
+                                      maxLines: 2,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -118,7 +128,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                       text: 'add-button'.i18n(),
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white,
-                      onTap: () {},
+                      onTap: controller.createNewDocument,
                     ),
                   ),
                 ],

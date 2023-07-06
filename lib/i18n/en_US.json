@@ -55,5 +55,6 @@
     "register-name-validation": "Please enter a valid name.",
     "register-email-validation": "Please enter a valid email address.",
     "register-password-validation": "Please enter a valid password of 8 or more characters.",
-    "register-password2-validation": "The password confirmation must match the previously entered password."
+    "register-password2-validation": "The password confirmation must match the previously entered password.",
+    "document-name-validation": "Please enter a valid name for your document."
 }

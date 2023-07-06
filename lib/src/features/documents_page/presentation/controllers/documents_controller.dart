@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
 import 'package:myfinances/src/features/documents_page/data/services/documents_service.dart';
@@ -40,12 +42,43 @@ class DocumentsController extends GetxController {
     _isLoading.value = false;
   }
 
-  void goToAddDocumentPage() => AppRoutes.goToAddDocumentPage();
+  void goToAddDocumentPage() {
+    nameController.clear();
+    _selectedDocumentType.value = DocumentType.values.first;
+    AppRoutes.goToAddDocumentPage();
+  }
 
   final TextEditingController nameController = TextEditingController();
+  final FocusNode nameFocus = FocusNode();
+  final FocusNode typeFocus = FocusNode();
   final Rx<DocumentType> _selectedDocumentType =
       Rx<DocumentType>(DocumentType.values.first);
   DocumentType get selectedDocumentType => _selectedDocumentType.value;
   set selectedDocumentType(DocumentType value) =>
       _selectedDocumentType.value = value;
+
+  Future<void> createNewDocument() async {
+    try {
+      LoadingWidget.dialog();
+      final String name = nameController.text.trim();
+      final DocumentType type = selectedDocumentType;
+
+      if (name.isEmpty) {
+        throw AppError(message: 'document-name-validation'.i18n());
+      }
+
+      final DocumentModel documentModel = await _financesService.newDocument(
+        name: name,
+        documentType: type,
+      );
+
+      _userDocuments.add(documentModel);
+      _sortDocuments();
+
+      Get.close(2);
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+    }
+  }
 }

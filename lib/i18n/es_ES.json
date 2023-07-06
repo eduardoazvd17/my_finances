@@ -55,5 +55,6 @@
     "register-name-validation": "Ingrese un nombre válido.",
     "register-email-validation": "Ingrese una dirección de correo electrónico válida.",
     "register-password-validation": "Por favor ingrese una contraseña válida de 8 o más caracteres.",
-    "register-password2-validation": "La confirmación de la contraseña debe coincidir con la contraseña ingresada anteriormente"
+    "register-password2-validation": "La confirmación de la contraseña debe coincidir con la contraseña ingresada anteriormente",
+    "document-name-validation": "Ingrese un nombre válido para su documento"
 }

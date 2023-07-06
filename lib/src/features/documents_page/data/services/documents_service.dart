@@ -31,7 +31,7 @@ class FinancesService {
     }
   }
 
-  Future<void> newDocument({
+  Future<DocumentModel> newDocument({
     required String name,
     required DocumentType documentType,
   }) async {
@@ -48,6 +48,7 @@ class FinancesService {
         isFavorite: false,
       );
       await docRef.set(documentModel.toMap());
+      return documentModel;
     } on AppError catch (_) {
       rethrow;
     } catch (_) {
