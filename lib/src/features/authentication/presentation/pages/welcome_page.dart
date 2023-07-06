@@ -8,6 +8,7 @@ import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
+import '../../../../core/presentation/views/settings_view.dart';
 import '../controllers/auth_controller.dart';
 
 class WelcomePage extends GetWidget<AuthController> {
@@ -16,6 +17,11 @@ class WelcomePage extends GetWidget<AuthController> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+      appBar: AppBar(
+        actions: [
+          _settingsMenuButton(context),
+        ],
+      ),
       body: Center(
         child: ScrollViewWidget(
           child: Column(
@@ -92,6 +98,16 @@ class WelcomePage extends GetWidget<AuthController> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _settingsMenuButton(BuildContext context) {
+    return IconButton(
+      icon: const Icon(CupertinoIcons.settings),
+      onPressed: () => showModalBottomSheet(
+        context: context,
+        builder: (_) => const SettingsView(),
+      ),
     );
   }
 

@@ -7,6 +7,8 @@ import 'package:myfinances/src/core/data/errors/app_error.dart';
 import 'package:myfinances/src/core/data/models/database_model.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
 
+import '../../../../core/data/enums/app_language.dart';
+
 class AuthService {
   final DatabaseModel _database;
 
@@ -155,6 +157,30 @@ class AuthService {
     return await _database.credentialsManager.requestAuth(
       authReasonMessage: 'auth-required-text'.i18n(),
     );
+  }
+
+  Future<void> saveUserLanguage({
+    required UserModel userModel,
+    required AppLanguage? appLanguage,
+  }) async {
+    try {
+      final prefs = await _database.sharedPreferences;
+      if (appLanguage != null) {
+        prefs.setInt('AppLanguage-${userModel.id}', appLanguage.index);
+      } else {
+        prefs.remove('AppLanguage-${userModel.id}');
+      }
+    } catch (_) {}
+  }
+
+  Future<AppLanguage?> getUserLanguage({required UserModel userModel}) async {
+    try {
+      final prefs = await _database.sharedPreferences;
+      final int? index = prefs.getInt('AppLanguage-${userModel.id}');
+      return index != null ? AppLanguage.values[index] : null;
+    } catch (_) {
+      return null;
+    }
   }
 
   String _md5Hash(String value) {

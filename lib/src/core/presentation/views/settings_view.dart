@@ -32,11 +32,15 @@ class SettingsView extends GetWidget<AppController> {
                 ],
               ),
             ),
-            _biometricTile(context),
-            const Divider(),
-            _languageTile(context),
-            const Divider(),
-            _logoutTile(),
+            if (controller.user == null)
+              _languageTile(context)
+            else ...[
+              _biometricTile(context),
+              const Divider(),
+              _languageTile(context),
+              const Divider(),
+              _logoutTile(),
+            ],
           ],
         ),
       ),
@@ -68,14 +72,21 @@ class SettingsView extends GetWidget<AppController> {
       child: Row(
         children: [
           Text(
-            'Idioma: ',
-            style: Theme.of(context).listTileTheme.titleTextStyle,
+            '${'app-language-label'.i18n()}: ',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.normal),
           ),
           Expanded(
             child: DropdownButton<AppLanguage?>(
               isExpanded: true,
               value: i18nController.selectedLanguage,
-              onChanged: (value) => i18nController.selectedLanguage = value,
+              iconEnabledColor: Theme.of(context).primaryColor,
+              iconSize: 35,
+              onChanged: (value) {
+                i18nController.setSelectedLanguage(value);
+              },
               items: [
                 DropdownMenuItem(
                   value: null,
