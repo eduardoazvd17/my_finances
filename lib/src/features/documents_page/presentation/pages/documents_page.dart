@@ -52,6 +52,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 children: controller.userDocuments.map((documentModel) {
                   return DocumentTileWidget(
                     documentModel: documentModel,
+                    onTap: () {},
                   );
                 }).toList(),
               ),
