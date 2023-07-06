@@ -94,32 +94,35 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       child: Row(
         children: [
           Text(
-            '${'app-language-label'.i18n()}:  ',
+            '${'app-language-label'.i18n()}:',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
                 ?.copyWith(fontWeight: FontWeight.normal),
           ),
           Expanded(
-            child: DropDownButtonWidget<AppLanguage?>(
-              itemHeight: 50,
-              isExpanded: true,
-              value: i18nController.selectedLanguage,
-              onChanged: (value) {
-                i18nController.setSelectedLanguage(value);
-              },
-              items: [
-                DropdownMenuItem(
-                  value: null,
-                  child: Text('app-language-null'.i18n()),
-                ),
-                ...AppLanguage.values.map(
-                  (language) => DropdownMenuItem(
-                    value: language,
-                    child: Text(language.title),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: DropDownButtonWidget<AppLanguage?>(
+                itemHeight: 50,
+                isExpanded: true,
+                value: i18nController.selectedLanguage,
+                onChanged: (value) {
+                  i18nController.setSelectedLanguage(value);
+                },
+                items: [
+                  DropdownMenuItem(
+                    value: null,
+                    child: Text('app-language-null'.i18n()),
                   ),
-                )
-              ],
+                  ...AppLanguage.values.map(
+                    (language) => DropdownMenuItem(
+                      value: language,
+                      child: Text(language.title),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],
@@ -134,30 +137,33 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       child: Row(
         children: [
           Text(
-            '${'app-theme-label'.i18n()}:  ',
+            '${'app-theme-label'.i18n()}:',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
                 ?.copyWith(fontWeight: FontWeight.normal),
           ),
           Expanded(
-            child: DropDownButtonWidget<AppTheme>(
-              itemHeight: 50,
-              isExpanded: true,
-              value: themeController.selectedTheme,
-              onChanged: (value) {
-                if (value != null) {
-                  themeController.setSelectedTheme(value);
-                }
-              },
-              items: AppTheme.values
-                  .map(
-                    (theme) => DropdownMenuItem(
-                      value: theme,
-                      child: Text(theme.title),
-                    ),
-                  )
-                  .toList(),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: DropDownButtonWidget<AppTheme>(
+                itemHeight: 50,
+                isExpanded: true,
+                value: themeController.selectedTheme,
+                onChanged: (value) {
+                  if (value != null) {
+                    themeController.setSelectedTheme(value);
+                  }
+                },
+                items: AppTheme.values
+                    .map(
+                      (theme) => DropdownMenuItem(
+                        value: theme,
+                        child: Text(theme.title),
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
           ),
         ],
