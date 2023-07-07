@@ -21,7 +21,7 @@ class LoadingWidget extends StatelessWidget {
         child: Material(
           borderRadius: BorderRadius.circular(10),
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
             child: LoadingWidget(removeLogo: removeLogo),
           ),
         ),

@@ -9,6 +9,7 @@ import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
 import '../../../../core/presentation/views/settings_bottom_sheet_modal.dart';
+import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../controllers/auth_controller.dart';
 
 class WelcomePage extends GetWidget<AuthController> {
@@ -100,9 +101,22 @@ class WelcomePage extends GetWidget<AuthController> {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  text: 'cancel-button'.i18n(),
+                  icon: Icon(
+                    Icons.exit_to_app,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  text: 'logout-button'.i18n(),
                   borderColor: Colors.transparent,
-                  onTap: controller.cancelAutoLogin,
+                  onTap: () {
+                    Get.dialog(
+                      CustomDialog(
+                        title: 'logout-button'.i18n(),
+                        content: 'logout-confirmation-text'.i18n(),
+                        onConfirm: controller.cancelAutoLogin,
+                      ),
+                      name: 'logout',
+                    );
+                  },
                 ),
               ),
             ],
