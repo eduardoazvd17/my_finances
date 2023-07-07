@@ -27,22 +27,7 @@ class WelcomePage extends GetWidget<AuthController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AppLogo(verticalAlign: true),
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Text(
-                  'welcome-text'.i18n(),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 80),
-                child: Text(
-                  'slogan-text'.i18n(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey[600]),
-                ),
-              ),
+              _welcomeWidget(),
               Obx(
                 () {
                   if (controller.showBiometricsTryAgainButton) {
@@ -61,6 +46,29 @@ class WelcomePage extends GetWidget<AuthController> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _welcomeWidget() {
+    return Column(
+      children: [
+        AppLogo(verticalAlign: true),
+        Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: Text(
+            'welcome-text'.i18n(),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 80),
+          child: Text(
+            'slogan-text'.i18n(),
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.grey[600]),
+          ),
+        )
+      ],
     );
   }
 
