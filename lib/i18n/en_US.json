@@ -3,6 +3,7 @@
     "welcome-text": "Welcome to my finance app",
     "slogan-text": "Empower your pocket with financial planning!",
     "settings-text": "Settings",
+    "loading-text": "Loading...",
     "cannot-enable-biometrics-text": "Enable biometrics in the settings of your device.",
     "logout-confirmation-text": "Do you really want to logout?",
     "error-text": "Error",

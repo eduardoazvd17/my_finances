@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 
 class LoadingWidget extends StatelessWidget {
-  final String text;
+  final String? text;
   final bool inline;
   final bool removeLogo;
 
   const LoadingWidget({
-    this.text = "Carregando...",
+    this.text,
     this.inline = false,
     this.removeLogo = false,
     super.key,
@@ -61,7 +62,7 @@ class LoadingWidget extends StatelessWidget {
 
   Widget _textWidget(BuildContext context) {
     return Text(
-      text,
+      text ?? 'loading-text'.i18n(),
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Theme.of(context).primaryColor,
