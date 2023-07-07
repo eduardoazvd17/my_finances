@@ -66,6 +66,10 @@ class AuthOverlayView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ButtonWidget(
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                color: Theme.of(context).primaryColor,
+                              ),
                               text: 'logout-button'.i18n(),
                               borderColor: Colors.transparent,
                               onTap: () {
