@@ -5,21 +5,23 @@ import 'package:get/get.dart';
 class LoadingWidget extends StatelessWidget {
   final String text;
   final bool inline;
+  final bool removeLogo;
 
   const LoadingWidget({
     this.text = "Carregando...",
     this.inline = false,
+    this.removeLogo = false,
     super.key,
   });
 
-  static dialog() {
+  static dialog({bool removeLogo = false}) {
     Get.dialog(
       Center(
         child: Material(
           borderRadius: BorderRadius.circular(10),
-          child: const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: LoadingWidget(),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: LoadingWidget(removeLogo: removeLogo),
           ),
         ),
       ),
@@ -33,17 +35,18 @@ class LoadingWidget extends StatelessWidget {
     const size = 70.0;
     return Stack(
       children: [
-        SizedBox(
-          height: size,
-          width: size,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Image.asset(
-              "assets/images/logo.png",
-              opacity: const AlwaysStoppedAnimation(0.5),
-            ).animate().fade().slideY(),
+        if (!removeLogo)
+          SizedBox(
+            height: size,
+            width: size,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Image.asset(
+                "assets/images/logo.png",
+                opacity: const AlwaysStoppedAnimation(0.5),
+              ).animate().fade().slideY(),
+            ),
           ),
-        ),
         SizedBox(
           height: size,
           width: size,
