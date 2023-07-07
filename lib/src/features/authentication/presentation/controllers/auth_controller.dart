@@ -22,7 +22,7 @@ class AuthController extends GetxController {
     super.onInit();
   }
 
-  final RxBool _isLoading = RxBool(true);
+  final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
 
   final nameController = TextEditingController();
