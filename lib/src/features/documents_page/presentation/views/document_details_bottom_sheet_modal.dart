@@ -10,7 +10,7 @@ import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../widgets/document_details_widget.dart';
 
-class EditDocumentBottomSheetModalWidget extends StatefulWidget {
+class DocumentDetailsBottomSheetModalWidget extends StatefulWidget {
   final DocumentModel documentModel;
   final Future<bool> Function({
     required DocumentModel documentModel,
@@ -19,7 +19,7 @@ class EditDocumentBottomSheetModalWidget extends StatefulWidget {
   }) onEdit;
   final Function(DocumentModel) onDelete;
 
-  const EditDocumentBottomSheetModalWidget({
+  const DocumentDetailsBottomSheetModalWidget({
     super.key,
     required this.documentModel,
     required this.onEdit,
@@ -27,12 +27,12 @@ class EditDocumentBottomSheetModalWidget extends StatefulWidget {
   });
 
   @override
-  State<EditDocumentBottomSheetModalWidget> createState() =>
-      _EditDocumentBottomSheetModalWidgetState();
+  State<DocumentDetailsBottomSheetModalWidget> createState() =>
+      _DocumentDetailsBottomSheetModalWidgetState();
 }
 
-class _EditDocumentBottomSheetModalWidgetState
-    extends State<EditDocumentBottomSheetModalWidget> {
+class _DocumentDetailsBottomSheetModalWidgetState
+    extends State<DocumentDetailsBottomSheetModalWidget> {
   bool? _isFavorite;
 
   @override
@@ -107,29 +107,36 @@ class _EditDocumentBottomSheetModalWidgetState
                 text: widget.documentModel.name,
               );
 
+              Future<void> onConfirm() async {
+                final bool result = await widget.onEdit.call(
+                  documentModel: widget.documentModel,
+                  newName: nameController.text,
+                );
+                if (result) Get.close(1);
+              }
+
               Get.close(1);
               Get.dialog(
                 CustomDialog(
                   autoClose: false,
                   title: 'rename-document-dialog-title'.i18n(),
                   confirmButtonText: 'rename-button'.i18n(),
-                  onConfirm: () async {
-                    final bool result = await widget.onEdit.call(
-                      documentModel: widget.documentModel,
-                      newName: nameController.text,
-                    );
-                    if (result) Get.close(1);
-                  },
+                  onConfirm: onConfirm,
                   closeButtonText: 'cancel-button'.i18n(),
                   onClose: () => Get.close(1),
                   child: TextFieldWidget(
                     autofocus: true,
-                    label: 'rename-document-label',
-                    hint: 'rename-document-hint',
+                    label: 'rename-document-label'.i18n(),
+                    hint: 'rename-document-hint'.i18n(),
                     controller: nameController,
                     focusNode: FocusNode(),
+                    textCapitalization: TextCapitalization.sentences,
+                    textInputType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (_) => onConfirm(),
                   ),
                 ),
+                barrierDismissible: false,
               );
             },
           ),
@@ -144,14 +151,14 @@ class _EditDocumentBottomSheetModalWidgetState
         Expanded(
           child: ButtonWidget(
             icon: const Icon(CupertinoIcons.trash, color: Colors.red),
-            text: 'delete-button'.i18n(),
+            text: 'delete-document-dialog-title'.i18n(),
             foregroundColor: Colors.red,
             borderColor: Colors.transparent,
             onTap: () {
               Get.dialog(
                 CustomDialog(
-                  title: 'delete-document-dialog-title'.i18n(),
-                  content: 'delete-document-dialog-content'.i18n(),
+                  title: 'delete-button'.i18n(),
+                  content: 'delete-document-confirmation-text'.i18n(),
                   onConfirm: () async {
                     Get.close(1);
                     widget.onDelete.call(widget.documentModel);

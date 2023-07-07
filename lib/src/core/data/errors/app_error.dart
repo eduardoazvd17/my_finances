@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 
@@ -16,7 +17,8 @@ class AppError implements Exception {
         title: 'error-text'.i18n(),
         content: message,
       ),
-      name: 'appError',
+      barrierColor: Colors.black87,
+      name: 'error',
     );
   }
 

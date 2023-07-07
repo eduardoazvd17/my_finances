@@ -39,7 +39,7 @@ class DocumentDetailsWidget extends StatelessWidget {
           ),
         ),
         _textTile(
-          label: 'document-last-modification-label'.i18n(),
+          label: 'document-last-modification-date-label'.i18n(),
           data: DateTimeUtils.formatFullDateByLocale(
             documentModel.lastEditDate,
           ),
@@ -54,7 +54,7 @@ class DocumentDetailsWidget extends StatelessWidget {
       child: Wrap(
         children: [
           Text(
-            '$label:',
+            label,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 
 import '../controllers/app_controller.dart';
 import '../widgets/button_widget.dart';
+import '../widgets/custom_dialog.dart';
 
 class AuthOverlayView extends StatelessWidget {
   const AuthOverlayView({super.key});
@@ -57,16 +59,23 @@ class AuthOverlayView extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 30),
+                        vertical: 15,
+                        horizontal: 30,
+                      ),
                       child: Row(
                         children: [
                           Expanded(
                             child: ButtonWidget(
-                              text: 'cancel-button'.i18n(),
+                              text: 'logout-button'.i18n(),
                               borderColor: Colors.transparent,
                               onTap: () {
-                                //TODO: Dialogo de confirmação
-                                AppController.instance.logout();
+                                Get.dialog(
+                                  CustomDialog(
+                                    title: 'logout-button'.i18n(),
+                                    content: 'logout-confirmation-text'.i18n(),
+                                    onConfirm: AppController.instance.logout,
+                                  ),
+                                );
                               },
                             ),
                           ),

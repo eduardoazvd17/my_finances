@@ -4,7 +4,7 @@ import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
 import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
 
-import '../views/edit_document_bottom_sheet_modal.dart';
+import '../views/document_details_bottom_sheet_modal.dart';
 
 class DocumentTileWidget extends StatelessWidget {
   final DocumentModel documentModel;
@@ -84,7 +84,7 @@ class DocumentTileWidget extends StatelessWidget {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          child: EditDocumentBottomSheetModalWidget(
+          child: DocumentDetailsBottomSheetModalWidget(
             documentModel: documentModel,
             onEdit: onEdit,
             onDelete: onDelete,
