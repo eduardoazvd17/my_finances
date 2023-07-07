@@ -151,13 +151,13 @@ class _DocumentDetailsBottomSheetModalWidgetState
         Expanded(
           child: ButtonWidget(
             icon: const Icon(CupertinoIcons.trash, color: Colors.red),
-            text: 'delete-document-dialog-title'.i18n(),
+            text: 'delete-button'.i18n(),
             foregroundColor: Colors.red,
             borderColor: Colors.transparent,
             onTap: () {
               Get.dialog(
                 CustomDialog(
-                  title: 'delete-button'.i18n(),
+                  title: 'delete-document-dialog-title'.i18n(),
                   content: 'delete-document-confirmation-text'.i18n(),
                   onConfirm: () async {
                     Get.close(1);

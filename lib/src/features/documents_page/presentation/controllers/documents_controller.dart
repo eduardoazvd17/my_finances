@@ -110,7 +110,7 @@ class DocumentsController extends GetxController {
     }
 
     try {
-      LoadingWidget.dialog();
+      //LoadingWidget.dialog();
 
       if (newName != null && newName.trim().isEmpty) {
         throw AppError(message: 'document-name-validation'.i18n());
@@ -125,10 +125,10 @@ class DocumentsController extends GetxController {
 
       _userDocuments.remove(documentModel);
       _userDocuments.add(newDocumentModel);
-      Get.close(1);
+      //Get.close(1);
       return true;
     } on AppError catch (appError) {
-      Get.close(1);
+      //Get.close(1);
       appError.showDialog();
       return false;
     }
