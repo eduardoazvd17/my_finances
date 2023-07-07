@@ -21,12 +21,12 @@ class DocumentModel extends Equatable {
     required this.isFavorite,
   });
 
-  DocumentModel copyWith(
+  DocumentModel copyWith({
     String? id,
     String? name,
     DateTime? lastEditDate,
     bool? isFavorite,
-  ) {
+  }) {
     return DocumentModel(
       id: id ?? this.id,
       name: name ?? this.name,

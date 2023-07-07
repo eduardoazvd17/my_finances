@@ -98,7 +98,39 @@ class DocumentsController extends GetxController {
     }
   }
 
-  Future<void> editDocument(DocumentModel documentModel) async {
-    //TODO: Editar documento.
+  Future<bool> editDocument({
+    required DocumentModel documentModel,
+    String? newName,
+    bool? newIsFavorite,
+  }) async {
+    if ((newName == null && newIsFavorite == null) ||
+        (newName == documentModel.name &&
+            newIsFavorite == documentModel.isFavorite)) {
+      return true;
+    }
+
+    try {
+      LoadingWidget.dialog();
+
+      if (newName != null && newName.trim().isEmpty) {
+        throw AppError(message: 'document-name-validation'.i18n());
+      }
+
+      final DocumentModel newDocumentModel =
+          await _financesService.editDocument(
+        documentModel: documentModel,
+        newName: newName,
+        newIsFavorite: newIsFavorite,
+      );
+
+      _userDocuments.remove(documentModel);
+      _userDocuments.add(newDocumentModel);
+      Get.close(1);
+      return true;
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+      return false;
+    }
   }
 }

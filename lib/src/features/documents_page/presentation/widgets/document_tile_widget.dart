@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
-import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
 
+import '../views/edit_document_bottom_sheet_modal.dart';
+
 class DocumentTileWidget extends StatelessWidget {
   final DocumentModel documentModel;
-  final void Function() onTap;
-  final void Function() onEdit;
-  final void Function() onDelete;
+  final void Function(DocumentModel) onTap;
+  final Future<bool> Function({
+    required DocumentModel documentModel,
+    bool? newIsFavorite,
+    String? newName,
+  }) onEdit;
+  final void Function(DocumentModel) onDelete;
   const DocumentTileWidget({
     super.key,
     required this.documentModel,
@@ -20,12 +25,10 @@ class DocumentTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Atribuir onDelete e onEdit.
-
     return Padding(
       padding: const EdgeInsets.only(left: 5, top: 10, bottom: 10),
       child: InkWell(
-        onTap: onTap,
+        onTap: () => onTap(documentModel),
         onLongPress: () => _openMenu(context),
         borderRadius: BorderRadius.circular(10),
         child: Row(
@@ -75,9 +78,17 @@ class DocumentTileWidget extends StatelessWidget {
   void _openMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) {
-        return BottomSheetModalWidget(
-          child: Container(),
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: EditDocumentBottomSheetModalWidget(
+            documentModel: documentModel,
+            onEdit: onEdit,
+            onDelete: onDelete,
+          ),
         );
       },
     );

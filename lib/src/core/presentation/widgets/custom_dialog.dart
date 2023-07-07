@@ -12,6 +12,7 @@ class CustomDialog extends StatelessWidget {
   final void Function()? onConfirm;
   final String? closeButtonText;
   final void Function()? onClose;
+  final bool autoClose;
 
   const CustomDialog({
     super.key,
@@ -24,6 +25,7 @@ class CustomDialog extends StatelessWidget {
     this.onConfirm,
     this.closeButtonText,
     this.onClose,
+    this.autoClose = true,
   });
 
   @override
@@ -65,12 +67,12 @@ class CustomDialog extends StatelessWidget {
           Divider(thickness: 2, color: Colors.grey[100]!, height: 5),
           if (content != null && child == null)
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(16.0),
               child: Text(content!, textAlign: TextAlign.center),
             ),
           if (child != null && content == null)
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: child!,
             ),
           Padding(
@@ -87,12 +89,12 @@ class CustomDialog extends StatelessWidget {
                       highlightColor: Colors.transparent,
                       onTap: () {
                         onConfirm?.call();
-                        Get.close(1);
+                        if (autoClose) Get.close(1);
                       },
                       child: Container(
                         height: 40,
                         decoration: BoxDecoration(
-                          color: Colors.green[300]!,
+                          color: Theme.of(context).primaryColor,
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(20),
                           ),
@@ -123,7 +125,7 @@ class CustomDialog extends StatelessWidget {
                     highlightColor: Colors.transparent,
                     onTap: () {
                       onClose?.call();
-                      Get.close(1);
+                      if (autoClose) Get.close(1);
                     },
                     child: Container(
                       height: 40,

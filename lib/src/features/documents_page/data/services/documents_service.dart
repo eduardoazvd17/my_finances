@@ -56,11 +56,38 @@ class FinancesService {
     }
   }
 
-  Future<void> editDocument({required DocumentModel documentModel}) async {
+  Future<DocumentModel> editDocument({
+    required DocumentModel documentModel,
+    String? newName,
+    bool? newIsFavorite,
+  }) async {
     try {
-      await _database.documentsCollection
-          .doc(documentModel.id)
-          .set(documentModel.toMap());
+      final DocumentModel? newDocumentModel;
+      if (newName != null && newIsFavorite != null) {
+        newDocumentModel = documentModel.copyWith(
+          name: newName,
+          isFavorite: newIsFavorite,
+          lastEditDate: DateTime.now(),
+        );
+      } else if (newName != null) {
+        newDocumentModel = documentModel.copyWith(
+          name: newName,
+          lastEditDate: DateTime.now(),
+        );
+      } else if (newIsFavorite != null) {
+        newDocumentModel = documentModel.copyWith(
+          isFavorite: newIsFavorite,
+        );
+      } else {
+        newDocumentModel = null;
+      }
+
+      if (newDocumentModel != null) {
+        await _database.documentsCollection
+            .doc(newDocumentModel.id)
+            .set(newDocumentModel.toMap());
+      }
+      return newDocumentModel ?? documentModel;
     } on AppError catch (_) {
       rethrow;
     } catch (_) {

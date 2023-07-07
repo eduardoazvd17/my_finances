@@ -52,9 +52,9 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 children: controller.userDocuments.map((documentModel) {
                   return DocumentTileWidget(
                     documentModel: documentModel,
-                    onTap: () => controller.openDocument(documentModel),
-                    onEdit: () => controller.editDocument(documentModel),
-                    onDelete: () => controller.deleteDocument(documentModel),
+                    onTap: controller.openDocument,
+                    onEdit: controller.editDocument,
+                    onDelete: controller.deleteDocument,
                   );
                 }).toList(),
               ),
