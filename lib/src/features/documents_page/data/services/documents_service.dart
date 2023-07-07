@@ -63,18 +63,22 @@ class FinancesService {
   }) async {
     try {
       final DocumentModel? newDocumentModel;
-      if (newName != null && newIsFavorite != null) {
+      if (newName != null &&
+          newIsFavorite != null &&
+          newName != documentModel.name &&
+          newIsFavorite != documentModel.isFavorite) {
         newDocumentModel = documentModel.copyWith(
           name: newName,
           isFavorite: newIsFavorite,
           lastEditDate: DateTime.now(),
         );
-      } else if (newName != null) {
+      } else if (newName != null && newName != documentModel.name) {
         newDocumentModel = documentModel.copyWith(
           name: newName,
           lastEditDate: DateTime.now(),
         );
-      } else if (newIsFavorite != null) {
+      } else if (newIsFavorite != null &&
+          newIsFavorite != documentModel.isFavorite) {
         newDocumentModel = documentModel.copyWith(
           isFavorite: newIsFavorite,
         );
