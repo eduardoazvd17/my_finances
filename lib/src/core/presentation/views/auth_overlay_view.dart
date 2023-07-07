@@ -75,6 +75,7 @@ class AuthOverlayView extends StatelessWidget {
                                     content: 'logout-confirmation-text'.i18n(),
                                     onConfirm: AppController.instance.logout,
                                   ),
+                                  name: 'logout',
                                 );
                               },
                             ),

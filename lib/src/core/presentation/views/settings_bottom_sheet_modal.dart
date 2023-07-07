@@ -180,6 +180,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
             content: 'logout-confirmation-text'.i18n(),
             onConfirm: controller.logout,
           ),
+          name: 'logout',
         );
       },
       trailing: const Icon(Icons.exit_to_app),

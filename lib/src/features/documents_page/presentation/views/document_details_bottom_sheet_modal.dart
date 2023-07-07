@@ -136,6 +136,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                     onSubmitted: (_) => onConfirm(),
                   ),
                 ),
+                name: 'renameDocument',
                 barrierDismissible: false,
               );
             },
@@ -164,6 +165,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                     widget.onDelete.call(widget.documentModel);
                   },
                 ),
+                name: 'deleteDocument',
               );
             },
           ),
