@@ -82,10 +82,6 @@ class DocumentsController extends GetxController {
     }
   }
 
-  void openDocument(DocumentModel documentModel) {
-    //TODO: Abrir documento.
-  }
-
   Future<void> deleteDocument(DocumentModel documentModel) async {
     try {
       LoadingWidget.dialog();
@@ -132,5 +128,9 @@ class DocumentsController extends GetxController {
       appError.showDialog();
       return false;
     }
+  }
+
+  void openDocument(DocumentModel documentModel) {
+    //TODO: Abrir documento.
   }
 }

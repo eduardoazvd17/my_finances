@@ -23,6 +23,7 @@ class DocumentDetailsWidget extends StatelessWidget {
               Expanded(
                   child: Text(
                 documentModel.name,
+                style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.left,
               )),
             ],
