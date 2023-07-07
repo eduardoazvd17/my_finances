@@ -17,8 +17,6 @@ class I18nController extends GetxController {
     super.onInit();
   }
 
-  void reload() => _loadSelectedLanguage();
-
   Iterable<Locale> get supportedLocales =>
       AppLanguage.values.map((e) => e.locale);
 
