@@ -13,7 +13,7 @@ import 'package:myfinances/src/features/documents_page/presentation/widgets/docu
 
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../controllers/documents_controller.dart';
-import '../views/documents_filter_bottom_sheet_modal.dart';
+import '../views/documents_order_bottom_sheet_modal.dart';
 
 class DocumentsPage extends GetWidget<DocumentsController> {
   const DocumentsPage({super.key});
@@ -44,14 +44,14 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         title: 'my-documents-text'.i18n(),
         expandedContent: true,
         action: IconButtonWidget(
-          tooltip: 'filter-document-button'.i18n(),
+          tooltip: 'order-document-button'.i18n(),
           onTap: () {
             showModalBottomSheet(
               context: context,
-              builder: (_) => const DocumentsFilterBottomSheetModal(),
+              builder: (_) => const DocumentsOrderBottomSheetModal(),
             );
           },
-          icon: Icons.filter_alt_outlined,
+          icon: Icons.filter_list,
           backgroundColor: Colors.transparent,
         ),
         content: Obx(() {

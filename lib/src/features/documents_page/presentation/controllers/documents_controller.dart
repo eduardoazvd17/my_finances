@@ -2,11 +2,12 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
-import 'package:myfinances/src/features/documents_page/data/enums/document_filter_type.dart';
+import 'package:myfinances/src/features/documents_page/data/enums/document_order_type.dart';
 import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
 import 'package:myfinances/src/features/documents_page/data/services/documents_service.dart';
 
+import '../../../../core/data/enums/list_order.dart';
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/utils/app_routes.dart';
 
@@ -28,18 +29,18 @@ class DocumentsController extends GetxController {
   final RxList<DocumentModel> _userDocuments = RxList<DocumentModel>();
   List<DocumentModel> get userDocuments => _userDocuments.toList();
 
-  final Rx<DocumentFilterType> _documentFilterType =
-      Rx<DocumentFilterType>(DocumentFilterType.lastModifiedDate);
-  DocumentFilterType get documentFilterType => _documentFilterType.value;
-  set documentFilterType(DocumentFilterType value) {
-    _documentFilterType.value = value;
+  final Rx<DocumentOrderType> _documentOrderType =
+      Rx<DocumentOrderType>(DocumentOrderType.lastModifiedDate);
+  DocumentOrderType get documentOrderType => _documentOrderType.value;
+  set documentOrderType(DocumentOrderType value) {
+    _documentOrderType.value = value;
     _sortDocuments();
   }
 
-  final RxBool _reverseFilter = RxBool(false);
-  bool get reverseFilter => _reverseFilter.value;
-  set reverseFilter(bool value) {
-    _reverseFilter.value = value;
+  final Rx<ListOrder> _sortOrder = Rx<ListOrder>(ListOrder.ascending);
+  ListOrder get sortOrder => _sortOrder.value;
+  set sortOrder(ListOrder value) {
+    _sortOrder.value = value;
     _sortDocuments();
   }
 
@@ -50,13 +51,14 @@ class DocumentsController extends GetxController {
       } else if (b.isFavorite && !a.isFavorite) {
         return 1;
       } else {
-        return switch (documentFilterType) {
-          DocumentFilterType.alphabetical =>
-            reverseFilter ? a.name.compareTo(b.name) : b.name.compareTo(a.name),
-          DocumentFilterType.lastModifiedDate => reverseFilter
+        final isDescending = sortOrder == ListOrder.descending;
+        return switch (documentOrderType) {
+          DocumentOrderType.alphabetical =>
+            isDescending ? a.name.compareTo(b.name) : b.name.compareTo(a.name),
+          DocumentOrderType.lastModifiedDate => isDescending
               ? a.lastEditDate.compareTo(b.lastEditDate)
               : b.lastEditDate.compareTo(a.lastEditDate),
-          DocumentFilterType.creationDate => reverseFilter
+          DocumentOrderType.creationDate => isDescending
               ? a.creationDate.compareTo(b.creationDate)
               : b.creationDate.compareTo(a.creationDate),
         };

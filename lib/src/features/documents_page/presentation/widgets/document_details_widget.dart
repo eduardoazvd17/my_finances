@@ -35,13 +35,13 @@ class DocumentDetailsWidget extends StatelessWidget {
             data: documentModel.type.title),
         _textTile(
           label: 'document-creation-date-label'.i18n(),
-          data: DateTimeUtils.formatFullDateByLocale(
+          data: DateTimeUtils.formatFullDate(
             documentModel.creationDate,
           ),
         ),
         _textTile(
           label: 'document-last-modification-date-label'.i18n(),
-          data: DateTimeUtils.formatFullDateByLocale(
+          data: DateTimeUtils.formatFullDate(
             documentModel.lastEditDate,
           ),
         ),
