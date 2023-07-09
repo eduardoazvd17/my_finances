@@ -20,16 +20,18 @@ class FloatingBottomMenuWidget extends StatelessWidget {
 class FloatingBottomMenuItem extends StatelessWidget {
   final IconData icon;
   final void Function() onTap;
-  final Color? iconColor;
   final String tooltip;
   final bool showTooltip;
+  final Color? foregroundColor;
+  final Color? backgroundColor;
   const FloatingBottomMenuItem({
     super.key,
     required this.icon,
     required this.onTap,
     required this.tooltip,
     this.showTooltip = false,
-    this.iconColor,
+    this.foregroundColor,
+    this.backgroundColor,
   });
 
   @override
@@ -38,29 +40,35 @@ class FloatingBottomMenuItem extends StatelessWidget {
       message: tooltip,
       preferBelow: false,
       verticalOffset: 35,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(50),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 50,
-              width: 50,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(icon, color: iconColor),
-              ),
-            ),
-            if (showTooltip)
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Text(
-                  tooltip,
-                  style: TextStyle(color: iconColor),
+      child: Container(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(50),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 50,
+                width: 50,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(icon, color: foregroundColor),
                 ),
               ),
-          ],
+              if (showTooltip)
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Text(
+                    tooltip,
+                    style: TextStyle(color: foregroundColor),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
