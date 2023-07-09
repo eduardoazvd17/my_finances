@@ -13,6 +13,7 @@ import 'package:myfinances/src/features/documents_page/presentation/widgets/docu
 
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../controllers/documents_controller.dart';
+import '../views/documents_filter_bottom_sheet_modal.dart';
 
 class DocumentsPage extends GetWidget<DocumentsController> {
   const DocumentsPage({super.key});
@@ -33,7 +34,8 @@ class DocumentsPage extends GetWidget<DocumentsController> {
             icon: Icons.add,
             onTap: controller.goToAddDocumentPage,
             tooltip: 'add-document-button'.i18n(),
-            iconColor: Theme.of(context).primaryColor,
+            foregroundColor: Colors.white,
+            backgroundColor: Theme.of(context).primaryColor,
             showTooltip: true,
           ),
         ],
@@ -42,9 +44,15 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         title: 'my-documents-text'.i18n(),
         expandedContent: true,
         action: IconButtonWidget(
-          tooltip: 'add-document-button'.i18n(),
-          onTap: controller.goToAddDocumentPage,
-          icon: CupertinoIcons.add,
+          tooltip: 'filter-document-button'.i18n(),
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (_) => const DocumentsFilterBottomSheetModal(),
+            );
+          },
+          icon: Icons.filter_alt_outlined,
+          backgroundColor: Colors.transparent,
         ),
         content: Obx(() {
           if (controller.userDocuments.isEmpty) {
