@@ -13,6 +13,7 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
   @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
+      icon: Icons.filter_list,
       title: 'order-document-button'.i18n(),
       child: Column(
         children: [

@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class BottomSheetModalWidget extends StatelessWidget {
   final Widget child;
   final String? title;
+  final IconData? icon;
   const BottomSheetModalWidget({
     super.key,
     required this.child,
     this.title,
+    this.icon,
   });
 
   @override
@@ -35,6 +37,11 @@ class BottomSheetModalWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    if (icon != null)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Icon(icon),
+                      ),
                     Text(
                       title!,
                       style: const TextStyle(

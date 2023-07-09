@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -18,6 +19,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
   Widget build(BuildContext context) {
     return Obx(
       () => BottomSheetModalWidget(
+        icon: CupertinoIcons.settings,
         title: 'settings-text'.i18n(),
         child: Column(
           children: [
