@@ -45,7 +45,7 @@ class LoadingWidget extends StatelessWidget {
               child: Image.asset(
                 "assets/images/logo.png",
                 opacity: const AlwaysStoppedAnimation(0.5),
-              ).animate().fade().slideY(),
+              ).animate().fade(),
             ),
           ),
         SizedBox(
@@ -54,7 +54,7 @@ class LoadingWidget extends StatelessWidget {
           child: CircularProgressIndicator(
             color: Theme.of(context).primaryColor,
             strokeWidth: 5,
-          ).animate().fade().slideY(),
+          ),
         ),
       ],
     );
