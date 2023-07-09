@@ -28,10 +28,21 @@ class DocumentsController extends GetxController {
 
   final RxList<DocumentModel> _userDocuments = RxList<DocumentModel>();
   List<DocumentModel> get userDocuments => _userDocuments.toList();
+  Future<void> _loadUserDocuments() async {
+    _isLoading.value = true;
+    try {
+      await _loadSortSettings();
+      _userDocuments.value = await _documentsService.getUserDocuments();
+      _sortDocuments();
+    } on AppError catch (appError) {
+      appError.showDialog();
+    }
+    _isLoading.value = false;
+  }
 
-  final Rx<DocumentOrderType> _documentOrderType =
-      Rx<DocumentOrderType>(DocumentOrderType.lastModifiedDate);
-
+  final Rx<DocumentOrderType> _documentOrderType = Rx<DocumentOrderType>(
+    DocumentOrderType.lastModifiedDate,
+  );
   DocumentOrderType get documentOrderType => _documentOrderType.value;
   Future<void> setDocumentOrderType(
     DocumentOrderType value, {
@@ -69,36 +80,29 @@ class DocumentsController extends GetxController {
 
   void _sortDocuments() {
     _userDocuments.sort((a, b) {
-      if (a.isFavorite && !b.isFavorite) {
-        return -1;
-      } else if (b.isFavorite && !a.isFavorite) {
-        return 1;
+      if (a.isFavorite != b.isFavorite) {
+        return a.isFavorite ? -1 : 1;
       } else {
-        final isDescending = sortOrder == ListOrder.descending;
-        return switch (documentOrderType) {
-          DocumentOrderType.alphabetical =>
-            isDescending ? a.name.compareTo(b.name) : b.name.compareTo(a.name),
-          DocumentOrderType.lastModifiedDate => isDescending
-              ? a.lastEditDate.compareTo(b.lastEditDate)
-              : b.lastEditDate.compareTo(a.lastEditDate),
-          DocumentOrderType.creationDate => isDescending
-              ? a.creationDate.compareTo(b.creationDate)
-              : b.creationDate.compareTo(a.creationDate),
+        return switch (sortOrder) {
+          ListOrder.ascending => switch (documentOrderType) {
+              DocumentOrderType.alphabetical =>
+                a.name.toLowerCase().compareTo(b.name.toLowerCase()),
+              DocumentOrderType.lastModifiedDate =>
+                a.lastEditDate.compareTo(b.lastEditDate),
+              DocumentOrderType.creationDate =>
+                a.creationDate.compareTo(b.creationDate),
+            },
+          ListOrder.descending => switch (documentOrderType) {
+              DocumentOrderType.alphabetical =>
+                b.name.toLowerCase().compareTo(a.name.toLowerCase()),
+              DocumentOrderType.lastModifiedDate =>
+                b.lastEditDate.compareTo(a.lastEditDate),
+              DocumentOrderType.creationDate =>
+                b.creationDate.compareTo(a.creationDate),
+            },
         };
       }
     });
-  }
-
-  Future<void> _loadUserDocuments() async {
-    _isLoading.value = true;
-    try {
-      await _loadSortSettings();
-      _userDocuments.value = await _documentsService.getUserDocuments();
-      _sortDocuments();
-    } on AppError catch (appError) {
-      appError.showDialog();
-    }
-    _isLoading.value = false;
   }
 
   void goToAddDocumentPage() {

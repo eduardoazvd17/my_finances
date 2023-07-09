@@ -61,9 +61,6 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 icon: Icons.info_outline,
                 message: 'my-documents-empty-title-text'.i18n(),
                 description: 'my-documents-empty-description-text'.i18n(),
-                actionButtonText: 'add-document-button'.i18n(),
-                actionButtonIcon: CupertinoIcons.add,
-                onAction: controller.goToAddDocumentPage,
               ),
             );
           } else {
