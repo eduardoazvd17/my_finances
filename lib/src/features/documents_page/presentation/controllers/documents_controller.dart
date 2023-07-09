@@ -12,13 +12,14 @@ import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/utils/app_routes.dart';
 
 class DocumentsController extends GetxController {
-  final DocumentsService _financesService;
+  final DocumentsService _documentsService;
   DocumentsController({
-    required DocumentsService financesService,
-  }) : _financesService = financesService;
+    required DocumentsService documentsService,
+  }) : _documentsService = documentsService;
 
   @override
   void onInit() {
+    _loadSortSettings();
     _loadUserDocuments();
     super.onInit();
   }
@@ -33,16 +34,35 @@ class DocumentsController extends GetxController {
       Rx<DocumentOrderType>(DocumentOrderType.lastModifiedDate);
 
   DocumentOrderType get documentOrderType => _documentOrderType.value;
-  set documentOrderType(DocumentOrderType value) {
+  Future<void> setDocumentOrderType(
+    DocumentOrderType value, {
+    bool withoutSaving = false,
+  }) async {
     _documentOrderType.value = value;
     _sortDocuments();
+    if (!withoutSaving) await _saveSortSettings();
   }
 
   final Rx<ListOrder> _sortOrder = Rx<ListOrder>(ListOrder.descending);
   ListOrder get sortOrder => _sortOrder.value;
-  set sortOrder(ListOrder value) {
+  Future<void> setSortOrder(ListOrder value,
+      {bool withoutSaving = false}) async {
     _sortOrder.value = value;
     _sortDocuments();
+    if (!withoutSaving) await _saveSortSettings();
+  }
+
+  Future<void> _loadSortSettings() async {
+    final values = await _documentsService.getSavedDocumentOrderType();
+    setDocumentOrderType(values.$1, withoutSaving: true);
+    setSortOrder(values.$2, withoutSaving: true);
+  }
+
+  Future<void> _saveSortSettings() async {
+    _documentsService.saveDocumentOrderType(
+      type: documentOrderType,
+      order: sortOrder,
+    );
   }
 
   void _sortDocuments() {
@@ -70,7 +90,7 @@ class DocumentsController extends GetxController {
   Future<void> _loadUserDocuments() async {
     _isLoading.value = true;
     try {
-      _userDocuments.value = await _financesService.getUserDocuments();
+      _userDocuments.value = await _documentsService.getUserDocuments();
       _sortDocuments();
     } on AppError catch (appError) {
       appError.showDialog();
@@ -103,7 +123,7 @@ class DocumentsController extends GetxController {
         throw AppError(message: 'document-name-validation'.i18n());
       }
 
-      final DocumentModel documentModel = await _financesService.newDocument(
+      final DocumentModel documentModel = await _documentsService.newDocument(
         name: name,
         documentType: type,
       );
@@ -121,7 +141,7 @@ class DocumentsController extends GetxController {
   Future<void> deleteDocument(DocumentModel documentModel) async {
     try {
       LoadingWidget.dialog();
-      await _financesService.deleteDocument(documentModel: documentModel);
+      await _documentsService.deleteDocument(documentModel: documentModel);
       _userDocuments.remove(documentModel);
       Get.close(1);
     } on AppError catch (appError) {
@@ -149,7 +169,7 @@ class DocumentsController extends GetxController {
       }
 
       final DocumentModel newDocumentModel =
-          await _financesService.editDocument(
+          await _documentsService.editDocument(
         documentModel: documentModel,
         newName: newName,
         newIsFavorite: newIsFavorite,

@@ -9,7 +9,7 @@ class DocumentsBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(
       () => DocumentsController(
-        financesService: DocumentsService(
+        documentsService: DocumentsService(
           userModel: AppController.instance.user!,
           database: Get.find<DatabaseModel>(),
         ),

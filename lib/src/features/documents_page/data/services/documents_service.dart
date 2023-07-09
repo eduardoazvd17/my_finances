@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myfinances/src/core/data/enums/list_order.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
+import 'package:myfinances/src/features/documents_page/data/enums/document_order_type.dart';
 import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
 
 import '../../../../core/data/errors/app_error.dart';
@@ -106,6 +108,34 @@ class DocumentsService {
       rethrow;
     } catch (_) {
       throw AppError.generic();
+    }
+  }
+
+  Future<void> saveDocumentOrderType({
+    required DocumentOrderType type,
+    required ListOrder order,
+  }) async {
+    try {
+      final prefs = await _database.sharedPreferences;
+      prefs.setInt('DocumentOrderType', type.index);
+      prefs.setInt('DocumentListOrder', type.index);
+    } catch (_) {}
+  }
+
+  Future<(DocumentOrderType, ListOrder)> getSavedDocumentOrderType() async {
+    try {
+      final prefs = await _database.sharedPreferences;
+      final int documentOrderTypeIndex = prefs.getInt('DocumentOrderType') ??
+          DocumentOrderType.lastModifiedDate.index;
+      final int listOrderIndex =
+          prefs.getInt('DocumentListOrder') ?? ListOrder.descending.index;
+
+      return (
+        DocumentOrderType.values[documentOrderTypeIndex],
+        ListOrder.values[listOrderIndex],
+      );
+    } catch (_) {
+      return (DocumentOrderType.lastModifiedDate, ListOrder.descending);
     }
   }
 }

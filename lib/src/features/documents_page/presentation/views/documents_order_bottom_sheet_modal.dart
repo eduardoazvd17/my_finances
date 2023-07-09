@@ -52,7 +52,7 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
             value: controller.documentOrderType,
             onChanged: (value) {
               if (value != null) {
-                controller.documentOrderType = value;
+                controller.setDocumentOrderType(value);
               }
             },
             items: DocumentOrderType.values.map((documentOrderType) {
@@ -86,7 +86,7 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
             value: controller.sortOrder,
             onChanged: (value) {
               if (value != null) {
-                controller.sortOrder = value;
+                controller.setSortOrder(value);
               }
             },
             items: ListOrder.values.map((order) {
