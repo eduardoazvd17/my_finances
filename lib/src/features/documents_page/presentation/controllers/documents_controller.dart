@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
+import 'package:myfinances/src/features/documents_page/data/enums/document_filter_type.dart';
 import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
 import 'package:myfinances/src/features/documents_page/data/services/documents_service.dart';
@@ -27,6 +28,21 @@ class DocumentsController extends GetxController {
   final RxList<DocumentModel> _userDocuments = RxList<DocumentModel>();
   List<DocumentModel> get userDocuments => _userDocuments.toList();
 
+  final Rx<DocumentFilterType> _documentFilterType =
+      Rx<DocumentFilterType>(DocumentFilterType.lastModifiedDate);
+  DocumentFilterType get documentFilterType => _documentFilterType.value;
+  set documentFilterType(DocumentFilterType value) {
+    _documentFilterType.value = value;
+    _sortDocuments();
+  }
+
+  final RxBool _reverseFilter = RxBool(false);
+  bool get reverseFilter => _reverseFilter.value;
+  set reverseFilter(bool value) {
+    _reverseFilter.value = value;
+    _sortDocuments();
+  }
+
   void _sortDocuments() {
     _userDocuments.sort((a, b) {
       if (a.isFavorite && !b.isFavorite) {
@@ -34,7 +50,16 @@ class DocumentsController extends GetxController {
       } else if (b.isFavorite && !a.isFavorite) {
         return 1;
       } else {
-        return b.lastEditDate.compareTo(a.lastEditDate);
+        return switch (documentFilterType) {
+          DocumentFilterType.alphabetical =>
+            reverseFilter ? a.name.compareTo(b.name) : b.name.compareTo(a.name),
+          DocumentFilterType.lastModifiedDate => reverseFilter
+              ? a.lastEditDate.compareTo(b.lastEditDate)
+              : b.lastEditDate.compareTo(a.lastEditDate),
+          DocumentFilterType.creationDate => reverseFilter
+              ? a.creationDate.compareTo(b.creationDate)
+              : b.creationDate.compareTo(a.creationDate),
+        };
       }
     });
   }
