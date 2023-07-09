@@ -27,8 +27,10 @@ class I18nController extends GetxController {
         LocalJsonLocalization.delegate,
       ];
 
-  Locale? Function(Locale?, Iterable<Locale>) get localeResolutionCallback =>
-      (locale, supportedLocales) {
+  Locale? Function(Locale?, Iterable<Locale>) get localeResolutionCallback => (
+        locale,
+        supportedLocales,
+      ) {
         if (supportedLocales.contains(locale)) {
           return locale;
         }
@@ -43,27 +45,34 @@ class I18nController extends GetxController {
 
   final Rx<AppLanguage?> _selectedLanguage = Rx<AppLanguage?>(null);
   AppLanguage? get selectedLanguage => _selectedLanguage.value;
-  Future<void> setSelectedLanguage(AppLanguage? value,
-      {bool withoutSaving = false}) async {
+  Future<void> setSelectedLanguage(
+    AppLanguage? value, {
+    bool withoutSaving = false,
+  }) async {
     if (!withoutSaving) LoadingWidget.dialog();
-    try {
-      _selectedLanguage.value = value;
-      if (value != null) {
-        Get.updateLocale(value.locale);
-      } else if (Get.deviceLocale != null) {
-        Get.updateLocale(Get.deviceLocale!);
-      }
 
-      if (!withoutSaving) {
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        if (value != null) {
-          await prefs.setInt('AppLanguage', value.index);
-        } else {
-          await prefs.remove('AppLanguage');
-        }
+    _selectedLanguage.value = value;
+    if (value != null) {
+      Get.updateLocale(value.locale);
+    } else if (Get.deviceLocale != null) {
+      Get.updateLocale(Get.deviceLocale!);
+    }
+
+    if (!withoutSaving) {
+      await _saveSelectedLanguage(value);
+      Get.close(1);
+    }
+  }
+
+  Future<void> _saveSelectedLanguage(AppLanguage? appLanguage) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (appLanguage != null) {
+        await prefs.setInt('AppLanguage', appLanguage.index);
+      } else {
+        await prefs.remove('AppLanguage');
       }
     } catch (_) {}
-    if (!withoutSaving) Get.close(1);
   }
 
   Future<void> _loadSelectedLanguage() async {

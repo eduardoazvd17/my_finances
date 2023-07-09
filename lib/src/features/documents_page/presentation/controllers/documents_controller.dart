@@ -19,7 +19,6 @@ class DocumentsController extends GetxController {
 
   @override
   void onInit() {
-    _loadSortSettings();
     _loadUserDocuments();
     super.onInit();
   }
@@ -45,17 +44,13 @@ class DocumentsController extends GetxController {
 
   final Rx<ListOrder> _sortOrder = Rx<ListOrder>(ListOrder.descending);
   ListOrder get sortOrder => _sortOrder.value;
-  Future<void> setSortOrder(ListOrder value,
-      {bool withoutSaving = false}) async {
+  Future<void> setSortOrder(
+    ListOrder value, {
+    bool withoutSaving = false,
+  }) async {
     _sortOrder.value = value;
     _sortDocuments();
     if (!withoutSaving) await _saveSortSettings();
-  }
-
-  Future<void> _loadSortSettings() async {
-    final values = await _documentsService.getSavedDocumentOrderType();
-    setDocumentOrderType(values.$1, withoutSaving: true);
-    setSortOrder(values.$2, withoutSaving: true);
   }
 
   Future<void> _saveSortSettings() async {
@@ -63,6 +58,13 @@ class DocumentsController extends GetxController {
       type: documentOrderType,
       order: sortOrder,
     );
+  }
+
+  Future<void> _loadSortSettings() async {
+    final (DocumentOrderType, ListOrder) values =
+        await _documentsService.getSavedDocumentOrderType();
+    setDocumentOrderType(values.$1, withoutSaving: true);
+    setSortOrder(values.$2, withoutSaving: true);
   }
 
   void _sortDocuments() {
@@ -90,6 +92,7 @@ class DocumentsController extends GetxController {
   Future<void> _loadUserDocuments() async {
     _isLoading.value = true;
     try {
+      await _loadSortSettings();
       _userDocuments.value = await _documentsService.getUserDocuments();
       _sortDocuments();
     } on AppError catch (appError) {
