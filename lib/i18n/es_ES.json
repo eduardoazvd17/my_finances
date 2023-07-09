@@ -12,6 +12,8 @@
     "my-documents-empty-title-text": "No se encontraron documentos",
     "my-documents-empty-description-text": "Aún no tienes ningún documento. ¡Comienza agregando uno nuevo!",
     "delete-document-confirmation-text": "¿Realmente desea eliminar este documento?",
+    "favorites-documents-text": "Favoritos",
+    "all-documents-text": "Todos",
     "login-email-label": "Correo electrónico:",
     "login-email-hint": "Ingrese su correo electrónico aquí...",
     "login-password-label": "Contraseña:",

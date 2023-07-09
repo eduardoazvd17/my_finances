@@ -22,11 +22,13 @@ class FloatingBottomMenuItem extends StatelessWidget {
   final void Function() onTap;
   final Color? iconColor;
   final String tooltip;
+  final bool showTooltip;
   const FloatingBottomMenuItem({
     super.key,
     required this.icon,
     required this.onTap,
     required this.tooltip,
+    this.showTooltip = false,
     this.iconColor,
   });
 
@@ -39,13 +41,26 @@ class FloatingBottomMenuItem extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(50),
-        child: SizedBox(
-          height: 50,
-          width: 50,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(icon, color: iconColor),
-          ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 50,
+              width: 50,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(icon, color: iconColor),
+              ),
+            ),
+            if (showTooltip)
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Text(
+                  tooltip,
+                  style: TextStyle(color: iconColor),
+                ),
+              ),
+          ],
         ),
       ),
     );

@@ -12,6 +12,8 @@
     "my-documents-empty-title-text": "No documents found",
     "my-documents-empty-description-text": "You don't have any documents yet. Start by adding a new one!",
     "delete-document-confirmation-text": "Do you really want to delete this document?",
+    "favorites-documents-text": "Favorites",
+    "all-documents-text": "All",
     "login-email-label": "Email:",
     "login-email-hint": "Enter your email here...",
     "login-password-label": "Password:",

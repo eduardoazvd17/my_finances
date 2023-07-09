@@ -5,12 +5,13 @@ import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/views/settings_bottom_sheet_modal.dart';
 import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
+import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/grouping_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/icon_button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 import 'package:myfinances/src/features/documents_page/presentation/widgets/document_tile_widget.dart';
 
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../controllers/documents_controller.dart';
 
 class DocumentsPage extends GetWidget<DocumentsController> {
@@ -24,6 +25,17 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         centerTitle: false,
         actions: [
           _settingsMenuButton(context),
+        ],
+      ),
+      floatingBottomMenu: FloatingBottomMenuWidget(
+        items: [
+          FloatingBottomMenuItem(
+            icon: Icons.add,
+            onTap: controller.goToAddDocumentPage,
+            tooltip: 'add-document-button'.i18n(),
+            iconColor: Theme.of(context).primaryColor,
+            showTooltip: true,
+          ),
         ],
       ),
       body: GroupingWidget(
@@ -50,11 +62,43 @@ class DocumentsPage extends GetWidget<DocumentsController> {
             return ScrollViewWidget(
               child: Column(
                 children: controller.userDocuments.map((documentModel) {
-                  return DocumentTileWidget(
-                    documentModel: documentModel,
-                    onTap: controller.openDocument,
-                    onEdit: controller.editDocument,
-                    onDelete: controller.deleteDocument,
+                  final int index =
+                      controller.userDocuments.indexOf(documentModel);
+
+                  final bool showFavoriteHeader =
+                      index == 0 && documentModel.isFavorite;
+
+                  final bool showAllHeader = index > 0 &&
+                      controller.userDocuments[index - 1].isFavorite &&
+                      !documentModel.isFavorite;
+
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (showFavoriteHeader)
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            'favorites-documents-text'.i18n(),
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      if (showAllHeader)
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            'all-documents-text'.i18n(),
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      DocumentTileWidget(
+                        documentModel: documentModel,
+                        onTap: controller.openDocument,
+                        onEdit: controller.editDocument,
+                        onDelete: controller.deleteDocument,
+                      ),
+                    ],
                   );
                 }).toList(),
               ),
