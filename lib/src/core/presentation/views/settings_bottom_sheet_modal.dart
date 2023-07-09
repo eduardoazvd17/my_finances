@@ -18,23 +18,9 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
   Widget build(BuildContext context) {
     return Obx(
       () => BottomSheetModalWidget(
+        title: 'settings-text'.i18n(),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'settings-text'.i18n(),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             if (controller.user == null)
               _getNoAuthTiles(context)
             else

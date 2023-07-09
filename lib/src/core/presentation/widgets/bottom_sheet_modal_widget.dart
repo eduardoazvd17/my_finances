@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class BottomSheetModalWidget extends StatelessWidget {
   final Widget child;
+  final String? title;
   const BottomSheetModalWidget({
     super.key,
     required this.child,
+    this.title,
   });
 
   @override
@@ -27,6 +29,22 @@ class BottomSheetModalWidget extends StatelessWidget {
                 ),
               ),
             ),
+            if (title != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title!,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             child,
           ],
         ),
