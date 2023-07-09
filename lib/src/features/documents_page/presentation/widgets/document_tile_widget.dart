@@ -34,7 +34,21 @@ class DocumentTileWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(documentModel.type.icon, size: 40),
+            Stack(
+              children: [
+                Icon(documentModel.type.icon, size: 40),
+                if (documentModel.isFavorite)
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Icon(
+                      CupertinoIcons.heart_fill,
+                      color: Colors.red[300],
+                      size: 15,
+                    ),
+                  ),
+              ],
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
