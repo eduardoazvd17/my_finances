@@ -121,6 +121,7 @@ class DocumentsController extends GetxController {
 
       _userDocuments.remove(documentModel);
       _userDocuments.add(newDocumentModel);
+      _sortDocuments();
       //Get.close(1);
       return true;
     } on AppError catch (appError) {
