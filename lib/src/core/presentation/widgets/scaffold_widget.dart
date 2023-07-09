@@ -19,23 +19,12 @@ class ScaffoldWidget extends StatelessWidget {
       onTap: _hideKeyboard,
       child: Scaffold(
         appBar: appBar,
+        floatingActionButton: floatingBottomMenu,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: floatingBottomMenu != null
-                ? Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: floatingBottomMenu!,
-                        ),
-                      ),
-                      if (body != null) body!,
-                    ],
-                  )
-                : body,
+            child: body,
           ),
         ),
       ),
