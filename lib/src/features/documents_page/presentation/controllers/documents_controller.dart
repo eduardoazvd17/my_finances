@@ -28,7 +28,15 @@ class DocumentsController extends GetxController {
   List<DocumentModel> get userDocuments => _userDocuments.toList();
 
   void _sortDocuments() {
-    _userDocuments.sort((a, b) => b.lastEditDate.compareTo(a.lastEditDate));
+    _userDocuments.sort((a, b) {
+      if (a.isFavorite && !b.isFavorite) {
+        return -1;
+      } else if (b.isFavorite && !a.isFavorite) {
+        return 1;
+      } else {
+        return b.lastEditDate.compareTo(a.lastEditDate);
+      }
+    });
   }
 
   Future<void> _loadUserDocuments() async {
