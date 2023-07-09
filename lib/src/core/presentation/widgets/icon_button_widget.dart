@@ -31,7 +31,7 @@ class IconButtonWidget extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: Icon(
               icon,
-              color: iconColor ?? Colors.white,
+              color: iconColor,
             ),
           ),
         ),
