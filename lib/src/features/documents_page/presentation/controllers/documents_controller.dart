@@ -12,9 +12,9 @@ import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/utils/app_routes.dart';
 
 class DocumentsController extends GetxController {
-  final FinancesService _financesService;
+  final DocumentsService _financesService;
   DocumentsController({
-    required FinancesService financesService,
+    required DocumentsService financesService,
   }) : _financesService = financesService;
 
   @override
@@ -31,13 +31,14 @@ class DocumentsController extends GetxController {
 
   final Rx<DocumentOrderType> _documentOrderType =
       Rx<DocumentOrderType>(DocumentOrderType.lastModifiedDate);
+
   DocumentOrderType get documentOrderType => _documentOrderType.value;
   set documentOrderType(DocumentOrderType value) {
     _documentOrderType.value = value;
     _sortDocuments();
   }
 
-  final Rx<ListOrder> _sortOrder = Rx<ListOrder>(ListOrder.ascending);
+  final Rx<ListOrder> _sortOrder = Rx<ListOrder>(ListOrder.descending);
   ListOrder get sortOrder => _sortOrder.value;
   set sortOrder(ListOrder value) {
     _sortOrder.value = value;

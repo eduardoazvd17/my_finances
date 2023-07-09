@@ -6,11 +6,11 @@ import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/database_model.dart';
 import '../enums/document_type.dart';
 
-class FinancesService {
+class DocumentsService {
   final UserModel userModel;
   final DatabaseModel _database;
 
-  FinancesService({
+  DocumentsService({
     required this.userModel,
     required DatabaseModel database,
   }) : _database = database;
