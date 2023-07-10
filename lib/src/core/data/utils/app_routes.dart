@@ -2,10 +2,13 @@ import 'package:get/get.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/login_page.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/register_page.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/welcome_page.dart';
+import 'package:myfinances/src/features/documents/data/bindings/document_editor_binding.dart';
+import 'package:myfinances/src/features/documents/presentation/pages/document_editor_page.dart';
 import 'package:myfinances/src/features/documents/presentation/pages/documents_page.dart';
 
 import '../../../features/authentication/data/bindings/auth_binding.dart';
 import '../../../features/documents/data/bindings/documents_binding.dart';
+import '../../../features/documents/data/models/document_model.dart';
 import '../../../features/documents/presentation/pages/add_document_page.dart';
 
 class AppRoutes {
@@ -14,6 +17,7 @@ class AppRoutes {
   static const String _register = "/register";
   static const String _documents = "/documents";
   static const String _addDocument = "/addDocument";
+  static const String _documentEditor = "/editor";
 
   static String get initialRoute => _welcome;
 
@@ -22,6 +26,14 @@ class AppRoutes {
   static void goToRegisterPage() => _navigate(_register);
   static void goToDocumentsPage() => _navigate(_documents, offAll: true);
   static void goToAddDocumentPage() => _navigate(_addDocument);
+  static void goToDocumentEditorPage({
+    required DocumentModel documentModel,
+  }) {
+    _navigate(
+      _documentEditor,
+      arguments: documentModel,
+    );
+  }
 
   static List<GetPage> getGetPages() {
     return [
@@ -49,6 +61,11 @@ class AppRoutes {
         name: _addDocument,
         page: () => const AddDocumentPage(),
         binding: DocumentsBinding(),
+      ),
+      GetPage(
+        name: _documentEditor,
+        page: () => const DocumentEditorPage(),
+        binding: DocumentEditorBinding(),
       ),
     ];
   }

@@ -195,14 +195,8 @@ class DocumentsController extends GetxController {
   }
 
   void openDocument(DocumentModel documentModel) {
-    //TODO: Abrir documento.
-    switch (documentModel.type) {
-      case DocumentType.monthlyExpenseControl:
-        break;
-      case DocumentType.investmentControl:
-        break;
-      case DocumentType.annotation:
-        break;
-    }
+    AppRoutes.goToDocumentEditorPage(
+      documentModel: documentModel,
+    );
   }
 }
