@@ -9,7 +9,7 @@ import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_wi
 import 'package:myfinances/src/core/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
-import 'package:myfinances/src/features/documents_page/presentation/widgets/document_tile_widget.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/document_tile_widget.dart';
 
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../controllers/documents_controller.dart';

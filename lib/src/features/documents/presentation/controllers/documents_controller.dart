@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
-import 'package:myfinances/src/features/documents_page/data/enums/document_order_type.dart';
-import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
-import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
-import 'package:myfinances/src/features/documents_page/data/services/documents_service.dart';
+import 'package:myfinances/src/features/documents/data/enums/document_order_type.dart';
+import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
+import 'package:myfinances/src/features/documents/data/models/document_model.dart';
+import 'package:myfinances/src/features/documents/data/services/documents_service.dart';
 
 import '../../../../core/data/enums/list_order.dart';
 import '../../../../core/data/errors/app_error.dart';
@@ -196,5 +196,13 @@ class DocumentsController extends GetxController {
 
   void openDocument(DocumentModel documentModel) {
     //TODO: Abrir documento.
+    switch (documentModel.type) {
+      case DocumentType.monthlyExpenseControl:
+        break;
+      case DocumentType.investmentControl:
+        break;
+      case DocumentType.annotation:
+        break;
+    }
   }
 }

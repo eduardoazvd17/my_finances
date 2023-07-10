@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
-import 'package:myfinances/src/features/documents_page/presentation/controllers/documents_controller.dart';
+import 'package:myfinances/src/features/documents/presentation/controllers/documents_controller.dart';
 
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../../../core/presentation/widgets/drop_down_button_widget.dart';

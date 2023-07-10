@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/login_page.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/register_page.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/welcome_page.dart';
-import 'package:myfinances/src/features/documents_page/presentation/pages/documents_page.dart';
+import 'package:myfinances/src/features/documents/presentation/pages/documents_page.dart';
 
 import '../../../features/authentication/data/bindings/auth_binding.dart';
-import '../../../features/documents_page/data/bindings/documents_binding.dart';
-import '../../../features/documents_page/presentation/pages/add_document_page.dart';
+import '../../../features/documents/data/bindings/documents_binding.dart';
+import '../../../features/documents/presentation/pages/add_document_page.dart';
 
 class AppRoutes {
   static const String _welcome = "/welcome";

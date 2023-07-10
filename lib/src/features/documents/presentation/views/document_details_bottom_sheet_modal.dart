@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/custom_dialog.dart';
 import 'package:myfinances/src/core/presentation/widgets/text_field_widget.dart';
-import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
+import 'package:myfinances/src/features/documents/data/models/document_model.dart';
 
 import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:myfinances/src/core/data/enums/list_order.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
-import 'package:myfinances/src/features/documents_page/data/enums/document_order_type.dart';
-import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
+import 'package:myfinances/src/features/documents/data/enums/document_order_type.dart';
+import 'package:myfinances/src/features/documents/data/models/document_model.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/database_model.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
-import 'package:myfinances/src/features/documents_page/data/enums/document_type.dart';
-import 'package:myfinances/src/features/documents_page/data/models/document_model.dart';
+import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
+import 'package:myfinances/src/features/documents/data/models/document_model.dart';
 
 import '../views/document_details_bottom_sheet_modal.dart';
 
