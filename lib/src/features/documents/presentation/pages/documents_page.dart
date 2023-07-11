@@ -103,6 +103,8 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                         onEdit: controller.editDocument,
                         onDelete: controller.deleteDocument,
                       ),
+                      if (index == controller.userDocuments.length - 1)
+                        const SizedBox(height: 65),
                     ],
                   );
                 }).toList(),
