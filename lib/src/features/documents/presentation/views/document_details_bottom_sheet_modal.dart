@@ -16,14 +16,14 @@ class DocumentDetailsBottomSheetModalWidget extends StatefulWidget {
     required DocumentModel documentModel,
     bool? newIsFavorite,
     String? newName,
-  }) onEdit;
-  final Function(DocumentModel) onDelete;
+  })? onEdit;
+  final Function(DocumentModel)? onDelete;
 
   const DocumentDetailsBottomSheetModalWidget({
     super.key,
     required this.documentModel,
-    required this.onEdit,
-    required this.onDelete,
+    this.onEdit,
+    this.onDelete,
   });
 
   @override
@@ -44,12 +44,14 @@ class _DocumentDetailsBottomSheetModalWidgetState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DocumentDetailsWidget(documentModel: widget.documentModel),
-            const Divider(),
-            _favoriteButton(context),
-            const Divider(),
-            _renameButton(context),
-            const Divider(),
-            _deleteButton(context),
+            if (widget.onEdit != null) ...[
+              const Divider(),
+              _favoriteButton(context),
+              const Divider(),
+              _renameButton(context),
+              const Divider(),
+            ],
+            if (widget.onDelete != null) _deleteButton(context),
           ],
         ),
       ),
@@ -80,7 +82,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                   _isFavorite = !(_isFavorite!);
                 }
               });
-              widget.onEdit.call(
+              widget.onEdit?.call(
                 documentModel: widget.documentModel,
                 newIsFavorite: _isFavorite,
               );
@@ -108,11 +110,11 @@ class _DocumentDetailsBottomSheetModalWidgetState
               );
 
               Future<void> onConfirm() async {
-                final bool result = await widget.onEdit.call(
+                final bool? result = await widget.onEdit?.call(
                   documentModel: widget.documentModel,
                   newName: nameController.text,
                 );
-                if (result) Get.close(1);
+                if (result == true) Get.close(1);
               }
 
               Get.close(1);
@@ -162,7 +164,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                   content: 'delete-document-confirmation-text'.i18n(),
                   onConfirm: () async {
                     Get.close(1);
-                    widget.onDelete.call(widget.documentModel);
+                    widget.onDelete?.call(widget.documentModel);
                   },
                 ),
                 name: 'deleteDocument',
