@@ -21,4 +21,10 @@ class DatabaseModel {
   CollectionReference<Map<String, dynamic>> get documentsCollection {
     return _firestore.collection('documents');
   }
+
+  CollectionReference<Map<String, dynamic>> documentDataCollection(
+    String documentId,
+  ) {
+    return documentsCollection.doc(documentId).collection('data');
+  }
 }

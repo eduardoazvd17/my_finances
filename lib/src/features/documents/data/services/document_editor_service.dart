@@ -1,12 +1,22 @@
+import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/database_model.dart';
-import '../../../../core/data/models/user_model.dart';
+import '../models/document_model.dart';
 
 class DocumentEditorService {
-  final UserModel userModel;
   final DatabaseModel _database;
 
   DocumentEditorService({
-    required this.userModel,
     required DatabaseModel database,
   }) : _database = database;
+
+  Future<void> loadData(DocumentModel documentModel) async {
+    try {
+      _database.documentDataCollection(documentModel.id);
+      //TODO: Carregar dados salvos.
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
 }

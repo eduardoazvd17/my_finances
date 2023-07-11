@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myfinances/src/core/presentation/widgets/expandable_grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 
@@ -17,6 +17,12 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         actions: [
           _documentInfoMenuButton(context),
         ],
+      ),
+      body: ExpandableGroupingWidget(
+        icon: Icons.ac_unit,
+        title: 'Aqui vai ficar o título',
+        subtitle: 'descrição vai ficar aqui...',
+        child: const Text('gasto 1\ngasto 2\ngasto 3\ngasto 4\ngasto 5'),
       ),
     );
   }
