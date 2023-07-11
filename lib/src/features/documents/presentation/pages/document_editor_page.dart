@@ -15,13 +15,13 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       appBar: AppBar(
         title: Text(controller.documentModel.name),
         actions: [
-          _getMoreMenuButton(context),
+          _documentInfoMenuButton(context),
         ],
       ),
     );
   }
 
-  Widget _getMoreMenuButton(BuildContext context) {
+  Widget _documentInfoMenuButton(BuildContext context) {
     return IconButton(
       onPressed: () {
         showModalBottomSheet(
