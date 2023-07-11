@@ -7,29 +7,32 @@ import '../../data/models/document_model.dart';
 
 class DocumentDetailsWidget extends StatelessWidget {
   final DocumentModel documentModel;
-  const DocumentDetailsWidget({super.key, required this.documentModel});
+  final bool showHeader;
+  const DocumentDetailsWidget(
+      {super.key, required this.documentModel, this.showHeader = true});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
-          child: Row(
-            children: [
-              Icon(documentModel.type.icon, size: 40),
-              const SizedBox(width: 5),
-              Expanded(
-                  child: Text(
-                documentModel.name,
-                style: const TextStyle(fontSize: 16),
-                textAlign: TextAlign.left,
-              )),
-            ],
+        if (showHeader)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Icon(documentModel.type.icon, size: 40),
+                const SizedBox(width: 5),
+                Expanded(
+                    child: Text(
+                  documentModel.name,
+                  style: const TextStyle(fontSize: 16),
+                  textAlign: TextAlign.left,
+                )),
+              ],
+            ),
           ),
-        ),
-        const Divider(),
+        if (showHeader) const Divider(),
         _textTile(
             label: 'document-type-label'.i18n(),
             data: documentModel.type.title),
