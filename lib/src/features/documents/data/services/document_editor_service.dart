@@ -11,7 +11,6 @@ class DocumentEditorService {
 
   Future<void> loadData(DocumentModel documentModel) async {
     try {
-      _database.documentDataCollection(documentModel.id);
       //TODO: Carregar dados salvos.
     } on AppError catch (_) {
       rethrow;

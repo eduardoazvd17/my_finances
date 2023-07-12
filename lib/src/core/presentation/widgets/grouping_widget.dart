@@ -1,46 +1,91 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfinances/src/core/data/models/grouping_model.dart';
+import 'package:myfinances/src/core/data/models/item_model.dart';
 
 class GroupingWidget extends StatelessWidget {
-  final String title;
-  final Widget? action;
-  final Widget content;
-  final bool expandedContent;
+  final GroupingModel groupingModel;
+  final List<ItemModel> items;
 
   const GroupingWidget({
     super.key,
-    required this.title,
-    this.action,
-    required this.content,
-    this.expandedContent = false,
+    required this.groupingModel,
+    required this.items,
   });
+
+  GroupingWidgetController get _controller => groupingModel.getController();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return AnimatedSize(
+      curve: Curves.ease,
+      duration: const Duration(milliseconds: 350),
+      alignment: Alignment.topLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(fontSize: 18),
-                ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Obx(
+                      () => InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: _controller.toggleIsExpanded,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(
+                            _controller.isExpanded
+                                ? CupertinoIcons.chevron_down
+                                : CupertinoIcons.chevron_right,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(groupingModel.title),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              if (action != null)
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: action,
-                ),
+              Obx(() {
+                if (_controller.isExpanded) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 16,
+                    ),
+                    child: Container(), //TODO: Mostrar os itens do agrupamento.
+                  );
+                } else {
+                  return Container();
+                }
+              }),
             ],
           ),
-        ),
-        const Divider(),
-        expandedContent ? Expanded(child: content) : content,
-      ],
+          const Divider(),
+        ],
+      ),
     );
   }
+}
+
+class GroupingWidgetController extends GetxController {
+  GroupingWidgetController({bool initializeExpanded = false}) {
+    _isExpanded = RxBool(initializeExpanded);
+  }
+
+  late final RxBool _isExpanded;
+  bool get isExpanded => _isExpanded.value;
+  void toggleIsExpanded() => _isExpanded.value = !isExpanded;
 }

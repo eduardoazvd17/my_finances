@@ -6,7 +6,7 @@ import 'package:myfinances/src/core/presentation/views/settings_bottom_sheet_mod
 import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/grouping_widget.dart';
+import 'package:myfinances/src/core/presentation/widgets/list_header_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/document_tile_widget.dart';
@@ -40,7 +40,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           ),
         ],
       ),
-      body: GroupingWidget(
+      body: ListHeaderWidget(
         title: 'my-documents-text'.i18n(),
         expandedContent: true,
         action: IconButtonWidget(
