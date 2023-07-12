@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../presentation/widgets/grouping_widget.dart';
+import '../../../../core/presentation/widgets/grouping_widget.dart';
 
 class GroupingModel {
   final String title;

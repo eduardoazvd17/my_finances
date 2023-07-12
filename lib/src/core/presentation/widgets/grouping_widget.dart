@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/core/data/models/grouping_model.dart';
-import 'package:myfinances/src/core/data/models/item_model.dart';
+
+import '../../../features/documents/data/models/grouping_model.dart';
+import '../../../features/documents/data/models/item_model.dart';
 
 class GroupingWidget extends StatelessWidget {
   final GroupingModel groupingModel;

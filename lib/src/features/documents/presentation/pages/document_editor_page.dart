@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/data/models/grouping_model.dart';
 import 'package:myfinances/src/core/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 
+import '../../data/models/grouping_model.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 
 class DocumentEditorPage extends GetWidget<DocumentEditorController> {
