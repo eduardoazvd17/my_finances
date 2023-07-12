@@ -41,31 +41,37 @@ class AppRoutes {
         name: _welcome,
         page: () => const WelcomePage(),
         binding: AuthBinding(),
+        transition: Transition.cupertino,
       ),
       GetPage(
         name: _login,
         page: () => const LoginPage(),
         binding: AuthBinding(),
+        transition: Transition.cupertino,
       ),
       GetPage(
         name: _register,
         page: () => const RegisterPage(),
         binding: AuthBinding(),
+        transition: Transition.cupertino,
       ),
       GetPage(
         name: _documents,
         page: () => const DocumentsPage(),
         binding: DocumentsBinding(),
+        transition: Transition.cupertino,
       ),
       GetPage(
         name: _addDocument,
         page: () => const AddDocumentPage(),
         binding: DocumentsBinding(),
+        transition: Transition.cupertino,
       ),
       GetPage(
         name: _documentEditor,
         page: () => const DocumentEditorPage(),
         binding: DocumentEditorBinding(),
+        transition: Transition.downToUp,
       ),
     ];
   }
