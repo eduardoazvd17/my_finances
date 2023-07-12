@@ -1,17 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/item_tile_widget.dart';
 
-import '../../../features/documents/data/models/grouping_model.dart';
-import '../../../features/documents/data/models/item_model.dart';
+import '../../data/models/grouping_model.dart';
+import '../../data/models/item_model.dart';
 
 class GroupingWidget extends StatelessWidget {
   final GroupingModel groupingModel;
+  final DocumentType documentType;
   final List<ItemModel> items;
 
   const GroupingWidget({
     super.key,
     required this.groupingModel,
+    required this.documentType,
     required this.items,
   });
 
@@ -66,7 +70,15 @@ class GroupingWidget extends StatelessWidget {
                       vertical: 8,
                       horizontal: 16,
                     ),
-                    child: Container(), //TODO: Mostrar os itens do agrupamento.
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: items.map((item) {
+                        return ItemTileWidget(
+                          item: item,
+                          documentType: documentType,
+                        );
+                      }).toList(),
+                    ),
                   );
                 } else {
                   return Container();

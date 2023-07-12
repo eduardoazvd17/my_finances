@@ -1,13 +1,14 @@
+import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/presentation/widgets/grouping_widget.dart';
+import '../../presentation/widgets/grouping_widget.dart';
 
-class GroupingModel {
+class GroupingModel extends Equatable {
   final String title;
   final bool initializeExpanded;
   final DateTime creationDate;
 
-  GroupingModel({
+  const GroupingModel({
     required this.title,
     required this.initializeExpanded,
     required this.creationDate,
@@ -25,4 +26,7 @@ class GroupingModel {
       );
     }
   }
+
+  @override
+  List<Object?> get props => [id];
 }

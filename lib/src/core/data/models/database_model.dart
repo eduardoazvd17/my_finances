@@ -22,9 +22,15 @@ class DatabaseModel {
     return _firestore.collection('documents');
   }
 
-  CollectionReference<Map<String, dynamic>> documentDataCollection(
+  CollectionReference<Map<String, dynamic>> documentGroupsCollection(
     String documentId,
   ) {
-    return documentsCollection.doc(documentId).collection('data');
+    return documentsCollection.doc(documentId).collection('groups');
+  }
+
+  CollectionReference<Map<String, dynamic>> documentItemsCollection(
+    String documentId,
+  ) {
+    return documentsCollection.doc(documentId).collection('items');
   }
 }

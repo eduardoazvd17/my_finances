@@ -104,14 +104,25 @@ class DocumentsService {
   Future<void> deleteDocument({required DocumentModel documentModel}) async {
     try {
       await _database.documentsCollection.doc(documentModel.id).delete();
-      final documentsDataQuery =
-          await _database.documentDataCollection(documentModel.id).get();
-      if (documentsDataQuery.docs.isNotEmpty) {
+
+      final documentsGroupsQuery =
+          await _database.documentGroupsCollection(documentModel.id).get();
+      if (documentsGroupsQuery.docs.isNotEmpty) {
         final batch = FirebaseFirestore.instance.batch();
-        for (final doc in documentsDataQuery.docs) {
+        for (final doc in documentsGroupsQuery.docs) {
           batch.delete(doc.reference);
         }
-        return batch.commit();
+        batch.commit();
+      }
+
+      final documentsItemsQuery =
+          await _database.documentItemsCollection(documentModel.id).get();
+      if (documentsItemsQuery.docs.isNotEmpty) {
+        final batch = FirebaseFirestore.instance.batch();
+        for (final doc in documentsItemsQuery.docs) {
+          batch.delete(doc.reference);
+        }
+        batch.commit();
       }
     } on AppError catch (_) {
       rethrow;
