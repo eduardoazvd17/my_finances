@@ -28,90 +28,76 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           _settingsMenuButton(context),
         ],
       ),
-      floatingBottomMenu: FloatingBottomMenuWidget(
-        items: [
-          FloatingBottomMenuItem(
-            icon: Icons.add,
-            onTap: controller.goToAddDocumentPage,
-            tooltip: 'add-document-button'.i18n(),
-            foregroundColor: Colors.white,
-            backgroundColor: Theme.of(context).primaryColor,
-            showTooltip: true,
-          ),
-        ],
-      ),
+      floatingBottomMenu: _addDocumentFloatingButton(context),
       body: ListHeaderWidget(
         title: 'my-documents-text'.i18n(),
         expandedContent: true,
-        action: IconButtonWidget(
-          tooltip: 'order-document-button'.i18n(),
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (_) => const DocumentsOrderBottomSheetModal(),
-            );
-          },
-          icon: Icons.filter_list,
-          backgroundColor: Colors.transparent,
-        ),
+        action: _orderDocumentsButton(context),
         content: Obx(() {
           if (controller.userDocuments.isEmpty) {
-            return Center(
-              child: AdviseMessageWidget(
-                icon: Icons.info_outline,
-                message: 'my-documents-empty-title-text'.i18n(),
-                description: 'my-documents-empty-description-text'.i18n(),
-              ),
-            );
+            return _emptyDocumentsContent();
           } else {
-            return ScrollViewWidget(
-              child: Column(
-                children: controller.userDocuments.map((documentModel) {
-                  final int index =
-                      controller.userDocuments.indexOf(documentModel);
-
-                  final bool showFavoriteHeader =
-                      index == 0 && documentModel.isFavorite;
-
-                  final bool showAllHeader = index > 0 &&
-                      controller.userDocuments[index - 1].isFavorite &&
-                      !documentModel.isFavorite;
-
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (showFavoriteHeader)
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                            'favorites-documents-text'.i18n(),
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      if (showAllHeader)
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                            'all-documents-text'.i18n(),
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      DocumentTileWidget(
-                        documentModel: documentModel,
-                        onTap: controller.openDocument,
-                        onEdit: controller.editDocument,
-                        onDelete: controller.deleteDocument,
-                      ),
-                      if (index == controller.userDocuments.length - 1)
-                        const SizedBox(height: 65),
-                    ],
-                  );
-                }).toList(),
-              ),
-            );
+            return _documentsListWidget();
           }
         }),
+      ),
+    );
+  }
+
+  Widget _emptyDocumentsContent() {
+    return Center(
+      child: AdviseMessageWidget(
+        icon: Icons.info_outline,
+        message: 'my-documents-empty-title-text'.i18n(),
+        description: 'my-documents-empty-description-text'.i18n(),
+      ),
+    );
+  }
+
+  Widget _documentsListWidget() {
+    return ScrollViewWidget(
+      child: Column(
+        children: controller.userDocuments.map((documentModel) {
+          final int index = controller.userDocuments.indexOf(documentModel);
+
+          final bool showFavoriteHeader =
+              index == 0 && documentModel.isFavorite;
+
+          final bool showAllHeader = index > 0 &&
+              controller.userDocuments[index - 1].isFavorite &&
+              !documentModel.isFavorite;
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (showFavoriteHeader)
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    'favorites-documents-text'.i18n(),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              if (showAllHeader)
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    'all-documents-text'.i18n(),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              DocumentTileWidget(
+                documentModel: documentModel,
+                onTap: controller.openDocument,
+                onEdit: controller.editDocument,
+                onDelete: controller.deleteDocument,
+              ),
+              if (index == controller.userDocuments.length - 1)
+                const SizedBox(height: 65),
+            ],
+          );
+        }).toList(),
       ),
     );
   }
@@ -123,6 +109,38 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         context: context,
         builder: (_) => const SettingsBottomSheetModal(),
       ),
+    );
+  }
+
+  Widget _addDocumentFloatingButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Material(
+        elevation: 8,
+        borderRadius: BorderRadius.circular(15),
+        child: FloatingBottomMenuItem(
+          icon: Icons.add,
+          onTap: controller.goToAddDocumentPage,
+          tooltip: 'add-document-button'.i18n(),
+          foregroundColor: Colors.white,
+          backgroundColor: Theme.of(context).primaryColor,
+          showTooltip: true,
+        ),
+      ),
+    );
+  }
+
+  Widget _orderDocumentsButton(BuildContext context) {
+    return IconButtonWidget(
+      tooltip: 'order-document-button'.i18n(),
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (_) => const DocumentsOrderBottomSheetModal(),
+        );
+      },
+      icon: Icons.filter_list,
+      backgroundColor: Colors.transparent,
     );
   }
 }

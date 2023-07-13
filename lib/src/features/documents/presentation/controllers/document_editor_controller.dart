@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
@@ -19,6 +20,10 @@ class DocumentEditorController extends GetxController {
     _loadGroupsAndItems();
     super.onInit();
   }
+
+  final RxDouble _menuScrollPosition = RxDouble(0);
+  double get menuScrollPosition => _menuScrollPosition.value;
+  set menuScrollPosition(double value) => _menuScrollPosition.value = value;
 
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;

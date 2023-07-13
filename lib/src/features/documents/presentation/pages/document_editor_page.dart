@@ -71,11 +71,27 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _floatingBottomMenu(BuildContext context) {
+    final scrollController = ScrollController(
+      initialScrollOffset: controller.menuScrollPosition,
+    );
+
+    scrollController.addListener(() {
+      controller.menuScrollPosition = scrollController.offset;
+    });
+
     return FloatingBottomMenuWidget(
+      scrollController: scrollController,
       items: [
         FloatingBottomMenuItem(
-          icon: Icons.add,
-          tooltip: 'add',
+          icon: Icons.post_add_rounded,
+          tooltip: 'new-group-button'.i18n(),
+          showTooltip: true,
+          onTap: () {},
+        ),
+        FloatingBottomMenuItem(
+          icon: Icons.format_list_bulleted_add,
+          tooltip: 'new-item-button'.i18n(),
+          showTooltip: true,
           onTap: () {},
         ),
       ],

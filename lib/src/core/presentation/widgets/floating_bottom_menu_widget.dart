@@ -1,18 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
 class FloatingBottomMenuWidget extends StatelessWidget {
+  final ScrollController? scrollController;
   final List<FloatingBottomMenuItem> items;
   const FloatingBottomMenuWidget({
     super.key,
     required this.items,
+    this.scrollController,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      borderRadius: BorderRadius.circular(50),
-      elevation: 8,
-      child: Wrap(children: items),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Material(
+        borderRadius: BorderRadius.circular(15),
+        elevation: 8,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+          child: ScrollViewWidget(
+            showBar: true,
+            controller: scrollController,
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: items,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -43,11 +63,11 @@ class FloatingBottomMenuItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(15),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
