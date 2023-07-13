@@ -14,38 +14,48 @@ class FloatingBottomMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Material(
-        borderRadius: BorderRadius.circular(15),
-        elevation: 8,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
-          child: ScrollViewWidget(
-            showBar: true,
-            controller: scrollController,
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: items.map((item) {
-                  if (items.indexOf(item) > 0) {
-                    return Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Container(
-                            width: 0.5,
-                            height: 25,
-                            color: Colors.grey[600],
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: Colors.grey[600]!,
+          ),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Material(
+          borderRadius: BorderRadius.circular(15),
+          elevation: 8,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+            child: ScrollViewWidget(
+              showBar: true,
+              controller: scrollController,
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: items.map((item) {
+                    if (items.indexOf(item) > 0) {
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: Container(
+                              width: 0.5,
+                              height: 25,
+                              color: Colors.grey[600],
+                            ),
                           ),
-                        ),
-                        item,
-                      ],
-                    );
-                  }
-                  return item;
-                }).toList(),
+                          item,
+                        ],
+                      );
+                    }
+                    return item;
+                  }).toList(),
+                ),
               ),
             ),
           ),
