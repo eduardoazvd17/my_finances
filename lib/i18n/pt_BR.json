@@ -58,6 +58,8 @@
     "rename-button": "Renomear",
     "delete-button": "Deletar",
     "order-document-button": "Ordenar meus documentos",
+    "new-group-button": "Novo agrupamento",
+    "new-item-button": "Novo item",
     "delete-document-dialog-title": "Deletar documento",
     "rename-document-dialog-title": "Renomear documento",
     "document-type-title-0": "Controle de gastos mensal",

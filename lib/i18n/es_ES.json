@@ -58,6 +58,8 @@
     "rename-button": "Renombrar",
     "delete-button": "Borrar",
     "order-document-button": "Ordenar mis documentos",
+    "new-group-button": "Nuevo grupo",
+    "new-item-button": "Nuevo elemento",
     "delete-document-dialog-title": "Eliminar documento",
     "rename-document-dialog-title": "Renombrar documento",
     "document-type-title-0": "Rastreador de gastos mensuales",
