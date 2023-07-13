@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,7 @@ import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/authentication/presentation/controllers/auth_controller.dart';
 
+import '../../../../core/data/utils/app_routes.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 
@@ -17,6 +20,12 @@ class LoginPage extends GetWidget<AuthController> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
+        leading: Get.previousRoute != AppRoutes.initialRoute
+            ? IconButton(
+                onPressed: () => AppRoutes.goToWelcomePage(),
+                icon: const Icon(Icons.arrow_back),
+              )
+            : null,
         title: Text('login-button'.i18n()),
       ),
       body: Center(

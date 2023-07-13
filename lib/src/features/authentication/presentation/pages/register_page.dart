@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/features/authentication/presentation/controllers/auth_controller.dart';
 
+import '../../../../core/data/utils/app_routes.dart';
 import '../../../../core/presentation/widgets/app_logo.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../../../core/presentation/widgets/scaffold_widget.dart';
@@ -18,6 +19,12 @@ class RegisterPage extends GetWidget<AuthController> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
+        leading: Get.previousRoute != AppRoutes.initialRoute
+            ? IconButton(
+                onPressed: () => AppRoutes.goToWelcomePage(),
+                icon: const Icon(Icons.arrow_back),
+              )
+            : null,
         title: Text('register-button'.i18n()),
       ),
       body: Center(

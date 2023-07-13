@@ -15,8 +15,8 @@ import '../middlewares/auth_middleware.dart';
 
 class AppRoutes {
   static const String _welcome = "/welcome";
-  static const String _login = "$_welcome/login";
-  static const String _register = "$_welcome/register";
+  static const String _login = "/login";
+  static const String _register = "/register";
   static const String _documents = "/documents";
   static const String _addDocument = "$_documents/addDocument";
   static const String _documentEditor = "$_documents/editor";
