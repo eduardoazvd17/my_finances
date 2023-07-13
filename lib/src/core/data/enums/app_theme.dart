@@ -15,4 +15,10 @@ extension AppThemeExtension on AppTheme {
         AppTheme.light => ThemeMode.light,
         AppTheme.dark => ThemeMode.dark,
       };
+
+  Color get webFrameBackgroundColor => switch (this) {
+        AppTheme.automatic => Colors.grey,
+        AppTheme.light => Colors.black,
+        AppTheme.dark => Colors.white,
+      };
 }

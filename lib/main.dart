@@ -47,34 +47,34 @@ class MyFinancesApp extends GetWidget<I18nController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => FlutterWebFrame(
-        builder: (context) {
-          return Obx(
-            () => GetMaterialApp(
-              builder: (_, child) => LifeCycleHandler(child: child!),
-              debugShowCheckedModeBanner: false,
-              title: 'app-name'.i18n(),
-              locale: controller.selectedLocale,
-              localizationsDelegates: controller.localizationsDelegates,
-              supportedLocales: controller.supportedLocales,
-              localeResolutionCallback: controller.localeResolutionCallback,
-              theme: AppThemes.light,
-              darkTheme: AppThemes.dark,
-              themeMode: Get.find<ThemeController>().selectedTheme.themeMode,
-              initialBinding: AppBinding(),
-              initialRoute: AppRoutes.initialRoute,
-              getPages: AppRoutes.getGetPages(),
-            ),
-          );
-        },
-        maximumSize: Size(500, Get.height),
-        enabled: kIsWeb,
-        backgroundColor: switch (Get.find<ThemeController>().selectedTheme) {
-          AppTheme.automatic => Colors.grey,
-          AppTheme.light => Colors.black,
-          AppTheme.dark => Colors.white,
-        },
-      ),
+      () {
+        final themeController = Get.find<ThemeController>();
+        return FlutterWebFrame(
+          builder: (context) {
+            return Obx(
+              () => GetMaterialApp(
+                builder: (_, child) => LifeCycleHandler(child: child!),
+                debugShowCheckedModeBanner: false,
+                title: 'app-name'.i18n(),
+                locale: controller.selectedLocale,
+                localizationsDelegates: controller.localizationsDelegates,
+                supportedLocales: controller.supportedLocales,
+                localeResolutionCallback: controller.localeResolutionCallback,
+                theme: AppThemes.light,
+                darkTheme: AppThemes.dark,
+                themeMode: themeController.selectedTheme.themeMode,
+                initialBinding: AppBinding(),
+                initialRoute: AppRoutes.initialRoute,
+                getPages: AppRoutes.getGetPages(),
+              ),
+            );
+          },
+          maximumSize: Size(500, Get.height),
+          enabled: kIsWeb,
+          backgroundColor:
+              themeController.selectedTheme.webFrameBackgroundColor,
+        );
+      },
     );
   }
 }
