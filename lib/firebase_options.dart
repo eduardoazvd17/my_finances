@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,9 +46,19 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyD2PO6qj1H-90xqhecjwXQ38wiEJXD0A7Y',
+    appId: '1:713898000759:web:abfc559661949ae60d2172',
+    messagingSenderId: '713898000759',
+    projectId: 'myfinancesbr',
+    authDomain: 'myfinancesbr.firebaseapp.com',
+    storageBucket: 'myfinancesbr.appspot.com',
+    measurementId: 'G-XP6B3HBTT3',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAxtwNmYyLhCnhJh1dybY63CDrE8VWDE1o',
-    appId: '1:713898000759:android:d79f714b262eb2fd0d2172',
+    appId: '1:713898000759:android:d58242f8f5ee51f40d2172',
     messagingSenderId: '713898000759',
     projectId: 'myfinancesbr',
     storageBucket: 'myfinancesbr.appspot.com',
@@ -59,12 +66,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCY0414TUAPWY3Zlmj5NoEalbHpL82IC9c',
-    appId: '1:713898000759:ios:f0d1508261da95340d2172',
+    appId: '1:713898000759:ios:901bbe817f9749560d2172',
     messagingSenderId: '713898000759',
     projectId: 'myfinancesbr',
     storageBucket: 'myfinancesbr.appspot.com',
-    iosClientId:
-        '713898000759-91dr66o7anovi4e7r20aul95lqe0nfdu.apps.googleusercontent.com',
-    iosBundleId: 'com.eduardoazvd.myfinances',
+    iosClientId: '713898000759-jn5pjb4i5oj8i8st01n08mbdndbl7rk5.apps.googleusercontent.com',
+    iosBundleId: 'com.eduardoazevedo.myfinances',
   );
 }
