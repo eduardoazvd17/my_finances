@@ -27,6 +27,23 @@ class GroupingModel extends Equatable {
     }
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'initializeExpanded': initializeExpanded,
+      'creationDate': creationDate.millisecondsSinceEpoch,
+    };
+  }
+
+  factory GroupingModel.fromMap(Map<String, dynamic> map) {
+    return GroupingModel(
+      title: map['title'],
+      initializeExpanded: map['initializeExpanded'],
+      creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
+    );
+  }
+
   @override
   List<Object?> get props => [id];
 }

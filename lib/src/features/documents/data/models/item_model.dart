@@ -2,6 +2,13 @@ class ItemModel {
   final String title;
   final String? groupingId;
   ItemModel({required this.title, required this.groupingId});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'groupingId': groupingId,
+    };
+  }
 }
 
 class AnnotationItemModel extends ItemModel {
@@ -14,6 +21,24 @@ class AnnotationItemModel extends ItemModel {
     this.quantity,
     this.price,
   });
+
+  @override
+  Map<String, dynamic> toMap() {
+    return super.toMap()
+      ..addAll({
+        'quantity': quantity,
+        'price': price?.toStringAsFixed(2),
+      });
+  }
+
+  factory AnnotationItemModel.fromMap(Map<String, dynamic> map) {
+    return AnnotationItemModel(
+      title: map['title'],
+      groupingId: map['groupingId'],
+      quantity: map['quantity'],
+      price: double.tryParse(map['price']),
+    );
+  }
 }
 
 //TODO: Implementar outros tipos de itens.
