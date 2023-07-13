@@ -45,6 +45,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
   Widget _documentInfoMenuButton(BuildContext context) {
     return IconButton(
+      tooltip: 'document-info-button'.i18n(),
       onPressed: () {
         showModalBottomSheet(
           context: context,
@@ -56,7 +57,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           },
         );
       },
-      icon: const Icon(Icons.more_vert),
+      icon: const Icon(Icons.info_outline),
     );
   }
 
@@ -93,6 +94,22 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           tooltip: 'new-item-button'.i18n(),
           showTooltip: true,
           onTap: () {},
+        ),
+        FloatingBottomMenuItem(
+          icon: Icons.info_outline,
+          tooltip: 'document-info-button'.i18n(),
+          showTooltip: true,
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) {
+                return DocumentDetailsBottomSheetModalWidget(
+                  documentModel: controller.documentModel,
+                );
+              },
+            );
+          },
         ),
       ],
     );

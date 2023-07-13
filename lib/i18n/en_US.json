@@ -60,6 +60,7 @@
     "order-document-button": "Order my documents",
     "new-group-button": "New group",
     "new-item-button": "New item",
+    "document-info-button": "Document info",
     "delete-document-dialog-title": "Delete document",
     "rename-document-dialog-title": "Rename document",
     "document-type-title-0": "Monthly expense control",
