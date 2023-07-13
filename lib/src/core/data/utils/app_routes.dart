@@ -11,14 +11,15 @@ import '../../../features/authentication/data/bindings/auth_binding.dart';
 import '../../../features/documents/data/bindings/documents_binding.dart';
 import '../../../features/documents/data/models/document_model.dart';
 import '../../../features/documents/presentation/pages/add_document_page.dart';
+import '../middlewares/auth_middleware.dart';
 
 class AppRoutes {
   static const String _welcome = "/welcome";
-  static const String _login = "/login";
-  static const String _register = "/register";
+  static const String _login = "$_welcome/login";
+  static const String _register = "$_welcome/register";
   static const String _documents = "/documents";
-  static const String _addDocument = "/addDocument";
-  static const String _documentEditor = "/editor";
+  static const String _addDocument = "$_documents/addDocument";
+  static const String _documentEditor = "$_documents/editor";
 
   static String get initialRoute => _welcome;
 
@@ -61,18 +62,21 @@ class AppRoutes {
         page: () => const DocumentsPage(),
         binding: DocumentsBinding(),
         transition: _getTransition(_documents),
+        middlewares: [AuthMiddleware()],
       ),
       GetPage(
         name: _addDocument,
         page: () => const AddDocumentPage(),
         binding: DocumentsBinding(),
         transition: _getTransition(_addDocument),
+        middlewares: [AuthMiddleware()],
       ),
       GetPage(
         name: _documentEditor,
         page: () => const DocumentEditorPage(),
         binding: DocumentEditorBinding(),
         transition: _getTransition(_documentEditor),
+        middlewares: [AuthMiddleware()],
       ),
     ];
   }

@@ -66,9 +66,9 @@ class MyFinancesApp extends GetWidget<I18nController> {
           ),
         );
       },
-      maximumSize: Size(480, Get.height),
+      maximumSize: Size(500, Get.height),
       enabled: kIsWeb,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey[600],
     );
   }
 }
