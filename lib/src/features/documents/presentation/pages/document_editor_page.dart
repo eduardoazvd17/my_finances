@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
@@ -21,6 +22,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           _documentInfoMenuButton(context),
         ],
       ),
+      floatingBottomMenu: _floatingBottomMenu(context),
       body: Column(
         children: [
           ...controller.groups.map((groupingModel) {
@@ -65,6 +67,18 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         Get.close(1);
       },
       icon: const Icon(Icons.close),
+    );
+  }
+
+  Widget _floatingBottomMenu(BuildContext context) {
+    return FloatingBottomMenuWidget(
+      items: [
+        FloatingBottomMenuItem(
+          icon: Icons.add,
+          tooltip: 'add',
+          onTap: () {},
+        ),
+      ],
     );
   }
 }

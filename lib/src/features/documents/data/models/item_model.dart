@@ -9,6 +9,8 @@ class ItemModel {
       'groupingId': groupingId,
     };
   }
+
+  //TODO: Implementar outros tipos de itens.
 }
 
 class AnnotationItemModel extends ItemModel {
@@ -40,8 +42,6 @@ class AnnotationItemModel extends ItemModel {
     );
   }
 }
-
-//TODO: Implementar outros tipos de itens.
 
 // class InvestimentControlItemModel extends ItemModel {
 //   InvestimentControlItemModel({
