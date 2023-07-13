@@ -97,7 +97,8 @@ class AppController extends GetxController {
         user != null &&
         isBiometricsEnabled &&
         canEnableBiometrics &&
-        _canShowAuthOverlay.value) {
+        _canShowAuthOverlay.value &&
+        !kIsWeb) {
       _canShowAuthOverlay.value = false;
       closeAuthOverlay();
       Get.dialog(
