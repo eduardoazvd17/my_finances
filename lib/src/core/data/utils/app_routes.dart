@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/login_page.dart';
 import 'package:myfinances/src/features/authentication/presentation/pages/register_page.dart';
@@ -41,37 +42,37 @@ class AppRoutes {
         name: _welcome,
         page: () => const WelcomePage(),
         binding: AuthBinding(),
-        transition: Transition.cupertino,
+        transition: _getTransition(_welcome),
       ),
       GetPage(
         name: _login,
         page: () => const LoginPage(),
         binding: AuthBinding(),
-        transition: Transition.cupertino,
+        transition: _getTransition(_login),
       ),
       GetPage(
         name: _register,
         page: () => const RegisterPage(),
         binding: AuthBinding(),
-        transition: Transition.cupertino,
+        transition: _getTransition(_register),
       ),
       GetPage(
         name: _documents,
         page: () => const DocumentsPage(),
         binding: DocumentsBinding(),
-        transition: Transition.cupertino,
+        transition: _getTransition(_documents),
       ),
       GetPage(
         name: _addDocument,
         page: () => const AddDocumentPage(),
         binding: DocumentsBinding(),
-        transition: Transition.cupertino,
+        transition: _getTransition(_addDocument),
       ),
       GetPage(
         name: _documentEditor,
         page: () => const DocumentEditorPage(),
         binding: DocumentEditorBinding(),
-        transition: Transition.downToUp,
+        transition: _getTransition(_documentEditor),
       ),
     ];
   }
@@ -94,6 +95,14 @@ class AppRoutes {
         parameters: parameters,
         arguments: arguments,
       );
+    }
+  }
+
+  static Transition _getTransition(String route) {
+    if (kIsWeb || route == _documentEditor) {
+      return Transition.downToUp;
+    } else {
+      return Transition.cupertino;
     }
   }
 }

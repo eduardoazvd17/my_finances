@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:credentials_manager/credentials_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/bindings/app_binding.dart';
@@ -44,22 +46,29 @@ class MyFinancesApp extends GetWidget<I18nController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => GetMaterialApp(
-        builder: (_, child) => LifeCycleHandler(child: child!),
-        debugShowCheckedModeBanner: false,
-        title: 'app-name'.i18n(),
-        locale: controller.selectedLocale,
-        localizationsDelegates: controller.localizationsDelegates,
-        supportedLocales: controller.supportedLocales,
-        localeResolutionCallback: controller.localeResolutionCallback,
-        theme: AppThemes.light,
-        darkTheme: AppThemes.dark,
-        themeMode: Get.find<ThemeController>().selectedTheme.themeMode,
-        initialBinding: AppBinding(),
-        initialRoute: AppRoutes.initialRoute,
-        getPages: AppRoutes.getGetPages(),
-      ),
+    return FlutterWebFrame(
+      builder: (context) {
+        return Obx(
+          () => GetMaterialApp(
+            builder: (_, child) => LifeCycleHandler(child: child!),
+            debugShowCheckedModeBanner: false,
+            title: 'app-name'.i18n(),
+            locale: controller.selectedLocale,
+            localizationsDelegates: controller.localizationsDelegates,
+            supportedLocales: controller.supportedLocales,
+            localeResolutionCallback: controller.localeResolutionCallback,
+            theme: AppThemes.light,
+            darkTheme: AppThemes.dark,
+            themeMode: Get.find<ThemeController>().selectedTheme.themeMode,
+            initialBinding: AppBinding(),
+            initialRoute: AppRoutes.initialRoute,
+            getPages: AppRoutes.getGetPages(),
+          ),
+        );
+      },
+      maximumSize: Size(480, Get.height),
+      enabled: kIsWeb,
+      backgroundColor: Colors.grey,
     );
   }
 }

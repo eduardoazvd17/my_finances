@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -46,8 +47,10 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
   Widget _getAuthTiles(BuildContext context) {
     return Column(
       children: [
-        _biometricTile(context),
-        const Divider(),
+        if (!kIsWeb) ...[
+          _biometricTile(context),
+          const Divider(),
+        ],
         _languageTile(context),
         const Divider(),
         _themeTile(context),

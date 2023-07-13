@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:credentials_manager/credentials_manager.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/errors/app_error.dart';
 import 'package:myfinances/src/core/data/models/database_model.dart';
@@ -18,19 +19,29 @@ class AuthService {
 
   Future<UserModel?> autoLogin() async {
     try {
-      final List<CredentialModel> credentials =
-          await _database.credentialsManager.getSavedCredentials();
-      if (credentials.isNotEmpty) {
-        final CredentialModel credential = credentials.first;
-        final UserModel userModel = UserModel(
-          id: credential.id,
-          name: credential.name!,
-          email: credential.loginOrEmail,
-          password: credential.password,
-        );
+      if (kIsWeb) {
+        final prefs = await _database.sharedPreferences;
+        final String? userId = prefs.getString('LoggedUserID');
+        if (userId != null) {
+          return await checkIfUserExists(userId);
+        }
+      } else {
+        final List<CredentialModel> credentials =
+            await _database.credentialsManager.getSavedCredentials();
+        if (credentials.isNotEmpty) {
+          final CredentialModel credential = credentials.first;
+          final UserModel userModel = UserModel(
+            id: credential.id,
+            name: credential.name!,
+            email: credential.loginOrEmail,
+            password: credential.password,
+          );
 
-        final bool result = await checkIfUserExists(userModel);
-        if (result) return userModel;
+          return await checkIfUserExists(
+            userModel.id,
+            password: userModel.password,
+          );
+        }
       }
       return null;
     } catch (_) {
@@ -49,15 +60,20 @@ class AuthService {
       if (query.docs.isNotEmpty && query.docs.first.exists) {
         final UserModel userModel = UserModel.fromMap(query.docs.first.data());
         if (userModel.password == _md5Hash(password)) {
-          await _database.credentialsManager.removeAllCredentials();
-          await _database.credentialsManager.saveCredential(
-            CredentialModel(
-              id: userModel.id,
-              loginOrEmail: userModel.email,
-              password: userModel.password,
-              name: userModel.name,
-            ),
-          );
+          if (kIsWeb) {
+            final prefs = await _database.sharedPreferences;
+            prefs.setString('LoggedUserID', userModel.id);
+          } else {
+            await _database.credentialsManager.removeAllCredentials();
+            await _database.credentialsManager.saveCredential(
+              CredentialModel(
+                id: userModel.id,
+                loginOrEmail: userModel.email,
+                password: userModel.password,
+                name: userModel.name,
+              ),
+            );
+          }
           return userModel;
         } else {
           throw AppError(message: 'incorrect-password'.i18n());
@@ -92,15 +108,20 @@ class AuthService {
           password: _md5Hash(password),
         );
         await dbRef.set(userModel.toMap());
-        await _database.credentialsManager.removeAllCredentials();
-        await _database.credentialsManager.saveCredential(
-          CredentialModel(
-            id: userModel.id,
-            loginOrEmail: userModel.email,
-            password: userModel.password,
-            name: userModel.name,
-          ),
-        );
+        if (kIsWeb) {
+          final prefs = await _database.sharedPreferences;
+          prefs.setString('LoggedUserID', userModel.id);
+        } else {
+          await _database.credentialsManager.removeAllCredentials();
+          await _database.credentialsManager.saveCredential(
+            CredentialModel(
+              id: userModel.id,
+              loginOrEmail: userModel.email,
+              password: userModel.password,
+              name: userModel.name,
+            ),
+          );
+        }
         return userModel;
       }
     } on AppError catch (_) {
@@ -110,15 +131,16 @@ class AuthService {
     }
   }
 
-  Future<bool> checkIfUserExists(UserModel userModel) async {
-    final reference = await _database.usersCollection.doc(userModel.id).get();
+  Future<UserModel?> checkIfUserExists(String userId,
+      {String? password}) async {
+    final reference = await _database.usersCollection.doc(userId).get();
     if (reference.exists && reference.data() != null) {
       final userFromDb = UserModel.fromMap(reference.data()!);
-      if (userFromDb.password == userModel.password) {
-        return true;
+      if (password == null || userFromDb.password == password) {
+        return userFromDb;
       }
     }
-    return false;
+    return null;
   }
 
   Future<void> logout() async {
@@ -128,16 +150,19 @@ class AuthService {
   }
 
   Future<bool> checkIfCanEnableBiometrics() async {
+    if (kIsWeb) return false;
     return await _database.credentialsManager.canCheckBiometrics() &&
         await _database.credentialsManager.isDeviceSupportedByAuth();
   }
 
   Future<bool> checkIfBiometricsIsEnabled() async {
+    if (kIsWeb) return false;
     final prefs = await _database.sharedPreferences;
     return prefs.getBool('isBiometricsEnabled') ?? false;
   }
 
   Future<bool> enableBiometrics() async {
+    if (kIsWeb) return false;
     final result = await _database.credentialsManager.requestAuth(
       authReasonMessage: 'enable-biometrics-button'.i18n(),
     );
@@ -154,6 +179,7 @@ class AuthService {
   }
 
   Future<bool> requestAuth() async {
+    if (kIsWeb) return true;
     return await _database.credentialsManager.requestAuth(
       authReasonMessage: 'auth-required-text'.i18n(),
     );

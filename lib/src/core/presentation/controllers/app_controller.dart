@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
 import 'package:myfinances/src/core/presentation/views/auth_overlay_view.dart';
@@ -71,6 +72,8 @@ class AppController extends GetxController {
   }
 
   Future<bool> requestAuth() async {
+    if (kIsWeb) return true;
+
     _canShowAuthOverlay.value = false;
 
     final bool result;
