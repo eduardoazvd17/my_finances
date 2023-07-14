@@ -27,22 +27,24 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           ],
         ),
         floatingBottomMenu: _floatingBottomMenu(context),
-        body: Column(
-          children: [
-            ...controller.groups.map((groupingModel) {
-              return GroupingWidget(
-                groupingModel: groupingModel,
-                documentType: controller.documentModel.type,
-                items: controller.getItemsByGroup(groupingModel.id),
-              );
-            }),
-            ...controller.itemsWithoutGroup.map(
-              (itemModel) => ItemTileWidget(
-                item: itemModel,
-                documentType: controller.documentModel.type,
+        body: Obx(
+          () => Column(
+            children: [
+              ...controller.groups.map((groupingModel) {
+                return GroupingWidget(
+                  groupingModel: groupingModel,
+                  documentType: controller.documentModel.type,
+                  items: controller.getItemsByGroup(groupingModel.id),
+                );
+              }),
+              ...controller.itemsWithoutGroup.map(
+                (itemModel) => ItemTileWidget(
+                  item: itemModel,
+                  documentType: controller.documentModel.type,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
