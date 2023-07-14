@@ -55,7 +55,17 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   }
 
   Widget _documentsListWidget() {
+    final scrollController = ScrollController(
+      initialScrollOffset: controller.documentsScrollPosition,
+    );
+
+    scrollController.addListener(() {
+      controller.documentsScrollPosition = scrollController.offset;
+    });
+
     return ScrollViewWidget(
+      showBar: true,
+      controller: scrollController,
       child: Column(
         children: controller.userDocuments.map((documentModel) {
           final int index = controller.userDocuments.indexOf(documentModel);

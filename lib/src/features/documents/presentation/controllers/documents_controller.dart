@@ -13,6 +13,7 @@ import '../../../../core/data/utils/app_routes.dart';
 
 class DocumentsController extends GetxController {
   final DocumentsService _documentsService;
+
   DocumentsController({
     required DocumentsService documentsService,
   }) : _documentsService = documentsService;
@@ -25,6 +26,11 @@ class DocumentsController extends GetxController {
 
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
+
+  final RxDouble _documentsScrollPosition = RxDouble(0.0);
+  double get documentsScrollPosition => _documentsScrollPosition.value;
+  set documentsScrollPosition(double value) =>
+      _documentsScrollPosition.value = value;
 
   final RxList<DocumentModel> _userDocuments = RxList<DocumentModel>();
   List<DocumentModel> get userDocuments => _userDocuments.toList();
