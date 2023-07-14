@@ -105,7 +105,6 @@ class AppController extends GetxController {
         const AuthOverlayView(),
         barrierDismissible: false,
         useSafeArea: false,
-        name: 'authenticationRequired',
       );
     }
   }

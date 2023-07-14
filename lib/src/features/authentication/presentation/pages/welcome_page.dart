@@ -115,7 +115,6 @@ class WelcomePage extends GetWidget<AuthController> {
                         onConfirm: controller.cancelAutoLogin,
                         invertButtonColor: true,
                       ),
-                      name: 'logout',
                       barrierColor: Colors.black87,
                     );
                   },
