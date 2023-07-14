@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/text_field_widget.dart';
 
 import '../controllers/document_editor_controller.dart';
 
@@ -14,10 +13,10 @@ class NewItemBottomSheetModal extends GetWidget<DocumentEditorController> {
     return BottomSheetModalWidget(
       icon: Icons.format_list_bulleted_add,
       title: 'new-item-button'.i18n(),
-      child: Column(
+      child: const Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Column(
               children: [],
             ),
