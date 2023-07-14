@@ -39,13 +39,11 @@ class DocumentsService {
   }) async {
     try {
       final DocumentReference docRef = _database.documentsCollection.doc();
-      final DateTime dateTimeNow = DateTime.now();
       final DocumentModel documentModel = DocumentModel(
         id: docRef.id,
         name: name,
         ownerId: userModel.id,
-        creationDate: dateTimeNow,
-        lastEditDate: dateTimeNow,
+        creationDate: DateTime.now(),
         type: documentType,
         isFavorite: false,
       );
@@ -146,7 +144,7 @@ class DocumentsService {
     try {
       final prefs = await _database.sharedPreferences;
       final int documentOrderTypeIndex = prefs.getInt('DocumentOrderType') ??
-          DocumentOrderType.lastModifiedDate.index;
+          DocumentOrderType.creationDate.index;
       final int listOrderIndex =
           prefs.getInt('DocumentListOrder') ?? ListOrder.descending.index;
 
@@ -155,7 +153,7 @@ class DocumentsService {
         ListOrder.values[listOrderIndex],
       );
     } catch (_) {
-      return (DocumentOrderType.lastModifiedDate, ListOrder.descending);
+      return (DocumentOrderType.creationDate, ListOrder.descending);
     }
   }
 }

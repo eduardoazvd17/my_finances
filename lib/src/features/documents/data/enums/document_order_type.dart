@@ -2,7 +2,6 @@ import 'package:localization/localization.dart';
 
 enum DocumentOrderType {
   alphabetical,
-  lastModifiedDate,
   creationDate,
 }
 

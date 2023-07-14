@@ -47,7 +47,7 @@ class DocumentsController extends GetxController {
   }
 
   final Rx<DocumentOrderType> _documentOrderType = Rx<DocumentOrderType>(
-    DocumentOrderType.lastModifiedDate,
+    DocumentOrderType.creationDate,
   );
   DocumentOrderType get documentOrderType => _documentOrderType.value;
   Future<void> setDocumentOrderType(
@@ -93,16 +93,12 @@ class DocumentsController extends GetxController {
           ListOrder.ascending => switch (documentOrderType) {
               DocumentOrderType.alphabetical =>
                 a.name.toLowerCase().compareTo(b.name.toLowerCase()),
-              DocumentOrderType.lastModifiedDate =>
-                a.lastEditDate.compareTo(b.lastEditDate),
               DocumentOrderType.creationDate =>
                 a.creationDate.compareTo(b.creationDate),
             },
           ListOrder.descending => switch (documentOrderType) {
               DocumentOrderType.alphabetical =>
                 b.name.toLowerCase().compareTo(a.name.toLowerCase()),
-              DocumentOrderType.lastModifiedDate =>
-                b.lastEditDate.compareTo(a.lastEditDate),
               DocumentOrderType.creationDate =>
                 b.creationDate.compareTo(a.creationDate),
             },

@@ -63,14 +63,14 @@ class DocumentTileWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Icon(
-                          CupertinoIcons.pencil,
+                          CupertinoIcons.calendar,
                           size: 18,
                           color: Colors.grey[600],
                         ),
                       ),
                       Text(
                         DateTimeUtils.formatFullDateShorted(
-                          documentModel.lastEditDate,
+                          documentModel.creationDate,
                         ),
                         style: TextStyle(color: Colors.grey[600]),
                       ),

@@ -42,12 +42,6 @@ class DocumentDetailsWidget extends StatelessWidget {
             documentModel.creationDate,
           ),
         ),
-        _textTile(
-          label: 'document-last-modification-date-label'.i18n(),
-          data: DateTimeUtils.formatFullDate(
-            documentModel.lastEditDate,
-          ),
-        ),
       ],
     );
   }
