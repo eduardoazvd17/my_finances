@@ -107,9 +107,7 @@ class AuthController extends GetxController {
       }
     } on AppError catch (appError) {
       Get.close(1);
-      appError.showDialog().then((_) {
-        focusNode?.requestFocus();
-      });
+      appError.showDialog().then((_) => focusNode?.requestFocus());
     }
   }
 

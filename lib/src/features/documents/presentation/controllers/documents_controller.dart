@@ -126,16 +126,19 @@ class DocumentsController extends GetxController {
       _selectedDocumentType.value = value;
 
   Future<void> createNewDocument() async {
+    FocusNode? focusNode;
     try {
       LoadingWidget.dialog();
       final String name = nameController.text.trim();
       final DocumentType? type = selectedDocumentType;
 
       if (name.isEmpty) {
+        focusNode = nameFocus;
         throw AppError(message: 'document-name-validation'.i18n());
       }
 
       if (type == null) {
+        focusNode = typeFocus;
         throw AppError(message: 'document-type-validation'.i18n());
       }
 
@@ -150,7 +153,7 @@ class DocumentsController extends GetxController {
       Get.close(2);
     } on AppError catch (appError) {
       Get.close(1);
-      appError.showDialog();
+      appError.showDialog().then((_) => focusNode?.requestFocus());
     }
   }
 
