@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
+import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/views/new_item_bottom_sheet_modal.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
@@ -27,26 +29,49 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           ],
         ),
         floatingBottomMenu: _floatingBottomMenu(context),
-        body: Obx(
-          () => Column(
-            children: [
-              ...controller.groups.map((groupingModel) {
-                return GroupingWidget(
-                  groupingModel: groupingModel,
-                  documentType: controller.documentModel.type,
-                  items: controller.getItemsByGroup(groupingModel.id),
-                );
-              }),
-              ...controller.itemsWithoutGroup.map(
-                (itemModel) => ItemTileWidget(
-                  item: itemModel,
-                  documentType: controller.documentModel.type,
-                ),
-              ),
-            ],
+        body: Obx(() {
+          if (!controller.isLoading) {
+            return const Center(
+              child: LoadingWidget(removeLogo: true, text: ''),
+            );
+          } else if (controller.groups.isEmpty &&
+              controller.itemsWithoutGroup.isEmpty) {
+            return _emptyDataContent();
+          } else {
+            return _dataListContent();
+          }
+        }),
+      ),
+    );
+  }
+
+  Widget _emptyDataContent() {
+    return Center(
+      child: AdviseMessageWidget(
+        icon: Icons.info_outline,
+        message: 'editor-data-empty-title-text'.i18n(),
+        description: 'editor-data-empty-description-text'.i18n(),
+      ),
+    );
+  }
+
+  Widget _dataListContent() {
+    return Column(
+      children: [
+        ...controller.groups.map((groupingModel) {
+          return GroupingWidget(
+            groupingModel: groupingModel,
+            documentType: controller.documentModel.type,
+            items: controller.getItemsByGroup(groupingModel.id),
+          );
+        }),
+        ...controller.itemsWithoutGroup.map(
+          (itemModel) => ItemTileWidget(
+            item: itemModel,
+            documentType: controller.documentModel.type,
           ),
         ),
-      ),
+      ],
     );
   }
 

@@ -12,6 +12,7 @@ import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart
 import 'package:myfinances/src/features/documents/presentation/widgets/document_tile_widget.dart';
 
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
+import '../../../../core/presentation/widgets/loading_widget.dart';
 import '../controllers/documents_controller.dart';
 import '../views/documents_order_bottom_sheet_modal.dart';
 
@@ -34,7 +35,11 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         expandedContent: true,
         action: _orderDocumentsButton(context),
         content: Obx(() {
-          if (controller.userDocuments.isEmpty) {
+          if (controller.isLoading) {
+            return const Center(
+              child: LoadingWidget(removeLogo: true, text: ''),
+            );
+          } else if (controller.userDocuments.isEmpty) {
             return _emptyDocumentsContent();
           } else {
             return _documentsListWidget();
