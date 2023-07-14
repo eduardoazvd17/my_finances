@@ -67,6 +67,8 @@
     "order-document-button": "Order my documents",
     "new-group-button": "New group",
     "new-item-button": "New item",
+    "edit-group-button": "Edit selected group",
+    "edit-item-button": "Edit selected item",
     "document-info-button": "Document info",
     "delete-document-dialog-title": "Delete document",
     "rename-document-dialog-title": "Rename document",
