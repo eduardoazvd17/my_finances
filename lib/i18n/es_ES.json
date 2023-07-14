@@ -15,6 +15,8 @@
     "favorites-documents-text": "Favoritos",
     "all-documents-text": "Todos",
     "select-text": "Seleccionar...",
+    "editor-data-empty-title-text": "No se encontraron datos",
+    "editor-data-empty-description-text": "Este documento aún no tiene datos. Usa el menú flotante en la parte inferior de la aplicación para agregar agrupaciones y elementos.",
     "login-email-label": "Correo electrónico:",
     "login-email-hint": "Ingrese su correo electrónico aquí...",
     "login-password-label": "Contraseña:",

@@ -15,6 +15,8 @@
     "favorites-documents-text": "Favorites",
     "all-documents-text": "All",
     "select-text": "Select...",
+    "editor-data-empty-title-text": "No data found",
+    "editor-data-empty-description-text": "This document has no data yet. Use the floating menu at the bottom of the app to add groupings and items.",
     "login-email-label": "Email:",
     "login-email-hint": "Enter your email here...",
     "login-password-label": "Password:",
