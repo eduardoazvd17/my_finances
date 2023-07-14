@@ -14,6 +14,7 @@
     "delete-document-confirmation-text": "¿Realmente desea eliminar este documento?",
     "favorites-documents-text": "Favoritos",
     "all-documents-text": "Todos",
+    "select-text": "Seleccionar...",
     "login-email-label": "Correo electrónico:",
     "login-email-hint": "Ingrese su correo electrónico aquí...",
     "login-password-label": "Contraseña:",
@@ -68,7 +69,7 @@
     "document-type-title-1": "Control de inversiones",
     "document-type-description-1": "Este tipo de documento es ideal para realizar un seguimiento de sus inversiones en acciones, FII y otros activos. Con esta característica, podrá registrar sus compras y ventas de activos.",
     "document-type-title-2": "Anotación",
-    "document-type-description-2": "Este tipo de documento funciona como un bloc de notas donde puedes registrar diferentes tipos de información importante. Usa esta funcionalidad para crear listas de compras, notas rápidas, tareas pendientes o cualquier tipo de nota que quieras .",
+    "document-type-description-2": "Este tipo de documento funciona como un bloc de notas donde puedes registrar diferentes tipos de información importante. Usa esta funcionalidad para crear listas de compras, notas rápidas, tareas pendientes o cualquier tipo de nota que quieras.",
     "document-type-title-3": "Administración de millas y puntos de aerolíneas",
     "document-type-description-3": "Este tipo de documento es perfecto para rastrear y optimizar el uso de puntos y millas aéreas en programas de fidelización.",
     "app-language-null": "Sistema",
@@ -92,6 +93,7 @@
     "register-name-validation": "Ingrese un nombre válido.",
     "register-email-validation": "Ingrese una dirección de correo electrónico válida.",
     "register-password-validation": "Por favor ingrese una contraseña válida de 8 o más caracteres.",
-    "register-password2-validation": "La confirmación de la contraseña debe coincidir con la contraseña ingresada anteriormente",
-    "document-name-validation": "Ingrese un nombre válido para su documento"
+    "register-password2-validation": "La confirmación de la contraseña debe coincidir con la contraseña ingresada anteriormente.",
+    "document-name-validation": "Ingrese un nombre válido para su documento.",
+    "document-type-validation": "Seleccione un tipo de documento para continuar."
 }

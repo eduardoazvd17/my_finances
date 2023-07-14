@@ -113,27 +113,30 @@ class DocumentsController extends GetxController {
 
   void goToAddDocumentPage() {
     nameController.clear();
-    _selectedDocumentType.value = DocumentType.values.first;
+    _selectedDocumentType.value = null;
     AppRoutes.goToAddDocumentPage();
   }
 
   final TextEditingController nameController = TextEditingController();
   final FocusNode nameFocus = FocusNode();
   final FocusNode typeFocus = FocusNode();
-  final Rx<DocumentType> _selectedDocumentType =
-      Rx<DocumentType>(DocumentType.values.first);
-  DocumentType get selectedDocumentType => _selectedDocumentType.value;
-  set selectedDocumentType(DocumentType value) =>
+  final Rx<DocumentType?> _selectedDocumentType = Rx<DocumentType?>(null);
+  DocumentType? get selectedDocumentType => _selectedDocumentType.value;
+  set selectedDocumentType(DocumentType? value) =>
       _selectedDocumentType.value = value;
 
   Future<void> createNewDocument() async {
     try {
       LoadingWidget.dialog();
       final String name = nameController.text.trim();
-      final DocumentType type = selectedDocumentType;
+      final DocumentType? type = selectedDocumentType;
 
       if (name.isEmpty) {
         throw AppError(message: 'document-name-validation'.i18n());
+      }
+
+      if (type == null) {
+        throw AppError(message: 'document-type-validation'.i18n());
       }
 
       final DocumentModel documentModel = await _documentsService.newDocument(

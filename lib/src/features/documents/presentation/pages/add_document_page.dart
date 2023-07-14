@@ -45,9 +45,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                       focusNode: controller.typeFocus,
                       value: controller.selectedDocumentType,
                       onChanged: (value) {
-                        if (value != null) {
-                          controller.selectedDocumentType = value;
-                        }
+                        controller.selectedDocumentType = value;
                       },
                       items: [
                         DropdownMenuItem(
@@ -100,13 +98,13 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                 ],
               ),
             ),
-            Obx(
-              () => Text(
-                controller.selectedDocumentType.description,
+            Obx(() {
+              return Text(
+                controller.selectedDocumentType?.description ?? '',
                 textAlign: TextAlign.justify,
                 style: TextStyle(color: Colors.grey[600]),
-              ),
-            ),
+              );
+            }),
             Padding(
               padding: const EdgeInsets.only(
                 top: 16,

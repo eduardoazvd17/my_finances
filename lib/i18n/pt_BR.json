@@ -14,6 +14,7 @@
     "delete-document-confirmation-text": "Deseja realmente deletar este documento?",
     "favorites-documents-text": "Favoritos",
     "all-documents-text": "Todos",
+    "select-text": "Selecione...",
     "login-email-label": "E-mail:",
     "login-email-hint": "Digite seu e-mail aqui...",
     "login-password-label": "Senha:",
@@ -93,5 +94,6 @@
     "register-email-validation": "Insira um endereço de e-mail válido.",
     "register-password-validation": "Insira uma senha válida com 8 ou mais caracteres.",
     "register-password2-validation": "A confirmação de senha deve ser igual a senha inserida anteriormente.",
-    "document-name-validation": "Insira um nome válido para o seu documento."
+    "document-name-validation": "Insira um nome válido para o seu documento.",
+    "document-type-validation": "Selecione um tipo de documento para continuar."
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 class DropDownButtonWidget<T> extends StatelessWidget {
   final T value;
@@ -9,6 +10,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
   final double? itemHeight;
   final FocusNode? focusNode;
   final bool isExpanded;
+  final String? hintText;
   const DropDownButtonWidget({
     super.key,
     required this.value,
@@ -18,6 +20,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
     this.isExpanded = false,
     this.itemHeight,
     this.focusNode,
+    this.hintText,
   });
 
   @override
@@ -40,6 +43,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
       value: value,
       items: items,
       onChanged: onChanged,
+      hint: Text(hintText ?? 'select-text'.i18n()),
     );
   }
 }
