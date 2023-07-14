@@ -17,8 +17,8 @@ class AppError implements Exception {
         title: 'error-text'.i18n(),
         content: message,
       ),
-      barrierColor: Colors.black87,
       name: 'error',
+      barrierColor: Colors.black87,
     );
   }
 

@@ -9,12 +9,16 @@ class DocumentEditorBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => DocumentEditorController(
-        documentModel: Get.arguments as DocumentModel,
-        documentEditorService: DocumentEditorService(
-          database: Get.find<DatabaseModel>(),
-        ),
-      ),
+      () {
+        final documentModel = Get.arguments as DocumentModel;
+        return DocumentEditorController(
+          documentModel: documentModel,
+          documentEditorService: DocumentEditorService(
+            documentModel: documentModel,
+            database: Get.find<DatabaseModel>(),
+          ),
+        );
+      },
     );
   }
 }

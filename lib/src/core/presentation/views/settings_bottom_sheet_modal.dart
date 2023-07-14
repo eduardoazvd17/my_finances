@@ -172,6 +172,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
             onConfirm: controller.logout,
           ),
           name: 'logout',
+          barrierColor: Colors.black87,
         );
       },
       trailing: const Icon(Icons.exit_to_app),

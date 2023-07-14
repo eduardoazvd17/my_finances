@@ -7,13 +7,15 @@ import '../enums/document_type.dart';
 import '../models/document_model.dart';
 
 class DocumentEditorService {
+  final DocumentModel documentModel;
   final DatabaseModel _database;
 
   DocumentEditorService({
+    required this.documentModel,
     required DatabaseModel database,
   }) : _database = database;
 
-  Future<List<GroupingModel>> loadGroups(DocumentModel documentModel) async {
+  Future<List<GroupingModel>> loadGroups() async {
     try {
       final query =
           await _database.documentGroupsCollection(documentModel.id).get();
@@ -28,7 +30,7 @@ class DocumentEditorService {
     }
   }
 
-  Future<List<ItemModel>> loadItems(DocumentModel documentModel) async {
+  Future<List<ItemModel>> loadItems() async {
     try {
       final query =
           await _database.documentItemsCollection(documentModel.id).get();

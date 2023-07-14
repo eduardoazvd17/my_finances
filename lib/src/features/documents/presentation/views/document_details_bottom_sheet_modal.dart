@@ -140,6 +140,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                 ),
                 name: 'renameDocument',
                 barrierDismissible: false,
+                barrierColor: Colors.black87,
               );
             },
           ),
@@ -168,6 +169,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                   },
                 ),
                 name: 'deleteDocument',
+                barrierColor: Colors.black87,
               );
             },
           ),

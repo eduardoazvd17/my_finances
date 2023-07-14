@@ -26,9 +26,9 @@ class LoadingWidget extends StatelessWidget {
           ),
         ),
       ),
-      barrierColor: Colors.black87,
-      barrierDismissible: false,
       name: 'loading',
+      barrierDismissible: false,
+      barrierColor: Colors.black87,
     );
   }
 

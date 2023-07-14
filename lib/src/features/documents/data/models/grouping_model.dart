@@ -16,6 +16,18 @@ class GroupingModel extends Equatable {
 
   String get id => title.toLowerCase().trim().replaceAll(' ', '_');
 
+  GroupingModel copyWith({
+    String? title,
+    bool? initializeExpanded,
+    DateTime? creationDate,
+  }) {
+    return GroupingModel(
+      title: title ?? this.title,
+      initializeExpanded: initializeExpanded ?? this.initializeExpanded,
+      creationDate: creationDate ?? this.creationDate,
+    );
+  }
+
   GroupingWidgetController getController() {
     if (Get.isRegistered<GroupingWidgetController>(tag: id)) {
       return Get.find<GroupingWidgetController>(tag: id);
