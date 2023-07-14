@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -43,8 +44,8 @@ class _AddOrEditGroupBottomSheetModalState
   @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
-      icon: Icons.post_add_rounded,
-      title: 'new-group-button'.i18n(),
+      icon: isEditing ? CupertinoIcons.pencil : Icons.post_add_rounded,
+      title: isEditing ? 'edit-group-button'.i18n() : 'new-group-button'.i18n(),
       child: Column(
         children: [
           Padding(
