@@ -14,31 +14,34 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWidget(
-      appBar: AppBar(
-        title: Text(controller.documentModel.name),
-        leading: _closeButton(context),
-        actions: [
-          _documentInfoMenuButton(context),
-        ],
-      ),
-      floatingBottomMenu: _floatingBottomMenu(context),
-      body: Column(
-        children: [
-          ...controller.groups.map((groupingModel) {
-            return GroupingWidget(
-              groupingModel: groupingModel,
-              documentType: controller.documentModel.type,
-              items: controller.getItemsByGroup(groupingModel.id),
-            );
-          }),
-          ...controller.itemsWithoutGroup.map(
-            (itemModel) => ItemTileWidget(
-              item: itemModel,
-              documentType: controller.documentModel.type,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: ScaffoldWidget(
+        appBar: AppBar(
+          title: Text(controller.documentModel.name),
+          leading: _closeButton(context),
+          actions: [
+            _documentInfoMenuButton(context),
+          ],
+        ),
+        floatingBottomMenu: _floatingBottomMenu(context),
+        body: Column(
+          children: [
+            ...controller.groups.map((groupingModel) {
+              return GroupingWidget(
+                groupingModel: groupingModel,
+                documentType: controller.documentModel.type,
+                items: controller.getItemsByGroup(groupingModel.id),
+              );
+            }),
+            ...controller.itemsWithoutGroup.map(
+              (itemModel) => ItemTileWidget(
+                item: itemModel,
+                documentType: controller.documentModel.type,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
