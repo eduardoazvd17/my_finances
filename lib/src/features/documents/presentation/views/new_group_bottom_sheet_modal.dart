@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widget.dart';
 
+import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../controllers/document_editor_controller.dart';
 
 class NewGroupBottomSheetModal extends GetWidget<DocumentEditorController> {
@@ -18,7 +19,14 @@ class NewGroupBottomSheetModal extends GetWidget<DocumentEditorController> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              children: [],
+              children: [
+                TextFieldWidget(
+                  label: 'group-name-label'.i18n(),
+                  hint: 'group-name-hint'.i18n(),
+                  controller: TextEditingController(),
+                  focusNode: FocusNode(),
+                ),
+              ],
             ),
           ),
         ],

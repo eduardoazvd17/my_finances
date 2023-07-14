@@ -94,6 +94,7 @@ class DocumentTileWidget extends StatelessWidget {
       context: context,
       barrierColor: Colors.black87,
       isScrollControlled: true,
+      useSafeArea: true,
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(

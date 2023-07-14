@@ -56,6 +56,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           context: context,
           barrierColor: Colors.black87,
           isScrollControlled: true,
+          useSafeArea: true,
           builder: (context) {
             return DocumentDetailsBottomSheetModalWidget(
               documentModel: controller.documentModel,
@@ -98,6 +99,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               context: context,
               barrierColor: Colors.black87,
               isScrollControlled: true,
+              useSafeArea: true,
               builder: (context) {
                 return const NewGroupBottomSheetModal();
               },
@@ -113,6 +115,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               context: context,
               barrierColor: Colors.black87,
               isScrollControlled: true,
+              useSafeArea: true,
               builder: (context) {
                 return const NewItemBottomSheetModal();
               },
@@ -128,6 +131,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               context: context,
               barrierColor: Colors.black87,
               isScrollControlled: true,
+              useSafeArea: true,
               builder: (context) {
                 return DocumentDetailsBottomSheetModalWidget(
                   documentModel: controller.documentModel,

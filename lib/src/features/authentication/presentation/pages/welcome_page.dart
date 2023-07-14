@@ -134,6 +134,7 @@ class WelcomePage extends GetWidget<AuthController> {
       onPressed: () => showModalBottomSheet(
         context: context,
         barrierColor: Colors.black87,
+        useSafeArea: true,
         builder: (_) => const SettingsBottomSheetModal(),
       ),
     );
