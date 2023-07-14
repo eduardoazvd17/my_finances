@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 import 'package:myfinances/src/features/documents/data/services/document_editor_service.dart';
@@ -29,20 +31,14 @@ class DocumentEditorController extends GetxController {
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
   List<GroupingModel> get groups => _groups.toList();
-  void sortGroups() {
-    _groups.sort((a, b) => a.title.compareTo(b.title));
-  }
+  void sortGroups() => _groups.sort((a, b) => a.name.compareTo(b.name));
 
   final RxList<ItemModel> _items = RxList<ItemModel>([]);
   List<ItemModel> get itemsWithoutGroup =>
       _items.where((item) => item.groupingId == null).toList();
-  List<ItemModel> getItemsByGroup(String groupingId) {
-    return _items.where((item) => item.groupingId == groupingId).toList();
-  }
-
-  void sortItems() {
-    _items.sort((a, b) => a.title.compareTo(b.title));
-  }
+  List<ItemModel> getItemsByGroup(String groupingId) =>
+      _items.where((item) => item.groupingId == groupingId).toList();
+  void sortItems() => _items.sort((a, b) => a.name.compareTo(b.name));
 
   Future<void> _loadGroupsAndItems() async {
     _isLoading.value = true;
@@ -61,5 +57,43 @@ class DocumentEditorController extends GetxController {
       appError.showDialog();
     }
     _isLoading.value = false;
+  }
+
+  Future<bool> addOrEditGrouping({
+    required GroupingModel? groupingModel,
+    required String newName,
+    required bool newInitializeExpanded,
+  }) async {
+    try {
+      LoadingWidget.dialog();
+
+      if (newName.isEmpty) {
+        throw AppError(message: 'group-name-validation'.i18n());
+      }
+
+      final GroupingModel newGroupingModel;
+      if (groupingModel == null) {
+        newGroupingModel = await _documentEditorService.addGrouping(
+          name: newName,
+          initializeExpanded: newInitializeExpanded,
+        );
+      } else {
+        newGroupingModel = await _documentEditorService.editGrouping(
+          groupingModel: groupingModel,
+          newName: newName,
+          newInitializeExpanded: newInitializeExpanded,
+        );
+      }
+
+      _groups.remove(groupingModel);
+      _groups.add(newGroupingModel);
+      sortGroups();
+      Get.close(1);
+      return true;
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+      return false;
+    }
   }
 }

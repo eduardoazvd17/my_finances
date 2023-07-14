@@ -101,7 +101,9 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               isScrollControlled: true,
               useSafeArea: true,
               builder: (context) {
-                return const NewGroupBottomSheetModal();
+                return NewGroupBottomSheetModal(
+                  controller: controller,
+                );
               },
             );
           },

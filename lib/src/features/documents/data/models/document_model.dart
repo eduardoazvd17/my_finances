@@ -22,7 +22,6 @@ class DocumentModel extends Equatable {
   DocumentModel copyWith({
     String? id,
     String? name,
-    DateTime? lastEditDate,
     bool? isFavorite,
   }) {
     return DocumentModel(

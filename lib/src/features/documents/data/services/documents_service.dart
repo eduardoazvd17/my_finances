@@ -61,37 +61,21 @@ class DocumentsService {
     String? newName,
     bool? newIsFavorite,
   }) async {
-    try {
-      final DocumentModel? newDocumentModel;
-      if (newName != null &&
-          newIsFavorite != null &&
-          newName != documentModel.name &&
-          newIsFavorite != documentModel.isFavorite) {
-        newDocumentModel = documentModel.copyWith(
-          name: newName,
-          isFavorite: newIsFavorite,
-          lastEditDate: DateTime.now(),
-        );
-      } else if (newName != null && newName != documentModel.name) {
-        newDocumentModel = documentModel.copyWith(
-          name: newName,
-          lastEditDate: DateTime.now(),
-        );
-      } else if (newIsFavorite != null &&
-          newIsFavorite != documentModel.isFavorite) {
-        newDocumentModel = documentModel.copyWith(
-          isFavorite: newIsFavorite,
-        );
-      } else {
-        newDocumentModel = null;
-      }
+    if (newName != null && newIsFavorite != null ||
+        newName == documentModel.name &&
+            newIsFavorite == documentModel.isFavorite) {
+      return documentModel;
+    }
 
-      if (newDocumentModel != null) {
-        await _database.documentsCollection
-            .doc(newDocumentModel.id)
-            .set(newDocumentModel.toMap());
-      }
-      return newDocumentModel ?? documentModel;
+    try {
+      final DocumentModel newDocumentModel = documentModel.copyWith(
+        name: newName ?? documentModel.name,
+        isFavorite: newIsFavorite ?? documentModel.isFavorite,
+      );
+      await _database.documentsCollection
+          .doc(newDocumentModel.id)
+          .set(newDocumentModel.toMap());
+      return newDocumentModel;
     } on AppError catch (_) {
       rethrow;
     } catch (_) {

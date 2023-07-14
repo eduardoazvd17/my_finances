@@ -4,25 +4,26 @@ import 'package:get/get.dart';
 import '../../presentation/widgets/grouping_widget.dart';
 
 class GroupingModel extends Equatable {
-  final String title;
+  final String id;
+  final String name;
   final bool initializeExpanded;
   final DateTime creationDate;
 
   const GroupingModel({
-    required this.title,
+    required this.id,
+    required this.name,
     required this.initializeExpanded,
     required this.creationDate,
   });
 
-  String get id => title.toLowerCase().trim().replaceAll(' ', '_');
-
   GroupingModel copyWith({
-    String? title,
+    String? name,
     bool? initializeExpanded,
     DateTime? creationDate,
   }) {
     return GroupingModel(
-      title: title ?? this.title,
+      id: id,
+      name: name ?? this.name,
       initializeExpanded: initializeExpanded ?? this.initializeExpanded,
       creationDate: creationDate ?? this.creationDate,
     );
@@ -42,7 +43,7 @@ class GroupingModel extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'title': title,
+      'name': name,
       'initializeExpanded': initializeExpanded,
       'creationDate': creationDate.millisecondsSinceEpoch,
     };
@@ -50,7 +51,8 @@ class GroupingModel extends Equatable {
 
   factory GroupingModel.fromMap(Map<String, dynamic> map) {
     return GroupingModel(
-      title: map['title'],
+      id: map['id'],
+      name: map['name'],
       initializeExpanded: map['initializeExpanded'],
       creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
     );

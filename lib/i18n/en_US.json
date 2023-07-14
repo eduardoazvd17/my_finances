@@ -38,6 +38,11 @@
     "rename-document-hint": "Enter a new name...",
     "by-label": "By:",
     "list-order-label": "Order:",
+    "group-name-label": "Group name:",
+    "group-name-hint": "Give the group a name...",
+    "group-rename-label": "New group name:",
+    "group-rename-hint": "Enter a new name...",
+    "start-expanded-button": "Start expanded grouping",
     "make-login-button": "Login",
     "make-register-button": "Register",
     "login-button": "Login with your account",
@@ -93,5 +98,6 @@
     "register-password-validation": "Please enter a valid password of 8 or more characters.",
     "register-password2-validation": "The password confirmation must match the previously entered password.",
     "document-name-validation": "Please enter a valid name for your document.",
-    "document-type-validation": "Please select a document type to continue."
+    "document-type-validation": "Please select a document type to continue.",
+    "group-name-validation": "Please enter a valid group name."
 }

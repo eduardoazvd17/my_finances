@@ -43,7 +43,7 @@ class ItemTileWidget extends StatelessWidget {
 
   Widget _annotationItemTile(BuildContext context) {
     final AnnotationItemModel item = this.item as AnnotationItemModel;
-    return Text(item.title);
+    return Text(item.name);
   }
 
   Widget _pointsAndAirlineMilesItemTile(BuildContext context) {

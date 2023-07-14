@@ -57,7 +57,7 @@ class GroupingWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(groupingModel.title),
+                        Text(groupingModel.name),
                       ],
                     ),
                   ),

@@ -1,11 +1,11 @@
 class ItemModel {
-  final String title;
+  final String name;
   final String? groupingId;
-  ItemModel({required this.title, required this.groupingId});
+  ItemModel({required this.name, required this.groupingId});
 
   Map<String, dynamic> toMap() {
     return {
-      'title': title,
+      'name': name,
       'groupingId': groupingId,
     };
   }
@@ -18,7 +18,7 @@ class AnnotationItemModel extends ItemModel {
   final double? price;
 
   AnnotationItemModel({
-    required super.title,
+    required super.name,
     super.groupingId,
     this.quantity,
     this.price,
@@ -35,7 +35,7 @@ class AnnotationItemModel extends ItemModel {
 
   factory AnnotationItemModel.fromMap(Map<String, dynamic> map) {
     return AnnotationItemModel(
-      title: map['title'],
+      name: map['name'],
       groupingId: map['groupingId'],
       quantity: map['quantity'],
       price: double.tryParse(map['price']),
@@ -45,21 +45,21 @@ class AnnotationItemModel extends ItemModel {
 
 // class InvestimentControlItemModel extends ItemModel {
 //   InvestimentControlItemModel({
-//     required super.title,
+//     required super.name,
 //     super.groupingId,
 //   });
 // }
 
 // class PointsAndAirlineMilesItemModel extends ItemModel {
 //   PointsAndAirlineMilesItemModel({
-//     required super.title,
+//     required super.name,
 //     super.groupingId,
 //   });
 // }
 
 // class MonthlyExpenseControlItemModel extends ItemModel {
 //   MonthlyExpenseControlItemModel({
-//     required super.title,
+//     required super.name,
 //     super.groupingId,
 //   });
 // }

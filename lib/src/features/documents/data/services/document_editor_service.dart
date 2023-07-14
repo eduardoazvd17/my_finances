@@ -50,4 +50,54 @@ class DocumentEditorService {
       throw AppError.generic();
     }
   }
+
+  Future<GroupingModel> addGrouping({
+    required String name,
+    required bool initializeExpanded,
+  }) async {
+    try {
+      final docRef = _database.documentGroupsCollection(documentModel.id).doc();
+      final GroupingModel groupingModel = GroupingModel(
+        id: docRef.id,
+        name: name,
+        initializeExpanded: initializeExpanded,
+        creationDate: DateTime.now(),
+      );
+      await docRef.set(groupingModel.toMap());
+      return groupingModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<GroupingModel> editGrouping({
+    required GroupingModel groupingModel,
+    String? newName,
+    bool? newInitializeExpanded,
+  }) async {
+    if (newName == null && newInitializeExpanded == null ||
+        groupingModel.name == newName &&
+            groupingModel.initializeExpanded == newInitializeExpanded) {
+      return groupingModel;
+    }
+
+    try {
+      final GroupingModel newGroupingModel = groupingModel.copyWith(
+        name: newName ?? groupingModel.name,
+        initializeExpanded:
+            newInitializeExpanded ?? groupingModel.initializeExpanded,
+      );
+      await _database
+          .documentGroupsCollection(documentModel.id)
+          .doc(newGroupingModel.id)
+          .set(newGroupingModel.toMap());
+      return newGroupingModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
 }

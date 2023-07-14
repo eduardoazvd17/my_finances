@@ -38,6 +38,11 @@
     "rename-document-hint": "Ingresa un nuevo nombre...",
     "by-label": "Por:",
     "list-order-label": "Ordem:",
+    "group-name-label": "Nombre del agrupamiento:",
+    "group-name-hint": "Dale un nombre al agrupamiento...",
+    "group-rename-label": "Nuevo nombre de agrupamiento:",
+    "group-rename-hint": "Ingresa un nuevo nombre...",
+    "start-expanded-button": "Iniciar agrupamiento expandido",
     "make-login-button": "Iniciar sesión",
     "make-register-button": "Registrarse",
     "login-button": "Inicia sesión con tu cuenta",
@@ -93,5 +98,6 @@
     "register-password-validation": "Por favor ingrese una contraseña válida de 8 o más caracteres.",
     "register-password2-validation": "La confirmación de la contraseña debe coincidir con la contraseña ingresada anteriormente.",
     "document-name-validation": "Ingrese un nombre válido para su documento.",
-    "document-type-validation": "Seleccione un tipo de documento para continuar."
+    "document-type-validation": "Seleccione un tipo de documento para continuar.",
+    "group-name-validation": "Ingrese un nombre de agrupamiento válido."
 }
