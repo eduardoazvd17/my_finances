@@ -92,6 +92,7 @@ class DocumentTileWidget extends StatelessWidget {
   void _openMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      barrierColor: Colors.black87,
       isScrollControlled: true,
       builder: (context) {
         return Padding(

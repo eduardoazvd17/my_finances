@@ -132,6 +132,7 @@ class WelcomePage extends GetWidget<AuthController> {
       icon: const Icon(CupertinoIcons.settings),
       onPressed: () => showModalBottomSheet(
         context: context,
+        barrierColor: Colors.black87,
         builder: (_) => const SettingsBottomSheetModal(),
       ),
     );

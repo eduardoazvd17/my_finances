@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
+import 'package:myfinances/src/features/documents/presentation/views/new_item_bottom_sheet_modal.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/item_tile_widget.dart';
 
 import '../views/document_details_bottom_sheet_modal.dart';
+import '../views/new_group_bottom_sheet_modal.dart';
 
 class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   const DocumentEditorPage({super.key});
@@ -52,6 +54,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       onPressed: () {
         showModalBottomSheet(
           context: context,
+          barrierColor: Colors.black87,
           isScrollControlled: true,
           builder: (context) {
             return DocumentDetailsBottomSheetModalWidget(
@@ -90,13 +93,31 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           icon: Icons.post_add_rounded,
           tooltip: 'new-group-button'.i18n(),
           showTooltip: true,
-          onTap: () {},
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              barrierColor: Colors.black87,
+              isScrollControlled: true,
+              builder: (context) {
+                return const NewGroupBottomSheetModal();
+              },
+            );
+          },
         ),
         FloatingBottomMenuItem(
           icon: Icons.format_list_bulleted_add,
           tooltip: 'new-item-button'.i18n(),
           showTooltip: true,
-          onTap: () {},
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              barrierColor: Colors.black87,
+              isScrollControlled: true,
+              builder: (context) {
+                return const NewItemBottomSheetModal();
+              },
+            );
+          },
         ),
         FloatingBottomMenuItem(
           icon: Icons.info_outline,
@@ -105,6 +126,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           onTap: () {
             showModalBottomSheet(
               context: context,
+              barrierColor: Colors.black87,
               isScrollControlled: true,
               builder: (context) {
                 return DocumentDetailsBottomSheetModalWidget(
