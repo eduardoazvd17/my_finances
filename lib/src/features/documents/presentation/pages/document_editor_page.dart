@@ -11,7 +11,7 @@ import 'package:myfinances/src/features/documents/presentation/controllers/docum
 import 'package:myfinances/src/features/documents/presentation/widgets/item_tile_widget.dart';
 
 import '../views/document_details_bottom_sheet_modal.dart';
-import '../views/new_group_bottom_sheet_modal.dart';
+import '../views/add_or_edit_group_bottom_sheet_modal.dart';
 
 class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   const DocumentEditorPage({super.key});
@@ -30,7 +30,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         ),
         floatingBottomMenu: _floatingBottomMenu(context),
         body: Obx(() {
-          if (!controller.isLoading) {
+          if (controller.isLoading) {
             return const Center(
               child: LoadingWidget(removeLogo: true, text: ''),
             );
@@ -128,7 +128,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               isScrollControlled: true,
               useSafeArea: true,
               builder: (context) {
-                return NewGroupBottomSheetModal(
+                return AddOrEditGroupBottomSheetModal(
                   controller: controller,
                 );
               },

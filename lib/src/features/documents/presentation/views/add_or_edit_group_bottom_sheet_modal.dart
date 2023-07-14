@@ -8,22 +8,23 @@ import 'package:myfinances/src/features/documents/data/models/grouping_model.dar
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../controllers/document_editor_controller.dart';
 
-class NewGroupBottomSheetModal extends StatefulWidget {
+class AddOrEditGroupBottomSheetModal extends StatefulWidget {
   final GroupingModel? groupingModel;
   final DocumentEditorController controller;
 
-  const NewGroupBottomSheetModal({
+  const AddOrEditGroupBottomSheetModal({
     super.key,
     this.groupingModel,
     required this.controller,
   });
 
   @override
-  State<NewGroupBottomSheetModal> createState() =>
-      _NewGroupBottomSheetModalState();
+  State<AddOrEditGroupBottomSheetModal> createState() =>
+      _AddOrEditGroupBottomSheetModalState();
 }
 
-class _NewGroupBottomSheetModalState extends State<NewGroupBottomSheetModal> {
+class _AddOrEditGroupBottomSheetModalState
+    extends State<AddOrEditGroupBottomSheetModal> {
   late final TextEditingController _nameController;
   final FocusNode _nameFocus = FocusNode();
   late bool _initializeExpanded;
