@@ -113,6 +113,7 @@ class WelcomePage extends GetWidget<AuthController> {
                         title: 'logout-button'.i18n(),
                         content: 'logout-confirmation-text'.i18n(),
                         onConfirm: controller.cancelAutoLogin,
+                        invertButtonColor: true,
                       ),
                       name: 'logout',
                       barrierColor: Colors.black87,

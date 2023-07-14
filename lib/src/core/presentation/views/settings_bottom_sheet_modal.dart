@@ -170,6 +170,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
             title: 'logout-button'.i18n(),
             content: 'logout-confirmation-text'.i18n(),
             onConfirm: controller.logout,
+            invertButtonColor: true,
           ),
           name: 'logout',
           barrierColor: Colors.black87,

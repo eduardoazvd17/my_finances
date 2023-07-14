@@ -163,6 +163,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                 CustomDialog(
                   title: 'delete-document-dialog-title'.i18n(),
                   content: 'delete-document-confirmation-text'.i18n(),
+                  invertButtonColor: true,
                   onConfirm: () async {
                     Get.close(1);
                     widget.onDelete?.call(widget.documentModel);

@@ -13,6 +13,7 @@ class CustomDialog extends StatelessWidget {
   final String? closeButtonText;
   final void Function()? onClose;
   final bool autoClose;
+  final bool invertButtonColor;
 
   const CustomDialog({
     super.key,
@@ -26,6 +27,7 @@ class CustomDialog extends StatelessWidget {
     this.closeButtonText,
     this.onClose,
     this.autoClose = true,
+    this.invertButtonColor = false,
   });
 
   @override
@@ -94,7 +96,9 @@ class CustomDialog extends StatelessWidget {
                       child: Container(
                         height: 40,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
+                          color: invertButtonColor
+                              ? Colors.red[300]
+                              : Theme.of(context).primaryColor.withAlpha(180),
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(20),
                           ),
@@ -132,7 +136,9 @@ class CustomDialog extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: onConfirm == null
                             ? Theme.of(context).primaryColor.withAlpha(180)
-                            : Colors.red[300],
+                            : invertButtonColor
+                                ? Theme.of(context).primaryColor.withAlpha(180)
+                                : Colors.red[300],
                         borderRadius: BorderRadius.only(
                           bottomLeft: onConfirm == null
                               ? const Radius.circular(20)
