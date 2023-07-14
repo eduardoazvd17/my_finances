@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:get/get.dart';
-import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/bindings/app_binding.dart';
 import 'package:myfinances/src/core/data/enums/app_theme.dart';
 import 'package:myfinances/src/core/data/models/database_model.dart';
@@ -55,7 +54,8 @@ class MyFinancesApp extends GetWidget<I18nController> {
               () => GetMaterialApp(
                 builder: (_, child) => LifeCycleHandler(child: child!),
                 debugShowCheckedModeBanner: false,
-                title: 'app-name'.i18n(),
+                title: controller.appName,
+                onGenerateTitle: (_) => controller.appName,
                 locale: controller.selectedLocale,
                 localizationsDelegates: controller.localizationsDelegates,
                 supportedLocales: controller.supportedLocales,

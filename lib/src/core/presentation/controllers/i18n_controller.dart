@@ -17,6 +17,16 @@ class I18nController extends GetxController {
     super.onInit();
   }
 
+  String get appName {
+    if (selectedLocale?.languageCode == 'pt') {
+      return "Minhas Finanças";
+    } else if (selectedLocale?.languageCode == 'es') {
+      return "Mis Finanzas";
+    } else {
+      return "My Finances";
+    }
+  }
+
   Iterable<Locale> get supportedLocales =>
       AppLanguage.values.map((e) => e.locale);
 
