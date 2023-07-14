@@ -52,6 +52,8 @@ class _DocumentDetailsBottomSheetModalWidgetState
               const Divider(),
             ],
             if (widget.onDelete != null) _deleteButton(context),
+            if (widget.onDelete == null && widget.onEdit == null)
+              const SizedBox(height: 50),
           ],
         ),
       ),
