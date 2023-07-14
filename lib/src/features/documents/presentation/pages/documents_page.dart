@@ -131,7 +131,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
 
   Widget _addDocumentFloatingButton(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Material(
         elevation: 8,
         borderRadius: BorderRadius.circular(15),
