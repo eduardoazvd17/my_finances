@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -10,6 +11,7 @@ import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/item_tile_widget.dart';
 
+import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 import '../views/add_or_edit_group_bottom_sheet_modal.dart';
 
@@ -177,50 +179,33 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   builder: (context) {
                     return AddOrEditGroupBottomSheetModal(
                       controller: controller,
-                      groupingModel: controller.selectedGroup,
+                      groupingModel: controller.selectedGroup!,
                     );
                   },
                 );
               },
             ),
             FloatingBottomMenuItem(
-              icon: Icons.close,
+              icon: CupertinoIcons.delete,
               tooltip: 'delete-group-button'.i18n(),
+              foregroundColor: Colors.red,
               showTooltip: true,
               onTap: () {
-                showModalBottomSheet(
-                  context: context,
+                Get.dialog(
+                  CustomDialog(
+                    title: 'delete-group-button'.i18n(),
+                    content: 'delete-group-confirmation-text'.i18n(),
+                    invertButtonColor: true,
+                    onConfirm: () async {
+                      Get.close(1);
+                      controller.deleteGroup(controller.selectedGroup!);
+                    },
+                  ),
                   barrierColor: Colors.black87,
-                  isScrollControlled: true,
-                  useSafeArea: true,
-                  builder: (context) {
-                    return AddOrEditGroupBottomSheetModal(
-                      controller: controller,
-                      groupingModel: controller.selectedGroup,
-                    );
-                  },
                 );
               },
             ),
           ],
-          FloatingBottomMenuItem(
-            icon: Icons.info_outline,
-            tooltip: 'document-info-button'.i18n(),
-            showTooltip: true,
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                barrierColor: Colors.black87,
-                isScrollControlled: true,
-                useSafeArea: true,
-                builder: (context) {
-                  return DocumentDetailsBottomSheetModalWidget(
-                    documentModel: controller.documentModel,
-                  );
-                },
-              );
-            },
-          ),
         ],
       ),
     );

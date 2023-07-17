@@ -100,4 +100,17 @@ class DocumentEditorService {
       throw AppError.generic();
     }
   }
+
+  Future<void> deleteGroup(GroupingModel groupingModel) async {
+    try {
+      await _database
+          .documentGroupsCollection(documentModel.id)
+          .doc(groupingModel.id)
+          .delete();
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
 }

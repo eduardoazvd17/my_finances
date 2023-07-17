@@ -17,6 +17,7 @@
     "select-text": "Select...",
     "editor-data-empty-title-text": "No data found",
     "editor-data-empty-description-text": "This document has no data yet. Use the floating menu at the bottom of the app to add groupings and items.",
+    "delete-group-confirmation-text": "Do you really want to delete this grouping?",
     "login-email-label": "Email:",
     "login-email-hint": "Enter your email here...",
     "login-password-label": "Password:",

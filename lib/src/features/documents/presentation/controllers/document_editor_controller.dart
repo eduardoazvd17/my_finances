@@ -100,4 +100,17 @@ class DocumentEditorController extends GetxController {
   final Rx<GroupingModel?> _selectedGroup = Rx<GroupingModel?>(null);
   GroupingModel? get selectedGroup => _selectedGroup.value;
   set selectedGroup(GroupingModel? value) => _selectedGroup.value = value;
+
+  Future<void> deleteGroup(GroupingModel groupingModel) async {
+    try {
+      LoadingWidget.dialog();
+      await _documentEditorService.deleteGroup(groupingModel);
+      selectedGroup = null;
+      _groups.remove(groupingModel);
+      Get.close(1);
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+    }
+  }
 }

@@ -17,6 +17,7 @@
     "select-text": "Selecione...",
     "editor-data-empty-title-text": "Nenhum dado encontrado",
     "editor-data-empty-description-text": "Este documento ainda não possui dados. Use o menu flutuante na parte inferior do aplicativo para adicionar agrupamentos e itens.",
+    "delete-group-confirmation-text": "Deseja realmente deletar este agrupamento?",
     "login-email-label": "E-mail:",
     "login-email-hint": "Digite seu e-mail aqui...",
     "login-password-label": "Senha:",
