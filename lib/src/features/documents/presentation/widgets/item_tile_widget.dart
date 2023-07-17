@@ -14,20 +14,22 @@ class ItemTileWidget extends GetWidget<DocumentEditorController> {
 
   @override
   Widget build(BuildContext context) {
-    return switch (controller.documentModel.type) {
-      DocumentType.monthlyExpenseControl => _monthlyExpenseControlItemTile(
-          context,
-        ),
-      DocumentType.investmentControl => _investmentControlItemTile(
-          context,
-        ),
-      DocumentType.annotation => _annotationItemTile(
-          context,
-        ),
-      DocumentType.pointsAndAirlineMiles => _pointsAndAirlineMilesItemTile(
-          context,
-        ),
-    };
+    return Obx(() {
+      return switch (controller.documentModel.type) {
+        DocumentType.monthlyExpenseControl => _monthlyExpenseControlItemTile(
+            context,
+          ),
+        DocumentType.investmentControl => _investmentControlItemTile(
+            context,
+          ),
+        DocumentType.annotation => _annotationItemTile(
+            context,
+          ),
+        DocumentType.pointsAndAirlineMiles => _pointsAndAirlineMilesItemTile(
+            context,
+          ),
+      };
+    });
   }
 
   Widget _monthlyExpenseControlItemTile(BuildContext context) {
@@ -53,44 +55,42 @@ class ItemTileWidget extends GetWidget<DocumentEditorController> {
           }
         },
         borderRadius: BorderRadius.circular(10),
-        child: Obx(
-          () => DecoratedBox(
-            decoration: BoxDecoration(
-              border: isSelected
-                  ? Border.all(
-                      color: Theme.of(context).primaryColor,
-                    )
-                  : null,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(5),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (itemModel.quantity != null)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
-                      child: Text(
-                        '${itemModel.quantity}x',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                        ),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: isSelected
+                ? Border.all(
+                    color: Theme.of(context).primaryColor,
+                  )
+                : null,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (itemModel.quantity != null)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5.0),
+                    child: Text(
+                      '${itemModel.quantity}x',
+                      style: TextStyle(
+                        color: Colors.grey[600],
                       ),
                     ),
-                  Expanded(child: Text(itemModel.name)),
-                  if (itemModel.price != null)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Text(
-                        CurrencyUtils.format(itemModel.price!),
-                        style: const TextStyle(
-                          color: Colors.green,
-                        ),
+                  ),
+                Expanded(child: Text(itemModel.name)),
+                if (itemModel.price != null)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      CurrencyUtils.format(itemModel.price!),
+                      style: const TextStyle(
+                        color: Colors.green,
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ),
         ),

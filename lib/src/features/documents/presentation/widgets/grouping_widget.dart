@@ -20,16 +20,16 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSize(
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 350),
-      alignment: Alignment.topLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Obx(
-            () => DecoratedBox(
+    return Obx(
+      () => AnimatedSize(
+        curve: Curves.ease,
+        duration: const Duration(milliseconds: 350),
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DecoratedBox(
               decoration: BoxDecoration(
                 border: isSelected
                     ? Border.all(
@@ -79,32 +79,29 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                       ),
                     ],
                   ),
-                  Obx(() {
-                    if (_controller.isExpanded) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 16,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: controller
-                              .getItemsByGroup(groupingModel.id)
-                              .map((itemModel) {
-                            return ItemTileWidget(itemModel: itemModel);
-                          }).toList(),
-                        ),
-                      );
-                    } else {
-                      return Container();
-                    }
-                  }),
+                  if (_controller.isExpanded)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 16,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: controller
+                            .getItemsByGroup(groupingModel.id)
+                            .map((itemModel) {
+                          return ItemTileWidget(itemModel: itemModel);
+                        }).toList(),
+                      ),
+                    )
+                  else
+                    Container(),
                 ],
               ),
             ),
-          ),
-          const Divider(),
-        ],
+            const Divider(),
+          ],
+        ),
       ),
     );
   }
