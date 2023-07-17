@@ -62,10 +62,13 @@ class DocumentTileWidget extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Icon(
-                          CupertinoIcons.calendar,
-                          size: 18,
-                          color: Colors.grey[600],
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Icon(
+                            CupertinoIcons.calendar,
+                            size: 18,
+                            color: Colors.grey[600],
+                          ),
                         ),
                       ),
                       Text(
