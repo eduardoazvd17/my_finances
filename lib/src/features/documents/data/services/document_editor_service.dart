@@ -126,4 +126,80 @@ class DocumentEditorService {
       throw AppError.generic();
     }
   }
+
+  Future<ItemModel> addAnnotationItem({
+    required String name,
+    required String? groupingId,
+    required int? quantity,
+    required double? price,
+  }) async {
+    try {
+      final docRef = _database.documentItemsCollection(documentModel.id).doc();
+      final AnnotationItemModel itemModel = AnnotationItemModel(
+        id: docRef.id,
+        name: name,
+        groupingId: groupingId,
+        quantity: quantity,
+        price: price,
+      );
+      await docRef.set(itemModel.toMap());
+      return itemModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<ItemModel> editAnnotationItem({
+    required AnnotationItemModel itemModel,
+    required String? newName,
+    required String? newGroupingId,
+    required int? newQuantity,
+    required double? newPrice,
+  }) async {
+    if (newName == null &&
+            newGroupingId == null &&
+            newQuantity == null &&
+            newPrice == null ||
+        itemModel.name == newName &&
+            itemModel.groupingId == newGroupingId &&
+            itemModel.quantity == newQuantity &&
+            itemModel.price == newPrice) {
+      return itemModel;
+    }
+
+    try {
+      final AnnotationItemModel newItemModel = itemModel.copyWith(
+        name: newName ?? itemModel.name,
+        groupingId: newGroupingId ?? itemModel.groupingId,
+        quantity: newQuantity ?? itemModel.quantity,
+        price: newPrice ?? itemModel.price,
+      );
+
+      await _database
+          .documentItemsCollection(documentModel.id)
+          .doc(newItemModel.id)
+          .set(newItemModel.toMap());
+
+      return newItemModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<void> deleteItem(ItemModel itemModel) async {
+    try {
+      await _database
+          .documentItemsCollection(documentModel.id)
+          .doc(itemModel.id)
+          .delete();
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
 }

@@ -98,16 +98,89 @@ class DocumentEditorController extends GetxController {
   }
 
   final Rx<GroupingModel?> _selectedGroup = Rx<GroupingModel?>(null);
-  GroupingModel? get selectedGroup => _selectedGroup.value;
-  set selectedGroup(GroupingModel? value) => _selectedGroup.value = value;
+  GroupingModel? get selectedGroup {
+    if (selectedItem != null) {
+      return null;
+    }
+    return _selectedGroup.value;
+  }
+
+  set selectedGroup(GroupingModel? value) {
+    if (selectedItem != null) {
+      selectedItem = null;
+    }
+    _selectedGroup.value = value;
+  }
 
   Future<void> deleteGroup(GroupingModel groupingModel) async {
     try {
       LoadingWidget.dialog();
       await _documentEditorService.deleteGroup(groupingModel);
-      selectedGroup = null;
+      _selectedGroup.value = null;
+      if (_selectedItem.value?.groupingId == groupingModel.id) {
+        _selectedItem.value = null;
+      }
       _groups.remove(groupingModel);
       _items.removeWhere((item) => item.groupingId == groupingModel.id);
+      Get.close(1);
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+    }
+  }
+
+  final Rx<ItemModel?> _selectedItem = Rx<ItemModel?>(null);
+  ItemModel? get selectedItem => _selectedItem.value;
+  set selectedItem(ItemModel? value) => _selectedItem.value = value;
+
+  Future<void> addOrEditAnnotationItem({
+    required AnnotationItemModel? itemModel,
+    required String newName,
+    required String? newGroupingId,
+    required int? newQuantity,
+    required double? newPrice,
+  }) async {
+    try {
+      LoadingWidget.dialog();
+
+      if (newName.isEmpty) {
+        throw AppError(message: 'group-name-validation'.i18n());
+      }
+
+      final ItemModel newItemModel;
+      if (itemModel == null) {
+        newItemModel = await _documentEditorService.addAnnotationItem(
+          name: newName,
+          groupingId: newGroupingId,
+          quantity: newQuantity,
+          price: newPrice,
+        );
+      } else {
+        newItemModel = await _documentEditorService.editAnnotationItem(
+          itemModel: itemModel,
+          newName: newName,
+          newGroupingId: newGroupingId,
+          newQuantity: newQuantity,
+          newPrice: newPrice,
+        );
+      }
+
+      _items.add(newItemModel);
+      sortItems();
+      Get.close(1);
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+    }
+  }
+
+  //TODO: Implementar outros tipos de itens.
+
+  Future<void> deleteItem(ItemModel itemModel) async {
+    try {
+      LoadingWidget.dialog();
+      await _documentEditorService.deleteItem(itemModel);
+      _items.remove(itemModel);
       Get.close(1);
     } on AppError catch (appError) {
       Get.close(1);

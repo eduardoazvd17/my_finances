@@ -1,14 +1,26 @@
-class ItemModel {
+import 'package:equatable/equatable.dart';
+
+class ItemModel extends Equatable {
+  final String id;
   final String name;
   final String? groupingId;
-  ItemModel({required this.name, required this.groupingId});
+
+  const ItemModel({
+    required this.id,
+    required this.name,
+    required this.groupingId,
+  });
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'groupingId': groupingId,
     };
   }
+
+  @override
+  List<Object?> get props => [id];
 
   //TODO: Implementar outros tipos de itens.
 }
@@ -17,12 +29,29 @@ class AnnotationItemModel extends ItemModel {
   final int? quantity;
   final double? price;
 
-  AnnotationItemModel({
+  const AnnotationItemModel({
+    required super.id,
     required super.name,
     super.groupingId,
     this.quantity,
     this.price,
   });
+
+  AnnotationItemModel copyWith({
+    String? id,
+    String? name,
+    String? groupingId,
+    int? quantity,
+    double? price,
+  }) {
+    return AnnotationItemModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      groupingId: groupingId ?? this.groupingId,
+      quantity: quantity ?? this.quantity,
+      price: price ?? this.price,
+    );
+  }
 
   @override
   Map<String, dynamic> toMap() {
@@ -35,6 +64,7 @@ class AnnotationItemModel extends ItemModel {
 
   factory AnnotationItemModel.fromMap(Map<String, dynamic> map) {
     return AnnotationItemModel(
+      id: map['id'],
       name: map['name'],
       groupingId: map['groupingId'],
       quantity: map['quantity'],
@@ -44,21 +74,21 @@ class AnnotationItemModel extends ItemModel {
 }
 
 // class InvestimentControlItemModel extends ItemModel {
-//   InvestimentControlItemModel({
+//   const InvestimentControlItemModel({
 //     required super.name,
 //     super.groupingId,
 //   });
 // }
 
 // class PointsAndAirlineMilesItemModel extends ItemModel {
-//   PointsAndAirlineMilesItemModel({
+//   const PointsAndAirlineMilesItemModel({
 //     required super.name,
 //     super.groupingId,
 //   });
 // }
 
 // class MonthlyExpenseControlItemModel extends ItemModel {
-//   MonthlyExpenseControlItemModel({
+//   const MonthlyExpenseControlItemModel({
 //     required super.name,
 //     super.groupingId,
 //   });
