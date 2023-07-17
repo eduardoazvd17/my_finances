@@ -59,6 +59,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
   Widget _dataListContent() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...controller.groups.map((groupingModel) {
           return GroupingWidget(

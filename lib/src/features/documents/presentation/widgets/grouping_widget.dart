@@ -54,7 +54,12 @@ class GroupingWidget extends StatelessWidget {
                       child: Obx(
                         () => InkWell(
                           borderRadius: BorderRadius.circular(10),
-                          onTap: _controller.toggleIsExpanded,
+                          onTap: () {
+                            _controller.toggleIsExpanded();
+                            if (_controller.isExpanded && !isSelected) {
+                              onSelect.call();
+                            }
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Icon(

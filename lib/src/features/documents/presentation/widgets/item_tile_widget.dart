@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/data/utils/currency_utils.dart';
 import '../../data/models/item_model.dart';
 import '../../data/enums/document_type.dart';
 
@@ -43,7 +44,35 @@ class ItemTileWidget extends StatelessWidget {
 
   Widget _annotationItemTile(BuildContext context) {
     final AnnotationItemModel item = this.item as AnnotationItemModel;
-    return Text(item.name);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (item.quantity != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 5.0),
+              child: Text(
+                '${item.quantity}x',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                ),
+              ),
+            ),
+          Expanded(child: Text(item.name)),
+          if (item.price != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Text(
+                CurrencyUtils.format(item.price!),
+                style: const TextStyle(
+                  color: Colors.green,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 
   Widget _pointsAndAirlineMilesItemTile(BuildContext context) {

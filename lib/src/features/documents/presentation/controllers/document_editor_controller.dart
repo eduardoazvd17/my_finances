@@ -87,6 +87,7 @@ class DocumentEditorController extends GetxController {
 
       _groups.remove(groupingModel);
       _groups.add(newGroupingModel);
+      _selectedGroup.value = null;
       sortGroups();
       Get.close(1);
       return true;
