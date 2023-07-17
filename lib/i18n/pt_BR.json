@@ -18,6 +18,7 @@
     "editor-data-empty-title-text": "Nenhum dado encontrado",
     "editor-data-empty-description-text": "Este documento ainda não possui dados. Use o menu flutuante na parte inferior do aplicativo para adicionar agrupamentos e itens.",
     "delete-group-confirmation-text": "Deseja realmente deletar este agrupamento?\n\nTodo os itens adicionados a ele também serão deletados.",
+    "delete-item-confirmation-text": "Deseja realmente deletar este item?",
     "login-email-label": "E-mail:",
     "login-email-hint": "Digite seu e-mail aqui...",
     "login-password-label": "Senha:",
@@ -114,5 +115,6 @@
     "register-password2-validation": "A confirmação de senha deve ser igual a senha inserida anteriormente.",
     "document-name-validation": "Insira um nome válido para o seu documento.",
     "document-type-validation": "Selecione um tipo de documento para continuar.",
-    "group-name-validation": "Insira um nome válido para o agrupamento."
+    "group-name-validation": "Insira um nome válido para o agrupamento.",
+    "item-name-validation": "Insira um nome válido para o item."
 }

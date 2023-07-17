@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 
 import '../../../../core/data/utils/currency_utils.dart';
 import '../../data/models/item_model.dart';
 import '../../data/enums/document_type.dart';
 
-class ItemTileWidget extends StatelessWidget {
-  final ItemModel item;
-  final DocumentType documentType;
+class ItemTileWidget extends GetWidget<DocumentEditorController> {
+  final ItemModel itemModel;
+  const ItemTileWidget({super.key, required this.itemModel});
 
-  const ItemTileWidget({
-    super.key,
-    required this.item,
-    required this.documentType,
-  });
+  bool get isSelected => controller.selectedItem == itemModel;
 
   @override
   Widget build(BuildContext context) {
-    return switch (documentType) {
+    return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => _monthlyExpenseControlItemTile(
           context,
         ),
@@ -43,34 +41,59 @@ class ItemTileWidget extends StatelessWidget {
   }
 
   Widget _annotationItemTile(BuildContext context) {
-    final AnnotationItemModel item = this.item as AnnotationItemModel;
+    final AnnotationItemModel itemModel = this.itemModel as AnnotationItemModel;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (item.quantity != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0),
-              child: Text(
-                '${item.quantity}x',
-                style: TextStyle(
-                  color: Colors.grey[600],
-                ),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: InkWell(
+        onTap: () {
+          if (isSelected) {
+            controller.selectedItem = null;
+          } else {
+            controller.selectedItem = itemModel;
+          }
+        },
+        borderRadius: BorderRadius.circular(10),
+        child: Obx(
+          () => DecoratedBox(
+            decoration: BoxDecoration(
+              border: isSelected
+                  ? Border.all(
+                      color: Theme.of(context).primaryColor,
+                    )
+                  : null,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (itemModel.quantity != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5.0),
+                      child: Text(
+                        '${itemModel.quantity}x',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  Expanded(child: Text(itemModel.name)),
+                  if (itemModel.price != null)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Text(
+                        CurrencyUtils.format(itemModel.price!),
+                        style: const TextStyle(
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
-          Expanded(child: Text(item.name)),
-          if (item.price != null)
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Text(
-                CurrencyUtils.format(item.price!),
-                style: const TextStyle(
-                  color: Colors.green,
-                ),
-              ),
-            ),
-        ],
+          ),
+        ),
       ),
     );
   }

@@ -58,31 +58,18 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _dataListContent() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ...controller.groups.map((groupingModel) {
-          return GroupingWidget(
-            documentType: controller.documentModel.type,
-            groupingModel: groupingModel,
-            isSelected: controller.selectedGroup == groupingModel,
-            onSelect: () {
-              if (controller.selectedGroup == groupingModel) {
-                controller.selectedGroup = null;
-              } else {
-                controller.selectedGroup = groupingModel;
-              }
-            },
-            items: controller.getItemsByGroup(groupingModel.id),
-          );
-        }),
-        ...controller.itemsWithoutGroup.map(
-          (itemModel) => ItemTileWidget(
-            item: itemModel,
-            documentType: controller.documentModel.type,
-          ),
-        ),
-      ],
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...controller.groups.map((groupingModel) {
+            return GroupingWidget(groupingModel: groupingModel);
+          }),
+          ...controller.itemsWithoutGroup.map((itemModel) {
+            return ItemTileWidget(itemModel: itemModel);
+          }),
+        ],
+      ),
     );
   }
 
@@ -127,11 +114,16 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
     return Obx(
       () => FloatingBottomMenuWidget(
-        selectedName: controller.selectedGroup?.name,
-        onRemoveSelected: () => controller.selectedGroup = null,
+        selectedName:
+            controller.selectedItem?.name ?? controller.selectedGroup?.name,
+        onRemoveSelected: () {
+          controller.selectedItem = null;
+          controller.selectedGroup = null;
+        },
         scrollController: scrollController,
         items: [
-          if (controller.selectedGroup == null)
+          if (controller.selectedGroup == null &&
+              controller.selectedItem == null)
             FloatingBottomMenuItem(
               icon: Icons.post_add_rounded,
               tooltip: 'new-group-button'.i18n(),
@@ -150,25 +142,26 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 );
               },
             ),
-          FloatingBottomMenuItem(
-            icon: Icons.format_list_bulleted_add,
-            tooltip: 'new-item-button'.i18n(),
-            showTooltip: true,
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                barrierColor: Colors.black87,
-                isScrollControlled: true,
-                useSafeArea: true,
-                builder: (context) {
-                  return AddOrEditItemBottomSheetModal(
-                    controller: controller,
-                    groupingModel: controller.selectedGroup,
-                  );
-                },
-              );
-            },
-          ),
+          if (controller.selectedItem == null)
+            FloatingBottomMenuItem(
+              icon: Icons.format_list_bulleted_add,
+              tooltip: 'new-item-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      controller: controller,
+                      groupingModel: controller.selectedGroup,
+                    );
+                  },
+                );
+              },
+            ),
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
               icon: CupertinoIcons.pencil,
@@ -202,6 +195,49 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                     invertButtonColor: true,
                     onConfirm: () {
                       controller.deleteGroup(controller.selectedGroup!);
+                    },
+                  ),
+                  barrierColor: Colors.black87,
+                );
+              },
+            ),
+          ],
+          if (controller.selectedItem != null) ...[
+            FloatingBottomMenuItem(
+              icon: CupertinoIcons.pencil,
+              tooltip: 'edit-item-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      controller: controller,
+                      groupingModel: controller.groups.firstWhereOrNull(
+                        (e) => e.id == controller.selectedItem!.groupingId,
+                      ),
+                      itemModel: controller.selectedItem,
+                    );
+                  },
+                );
+              },
+            ),
+            FloatingBottomMenuItem(
+              icon: CupertinoIcons.delete,
+              tooltip: 'delete-item-button'.i18n(),
+              foregroundColor: Colors.red,
+              showTooltip: true,
+              onTap: () {
+                Get.dialog(
+                  CustomDialog(
+                    title: 'delete-item-button'.i18n(),
+                    content: 'delete-item-confirmation-text'.i18n(),
+                    invertButtonColor: true,
+                    onConfirm: () {
+                      controller.deleteItem(controller.selectedItem!);
                     },
                   ),
                   barrierColor: Colors.black87,

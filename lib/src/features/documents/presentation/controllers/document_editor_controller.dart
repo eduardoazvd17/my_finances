@@ -145,7 +145,7 @@ class DocumentEditorController extends GetxController {
       LoadingWidget.dialog();
 
       if (newName.isEmpty) {
-        throw AppError(message: 'group-name-validation'.i18n());
+        throw AppError(message: 'item-name-validation'.i18n());
       }
 
       final ItemModel newItemModel;
@@ -166,6 +166,7 @@ class DocumentEditorController extends GetxController {
         );
       }
 
+      _items.remove(itemModel);
       _items.add(newItemModel);
       sortItems();
       Get.close(1);

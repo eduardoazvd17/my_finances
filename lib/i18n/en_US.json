@@ -18,6 +18,7 @@
     "editor-data-empty-title-text": "No data found",
     "editor-data-empty-description-text": "This document has no data yet. Use the floating menu at the bottom of the app to add groupings and items.",
     "delete-group-confirmation-text": "Do you really want to delete this grouping?\n\nAll items added to it will also be deleted.",
+    "delete-item-confirmation-text": "Do you really want to delete this item?",
     "login-email-label": "Email:",
     "login-email-hint": "Enter your email here...",
     "login-password-label": "Password:",
@@ -114,5 +115,6 @@
     "register-password2-validation": "The password confirmation must match the previously entered password.",
     "document-name-validation": "Please enter a valid name for your document.",
     "document-type-validation": "Please select a document type to continue.",
-    "group-name-validation": "Please enter a valid group name."
+    "group-name-validation": "Please enter a valid group name.",
+    "item-name-validation": "Please enter a valid name for the item."
 }

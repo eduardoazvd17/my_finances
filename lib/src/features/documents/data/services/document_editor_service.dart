@@ -158,23 +158,19 @@ class DocumentEditorService {
     required int? newQuantity,
     required double? newPrice,
   }) async {
-    if (newName == null &&
-            newGroupingId == null &&
-            newQuantity == null &&
-            newPrice == null ||
-        itemModel.name == newName &&
-            itemModel.groupingId == newGroupingId &&
-            itemModel.quantity == newQuantity &&
-            itemModel.price == newPrice) {
+    if (itemModel.name == newName &&
+        itemModel.groupingId == newGroupingId &&
+        itemModel.quantity == newQuantity &&
+        itemModel.price == newPrice) {
       return itemModel;
     }
 
     try {
       final AnnotationItemModel newItemModel = itemModel.copyWith(
         name: newName ?? itemModel.name,
-        groupingId: newGroupingId ?? itemModel.groupingId,
-        quantity: newQuantity ?? itemModel.quantity,
-        price: newPrice ?? itemModel.price,
+        groupingId: newGroupingId,
+        quantity: newQuantity,
+        price: newPrice,
       );
 
       await _database

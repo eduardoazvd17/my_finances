@@ -1,29 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
+import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/item_tile_widget.dart';
 
 import '../../data/models/grouping_model.dart';
-import '../../data/models/item_model.dart';
 
-class GroupingWidget extends StatelessWidget {
-  final DocumentType documentType;
+class GroupingWidget extends GetWidget<DocumentEditorController> {
   final GroupingModel groupingModel;
-  final bool isSelected;
-  final void Function() onSelect;
-  final List<ItemModel> items;
 
   const GroupingWidget({
     super.key,
-    required this.documentType,
     required this.groupingModel,
-    required this.onSelect,
-    required this.isSelected,
-    required this.items,
   });
 
   GroupingWidgetController get _controller => groupingModel.getController();
+
+  bool get isSelected => controller.selectedGroup == groupingModel;
 
   @override
   Widget build(BuildContext context) {
@@ -35,72 +28,79 @@ class GroupingWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              border: isSelected
-                  ? Border.all(
-                      color: Theme.of(context).primaryColor,
-                    )
-                  : null,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Obx(
-                        () => InkWell(
-                          borderRadius: BorderRadius.circular(10),
-                          onTap: () {
-                            _controller.toggleIsExpanded();
-                            if (_controller.isExpanded && !isSelected) {
-                              onSelect.call();
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Icon(
-                              _controller.isExpanded
-                                  ? CupertinoIcons.chevron_down
-                                  : CupertinoIcons.chevron_right,
+          Obx(
+            () => DecoratedBox(
+              decoration: BoxDecoration(
+                border: isSelected
+                    ? Border.all(
+                        color: Theme.of(context).primaryColor,
+                      )
+                    : null,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Obx(
+                          () => InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            onTap: () {
+                              _controller.toggleIsExpanded();
+                              if (_controller.isExpanded) {
+                                controller.selectedGroup = groupingModel;
+                              }
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Icon(
+                                _controller.isExpanded
+                                    ? CupertinoIcons.chevron_down
+                                    : CupertinoIcons.chevron_right,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: onSelect,
-                        child: Text(groupingModel.name),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            if (isSelected) {
+                              controller.selectedGroup = null;
+                            } else {
+                              controller.selectedGroup = groupingModel;
+                            }
+                          },
+                          child: Text(groupingModel.name),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Obx(() {
-                  if (_controller.isExpanded) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 16,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: items.map((item) {
-                          return ItemTileWidget(
-                            item: item,
-                            documentType: documentType,
-                          );
-                        }).toList(),
-                      ),
-                    );
-                  } else {
-                    return Container();
-                  }
-                }),
-              ],
+                    ],
+                  ),
+                  Obx(() {
+                    if (_controller.isExpanded) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 16,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: controller
+                              .getItemsByGroup(groupingModel.id)
+                              .map((itemModel) {
+                            return ItemTileWidget(itemModel: itemModel);
+                          }).toList(),
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }),
+                ],
+              ),
             ),
           ),
           const Divider(),

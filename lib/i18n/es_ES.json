@@ -18,6 +18,7 @@
     "editor-data-empty-title-text": "No se encontraron datos",
     "editor-data-empty-description-text": "Este documento aún no tiene datos. Usa el menú flotante en la parte inferior de la aplicación para agregar agrupaciones y elementos.",
     "delete-group-confirmation-text": "¿Desea realmente eliminar este agrupamiento?\n\nTodos los elementos que se le agreguen también se eliminarán.",
+    "delete-item-confirmation-text": "¿Realmente desea eliminar este elemento?",
     "login-email-label": "Correo electrónico:",
     "login-email-hint": "Ingrese su correo electrónico aquí...",
     "login-password-label": "Contraseña:",
@@ -114,5 +115,6 @@
     "register-password2-validation": "La confirmación de la contraseña debe coincidir con la contraseña ingresada anteriormente.",
     "document-name-validation": "Ingrese un nombre válido para su documento.",
     "document-type-validation": "Seleccione un tipo de documento para continuar.",
-    "group-name-validation": "Ingrese un nombre de agrupamiento válido."
+    "group-name-validation": "Ingrese un nombre de agrupamiento válido.",
+    "item-name-validation": "Ingrese un nombre válido para el elemento."
 }
