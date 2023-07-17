@@ -49,7 +49,7 @@ class _AddOrEditGroupBottomSheetModalState
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
             child: Column(
               children: [
                 TextFieldWidget(

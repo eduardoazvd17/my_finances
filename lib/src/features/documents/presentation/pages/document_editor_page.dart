@@ -5,7 +5,7 @@ import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
-import 'package:myfinances/src/features/documents/presentation/views/new_item_bottom_sheet_modal.dart';
+import 'package:myfinances/src/features/documents/presentation/views/add_or_edit_item_bottom_sheet_modal.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
@@ -160,14 +160,17 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 isScrollControlled: true,
                 useSafeArea: true,
                 builder: (context) {
-                  return const NewItemBottomSheetModal();
+                  return AddOrEditItemBottomSheetModal(
+                    controller: controller,
+                    groupingModel: controller.selectedGroup,
+                  );
                 },
               );
             },
           ),
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
-              icon: Icons.edit_note,
+              icon: CupertinoIcons.pencil,
               tooltip: 'edit-group-button'.i18n(),
               showTooltip: true,
               onTap: () {

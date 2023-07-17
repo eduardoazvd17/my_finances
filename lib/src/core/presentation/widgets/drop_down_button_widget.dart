@@ -37,7 +37,6 @@ class DropDownButtonWidget<T> extends StatelessWidget {
       ),
       icon: const Icon(CupertinoIcons.chevron_down),
       borderRadius: BorderRadius.circular(10),
-      padding: const EdgeInsets.symmetric(horizontal: 5),
       itemHeight: itemHeight,
       focusNode: focusNode,
       value: value,
