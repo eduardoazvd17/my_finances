@@ -8,6 +8,7 @@ import 'package:myfinances/src/features/documents/data/models/grouping_model.dar
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 
 import '../../../../core/presentation/widgets/button_widget.dart';
+import '../../data/enums/document_type.dart';
 import '../controllers/document_editor_controller.dart';
 
 class AddOrEditItemBottomSheetModal extends StatefulWidget {
@@ -53,87 +54,111 @@ class _AddOrEditItemBottomSheetModalState
             padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFieldWidget(
-                  label: isEditing
-                      ? 'item-rename-label'.i18n()
-                      : 'item-name-label'.i18n(),
-                  hint: isEditing
-                      ? 'item-rename-hint'.i18n()
-                      : 'item-name-hint'.i18n(),
-                  controller: _nameController,
-                  focusNode: _nameFocus,
+              children: _buildLayoutByDocumentType(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildLayoutByDocumentType() {
+    //TODO: Implementar outros tipos de itens.
+    return switch (widget.controller.documentModel.type) {
+      DocumentType.monthlyExpenseControl => [],
+      DocumentType.investmentControl => [],
+      DocumentType.annotation => [
+          _nameTextFieldWidget(),
+          _groupSelectionWidget(),
+          _buttonsWidget(() async {
+            return await widget.controller.addOrEditAnnotationItem(
+              itemModel: widget.itemModel as AnnotationItemModel?,
+              newName: _nameController.text,
+              newGroupingId: _selectedGrouping?.id,
+              newQuantity: null,
+              newPrice: null,
+            );
+          }),
+        ],
+      DocumentType.pointsAndAirlineMiles => [],
+    };
+  }
+
+  Widget _nameTextFieldWidget() {
+    return TextFieldWidget(
+      label: isEditing ? 'item-rename-label'.i18n() : 'item-name-label'.i18n(),
+      hint: isEditing ? 'item-rename-hint'.i18n() : 'item-name-hint'.i18n(),
+      controller: _nameController,
+      focusNode: _nameFocus,
+    );
+  }
+
+  Widget _groupSelectionWidget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          isEditing
+              ? 'item-change-group-label'.i18n()
+              : 'item-group-label'.i18n(),
+        ),
+        DropDownButtonWidget<GroupingModel?>(
+          hintText: 'item-group-hint'.i18n(),
+          value: _selectedGrouping,
+          onChanged: (group) {
+            setState(() => _selectedGrouping = group);
+          },
+          items: [
+            DropdownMenuItem(
+              value: null,
+              child: Text(
+                'item-group-hint'.i18n(),
+                style: TextStyle(
+                  color: Colors.grey[600],
                 ),
-                Text(
-                  isEditing
-                      ? 'item-change-group-label'.i18n()
-                      : 'item-group-label'.i18n(),
-                ),
-                DropDownButtonWidget<GroupingModel?>(
-                  hintText: 'item-group-hint'.i18n(),
-                  value: _selectedGrouping,
-                  onChanged: (group) {
-                    setState(() => _selectedGrouping = group);
-                  },
-                  items: [
-                    DropdownMenuItem(
-                      value: null,
-                      child: Text(
-                        'item-group-hint'.i18n(),
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ),
-                    ...widget.controller.groups.map(
-                      (group) {
-                        return DropdownMenuItem(
-                          value: group,
-                          child: Text(
-                            group.name,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          text: 'cancel-button'.i18n(),
-                          borderColor: Colors.red,
-                          foregroundColor: Colors.red,
-                          onTap: Get.back,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: ButtonWidget(
-                          text: isEditing
-                              ? 'save-button'.i18n()
-                              : 'add-button'.i18n(),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white,
-                          onTap: () async {
-                            // final bool result =
-                            //     await widget.controller.addOrEditGrouping(
-                            //   groupingModel: widget.groupingModel,
-                            //   newName: _nameController.text,
-                            //   newInitializeExpanded: _initializeExpanded,
-                            // );
-                            // if (result) Get.close(1);
-                          },
-                        ),
-                      ),
-                    ],
+              ),
+            ),
+            ...widget.controller.groups.map(
+              (group) {
+                return DropdownMenuItem(
+                  value: group,
+                  child: Text(
+                    group.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              ],
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buttonsWidget(Future<bool> Function() onAddOrEdit) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: ButtonWidget(
+              text: 'cancel-button'.i18n(),
+              borderColor: Colors.red,
+              foregroundColor: Colors.red,
+              onTap: Get.back,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: ButtonWidget(
+              text: isEditing ? 'save-button'.i18n() : 'add-button'.i18n(),
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.white,
+              onTap: () async {
+                final bool result = await onAddOrEdit.call();
+                if (result) Get.close(1);
+              },
             ),
           ),
         ],

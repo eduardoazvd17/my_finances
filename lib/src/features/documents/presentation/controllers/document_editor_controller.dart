@@ -133,7 +133,7 @@ class DocumentEditorController extends GetxController {
   ItemModel? get selectedItem => _selectedItem.value;
   set selectedItem(ItemModel? value) => _selectedItem.value = value;
 
-  Future<void> addOrEditAnnotationItem({
+  Future<bool> addOrEditAnnotationItem({
     required AnnotationItemModel? itemModel,
     required String newName,
     required String? newGroupingId,
@@ -168,9 +168,11 @@ class DocumentEditorController extends GetxController {
       _items.add(newItemModel);
       sortItems();
       Get.close(1);
+      return true;
     } on AppError catch (appError) {
       Get.close(1);
       appError.showDialog();
+      return false;
     }
   }
 

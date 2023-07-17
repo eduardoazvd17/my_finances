@@ -68,7 +68,7 @@ class AnnotationItemModel extends ItemModel {
       name: map['name'],
       groupingId: map['groupingId'],
       quantity: map['quantity'],
-      price: double.tryParse(map['price']),
+      price: double.tryParse(map['price'] ?? ''),
     );
   }
 }
