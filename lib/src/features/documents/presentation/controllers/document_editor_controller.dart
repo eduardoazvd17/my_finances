@@ -99,17 +99,10 @@ class DocumentEditorController extends GetxController {
   }
 
   final Rx<GroupingModel?> _selectedGroup = Rx<GroupingModel?>(null);
-  GroupingModel? get selectedGroup {
-    if (selectedItem != null) {
-      return null;
-    }
-    return _selectedGroup.value;
-  }
+  GroupingModel? get selectedGroup => _selectedGroup.value;
 
   set selectedGroup(GroupingModel? value) {
-    if (selectedItem != null) {
-      selectedItem = null;
-    }
+    _selectedItem.value = null;
     _selectedGroup.value = value;
   }
 
@@ -132,7 +125,10 @@ class DocumentEditorController extends GetxController {
 
   final Rx<ItemModel?> _selectedItem = Rx<ItemModel?>(null);
   ItemModel? get selectedItem => _selectedItem.value;
-  set selectedItem(ItemModel? value) => _selectedItem.value = value;
+  set selectedItem(ItemModel? value) {
+    _selectedGroup.value = null;
+    _selectedItem.value = value;
+  }
 
   Future<bool> addOrEditAnnotationItem({
     required AnnotationItemModel? itemModel,
