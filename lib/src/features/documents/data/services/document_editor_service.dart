@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 
@@ -107,6 +108,18 @@ class DocumentEditorService {
           .documentGroupsCollection(documentModel.id)
           .doc(groupingModel.id)
           .delete();
+
+      final documentsItemsQuery = await _database
+          .documentItemsCollection(documentModel.id)
+          .where('groupingId', isEqualTo: groupingModel.id)
+          .get();
+      if (documentsItemsQuery.docs.isNotEmpty) {
+        final batch = FirebaseFirestore.instance.batch();
+        for (final doc in documentsItemsQuery.docs) {
+          batch.delete(doc.reference);
+        }
+        batch.commit();
+      }
     } on AppError catch (_) {
       rethrow;
     } catch (_) {

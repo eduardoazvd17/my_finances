@@ -107,6 +107,7 @@ class DocumentEditorController extends GetxController {
       await _documentEditorService.deleteGroup(groupingModel);
       selectedGroup = null;
       _groups.remove(groupingModel);
+      _items.removeWhere((item) => item.groupingId == groupingModel.id);
       Get.close(1);
     } on AppError catch (appError) {
       Get.close(1);
