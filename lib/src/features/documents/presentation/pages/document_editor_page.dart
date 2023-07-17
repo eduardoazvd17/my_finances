@@ -196,8 +196,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                     title: 'delete-group-button'.i18n(),
                     content: 'delete-group-confirmation-text'.i18n(),
                     invertButtonColor: true,
-                    onConfirm: () async {
-                      Get.close(1);
+                    onConfirm: () {
                       controller.deleteGroup(controller.selectedGroup!);
                     },
                   ),
