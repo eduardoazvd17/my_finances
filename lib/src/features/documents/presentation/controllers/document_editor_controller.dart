@@ -96,4 +96,8 @@ class DocumentEditorController extends GetxController {
       return false;
     }
   }
+
+  final Rx<GroupingModel?> _selectedGroup = Rx<GroupingModel?>(null);
+  GroupingModel? get selectedGroup => _selectedGroup.value;
+  set selectedGroup(GroupingModel? value) => _selectedGroup.value = value;
 }

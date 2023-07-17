@@ -60,8 +60,16 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       children: [
         ...controller.groups.map((groupingModel) {
           return GroupingWidget(
-            groupingModel: groupingModel,
             documentType: controller.documentModel.type,
+            groupingModel: groupingModel,
+            isSelected: controller.selectedGroup == groupingModel,
+            onSelect: () {
+              if (controller.selectedGroup == groupingModel) {
+                controller.selectedGroup = null;
+              } else {
+                controller.selectedGroup = groupingModel;
+              }
+            },
             items: controller.getItemsByGroup(groupingModel.id),
           );
         }),
@@ -114,62 +122,85 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       controller.menuScrollPosition = scrollController.offset;
     });
 
-    return FloatingBottomMenuWidget(
-      scrollController: scrollController,
-      items: [
-        FloatingBottomMenuItem(
-          icon: Icons.post_add_rounded,
-          tooltip: 'new-group-button'.i18n(),
-          showTooltip: true,
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              barrierColor: Colors.black87,
-              isScrollControlled: true,
-              useSafeArea: true,
-              builder: (context) {
-                return AddOrEditGroupBottomSheetModal(
-                  controller: controller,
+    return Obx(
+      () => FloatingBottomMenuWidget(
+        scrollController: scrollController,
+        items: [
+          if (controller.selectedGroup == null)
+            FloatingBottomMenuItem(
+              icon: Icons.post_add_rounded,
+              tooltip: 'new-group-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditGroupBottomSheetModal(
+                      controller: controller,
+                    );
+                  },
                 );
               },
-            );
-          },
-        ),
-        FloatingBottomMenuItem(
-          icon: Icons.format_list_bulleted_add,
-          tooltip: 'new-item-button'.i18n(),
-          showTooltip: true,
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              barrierColor: Colors.black87,
-              isScrollControlled: true,
-              useSafeArea: true,
-              builder: (context) {
-                return const NewItemBottomSheetModal();
-              },
-            );
-          },
-        ),
-        FloatingBottomMenuItem(
-          icon: Icons.info_outline,
-          tooltip: 'document-info-button'.i18n(),
-          showTooltip: true,
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              barrierColor: Colors.black87,
-              isScrollControlled: true,
-              useSafeArea: true,
-              builder: (context) {
-                return DocumentDetailsBottomSheetModalWidget(
-                  documentModel: controller.documentModel,
+            ),
+          FloatingBottomMenuItem(
+            icon: Icons.format_list_bulleted_add,
+            tooltip: 'new-item-button'.i18n(),
+            showTooltip: true,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                barrierColor: Colors.black87,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (context) {
+                  return const NewItemBottomSheetModal();
+                },
+              );
+            },
+          ),
+          if (controller.selectedGroup != null)
+            FloatingBottomMenuItem(
+              icon: Icons.edit_note,
+              tooltip: 'edit-group-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditGroupBottomSheetModal(
+                      controller: controller,
+                      groupingModel: controller.selectedGroup,
+                    );
+                  },
                 );
               },
-            );
-          },
-        ),
-      ],
+            ),
+          FloatingBottomMenuItem(
+            icon: Icons.info_outline,
+            tooltip: 'document-info-button'.i18n(),
+            showTooltip: true,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                barrierColor: Colors.black87,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (context) {
+                  return DocumentDetailsBottomSheetModalWidget(
+                    documentModel: controller.documentModel,
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
