@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
 class FloatingBottomMenuWidget extends StatelessWidget {
+  final String? selectedName;
+  final void Function() onRemoveSelected;
   final ScrollController? scrollController;
   final List<FloatingBottomMenuItem> items;
   const FloatingBottomMenuWidget({
     super.key,
+    required this.selectedName,
+    required this.onRemoveSelected,
     required this.items,
     this.scrollController,
   });
@@ -27,36 +32,80 @@ class FloatingBottomMenuWidget extends StatelessWidget {
           elevation: 8,
           child: Padding(
             padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
-            child: ScrollViewWidget(
-              showBar: true,
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: items.map((item) {
-                    if (items.indexOf(item) > 0) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: Container(
-                              width: 0.5,
-                              height: 25,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (selectedName != null) ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 5.0),
+                          child: Text(
+                            'selected-label'.i18n(),
+                            style: TextStyle(
                               color: Colors.grey[600],
                             ),
                           ),
-                          item,
-                        ],
-                      );
-                    }
-                    return item;
-                  }).toList(),
+                        ),
+                        Expanded(
+                          child: Text(
+                            selectedName!,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: onRemoveSelected,
+                          child: Icon(
+                            Icons.close,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(height: 8),
+                ],
+                ScrollViewWidget(
+                  showBar: true,
+                  controller: scrollController,
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: items.map((item) {
+                        if (items.indexOf(item) > 0) {
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: Container(
+                                  width: 0.5,
+                                  height: 25,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                              item,
+                            ],
+                          );
+                        }
+                        return item;
+                      }).toList(),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),

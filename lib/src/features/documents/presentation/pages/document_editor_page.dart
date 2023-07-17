@@ -124,6 +124,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
     return Obx(
       () => FloatingBottomMenuWidget(
+        selectedName: controller.selectedGroup?.name,
+        onRemoveSelected: () => controller.selectedGroup = null,
         scrollController: scrollController,
         items: [
           if (controller.selectedGroup == null)
@@ -161,7 +163,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               );
             },
           ),
-          if (controller.selectedGroup != null)
+          if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
               icon: Icons.edit_note,
               tooltip: 'edit-group-button'.i18n(),
@@ -181,6 +183,26 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 );
               },
             ),
+            FloatingBottomMenuItem(
+              icon: Icons.close,
+              tooltip: 'delete-group-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditGroupBottomSheetModal(
+                      controller: controller,
+                      groupingModel: controller.selectedGroup,
+                    );
+                  },
+                );
+              },
+            ),
+          ],
           FloatingBottomMenuItem(
             icon: Icons.info_outline,
             tooltip: 'document-info-button'.i18n(),
