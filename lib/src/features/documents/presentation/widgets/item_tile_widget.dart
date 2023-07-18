@@ -45,7 +45,7 @@ class ItemTileWidget extends GetWidget<DocumentEditorController> {
   Widget _annotationItemTile(BuildContext context) {
     final AnnotationItemModel itemModel = this.itemModel as AnnotationItemModel;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      padding: const EdgeInsets.symmetric(vertical: 2.5),
       child: InkWell(
         onTap: () {
           if (isSelected) {
@@ -65,7 +65,10 @@ class ItemTileWidget extends GetWidget<DocumentEditorController> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: 16,
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
