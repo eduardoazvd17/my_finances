@@ -66,6 +66,7 @@ class DocumentEditorController extends GetxController {
   }) async {
     try {
       LoadingWidget.dialog();
+      _isLoading.value = true; //!FIX TEMPORÁRIO
 
       if (newName.isEmpty) {
         throw AppError(message: 'group-name-validation'.i18n());
@@ -91,9 +92,11 @@ class DocumentEditorController extends GetxController {
         _selectedGroup.value = newGroupingModel;
       }
       sortGroups();
+      _isLoading.value = false; //!FIX TEMPORÁRIO
       Get.close(1);
       return true;
     } on AppError catch (appError) {
+      _isLoading.value = false; //!FIX TEMPORÁRIO
       Get.close(1);
       appError.showDialog();
       return false;
@@ -141,6 +144,7 @@ class DocumentEditorController extends GetxController {
   }) async {
     try {
       LoadingWidget.dialog();
+      _isLoading.value = true; //!FIX TEMPORÁRIO
 
       if (newName.isEmpty) {
         throw AppError(message: 'item-name-validation'.i18n());
@@ -167,9 +171,11 @@ class DocumentEditorController extends GetxController {
       _items.remove(itemModel);
       _items.add(newItemModel);
       sortItems();
+      _isLoading.value = false; //!FIX TEMPORÁRIO
       Get.close(1);
       return true;
     } on AppError catch (appError) {
+      _isLoading.value = false; //!FIX TEMPORÁRIO
       Get.close(1);
       appError.showDialog();
       return false;
