@@ -34,8 +34,10 @@ class DocumentDetailsWidget extends StatelessWidget {
           ),
         if (showHeader) const Divider(),
         _textTile(
-            label: 'document-type-label'.i18n(),
-            data: documentModel.type.title),
+          label: 'document-type-label'.i18n(),
+          data: documentModel.type.title,
+          description: documentModel.type.description,
+        ),
         _textTile(
           label: 'document-creation-date-label'.i18n(),
           data: DateTimeUtils.formatFullDate(
@@ -46,19 +48,35 @@ class DocumentDetailsWidget extends StatelessWidget {
     );
   }
 
-  Widget _textTile({required String label, required String data}) {
+  Widget _textTile({
+    required String label,
+    required String data,
+    String? description,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Wrap(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+          Wrap(
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 5),
+              Text(data),
+            ],
           ),
-          const SizedBox(width: 5),
-          Text(data),
+          if (description != null)
+            Text(
+              description,
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
+            ),
         ],
       ),
     );
