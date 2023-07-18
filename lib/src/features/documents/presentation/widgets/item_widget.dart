@@ -82,6 +82,8 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
               itemModel.description!,
               style: TextStyle(
                 color: Colors.grey[600],
+                decoration:
+                    itemModel.isChecked ? TextDecoration.lineThrough : null,
               ),
             )
           : null,
