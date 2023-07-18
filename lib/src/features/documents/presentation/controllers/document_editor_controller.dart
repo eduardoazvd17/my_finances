@@ -151,7 +151,7 @@ class DocumentEditorController extends GetxController {
       if (itemModel == null) {
         newItemModel = await _documentEditorService.addAnnotationItem(
           name: newName,
-          description: newDescription,
+          description: newDescription == '' ? null : newDescription,
           groupingId: newGroupingId,
           quantity: newQuantity,
           price: newPrice,
@@ -160,7 +160,7 @@ class DocumentEditorController extends GetxController {
         newItemModel = await _documentEditorService.editAnnotationItem(
           itemModel: itemModel,
           newName: newName,
-          newDescription: newDescription,
+          newDescription: newDescription == '' ? null : newDescription,
           newGroupingId: newGroupingId,
           newQuantity: newQuantity,
           newPrice: newPrice,
