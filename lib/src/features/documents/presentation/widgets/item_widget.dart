@@ -69,27 +69,42 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
               horizontal: 8,
               vertical: 16,
             ),
-            child: Row(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (itemModel.quantity != null)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (itemModel.quantity != null)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5.0),
+                        child: Text(
+                          '${itemModel.quantity}x',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ),
+                    Expanded(child: Text(itemModel.name)),
+                    if (itemModel.price != null)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Text(
+                          CurrencyUtils.format(itemModel.price!),
+                          style: const TextStyle(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                if (itemModel.description != null)
                   Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
+                    padding: const EdgeInsets.only(top: 2.5),
                     child: Text(
-                      '${itemModel.quantity}x',
+                      itemModel.description!,
                       style: TextStyle(
                         color: Colors.grey[600],
-                      ),
-                    ),
-                  ),
-                Expanded(child: Text(itemModel.name)),
-                if (itemModel.price != null)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Text(
-                      CurrencyUtils.format(itemModel.price!),
-                      style: const TextStyle(
-                        color: Colors.green,
                       ),
                     ),
                   ),
