@@ -12,6 +12,7 @@ import 'package:myfinances/src/features/documents/presentation/controllers/docum
 import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
 import '../../../../core/presentation/widgets/custom_dialog.dart';
+import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 import '../views/add_or_edit_group_bottom_sheet_modal.dart';
 
@@ -59,16 +60,19 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
   Widget _dataListContent() {
     return Obx(
-      () => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ...controller.groups.map((groupingModel) {
-            return GroupingWidget(groupingModel: groupingModel);
-          }),
-          ...controller.itemsWithoutGroup.map((itemModel) {
-            return ItemWidget(itemModel: itemModel);
-          }),
-        ],
+      () => ScrollViewWidget(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ...controller.groups.map((groupingModel) {
+              return GroupingWidget(groupingModel: groupingModel);
+            }),
+            ...controller.itemsWithoutGroup.map((itemModel) {
+              return ItemWidget(itemModel: itemModel);
+            }),
+            const SizedBox(height: 125),
+          ],
+        ),
       ),
     );
   }

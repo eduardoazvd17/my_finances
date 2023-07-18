@@ -3,7 +3,6 @@ import 'package:credentials_manager/credentials_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/bindings/app_binding.dart';

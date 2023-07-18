@@ -30,8 +30,10 @@ class AddOrEditItemBottomSheetModal extends StatefulWidget {
 
 class _AddOrEditItemBottomSheetModalState
     extends State<AddOrEditItemBottomSheetModal> {
-  final _nameFocus = FocusNode();
   late final TextEditingController _nameController;
+  late final TextEditingController _descriptionController;
+  late final TextEditingController _quantityController;
+  late final TextEditingController _priceController;
   GroupingModel? _selectedGrouping;
 
   bool get isEditing => widget.itemModel != null;
@@ -39,6 +41,33 @@ class _AddOrEditItemBottomSheetModalState
   @override
   void initState() {
     _nameController = TextEditingController(text: widget.itemModel?.name ?? '');
+    _descriptionController =
+        TextEditingController(text: widget.itemModel?.description ?? '');
+
+    switch (widget.controller.documentModel.type) {
+      case DocumentType.monthlyExpenseControl:
+        break;
+      case DocumentType.investmentControl:
+        break;
+      case DocumentType.annotation:
+        _quantityController = TextEditingController(
+          text: (widget.itemModel as AnnotationItemModel?)
+                  ?.quantity
+                  ?.toString() ??
+              '',
+        );
+        _priceController = TextEditingController(
+          text: (widget.itemModel as AnnotationItemModel?)
+                  ?.price
+                  ?.toStringAsFixed(2)
+                  .replaceAll('.00', '')
+                  .replaceAll(',00', '') ??
+              '',
+        );
+        break;
+      case DocumentType.pointsAndAirlineMiles:
+        break;
+    }
     _selectedGrouping = widget.groupingModel;
     super.initState();
   }
@@ -69,14 +98,25 @@ class _AddOrEditItemBottomSheetModalState
       DocumentType.investmentControl => [],
       DocumentType.annotation => [
           _nameTextFieldWidget(),
+          _descriptionTextFieldWidget(),
+          Row(
+            children: [
+              Expanded(child: _quantityTextFieldWidget()),
+              const SizedBox(width: 8),
+              Expanded(child: _priceTextFieldWidget()),
+            ],
+          ),
           _groupSelectionWidget(),
           _buttonsWidget(() async {
             return await widget.controller.addOrEditAnnotationItem(
               itemModel: widget.itemModel as AnnotationItemModel?,
-              newName: _nameController.text,
+              newName: _nameController.text.trim(),
+              newDescription: _descriptionController.text.trim(),
               newGroupingId: _selectedGrouping?.id,
-              newQuantity: null,
-              newPrice: null,
+              newQuantity: int.tryParse(_quantityController.text.trim()),
+              newPrice: double.tryParse(
+                _priceController.text.trim().replaceAll(',', '.'),
+              ),
             );
           }),
         ],
@@ -89,52 +129,90 @@ class _AddOrEditItemBottomSheetModalState
       label: isEditing ? 'item-rename-label'.i18n() : 'item-name-label'.i18n(),
       hint: isEditing ? 'item-rename-hint'.i18n() : 'item-name-hint'.i18n(),
       controller: _nameController,
-      focusNode: _nameFocus,
+      textCapitalization: TextCapitalization.sentences,
+      focusNode: FocusNode(),
+    );
+  }
+
+  Widget _descriptionTextFieldWidget() {
+    return TextFieldWidget(
+      label: 'item-description-label'.i18n(),
+      hint: 'optional-text'.i18n(),
+      controller: _descriptionController,
+      textCapitalization: TextCapitalization.sentences,
+      focusNode: FocusNode(),
+    );
+  }
+
+  Widget _quantityTextFieldWidget() {
+    return TextFieldWidget(
+      label: 'item-quantity-label'.i18n(),
+      hint: 'optional-text'.i18n(),
+      controller: _quantityController,
+      textCapitalization: TextCapitalization.none,
+      textInputType: const TextInputType.numberWithOptions(decimal: false),
+      focusNode: FocusNode(),
+      maxLength: 3,
+    );
+  }
+
+  Widget _priceTextFieldWidget() {
+    return TextFieldWidget(
+      label: 'item-price-label'.i18n(),
+      hint: 'optional-text'.i18n(),
+      controller: _priceController,
+      textCapitalization: TextCapitalization.none,
+      textInputType: const TextInputType.numberWithOptions(decimal: true),
+      focusNode: FocusNode(),
+      maxLength: 10,
     );
   }
 
   Widget _groupSelectionWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          isEditing
-              ? 'item-change-group-label'.i18n()
-              : 'item-group-label'.i18n(),
-        ),
-        Obx(
-          () => DropDownButtonWidget<GroupingModel?>(
-            hintText: 'item-group-hint'.i18n(),
-            value: _selectedGrouping,
-            onChanged: (group) {
-              setState(() => _selectedGrouping = group);
-            },
-            items: [
-              DropdownMenuItem(
-                value: null,
-                child: Text(
-                  'item-group-hint'.i18n(),
-                  style: TextStyle(
-                    color: Colors.grey[600],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            isEditing
+                ? 'item-change-group-label'.i18n()
+                : 'item-group-label'.i18n(),
+          ),
+          Obx(
+            () => DropDownButtonWidget<GroupingModel?>(
+              hintText: 'item-group-hint'.i18n(),
+              value: _selectedGrouping,
+              onChanged: (group) {
+                setState(() => _selectedGrouping = group);
+              },
+              items: [
+                DropdownMenuItem(
+                  value: null,
+                  child: Text(
+                    'item-group-hint'.i18n(),
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                    ),
                   ),
                 ),
-              ),
-              ...widget.controller.groups.map(
-                (group) {
-                  return DropdownMenuItem(
-                    value: group,
-                    child: Text(
-                      group.name,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  );
-                },
-              ),
-            ],
+                ...widget.controller.groups.map(
+                  (group) {
+                    return DropdownMenuItem(
+                      value: group,
+                      child: Text(
+                        group.name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

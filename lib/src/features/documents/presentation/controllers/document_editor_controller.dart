@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 import 'package:myfinances/src/features/documents/data/services/document_editor_service.dart';
@@ -31,14 +30,16 @@ class DocumentEditorController extends GetxController {
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
   List<GroupingModel> get groups => _groups.toList();
-  void sortGroups() => _groups.sort((a, b) => a.name.compareTo(b.name));
+  void sortGroups() => _groups
+      .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
   final RxList<ItemModel> _items = RxList<ItemModel>([]);
   List<ItemModel> get itemsWithoutGroup =>
       _items.where((item) => item.groupingId == null).toList();
   List<ItemModel> getItemsByGroup(String groupingId) =>
       _items.where((item) => item.groupingId == groupingId).toList();
-  void sortItems() => _items.sort((a, b) => a.name.compareTo(b.name));
+  void sortItems() => _items
+      .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
   Future<void> _loadGroupsAndItems() async {
     _isLoading.value = true;
@@ -65,8 +66,7 @@ class DocumentEditorController extends GetxController {
     required bool newInitializeExpanded,
   }) async {
     try {
-      LoadingWidget.dialog();
-      _isLoading.value = true; //!FIX TEMPORÁRIO
+      _isLoading.value = true;
 
       if (newName.isEmpty) {
         throw AppError(message: 'group-name-validation'.i18n());
@@ -92,12 +92,10 @@ class DocumentEditorController extends GetxController {
         _selectedGroup.value = newGroupingModel;
       }
       sortGroups();
-      _isLoading.value = false; //!FIX TEMPORÁRIO
-      Get.close(1);
+      _isLoading.value = false;
       return true;
     } on AppError catch (appError) {
-      _isLoading.value = false; //!FIX TEMPORÁRIO
-      Get.close(1);
+      _isLoading.value = false;
       appError.showDialog();
       return false;
     }
@@ -112,8 +110,8 @@ class DocumentEditorController extends GetxController {
   }
 
   Future<void> deleteGroup(GroupingModel groupingModel) async {
+    _isLoading.value = true;
     try {
-      LoadingWidget.dialog();
       await _documentEditorService.deleteGroup(groupingModel);
       _selectedGroup.value = null;
       if (_selectedItem.value?.groupingId == groupingModel.id) {
@@ -121,11 +119,10 @@ class DocumentEditorController extends GetxController {
       }
       _groups.remove(groupingModel);
       _items.removeWhere((item) => item.groupingId == groupingModel.id);
-      Get.close(1);
     } on AppError catch (appError) {
-      Get.close(1);
       appError.showDialog();
     }
+    _isLoading.value = false;
   }
 
   final Rx<ItemModel?> _selectedItem = Rx<ItemModel?>(null);
@@ -138,13 +135,13 @@ class DocumentEditorController extends GetxController {
   Future<bool> addOrEditAnnotationItem({
     required AnnotationItemModel? itemModel,
     required String newName,
+    required String? newDescription,
     required String? newGroupingId,
     required int? newQuantity,
     required double? newPrice,
   }) async {
     try {
-      LoadingWidget.dialog();
-      _isLoading.value = true; //!FIX TEMPORÁRIO
+      _isLoading.value = true;
 
       if (newName.isEmpty) {
         throw AppError(message: 'item-name-validation'.i18n());
@@ -154,6 +151,7 @@ class DocumentEditorController extends GetxController {
       if (itemModel == null) {
         newItemModel = await _documentEditorService.addAnnotationItem(
           name: newName,
+          description: newDescription,
           groupingId: newGroupingId,
           quantity: newQuantity,
           price: newPrice,
@@ -162,6 +160,7 @@ class DocumentEditorController extends GetxController {
         newItemModel = await _documentEditorService.editAnnotationItem(
           itemModel: itemModel,
           newName: newName,
+          newDescription: newDescription,
           newGroupingId: newGroupingId,
           newQuantity: newQuantity,
           newPrice: newPrice,
@@ -170,16 +169,14 @@ class DocumentEditorController extends GetxController {
 
       _items.remove(itemModel);
       _items.add(newItemModel);
-      if (selectedItem?.id == itemModel?.id) {
+      if (selectedItem?.id == itemModel?.id && itemModel != null) {
         selectedItem = newItemModel;
       }
       sortItems();
-      _isLoading.value = false; //!FIX TEMPORÁRIO
-      Get.close(1);
+      _isLoading.value = false;
       return true;
     } on AppError catch (appError) {
-      _isLoading.value = false; //!FIX TEMPORÁRIO
-      Get.close(1);
+      _isLoading.value = false;
       appError.showDialog();
       return false;
     }
@@ -188,14 +185,13 @@ class DocumentEditorController extends GetxController {
   //TODO: Implementar outros tipos de itens.
 
   Future<void> deleteItem(ItemModel itemModel) async {
+    _isLoading.value = true;
     try {
-      LoadingWidget.dialog();
       await _documentEditorService.deleteItem(itemModel);
       _items.remove(itemModel);
-      Get.close(1);
     } on AppError catch (appError) {
-      Get.close(1);
       appError.showDialog();
     }
+    _isLoading.value = false;
   }
 }

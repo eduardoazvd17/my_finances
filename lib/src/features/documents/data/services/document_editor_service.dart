@@ -129,6 +129,7 @@ class DocumentEditorService {
 
   Future<ItemModel> addAnnotationItem({
     required String name,
+    required String? description,
     required String? groupingId,
     required int? quantity,
     required double? price,
@@ -138,6 +139,7 @@ class DocumentEditorService {
       final AnnotationItemModel itemModel = AnnotationItemModel(
         id: docRef.id,
         name: name,
+        description: description,
         groupingId: groupingId,
         quantity: quantity,
         price: price,
@@ -154,11 +156,13 @@ class DocumentEditorService {
   Future<ItemModel> editAnnotationItem({
     required AnnotationItemModel itemModel,
     required String? newName,
+    required String? newDescription,
     required String? newGroupingId,
     required int? newQuantity,
     required double? newPrice,
   }) async {
     if (itemModel.name == newName &&
+        itemModel.description == newDescription &&
         itemModel.groupingId == newGroupingId &&
         itemModel.quantity == newQuantity &&
         itemModel.price == newPrice) {
@@ -168,6 +172,7 @@ class DocumentEditorService {
     try {
       final AnnotationItemModel newItemModel = itemModel.copyWith(
         name: newName ?? itemModel.name,
+        description: newDescription,
         groupingId: newGroupingId,
         quantity: newQuantity,
         price: newPrice,
