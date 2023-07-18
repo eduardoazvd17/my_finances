@@ -9,7 +9,7 @@ import 'package:myfinances/src/features/documents/presentation/views/add_or_edit
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/item_tile_widget.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
@@ -66,7 +66,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             return GroupingWidget(groupingModel: groupingModel);
           }),
           ...controller.itemsWithoutGroup.map((itemModel) {
-            return ItemTileWidget(itemModel: itemModel);
+            return ItemWidget(itemModel: itemModel);
           }),
         ],
       ),

@@ -6,9 +6,9 @@ import '../../../../core/data/utils/currency_utils.dart';
 import '../../data/models/item_model.dart';
 import '../../data/enums/document_type.dart';
 
-class ItemTileWidget extends GetWidget<DocumentEditorController> {
+class ItemWidget extends GetWidget<DocumentEditorController> {
   final ItemModel itemModel;
-  const ItemTileWidget({super.key, required this.itemModel});
+  const ItemWidget({super.key, required this.itemModel});
 
   bool get isSelected => controller.selectedItem == itemModel;
 

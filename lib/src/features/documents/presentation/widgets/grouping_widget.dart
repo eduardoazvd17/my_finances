@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/item_tile_widget.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
 import '../../data/models/grouping_model.dart';
 
@@ -96,7 +96,7 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                         children: controller
                             .getItemsByGroup(groupingModel.id)
                             .map((itemModel) {
-                          return ItemTileWidget(itemModel: itemModel);
+                          return ItemWidget(itemModel: itemModel);
                         }).toList(),
                       ),
                     )
