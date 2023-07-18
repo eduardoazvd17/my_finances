@@ -13,6 +13,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool obscureText;
   final Iterable<String>? autofillHints;
   final bool autofocus;
+  final int? maxLength;
 
   const TextFieldWidget({
     super.key,
@@ -28,6 +29,7 @@ class TextFieldWidget extends StatefulWidget {
     this.obscureText = false,
     this.autofillHints,
     this.autofocus = false,
+    this.maxLength,
   });
 
   @override
@@ -94,6 +96,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             textInputAction: widget.textInputAction,
             obscureText: widget.obscureText,
             textCapitalization: widget.textCapitalization,
+            maxLength: widget.maxLength,
           ),
         ],
       ),
