@@ -68,6 +68,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                         ...DocumentType.values.map((documentType) {
                           return DropdownMenuItem(
                             value: documentType,
+                            enabled: documentType.isEnabled,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                 vertical: 5.0,
@@ -79,12 +80,23 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                                       left: 2.5,
                                       right: 5.0,
                                     ),
-                                    child: Icon(documentType.icon, size: 40),
+                                    child: Icon(
+                                      documentType.icon,
+                                      size: 40,
+                                      color: documentType.isEnabled
+                                          ? null
+                                          : Colors.grey[600],
+                                    ),
                                   ),
                                   Expanded(
                                     child: Text(
                                       documentType.title,
                                       maxLines: 2,
+                                      style: documentType.isEnabled
+                                          ? null
+                                          : TextStyle(
+                                              color: Colors.grey[600],
+                                            ),
                                     ),
                                   ),
                                 ],

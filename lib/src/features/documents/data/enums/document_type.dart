@@ -12,6 +12,7 @@ enum DocumentType {
 extension DocumentTypeExtension on DocumentType {
   String get title => "document-type-title-$index".i18n();
   String get description => "document-type-description-$index".i18n();
+
   IconData get icon {
     return switch (this) {
       DocumentType.monthlyExpenseControl => CupertinoIcons.money_dollar,
@@ -20,4 +21,12 @@ extension DocumentTypeExtension on DocumentType {
       DocumentType.pointsAndAirlineMiles => Icons.airplane_ticket_outlined,
     };
   }
+
+  //TODO: Remover quanto implementar outros tipos de itens.
+  bool get isEnabled => switch (this) {
+        DocumentType.monthlyExpenseControl => false,
+        DocumentType.investmentControl => false,
+        DocumentType.annotation => true,
+        DocumentType.pointsAndAirlineMiles => false,
+      };
 }
