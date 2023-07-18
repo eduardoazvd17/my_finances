@@ -27,7 +27,6 @@ class AddOrEditGroupBottomSheetModal extends StatefulWidget {
 class _AddOrEditGroupBottomSheetModalState
     extends State<AddOrEditGroupBottomSheetModal> {
   late final TextEditingController _nameController;
-  final FocusNode _nameFocus = FocusNode();
   late bool _initializeExpanded;
 
   bool get isEditing => widget.groupingModel != null;
@@ -60,7 +59,8 @@ class _AddOrEditGroupBottomSheetModalState
                       ? 'group-rename-hint'.i18n()
                       : 'group-name-hint'.i18n(),
                   controller: _nameController,
-                  focusNode: _nameFocus,
+                  textCapitalization: TextCapitalization.sentences,
+                  focusNode: FocusNode(),
                 ),
                 SwitchListTile(
                   value: _initializeExpanded,
@@ -96,7 +96,7 @@ class _AddOrEditGroupBottomSheetModalState
                             final bool result =
                                 await widget.controller.addOrEditGrouping(
                               groupingModel: widget.groupingModel,
-                              newName: _nameController.text,
+                              newName: _nameController.text.trim(),
                               newInitializeExpanded: _initializeExpanded,
                             );
                             if (result) Get.close(1);
