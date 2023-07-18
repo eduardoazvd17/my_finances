@@ -42,13 +42,19 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                 children: [
                   if (selectedName != null) ...[
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      padding: const EdgeInsets.only(
+                        bottom: 8,
+                        left: 8,
+                        right: 8,
+                        top: 4.5,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 5.0),
+                            padding:
+                                const EdgeInsets.only(right: 5.0, top: 3.5),
                             child: Text(
                               'selected-label'.i18n(),
                               style: TextStyle(
@@ -57,17 +63,21 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-                            child: Text(
-                              selectedName!,
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 3.5),
+                              child: Text(
+                                selectedName!,
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           InkWell(
                             onTap: onRemoveSelected,
+                            borderRadius: BorderRadius.circular(15),
                             child: Icon(
                               Icons.close,
                               color: Colors.grey[600],
@@ -76,7 +86,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Divider(height: 8),
+                    const Divider(height: 0),
                   ],
                   ScrollViewWidget(
                     showBar: true,
@@ -154,8 +164,8 @@ class FloatingBottomMenuItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                height: 50,
-                width: 50,
+                height: 60,
+                width: 60,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(icon, color: foregroundColor),
