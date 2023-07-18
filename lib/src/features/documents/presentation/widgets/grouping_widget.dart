@@ -43,27 +43,24 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                 children: [
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Obx(
-                          () => InkWell(
-                            borderRadius: BorderRadius.circular(10),
-                            onTap: () {
-                              _controller.toggleIsExpanded();
-                              if (_controller.isExpanded) {
-                                controller.selectedGroup = groupingModel;
-                              } else if (controller.selectedItem?.groupingId ==
-                                  groupingModel.id) {
-                                controller.selectedItem = null;
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Icon(
-                                _controller.isExpanded
-                                    ? CupertinoIcons.chevron_down
-                                    : CupertinoIcons.chevron_right,
-                              ),
+                      Obx(
+                        () => InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () {
+                            _controller.toggleIsExpanded();
+                            if (_controller.isExpanded) {
+                              controller.selectedGroup = groupingModel;
+                            } else if (controller.selectedItem?.groupingId ==
+                                groupingModel.id) {
+                              controller.selectedItem = null;
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Icon(
+                              _controller.isExpanded
+                                  ? CupertinoIcons.chevron_down
+                                  : CupertinoIcons.chevron_right,
                             ),
                           ),
                         ),
@@ -77,7 +74,13 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                               controller.selectedGroup = groupingModel;
                             }
                           },
-                          child: Text(groupingModel.name),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 10,
+                            ),
+                            child: Text(groupingModel.name),
+                          ),
                         ),
                       ),
                     ],
