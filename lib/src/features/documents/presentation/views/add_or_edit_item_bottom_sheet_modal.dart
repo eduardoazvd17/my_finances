@@ -102,35 +102,37 @@ class _AddOrEditItemBottomSheetModalState
               ? 'item-change-group-label'.i18n()
               : 'item-group-label'.i18n(),
         ),
-        DropDownButtonWidget<GroupingModel?>(
-          hintText: 'item-group-hint'.i18n(),
-          value: _selectedGrouping,
-          onChanged: (group) {
-            setState(() => _selectedGrouping = group);
-          },
-          items: [
-            DropdownMenuItem(
-              value: null,
-              child: Text(
-                'item-group-hint'.i18n(),
-                style: TextStyle(
-                  color: Colors.grey[600],
+        Obx(
+          () => DropDownButtonWidget<GroupingModel?>(
+            hintText: 'item-group-hint'.i18n(),
+            value: _selectedGrouping,
+            onChanged: (group) {
+              setState(() => _selectedGrouping = group);
+            },
+            items: [
+              DropdownMenuItem(
+                value: null,
+                child: Text(
+                  'item-group-hint'.i18n(),
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                  ),
                 ),
               ),
-            ),
-            ...widget.controller.groups.map(
-              (group) {
-                return DropdownMenuItem(
-                  value: group,
-                  child: Text(
-                    group.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                );
-              },
-            ),
-          ],
+              ...widget.controller.groups.map(
+                (group) {
+                  return DropdownMenuItem(
+                    value: group,
+                    child: Text(
+                      group.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ],
     );

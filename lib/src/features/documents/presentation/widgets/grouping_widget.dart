@@ -20,16 +20,16 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => AnimatedSize(
-        curve: Curves.ease,
-        duration: const Duration(milliseconds: 350),
-        alignment: Alignment.topLeft,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DecoratedBox(
+    return AnimatedSize(
+      curve: Curves.ease,
+      duration: const Duration(milliseconds: 350),
+      alignment: Alignment.topLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Obx(
+            () => DecoratedBox(
               decoration: BoxDecoration(
                 border: isSelected
                     ? Border.all(
@@ -52,6 +52,9 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                               _controller.toggleIsExpanded();
                               if (_controller.isExpanded) {
                                 controller.selectedGroup = groupingModel;
+                              } else if (controller.selectedItem?.groupingId ==
+                                  groupingModel.id) {
+                                controller.selectedItem = null;
                               }
                             },
                             child: Padding(
@@ -99,9 +102,9 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                 ],
               ),
             ),
-            const Divider(),
-          ],
-        ),
+          ),
+          const Divider(),
+        ],
       ),
     );
   }
