@@ -59,5 +59,5 @@ class GroupingModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, name, initializeExpanded, creationDate];
 }

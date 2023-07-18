@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class ItemModel extends Equatable {
+class ItemModel {
   final String id;
   final String name;
   final String? groupingId;
@@ -18,9 +16,6 @@ class ItemModel extends Equatable {
       'groupingId': groupingId,
     };
   }
-
-  @override
-  List<Object?> get props => [id];
 
   //TODO: Implementar outros tipos de itens.
 }
