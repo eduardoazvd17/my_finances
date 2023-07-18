@@ -26,6 +26,7 @@ class ItemModel {
 class AnnotationItemModel extends ItemModel {
   final int? quantity;
   final double? price;
+  final bool isChecked;
 
   const AnnotationItemModel({
     required super.id,
@@ -34,9 +35,22 @@ class AnnotationItemModel extends ItemModel {
     super.groupingId,
     this.quantity,
     this.price,
+    this.isChecked = false,
   });
 
-  AnnotationItemModel copyWith({
+  AnnotationItemModel toggleIsCheckedAndCopy() {
+    return AnnotationItemModel(
+      id: id,
+      name: name,
+      description: description,
+      groupingId: groupingId,
+      quantity: quantity,
+      price: price,
+      isChecked: !isChecked,
+    );
+  }
+
+  AnnotationItemModel editAndCopy({
     String? id,
     String? name,
     String? description,
@@ -51,6 +65,7 @@ class AnnotationItemModel extends ItemModel {
       groupingId: groupingId,
       quantity: quantity,
       price: price,
+      isChecked: isChecked,
     );
   }
 
@@ -60,6 +75,7 @@ class AnnotationItemModel extends ItemModel {
       ..addAll({
         'quantity': quantity,
         'price': price?.toStringAsFixed(2),
+        'isChecked': isChecked,
       });
   }
 
@@ -71,6 +87,7 @@ class AnnotationItemModel extends ItemModel {
       groupingId: map['groupingId'],
       quantity: map['quantity'],
       price: double.tryParse(map['price'] ?? ''),
+      isChecked: map['isChecked'] ?? false,
     );
   }
 }

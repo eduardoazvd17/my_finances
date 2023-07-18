@@ -182,6 +182,23 @@ class DocumentEditorController extends GetxController {
     }
   }
 
+  Future<void> toggleIsCheckedAnnotationItem(
+    AnnotationItemModel itemModel,
+  ) async {
+    _isLoading.value = true;
+    try {
+      final ItemModel newItemModel =
+          await _documentEditorService.toggleIsCheckedAnnotationItem(itemModel);
+      _items.remove(itemModel);
+      _items.add(newItemModel);
+      selectedItem = newItemModel;
+      sortItems();
+    } on AppError catch (appError) {
+      appError.showDialog();
+    }
+    _isLoading.value = false;
+  }
+
   //TODO: Implementar outros tipos de itens.
 
   Future<void> deleteItem(ItemModel itemModel) async {

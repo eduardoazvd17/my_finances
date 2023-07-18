@@ -85,7 +85,7 @@ class DocumentEditorService {
     }
 
     try {
-      final GroupingModel newGroupingModel = groupingModel.copyWith(
+      final GroupingModel newGroupingModel = groupingModel.editAndCopy(
         name: newName ?? groupingModel.name,
         initializeExpanded:
             newInitializeExpanded ?? groupingModel.initializeExpanded,
@@ -170,7 +170,7 @@ class DocumentEditorService {
     }
 
     try {
-      final AnnotationItemModel newItemModel = itemModel.copyWith(
+      final AnnotationItemModel newItemModel = itemModel.editAndCopy(
         name: newName ?? itemModel.name,
         description: newDescription,
         groupingId: newGroupingId,
@@ -197,6 +197,22 @@ class DocumentEditorService {
           .documentItemsCollection(documentModel.id)
           .doc(itemModel.id)
           .delete();
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<ItemModel> toggleIsCheckedAnnotationItem(
+    AnnotationItemModel itemModel,
+  ) async {
+    try {
+      await _database
+          .documentItemsCollection(documentModel.id)
+          .doc(itemModel.id)
+          .update({'isChecked': !itemModel.isChecked});
+      return itemModel.toggleIsCheckedAndCopy();
     } on AppError catch (_) {
       rethrow;
     } catch (_) {

@@ -13,6 +13,8 @@ import 'package:myfinances/src/features/documents/presentation/widgets/item_widg
 
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
+import '../../data/enums/document_type.dart';
+import '../../data/models/item_model.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 import '../views/add_or_edit_group_bottom_sheet_modal.dart';
 
@@ -207,6 +209,20 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
           ],
           if (controller.selectedItem != null) ...[
+            if (controller.documentModel.type == DocumentType.annotation)
+              FloatingBottomMenuItem(
+                icon: (controller.selectedItem as AnnotationItemModel).isChecked
+                    ? Icons.check_box
+                    : Icons.check_box_outline_blank,
+                tooltip:
+                    (controller.selectedItem as AnnotationItemModel).isChecked
+                        ? 'uncheck-item-button'.i18n()
+                        : 'check-item-button'.i18n(),
+                showTooltip: true,
+                onTap: () => controller.toggleIsCheckedAnnotationItem(
+                  controller.selectedItem as AnnotationItemModel,
+                ),
+              ),
             FloatingBottomMenuItem(
               icon: CupertinoIcons.pencil,
               tooltip: 'edit-item-button'.i18n(),

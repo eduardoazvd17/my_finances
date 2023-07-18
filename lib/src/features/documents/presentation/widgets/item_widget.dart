@@ -44,9 +44,67 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
 
   Widget _annotationItemTile(BuildContext context) {
     final AnnotationItemModel itemModel = this.itemModel as AnnotationItemModel;
+
+    return _itemBaseWidget(
+      context: context,
+      onLongPress: () {
+        controller.selectedItem = itemModel;
+        controller.toggleIsCheckedAnnotationItem(itemModel);
+      },
+      leading: itemModel.quantity != null
+          ? Text(
+              '${itemModel.quantity}x',
+              style: TextStyle(
+                color: Colors.grey[600],
+                decoration:
+                    itemModel.isChecked ? TextDecoration.lineThrough : null,
+              ),
+            )
+          : null,
+      trailing: itemModel.price != null
+          ? Text(
+              CurrencyUtils.format(itemModel.price!),
+              style: TextStyle(
+                color: Colors.green,
+                decoration:
+                    itemModel.isChecked ? TextDecoration.lineThrough : null,
+              ),
+            )
+          : null,
+      middleExpanded: Text(
+        itemModel.name,
+        style: TextStyle(
+          decoration: itemModel.isChecked ? TextDecoration.lineThrough : null,
+        ),
+      ),
+      bottom: itemModel.description != null
+          ? Text(
+              itemModel.description!,
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
+            )
+          : null,
+    );
+  }
+
+  Widget _pointsAndAirlineMilesItemTile(BuildContext context) {
+    //final PointsAndAirlineMilesItemModel item = this.item as PointsAndAirlineMilesItemModel;
+    return Container();
+  }
+
+  Widget _itemBaseWidget({
+    required BuildContext context,
+    void Function()? onLongPress,
+    Widget? leading,
+    Widget? middleExpanded,
+    Widget? trailing,
+    Widget? bottom,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.5),
       child: InkWell(
+        onLongPress: onLongPress,
         onTap: () {
           if (isSelected) {
             controller.selectedItem = null;
@@ -75,38 +133,23 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (itemModel.quantity != null)
+                    if (leading != null)
                       Padding(
                         padding: const EdgeInsets.only(right: 5.0),
-                        child: Text(
-                          '${itemModel.quantity}x',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                          ),
-                        ),
+                        child: leading,
                       ),
-                    Expanded(child: Text(itemModel.name)),
-                    if (itemModel.price != null)
+                    if (middleExpanded != null) Expanded(child: middleExpanded),
+                    if (trailing != null)
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
-                        child: Text(
-                          CurrencyUtils.format(itemModel.price!),
-                          style: const TextStyle(
-                            color: Colors.green,
-                          ),
-                        ),
+                        child: trailing,
                       ),
                   ],
                 ),
-                if (itemModel.description != null)
+                if (bottom != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 2.5),
-                    child: Text(
-                      itemModel.description!,
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                      ),
-                    ),
+                    child: bottom,
                   ),
               ],
             ),
@@ -114,10 +157,5 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
         ),
       ),
     );
-  }
-
-  Widget _pointsAndAirlineMilesItemTile(BuildContext context) {
-    //final PointsAndAirlineMilesItemModel item = this.item as PointsAndAirlineMilesItemModel;
-    return Container();
   }
 }

@@ -15,7 +15,7 @@ class GroupingModel {
     required this.creationDate,
   });
 
-  GroupingModel copyWith({
+  GroupingModel editAndCopy({
     String? name,
     bool? initializeExpanded,
     DateTime? creationDate,

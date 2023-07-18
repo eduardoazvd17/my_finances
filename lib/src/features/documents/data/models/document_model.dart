@@ -19,7 +19,7 @@ class DocumentModel extends Equatable {
     required this.isFavorite,
   });
 
-  DocumentModel copyWith({
+  DocumentModel editAndCopy({
     String? id,
     String? name,
     bool? isFavorite,

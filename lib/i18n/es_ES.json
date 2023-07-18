@@ -86,6 +86,8 @@
     "delete-group-button": "Borrar agrupamiento",
     "delete-item-button": "Borrar elemento",
     "document-info-button": "Información del documento",
+    "check-item-button": "Marcar elemento",
+    "uncheck-item-button": "Desmarcar elemento",
     "delete-document-dialog-title": "Eliminar documento",
     "rename-document-dialog-title": "Renombrar documento",
     "document-type-title-0": "Rastreador de gastos mensuales",

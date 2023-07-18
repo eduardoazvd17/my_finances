@@ -68,7 +68,7 @@ class DocumentsService {
     }
 
     try {
-      final DocumentModel newDocumentModel = documentModel.copyWith(
+      final DocumentModel newDocumentModel = documentModel.editAndCopy(
         name: newName ?? documentModel.name,
         isFavorite: newIsFavorite ?? documentModel.isFavorite,
       );
