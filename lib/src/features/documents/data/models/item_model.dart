@@ -42,9 +42,9 @@ class AnnotationItemModel extends ItemModel {
     return AnnotationItemModel(
       id: id ?? this.id,
       name: name ?? this.name,
-      groupingId: groupingId ?? this.groupingId,
-      quantity: quantity ?? this.quantity,
-      price: price ?? this.price,
+      groupingId: groupingId,
+      quantity: quantity,
+      price: price,
     );
   }
 

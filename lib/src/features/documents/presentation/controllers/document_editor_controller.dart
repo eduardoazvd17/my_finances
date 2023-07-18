@@ -170,6 +170,9 @@ class DocumentEditorController extends GetxController {
 
       _items.remove(itemModel);
       _items.add(newItemModel);
+      if (selectedItem?.id == itemModel?.id) {
+        selectedItem = newItemModel;
+      }
       sortItems();
       _isLoading.value = false; //!FIX TEMPORÁRIO
       Get.close(1);
