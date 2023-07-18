@@ -15,6 +15,7 @@ class ItemModel {
     return {
       'id': id,
       'name': name,
+      'description': description,
       'groupingId': groupingId,
     };
   }
