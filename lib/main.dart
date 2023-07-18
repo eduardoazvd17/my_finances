@@ -19,8 +19,6 @@ import 'src/core/presentation/controllers/theme_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
   final firebaseApp = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -34,7 +32,6 @@ void main() async {
     ),
     fenix: true,
   );
-
   Get.lazyPut(() => I18nController(), fenix: true);
   Get.lazyPut(() => ThemeController(), fenix: true);
   runApp(const MyFinancesApp());
