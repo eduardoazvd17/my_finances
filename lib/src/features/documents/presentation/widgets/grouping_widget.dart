@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
+import '../../data/enums/document_type.dart';
 import '../../data/models/grouping_model.dart';
 
 class GroupingWidget extends GetWidget<DocumentEditorController> {
@@ -84,6 +85,7 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                           ),
                         ),
                       ),
+                      _trailingWidgetByDocumentType(),
                     ],
                   ),
                   if (_controller.isExpanded)
@@ -110,6 +112,22 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
           const Divider(),
         ],
       ),
+    );
+  }
+
+  Widget _trailingWidgetByDocumentType() {
+    //TODO: Implementar outros tipos de itens.
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: switch (controller.documentModel.type) {
+        DocumentType.monthlyExpenseControl => Container(),
+        DocumentType.investmentControl => Container(),
+        DocumentType.annotation => Text(
+            controller.getItemsByGroup(groupingModel.id).length.toString(),
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        DocumentType.pointsAndAirlineMiles => Container(),
+      },
     );
   }
 }
