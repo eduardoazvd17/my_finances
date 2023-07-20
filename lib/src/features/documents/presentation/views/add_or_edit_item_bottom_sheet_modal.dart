@@ -102,7 +102,16 @@ class _AddOrEditItemBottomSheetModalState
           Row(
             children: [
               Expanded(child: _quantityTextFieldWidget()),
-              const SizedBox(width: 8),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'X',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
               Expanded(child: _priceTextFieldWidget()),
             ],
           ),
