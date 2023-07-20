@@ -19,6 +19,8 @@
     "editor-data-empty-description-text": "Este documento ainda não possui dados. Use o menu flutuante na parte inferior do aplicativo para adicionar agrupamentos e itens.",
     "delete-group-confirmation-text": "Deseja realmente deletar este agrupamento?\n\nTodo os itens adicionados a ele também serão deletados.",
     "delete-item-confirmation-text": "Deseja realmente deletar este item?",
+    "uncheck-all-confirmation-text": "Deseja realmente desmarcar todos os items de todos os agrupamentos?",
+    "uncheck-all-group-confirmation-text": "Deseja realmente desmarcar todos os items deste agrupamento selecionado?",
     "optional-text": "(Opcional)",
     "login-email-label": "E-mail:",
     "login-email-hint": "Digite seu e-mail aqui...",

@@ -179,9 +179,23 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               icon: Icons.check_box,
               tooltip: 'uncheck-all-items-button'.i18n(),
               showTooltip: true,
-              onTap: () => controller.uncheckAllAnnotationItems(
-                controller.selectedGroup?.id,
-              ),
+              onTap: () {
+                Get.dialog(
+                  CustomDialog(
+                    title: 'uncheck-all-items-button'.i18n(),
+                    content: controller.selectedGroup != null
+                        ? 'uncheck-all-group-confirmation-text'.i18n()
+                        : 'uncheck-all-confirmation-text'.i18n(),
+                    invertButtonColor: true,
+                    onConfirm: () {
+                      controller.uncheckAllAnnotationItems(
+                        controller.selectedGroup?.id,
+                      );
+                    },
+                  ),
+                  barrierColor: Colors.black87,
+                );
+              },
             ),
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
