@@ -88,6 +88,7 @@
     "document-info-button": "Informações do documento",
     "check-item-button": "Marcar item",
     "uncheck-item-button": "Desmarcar item",
+    "uncheck-all-items-button": "Desmarcar todos os itens",
     "delete-document-dialog-title": "Deletar documento",
     "rename-document-dialog-title": "Renomear documento",
     "document-type-title-0": "Controle de gastos mensal",

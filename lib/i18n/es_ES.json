@@ -88,6 +88,7 @@
     "document-info-button": "Información del documento",
     "check-item-button": "Marcar elemento",
     "uncheck-item-button": "Desmarcar elemento",
+    "uncheck-all-items-button": "Desmarcar todos los elementos",
     "delete-document-dialog-title": "Eliminar documento",
     "rename-document-dialog-title": "Renombrar documento",
     "document-type-title-0": "Rastreador de gastos mensuales",

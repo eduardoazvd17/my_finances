@@ -168,6 +168,21 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 );
               },
             ),
+          if (controller.selectedItem == null &&
+              controller.documentModel.type == DocumentType.annotation &&
+              controller.items
+                      .cast<AnnotationItemModel>()
+                      .where((e) => e.isChecked)
+                      .length >=
+                  2)
+            FloatingBottomMenuItem(
+              icon: Icons.check_box,
+              tooltip: 'uncheck-all-items-button'.i18n(),
+              showTooltip: true,
+              onTap: () => controller.uncheckAllAnnotationItems(
+                controller.selectedGroup?.id,
+              ),
+            ),
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
               icon: CupertinoIcons.pencil,

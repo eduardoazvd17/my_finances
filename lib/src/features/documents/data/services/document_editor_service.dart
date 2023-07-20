@@ -118,7 +118,7 @@ class DocumentEditorService {
         for (final doc in documentsItemsQuery.docs) {
           batch.delete(doc.reference);
         }
-        batch.commit();
+        await batch.commit();
       }
     } on AppError catch (_) {
       rethrow;
@@ -213,6 +213,21 @@ class DocumentEditorService {
           .doc(itemModel.id)
           .update({'isChecked': !itemModel.isChecked});
       return itemModel.toggleIsCheckedAndCopy();
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<void> uncheckAnnotationItems(Iterable<String> checkedIds) async {
+    try {
+      for (final String id in checkedIds) {
+        await _database
+            .documentItemsCollection(documentModel.id)
+            .doc(id)
+            .update({'isChecked': false});
+      }
     } on AppError catch (_) {
       rethrow;
     } catch (_) {

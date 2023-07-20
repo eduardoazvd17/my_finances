@@ -88,6 +88,7 @@
     "document-info-button": "Document info",
     "check-item-button": "Check item",
     "uncheck-item-button": "Uncheck item",
+    "uncheck-all-items-button": "Uncheck all items",
     "delete-document-dialog-title": "Delete document",
     "rename-document-dialog-title": "Rename document",
     "document-type-title-0": "Monthly expense control",

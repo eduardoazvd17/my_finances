@@ -34,6 +34,7 @@ class DocumentEditorController extends GetxController {
       .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
   final RxList<ItemModel> _items = RxList<ItemModel>([]);
+  List<ItemModel> get items => _items.toList();
   List<ItemModel> get itemsWithoutGroup =>
       _items.where((item) => item.groupingId == null).toList();
   List<ItemModel> getItemsByGroup(String groupingId) =>
@@ -192,6 +193,34 @@ class DocumentEditorController extends GetxController {
       _items.remove(itemModel);
       _items.add(newItemModel);
       selectedItem = newItemModel;
+      sortItems();
+    } on AppError catch (appError) {
+      appError.showDialog();
+    }
+    _isLoading.value = false;
+  }
+
+  Future<void> uncheckAllAnnotationItems([String? groupingId]) async {
+    _isLoading.value = true;
+    try {
+      final List<AnnotationItemModel> checkedItems;
+      if (groupingId == null) {
+        checkedItems = List<AnnotationItemModel>.from(
+          _items.cast<AnnotationItemModel>().where((e) => e.isChecked),
+        );
+      } else {
+        checkedItems = List<AnnotationItemModel>.from(
+          getItemsByGroup(groupingId).cast<AnnotationItemModel>().where((e) {
+            return e.isChecked;
+          }),
+        );
+      }
+
+      final Iterable<String> checkedItemsIds = checkedItems.map((e) => e.id);
+      await _documentEditorService.uncheckAnnotationItems(checkedItemsIds);
+      _items.removeWhere((e) => checkedItemsIds.contains(e.id));
+      _items
+          .addAll(checkedItems.map((e) => e.toggleIsCheckedAndCopy()).toList());
       sortItems();
     } on AppError catch (appError) {
       appError.showDialog();

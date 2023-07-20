@@ -94,7 +94,7 @@ class DocumentsService {
         for (final doc in documentsGroupsQuery.docs) {
           batch.delete(doc.reference);
         }
-        batch.commit();
+        await batch.commit();
       }
 
       final documentsItemsQuery =
@@ -104,7 +104,7 @@ class DocumentsService {
         for (final doc in documentsItemsQuery.docs) {
           batch.delete(doc.reference);
         }
-        batch.commit();
+        await batch.commit();
       }
     } on AppError catch (_) {
       rethrow;
