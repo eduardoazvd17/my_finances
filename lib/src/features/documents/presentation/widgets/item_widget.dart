@@ -47,10 +47,6 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
 
     return _itemBaseWidget(
       context: context,
-      onLongPress: () {
-        controller.selectedItem = itemModel;
-        controller.toggleIsCheckedAnnotationItem(itemModel);
-      },
       leading: itemModel.quantity != null
           ? Text(
               '${itemModel.quantity}x',

@@ -67,6 +67,7 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                       ),
                       Expanded(
                         child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
                           onTap: () {
                             if (isSelected) {
                               controller.selectedGroup = null;
