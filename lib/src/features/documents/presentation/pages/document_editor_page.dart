@@ -170,10 +170,14 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
           if (controller.selectedItem == null &&
               controller.documentModel.type == DocumentType.annotation &&
-              controller.items
-                      .cast<AnnotationItemModel>()
-                      .where((e) => e.isChecked)
-                      .length >=
+              controller.items.cast<AnnotationItemModel>().where((e) {
+                    if (controller.selectedGroup != null) {
+                      return e.isChecked &&
+                          controller.selectedGroup!.id == e.groupingId;
+                    } else {
+                      return e.isChecked;
+                    }
+                  }).length >=
                   2)
             FloatingBottomMenuItem(
               icon: Icons.check_box,
