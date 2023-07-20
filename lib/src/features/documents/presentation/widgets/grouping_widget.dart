@@ -117,13 +117,14 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
 
   Widget _trailingWidgetByDocumentType() {
     //TODO: Implementar outros tipos de itens.
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: switch (controller.documentModel.type) {
         DocumentType.monthlyExpenseControl => Container(),
         DocumentType.investmentControl => Container(),
         DocumentType.annotation => Text(
-            controller.getItemsByGroup(groupingModel.id).length.toString(),
+            '${controller.getItemsByGroup(groupingModel.id).length}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         DocumentType.pointsAndAirlineMiles => Container(),
