@@ -27,7 +27,6 @@ class DocumentEditorController extends GetxController {
       final List<GroupingModel> tempGroups =
           await _documentEditorService.loadGroups();
 
-      //switch case de tipo
       final List<ItemModel> tempItems =
           await _documentEditorService.loadItems();
 
