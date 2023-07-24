@@ -17,8 +17,29 @@ class DocumentEditorController extends GetxController {
 
   @override
   void onInit() {
-    _loadGroupsAndItems();
+    _initializeData();
     super.onInit();
+  }
+
+  Future<void> _initializeData() async {
+    _isLoading.value = true;
+    try {
+      final List<GroupingModel> tempGroups =
+          await _documentEditorService.loadGroups();
+
+      //switch case de tipo
+      final List<ItemModel> tempItems =
+          await _documentEditorService.loadItems();
+
+      _groups.value = tempGroups;
+      _items.value = tempItems;
+
+      sortGroups();
+      sortItems();
+    } on AppError catch (appError) {
+      appError.showDialog();
+    }
+    _isLoading.value = false;
   }
 
   final RxDouble _menuScrollPosition = RxDouble(0);
@@ -33,32 +54,12 @@ class DocumentEditorController extends GetxController {
   void sortGroups() => _groups
       .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
-  final RxList<ItemModel> _items = RxList<ItemModel>([]);
-  List<ItemModel> get items => _items.toList();
-  List<ItemModel> get itemsWithoutGroup =>
-      _items.where((item) => item.groupingId == null).toList();
-  List<ItemModel> getItemsByGroup(String groupingId) =>
-      _items.where((item) => item.groupingId == groupingId).toList();
-  void sortItems() => _items
-      .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+  final Rx<GroupingModel?> _selectedGroup = Rx<GroupingModel?>(null);
+  GroupingModel? get selectedGroup => _selectedGroup.value;
 
-  Future<void> _loadGroupsAndItems() async {
-    _isLoading.value = true;
-    try {
-      final List<GroupingModel> tempGroups =
-          await _documentEditorService.loadGroups();
-      final List<ItemModel> tempItems =
-          await _documentEditorService.loadItems();
-
-      _groups.value = tempGroups;
-      _items.value = tempItems;
-
-      sortGroups();
-      sortItems();
-    } on AppError catch (appError) {
-      appError.showDialog();
-    }
-    _isLoading.value = false;
+  set selectedGroup(GroupingModel? value) {
+    _selectedItem.value = null;
+    _selectedGroup.value = value;
   }
 
   Future<bool> addOrEditGrouping({
@@ -102,14 +103,6 @@ class DocumentEditorController extends GetxController {
     }
   }
 
-  final Rx<GroupingModel?> _selectedGroup = Rx<GroupingModel?>(null);
-  GroupingModel? get selectedGroup => _selectedGroup.value;
-
-  set selectedGroup(GroupingModel? value) {
-    _selectedItem.value = null;
-    _selectedGroup.value = value;
-  }
-
   Future<void> deleteGroup(GroupingModel groupingModel) async {
     _isLoading.value = true;
     try {
@@ -125,6 +118,15 @@ class DocumentEditorController extends GetxController {
     }
     _isLoading.value = false;
   }
+
+  final RxList<ItemModel> _items = RxList<ItemModel>([]);
+  List<ItemModel> get items => _items.toList();
+  List<ItemModel> get itemsWithoutGroup =>
+      _items.where((item) => item.groupingId == null).toList();
+  List<ItemModel> getItemsByGroup(String groupingId) =>
+      _items.where((item) => item.groupingId == groupingId).toList();
+  void sortItems() => _items
+      .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
   final Rx<ItemModel?> _selectedItem = Rx<ItemModel?>(null);
   ItemModel? get selectedItem => _selectedItem.value;
