@@ -50,15 +50,12 @@ class _AddOrEditItemBottomSheetModalState
       case DocumentType.investmentControl:
         break;
       case DocumentType.annotation:
+        final annotation = widget.itemModel as AnnotationItemModel?;
         _quantityController = TextEditingController(
-          text: (widget.itemModel as AnnotationItemModel?)
-                  ?.quantity
-                  ?.toString() ??
-              '',
+          text: annotation?.quantity?.toString() ?? '',
         );
         _priceController = TextEditingController(
-          text: (widget.itemModel as AnnotationItemModel?)
-                  ?.price
+          text: annotation?.price
                   ?.toStringAsFixed(2)
                   .replaceAll('.00', '')
                   .replaceAll(',00', '') ??
