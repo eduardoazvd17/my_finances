@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/views/add_or_edit_item_bottom_sheet_modal.dart';
@@ -28,9 +27,15 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       child: ScaffoldWidget(
         appBar: AppBar(
           title: Text(controller.documentModel.name),
-          leading: _closeButton(context),
+          leading: IconButton(
+            tooltip: 'close-button'.i18n(),
+            onPressed: () {
+              Get.close(1);
+            },
+            icon: const Icon(Icons.close),
+          ),
           actions: [
-            _documentInfoMenuButton(context),
+            _getDocumentInfoMenuButton(context),
           ],
         ),
         floatingBottomMenu: _getDocumentFloatingMenu(context),
@@ -41,21 +46,13 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             );
           } else if (controller.groups.isEmpty &&
               controller.itemsWithoutGroup.isEmpty) {
-            return _getEmptyDocumentContent();
+            return Center(
+              child: controller.documentModel.type.emptyDocumentAdviseWidget,
+            );
           } else {
             return _getDocumentContent();
           }
         }),
-      ),
-    );
-  }
-
-  Widget _getEmptyDocumentContent() {
-    return Center(
-      child: AdviseMessageWidget(
-        icon: Icons.info_outline,
-        message: 'editor-data-empty-title-text'.i18n(),
-        description: 'editor-data-empty-description-text'.i18n(),
       ),
     );
   }
@@ -79,7 +76,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     );
   }
 
-  Widget _documentInfoMenuButton(BuildContext context) {
+  Widget _getDocumentInfoMenuButton(BuildContext context) {
     return IconButton(
       tooltip: 'document-info-button'.i18n(),
       onPressed: () {
@@ -96,16 +93,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         );
       },
       icon: const Icon(Icons.info_outline),
-    );
-  }
-
-  Widget _closeButton(BuildContext context) {
-    return IconButton(
-      tooltip: 'close-button'.i18n(),
-      onPressed: () {
-        Get.close(1);
-      },
-      icon: const Icon(Icons.close),
     );
   }
 
@@ -136,7 +123,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     BuildContext context,
   ) {
     //TODO: Implementar outros tipos de itens.
-
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
       DocumentType.investmentControl => [],

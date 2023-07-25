@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 
 enum DocumentType {
   monthlyExpenseControl,
@@ -29,4 +30,10 @@ extension DocumentTypeExtension on DocumentType {
         DocumentType.annotation => true,
         DocumentType.pointsAndAirlineMiles => false,
       };
+
+  AdviseMessageWidget get emptyDocumentAdviseWidget => AdviseMessageWidget(
+        icon: icon,
+        message: 'document-type-empty-title-$index'.i18n(),
+        description: 'document-type-empty-description-$index'.i18n(),
+      );
 }
