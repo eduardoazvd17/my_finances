@@ -49,9 +49,7 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                           borderRadius: BorderRadius.circular(10),
                           onTap: () {
                             _controller.toggleIsExpanded();
-                            if (_controller.isExpanded) {
-                              controller.selectedGroup = groupingModel;
-                            } else if (controller.selectedItem?.groupingId ==
+                            if (controller.selectedItem?.groupingId ==
                                 groupingModel.id) {
                               controller.selectedItem = null;
                             }
