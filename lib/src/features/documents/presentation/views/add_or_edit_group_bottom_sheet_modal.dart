@@ -50,63 +50,81 @@ class _AddOrEditGroupBottomSheetModalState
           Padding(
             padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
             child: Column(
-              children: [
-                TextFieldWidget(
-                  label: isEditing
-                      ? 'group-rename-label'.i18n()
-                      : 'group-name-label'.i18n(),
-                  hint: isEditing
-                      ? 'group-rename-hint'.i18n()
-                      : 'group-name-hint'.i18n(),
-                  controller: _nameController,
-                  textCapitalization: TextCapitalization.sentences,
-                  focusNode: FocusNode(),
-                ),
-                SwitchListTile(
-                  value: _initializeExpanded,
-                  contentPadding: EdgeInsets.zero,
-                  onChanged: (value) {
-                    setState(() {
-                      _initializeExpanded = value;
-                    });
-                  },
-                  title: Text('start-expanded-button'.i18n()),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          text: 'cancel-button'.i18n(),
-                          borderColor: Colors.red,
-                          foregroundColor: Colors.red,
-                          onTap: Get.back,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: ButtonWidget(
-                          text: isEditing
-                              ? 'save-button'.i18n()
-                              : 'add-button'.i18n(),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white,
-                          onTap: () async {
-                            final bool result =
-                                await widget.controller.addOrEditGrouping(
-                              groupingModel: widget.groupingModel,
-                              newName: _nameController.text.trim(),
-                              newInitializeExpanded: _initializeExpanded,
-                            );
-                            if (result) Get.close(1);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _buildLayout(context),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildLayout(BuildContext context) {
+    return [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+        child: Column(
+          children: [
+            _nameTextFieldWidget(),
+            _initializeExpandedWidget(),
+            _buttonsWidget(),
+          ],
+        ),
+      ),
+    ];
+  }
+
+  TextFieldWidget _nameTextFieldWidget() {
+    return TextFieldWidget(
+      label:
+          isEditing ? 'group-rename-label'.i18n() : 'group-name-label'.i18n(),
+      hint: isEditing ? 'group-rename-hint'.i18n() : 'group-name-hint'.i18n(),
+      controller: _nameController,
+      textCapitalization: TextCapitalization.sentences,
+      focusNode: FocusNode(),
+    );
+  }
+
+  SwitchListTile _initializeExpandedWidget() {
+    return SwitchListTile(
+      value: _initializeExpanded,
+      contentPadding: EdgeInsets.zero,
+      onChanged: (value) {
+        setState(() {
+          _initializeExpanded = value;
+        });
+      },
+      title: Text('start-expanded-button'.i18n()),
+    );
+  }
+
+  Widget _buttonsWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: ButtonWidget(
+              text: 'cancel-button'.i18n(),
+              borderColor: Colors.red,
+              foregroundColor: Colors.red,
+              onTap: Get.back,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: ButtonWidget(
+              text: isEditing ? 'save-button'.i18n() : 'add-button'.i18n(),
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.white,
+              onTap: () async {
+                final bool result = await widget.controller.addOrEditGrouping(
+                  groupingModel: widget.groupingModel,
+                  newName: _nameController.text.trim(),
+                  newInitializeExpanded: _initializeExpanded,
+                );
+                if (result) Get.close(1);
+              },
             ),
           ),
         ],
