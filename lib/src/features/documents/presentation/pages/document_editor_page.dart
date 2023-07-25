@@ -33,7 +33,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             _documentInfoMenuButton(context),
           ],
         ),
-        floatingBottomMenu: _floatingBottomMenu(context),
+        floatingBottomMenu: _getDocumentFloatingMenu(context),
         body: Obx(() {
           if (controller.isLoading) {
             return const Center(
@@ -41,16 +41,16 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             );
           } else if (controller.groups.isEmpty &&
               controller.itemsWithoutGroup.isEmpty) {
-            return _emptyDataContent();
+            return _getEmptyDocumentContent();
           } else {
-            return _dataListContent();
+            return _getDocumentContent();
           }
         }),
       ),
     );
   }
 
-  Widget _emptyDataContent() {
+  Widget _getEmptyDocumentContent() {
     return Center(
       child: AdviseMessageWidget(
         icon: Icons.info_outline,
@@ -60,7 +60,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     );
   }
 
-  Widget _dataListContent() {
+  Widget _getDocumentContent() {
     return Obx(
       () => ScrollViewWidget(
         child: Column(
@@ -109,7 +109,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     );
   }
 
-  Widget _floatingBottomMenu(BuildContext context) {
+  Widget _getDocumentFloatingMenu(BuildContext context) {
     final scrollController = ScrollController(
       initialScrollOffset: controller.menuScrollPosition,
     );
@@ -127,7 +127,20 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           controller.selectedGroup = null;
         },
         scrollController: scrollController,
-        items: [
+        items: _getDocumentFloatingMenuItems(context),
+      ),
+    );
+  }
+
+  List<FloatingBottomMenuItem> _getDocumentFloatingMenuItems(
+    BuildContext context,
+  ) {
+    //TODO: Implementar outros tipos de itens.
+
+    return switch (controller.documentModel.type) {
+      DocumentType.monthlyExpenseControl => [],
+      DocumentType.investmentControl => [],
+      DocumentType.annotation => [
           if (controller.selectedGroup == null &&
               controller.selectedItem == null)
             FloatingBottomMenuItem(
@@ -299,7 +312,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
           ],
         ],
-      ),
-    );
+      DocumentType.pointsAndAirlineMiles => [],
+    };
   }
 }
