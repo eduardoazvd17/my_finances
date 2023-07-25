@@ -74,7 +74,10 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
+                              padding: EdgeInsets.only(
+                                left: 5.0,
+                                top: MediaQuery.of(context).textScaleFactor,
+                              ),
                               child: InkWell(
                                 onTap: onRemoveSelected,
                                 borderRadius: BorderRadius.circular(15),

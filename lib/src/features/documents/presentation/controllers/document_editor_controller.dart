@@ -26,7 +26,6 @@ class DocumentEditorController extends GetxController {
     try {
       final List<GroupingModel> tempGroups =
           await _documentEditorService.loadGroups();
-
       final List<ItemModel> tempItems =
           await _documentEditorService.loadItems();
 
