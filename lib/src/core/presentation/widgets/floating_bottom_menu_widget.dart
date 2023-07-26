@@ -49,7 +49,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                         top: 4.5,
                       ),
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
@@ -71,20 +71,14 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: 5.0,
-                                top: MediaQuery.of(context).textScaleFactor,
-                              ),
-                              child: InkWell(
-                                onTap: onRemoveSelected,
-                                borderRadius: BorderRadius.circular(15),
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.grey[600],
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: InkWell(
+                              onTap: onRemoveSelected,
+                              borderRadius: BorderRadius.circular(15),
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.grey[600],
                               ),
                             ),
                           ),
@@ -107,7 +101,8 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 5.0),
+                                    horizontal: 5.0,
+                                  ),
                                   child: Container(
                                     width: 0.5,
                                     height: 25,
