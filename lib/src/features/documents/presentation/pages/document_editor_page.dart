@@ -125,7 +125,28 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     //TODO: Implementar outros tipos de itens.
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
-      DocumentType.investmentControl => [],
+      DocumentType.investmentControl => [
+          FloatingBottomMenuItem(
+            icon: Icons.post_add_rounded,
+            tooltip: 'add-investiment-type-button'.i18n(),
+            showTooltip: true,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                barrierColor: Colors.black87,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (context) {
+                  return AddOrEditGroupBottomSheetModal(
+                    icon: Icons.post_add_rounded,
+                    title: 'add-investiment-type-button'.i18n(),
+                    controller: controller,
+                  );
+                },
+              );
+            },
+          ),
+        ],
       DocumentType.annotation => [
           if (controller.selectedGroup == null &&
               controller.selectedItem == null)
@@ -141,6 +162,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   useSafeArea: true,
                   builder: (context) {
                     return AddOrEditGroupBottomSheetModal(
+                      icon: Icons.post_add_rounded,
+                      title: 'new-group-button'.i18n(),
                       controller: controller,
                     );
                   },
@@ -160,6 +183,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   useSafeArea: true,
                   builder: (context) {
                     return AddOrEditItemBottomSheetModal(
+                      icon: Icons.format_list_bulleted_add,
+                      title: 'new-item-button'.i18n(),
                       controller: controller,
                       groupingModel: controller.selectedGroup,
                     );
@@ -213,6 +238,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   useSafeArea: true,
                   builder: (context) {
                     return AddOrEditGroupBottomSheetModal(
+                      icon: CupertinoIcons.pencil,
+                      title: 'edit-group-button'.i18n(),
                       controller: controller,
                       groupingModel: controller.selectedGroup!,
                     );
@@ -267,6 +294,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   useSafeArea: true,
                   builder: (context) {
                     return AddOrEditItemBottomSheetModal(
+                      icon: CupertinoIcons.pencil,
+                      title: 'edit-item-button'.i18n(),
                       controller: controller,
                       groupingModel: controller.groups.firstWhereOrNull(
                         (e) => e.id == controller.selectedItem!.groupingId,

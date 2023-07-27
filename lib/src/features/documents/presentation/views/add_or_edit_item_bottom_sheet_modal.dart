@@ -12,12 +12,16 @@ import '../../data/enums/document_type.dart';
 import '../controllers/document_editor_controller.dart';
 
 class AddOrEditItemBottomSheetModal extends StatefulWidget {
+  final IconData icon;
+  final String title;
   final ItemModel? itemModel;
   final GroupingModel? groupingModel;
   final DocumentEditorController controller;
 
   const AddOrEditItemBottomSheetModal({
     super.key,
+    required this.icon,
+    required this.title,
     this.itemModel,
     this.groupingModel,
     required this.controller,
@@ -72,8 +76,8 @@ class _AddOrEditItemBottomSheetModalState
   @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
-      icon: Icons.format_list_bulleted_add,
-      title: isEditing ? 'edit-item-button'.i18n() : 'new-item-button'.i18n(),
+      icon: widget.icon,
+      title: widget.title,
       child: Column(
         children: [
           Padding(

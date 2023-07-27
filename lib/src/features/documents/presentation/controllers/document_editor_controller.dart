@@ -64,12 +64,13 @@ class DocumentEditorController extends GetxController {
     required GroupingModel? groupingModel,
     required String newName,
     required bool newInitializeExpanded,
+    required String nameValidationError,
   }) async {
     try {
       _isLoading.value = true;
 
       if (newName.isEmpty) {
-        throw AppError(message: 'group-name-validation'.i18n());
+        throw AppError(message: nameValidationError);
       }
 
       final GroupingModel newGroupingModel;

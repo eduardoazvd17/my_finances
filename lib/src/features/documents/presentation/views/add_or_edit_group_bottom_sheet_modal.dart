@@ -7,16 +7,21 @@ import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 
 import '../../../../core/presentation/widgets/text_field_widget.dart';
+import '../../data/enums/document_type.dart';
 import '../controllers/document_editor_controller.dart';
 
 class AddOrEditGroupBottomSheetModal extends StatefulWidget {
-  final GroupingModel? groupingModel;
+  final IconData icon;
+  final String title;
   final DocumentEditorController controller;
+  final GroupingModel? groupingModel;
 
   const AddOrEditGroupBottomSheetModal({
     super.key,
-    this.groupingModel,
+    required this.icon,
+    required this.title,
     required this.controller,
+    this.groupingModel,
   });
 
   @override
@@ -43,15 +48,15 @@ class _AddOrEditGroupBottomSheetModalState
   @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
-      icon: isEditing ? CupertinoIcons.pencil : Icons.post_add_rounded,
-      title: isEditing ? 'edit-group-button'.i18n() : 'new-group-button'.i18n(),
+      icon: widget.icon,
+      title: widget.title,
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _buildLayout(context),
+              children: _buildLayoutByDocumentType(context),
             ),
           ),
         ],
@@ -59,19 +64,20 @@ class _AddOrEditGroupBottomSheetModalState
     );
   }
 
-  List<Widget> _buildLayout(BuildContext context) {
-    return [
-      Padding(
-        padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-        child: Column(
-          children: [
-            _nameTextFieldWidget(),
-            _initializeExpandedWidget(),
-            _buttonsWidget(),
-          ],
-        ),
-      ),
-    ];
+  List<Widget> _buildLayoutByDocumentType(BuildContext context) {
+    //TODO: Implementar outros tipos de itens.
+    return switch (widget.controller.documentModel.type) {
+      DocumentType.monthlyExpenseControl => [],
+      DocumentType.investmentControl => [],
+      DocumentType.annotation => [
+          _nameTextFieldWidget(),
+          _initializeExpandedWidget(),
+          _buttonsWidget(
+            nameValidationError: 'group-name-validation'.i18n(),
+          ),
+        ],
+      DocumentType.pointsAndAirlineMiles => [],
+    };
   }
 
   TextFieldWidget _nameTextFieldWidget() {
@@ -98,7 +104,9 @@ class _AddOrEditGroupBottomSheetModalState
     );
   }
 
-  Widget _buttonsWidget() {
+  Widget _buttonsWidget({
+    required String nameValidationError,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: Row(
@@ -122,6 +130,7 @@ class _AddOrEditGroupBottomSheetModalState
                   groupingModel: widget.groupingModel,
                   newName: _nameController.text.trim(),
                   newInitializeExpanded: _initializeExpanded,
+                  nameValidationError: nameValidationError,
                 );
                 if (result) Get.close(1);
               },
