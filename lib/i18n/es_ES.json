@@ -124,12 +124,9 @@
     "user-exists": "Ya existe una cuenta asociada con esta dirección de correo electrónico.",
     "login-email-validation": "Ingrese una dirección de correo electrónico válida.",
     "login-password-validation": "Ingrese su contraseña para iniciar sesión.",
-    "register-name-validation": "Ingrese un nombre válido.",
     "register-email-validation": "Ingrese una dirección de correo electrónico válida.",
     "register-password-validation": "Por favor ingrese una contraseña válida de 8 o más caracteres.",
     "register-password2-validation": "La confirmación de la contraseña debe coincidir con la contraseña ingresada anteriormente.",
-    "document-name-validation": "Ingrese un nombre válido para su documento.",
     "document-type-validation": "Seleccione un tipo de documento para continuar.",
-    "group-name-validation": "Ingrese un nombre de agrupamiento válido.",
-    "item-name-validation": "Ingrese un nombre válido para el elemento."
+    "name-validation": "Ingrese un nombre válido."
 }

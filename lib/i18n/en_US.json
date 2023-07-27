@@ -124,12 +124,9 @@
     "user-exists": "An account associated with this email address already exists.",
     "login-email-validation": "Please enter a valid email address.",
     "login-password-validation": "Enter your password to login.",
-    "register-name-validation": "Please enter a valid name.",
     "register-email-validation": "Please enter a valid email address.",
     "register-password-validation": "Please enter a valid password of 8 or more characters.",
     "register-password2-validation": "The password confirmation must match the previously entered password.",
-    "document-name-validation": "Please enter a valid name for your document.",
     "document-type-validation": "Please select a document type to continue.",
-    "group-name-validation": "Please enter a valid group name.",
-    "item-name-validation": "Please enter a valid name for the item."
+    "name-validation": "Please enter a valid name."
 }

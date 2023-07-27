@@ -72,9 +72,7 @@ class _AddOrEditGroupBottomSheetModalState
       DocumentType.annotation => [
           _nameTextFieldWidget(),
           _initializeExpandedWidget(),
-          _buttonsWidget(
-            nameValidationError: 'group-name-validation'.i18n(),
-          ),
+          _buttonsWidget(),
         ],
       DocumentType.pointsAndAirlineMiles => [],
     };
@@ -104,9 +102,7 @@ class _AddOrEditGroupBottomSheetModalState
     );
   }
 
-  Widget _buttonsWidget({
-    required String nameValidationError,
-  }) {
+  Widget _buttonsWidget() {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: Row(
@@ -130,7 +126,6 @@ class _AddOrEditGroupBottomSheetModalState
                   groupingModel: widget.groupingModel,
                   newName: _nameController.text.trim(),
                   newInitializeExpanded: _initializeExpanded,
-                  nameValidationError: nameValidationError,
                 );
                 if (result) Get.close(1);
               },

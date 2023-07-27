@@ -123,7 +123,7 @@ class AuthController extends GetxController {
 
       if (name.isEmpty) {
         focusNode = nameFocus;
-        throw AppError(message: 'register-name-validation'.i18n());
+        throw AppError(message: 'name-validation'.i18n());
       }
 
       if (!email.isEmail) {

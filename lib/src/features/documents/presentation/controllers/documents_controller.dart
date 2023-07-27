@@ -130,7 +130,7 @@ class DocumentsController extends GetxController {
 
       if (name.isEmpty) {
         focusNode = nameFocus;
-        throw AppError(message: 'document-name-validation'.i18n());
+        throw AppError(message: 'name-validation'.i18n());
       }
 
       if (type == null) {
@@ -180,7 +180,7 @@ class DocumentsController extends GetxController {
       //LoadingWidget.dialog();
 
       if (newName != null && newName.trim().isEmpty) {
-        throw AppError(message: 'document-name-validation'.i18n());
+        throw AppError(message: 'name-validation'.i18n());
       }
 
       final DocumentModel newDocumentModel =
