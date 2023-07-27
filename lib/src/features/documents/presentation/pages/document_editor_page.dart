@@ -69,7 +69,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ...controller.itemsWithoutGroup.map((itemModel) {
               return ItemWidget(itemModel: itemModel);
             }),
-            const SizedBox(height: 140),
+            const SizedBox(height: 125),
           ],
         ),
       ),
