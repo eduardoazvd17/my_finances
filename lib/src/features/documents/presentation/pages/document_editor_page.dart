@@ -126,26 +126,49 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
       DocumentType.investmentControl => [
-          FloatingBottomMenuItem(
-            icon: Icons.post_add_rounded,
-            tooltip: 'add-asset-button'.i18n(),
-            showTooltip: true,
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                barrierColor: Colors.black87,
-                isScrollControlled: true,
-                useSafeArea: true,
-                builder: (context) {
-                  return AddOrEditGroupBottomSheetModal(
-                    icon: Icons.post_add_rounded,
-                    title: 'add-asset-button'.i18n(),
-                    controller: controller,
-                  );
-                },
-              );
-            },
-          ),
+          if (controller.selectedGroup == null)
+            FloatingBottomMenuItem(
+              icon: Icons.post_add_rounded,
+              tooltip: 'add-asset-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditGroupBottomSheetModal(
+                      icon: Icons.post_add_rounded,
+                      title: 'add-asset-button'.i18n(),
+                      controller: controller,
+                    );
+                  },
+                );
+              },
+            ),
+          if (controller.selectedGroup != null)
+            FloatingBottomMenuItem(
+              icon: Icons.post_add_rounded,
+              tooltip: 'edit-asset-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditGroupBottomSheetModal(
+                      icon: CupertinoIcons.pencil,
+                      title: 'edit-asset-button'.i18n(),
+                      groupingModel: controller.selectedGroup,
+                      controller: controller,
+                    );
+                  },
+                );
+              },
+            ),
         ],
       DocumentType.annotation => [
           if (controller.selectedGroup == null &&

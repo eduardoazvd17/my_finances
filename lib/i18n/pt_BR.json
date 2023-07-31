@@ -133,5 +133,6 @@
     "asset-label": "Ticker ou nome do ativo:",
     "asset-hint": "Exemplo MYFC3...",
     "existing-asset-dialog-title": "Ativo já adicionado",
-    "existing-asset-dialog-content": "O ativo \"%s\" já existe no seu documento."
+    "existing-asset-dialog-content": "O ativo \"%s\" já existe no seu documento.",
+    "edit-asset-button": "Editar ativo"
 }
