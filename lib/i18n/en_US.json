@@ -131,5 +131,7 @@
     "name-validation": "Please enter a valid name.",
     "add-asset-button": "Add asset",
     "asset-label": "Ticker or asset name:",
-    "asset-hint": "Example MYFC3..."
+    "asset-hint": "Example MYFC3...",
+    "existing-asset-dialog-title": "Asset already added",
+    "existing-asset-dialog-content": "The asset \"%s\" already exists in your document."
 }

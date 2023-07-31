@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -6,6 +5,7 @@ import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widg
 import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 
+import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../../data/enums/document_type.dart';
 import '../controllers/document_editor_controller.dart';
@@ -72,7 +72,7 @@ class _AddOrEditGroupBottomSheetModalState
           _assetTextFieldWidget(),
           _buttonsWidget(() async {
             final RegExp tickerRegex = RegExp(
-              r'([a-z]{4}|[A-Z]{4})(([1-9]{1}[0-1]{1})|[1-9]{1})',
+              r'[a-zA-Z]{4}(([1-9]{1}[0-1]{1})|[1-9]{1})',
             );
 
             String newName = _nameController.text.trim();
@@ -84,6 +84,25 @@ class _AddOrEditGroupBottomSheetModalState
                   matchString.toUpperCase(),
                 );
               }
+            }
+
+            final GroupingModel? existingGrouping =
+                widget.controller.groups.firstWhereOrNull(
+              (e) => e.name.toLowerCase() == newName.toLowerCase(),
+            );
+            if (existingGrouping != null) {
+              await Get.dialog(
+                CustomDialog(
+                  title: 'existing-asset-dialog-title'.i18n(),
+                  content: 'existing-asset-dialog-content'.i18n([
+                    existingGrouping.name,
+                  ]),
+                  onClose: () {
+                    widget.controller.selectedGroup = existingGrouping;
+                  },
+                ),
+              );
+              return true;
             }
 
             return await widget.controller.addOrEditGrouping(

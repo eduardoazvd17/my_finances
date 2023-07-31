@@ -131,5 +131,7 @@
     "name-validation": "Insira um nome válido.",
     "add-asset-button": "Adicionar ativo",
     "asset-label": "Ticker ou nome do ativo:",
-    "asset-hint": "Exemplo MYFC3..."
+    "asset-hint": "Exemplo MYFC3...",
+    "existing-asset-dialog-title": "Ativo já adicionado",
+    "existing-asset-dialog-content": "O ativo \"%s\" já existe no seu documento."
 }
