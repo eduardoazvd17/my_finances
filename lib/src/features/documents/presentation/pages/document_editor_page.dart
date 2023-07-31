@@ -147,7 +147,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 );
               },
             ),
-          if (controller.selectedGroup != null)
+          if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
               icon: Icons.post_add_rounded,
               tooltip: 'edit-asset-button'.i18n(),
@@ -169,6 +169,26 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 );
               },
             ),
+            FloatingBottomMenuItem(
+              icon: CupertinoIcons.delete,
+              tooltip: 'delete-asset-button'.i18n(),
+              foregroundColor: Colors.red,
+              showTooltip: true,
+              onTap: () {
+                Get.dialog(
+                  CustomDialog(
+                    title: 'delete-asset-button'.i18n(),
+                    content: 'delete-asset-confirmation-text'.i18n(),
+                    invertButtonColor: true,
+                    onConfirm: () {
+                      controller.deleteGroup(controller.selectedGroup!);
+                    },
+                  ),
+                  barrierColor: Colors.black87,
+                );
+              },
+            ),
+          ],
         ],
       DocumentType.annotation => [
           if (controller.selectedGroup == null &&

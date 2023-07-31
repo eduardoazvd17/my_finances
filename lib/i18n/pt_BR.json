@@ -134,5 +134,7 @@
     "asset-hint": "Exemplo MYFC3...",
     "existing-asset-dialog-title": "Ativo já adicionado",
     "existing-asset-dialog-content": "O ativo \"%s\" já existe no seu documento.",
-    "edit-asset-button": "Editar ativo"
+    "edit-asset-button": "Editar ativo",
+    "delete-asset-button": "Excluir ativo",
+    "delete-asset-confirmation-text": "Deseja realmente excluir esse ativo?\n\nTodas as informações de compra e venda deste ativo também serão excluídas."
 }
