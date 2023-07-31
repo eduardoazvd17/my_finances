@@ -139,6 +139,7 @@ class DocumentEditorService {
       final AnnotationItemModel itemModel = AnnotationItemModel(
         id: docRef.id,
         name: name,
+        creationDate: DateTime.now(),
         description: description,
         groupingId: groupingId,
         quantity: quantity,

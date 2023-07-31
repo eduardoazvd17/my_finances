@@ -128,5 +128,8 @@
     "register-password-validation": "Insira uma senha válida com 8 ou mais caracteres.",
     "register-password2-validation": "A confirmação de senha deve ser igual a senha inserida anteriormente.",
     "document-type-validation": "Selecione um tipo de documento para continuar.",
-    "name-validation": "Insira um nome válido."
+    "name-validation": "Insira um nome válido.",
+    "add-asset-button": "Adicionar ativo",
+    "asset-label": "Ticker ou nome do ativo:",
+    "asset-hint": "Exemplo MYFC3..."
 }

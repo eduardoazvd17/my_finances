@@ -128,7 +128,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       DocumentType.investmentControl => [
           FloatingBottomMenuItem(
             icon: Icons.post_add_rounded,
-            tooltip: 'add-investiment-type-button'.i18n(),
+            tooltip: 'add-asset-button'.i18n(),
             showTooltip: true,
             onTap: () {
               showModalBottomSheet(
@@ -139,7 +139,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 builder: (context) {
                   return AddOrEditGroupBottomSheetModal(
                     icon: Icons.post_add_rounded,
-                    title: 'add-investiment-type-button'.i18n(),
+                    title: 'add-asset-button'.i18n(),
                     controller: controller,
                   );
                 },

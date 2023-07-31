@@ -1,12 +1,14 @@
 class ItemModel {
   final String id;
   final String name;
+  final DateTime creationDate;
   final String? description;
   final String? groupingId;
 
   const ItemModel({
     required this.id,
     required this.name,
+    required this.creationDate,
     required this.description,
     required this.groupingId,
   });
@@ -15,6 +17,7 @@ class ItemModel {
     return {
       'id': id,
       'name': name,
+      'creationDate': creationDate,
       'description': description,
       'groupingId': groupingId,
     };
@@ -31,6 +34,7 @@ class AnnotationItemModel extends ItemModel {
   const AnnotationItemModel({
     required super.id,
     required super.name,
+    required super.creationDate,
     super.description,
     super.groupingId,
     this.quantity,
@@ -42,6 +46,7 @@ class AnnotationItemModel extends ItemModel {
     return AnnotationItemModel(
       id: id,
       name: name,
+      creationDate: creationDate,
       description: description,
       groupingId: groupingId,
       quantity: quantity,
@@ -61,6 +66,7 @@ class AnnotationItemModel extends ItemModel {
     return AnnotationItemModel(
       id: id ?? this.id,
       name: name ?? this.name,
+      creationDate: creationDate,
       description: description,
       groupingId: groupingId,
       quantity: quantity,
@@ -83,6 +89,7 @@ class AnnotationItemModel extends ItemModel {
     return AnnotationItemModel(
       id: map['id'],
       name: map['name'],
+      creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
       description: map['description'],
       groupingId: map['groupingId'],
       quantity: map['quantity'],

@@ -68,14 +68,54 @@ class _AddOrEditGroupBottomSheetModalState
     //TODO: Implementar outros tipos de itens.
     return switch (widget.controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
-      DocumentType.investmentControl => [],
+      DocumentType.investmentControl => [
+          _assetTextFieldWidget(),
+          _buttonsWidget(() async {
+            final RegExp tickerRegex = RegExp(
+              r'([a-z]{4}|[A-Z]{4})(([1-9]{1}[0-1]{1})|[1-9]{1})',
+            );
+
+            String newName = _nameController.text.trim();
+            if (tickerRegex.hasMatch(newName)) {
+              for (final match in tickerRegex.allMatches(newName)) {
+                final String matchString = match.group(0) ?? '';
+                newName = newName.replaceAll(
+                  matchString,
+                  matchString.toUpperCase(),
+                );
+              }
+            }
+
+            return await widget.controller.addOrEditGrouping(
+              groupingModel: widget.groupingModel,
+              newName: newName,
+              newInitializeExpanded: _initializeExpanded,
+            );
+          }),
+        ],
       DocumentType.annotation => [
           _nameTextFieldWidget(),
           _initializeExpandedWidget(),
-          _buttonsWidget(),
+          _buttonsWidget(() async {
+            return await widget.controller.addOrEditGrouping(
+              groupingModel: widget.groupingModel,
+              newName: _nameController.text.trim(),
+              newInitializeExpanded: _initializeExpanded,
+            );
+          }),
         ],
       DocumentType.pointsAndAirlineMiles => [],
     };
+  }
+
+  TextFieldWidget _assetTextFieldWidget() {
+    return TextFieldWidget(
+      label: 'asset-label'.i18n(),
+      hint: 'asset-hint'.i18n(),
+      controller: _nameController,
+      textCapitalization: TextCapitalization.sentences,
+      focusNode: FocusNode(),
+    );
   }
 
   TextFieldWidget _nameTextFieldWidget() {
@@ -102,7 +142,7 @@ class _AddOrEditGroupBottomSheetModalState
     );
   }
 
-  Widget _buttonsWidget() {
+  Widget _buttonsWidget(Future<bool> Function() onAddOrEdit) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: Row(
@@ -122,11 +162,7 @@ class _AddOrEditGroupBottomSheetModalState
               backgroundColor: Theme.of(context).primaryColor,
               foregroundColor: Colors.white,
               onTap: () async {
-                final bool result = await widget.controller.addOrEditGrouping(
-                  groupingModel: widget.groupingModel,
-                  newName: _nameController.text.trim(),
-                  newInitializeExpanded: _initializeExpanded,
-                );
+                final bool result = await onAddOrEdit.call();
                 if (result) Get.close(1);
               },
             ),

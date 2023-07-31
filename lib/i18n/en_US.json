@@ -128,5 +128,8 @@
     "register-password-validation": "Please enter a valid password of 8 or more characters.",
     "register-password2-validation": "The password confirmation must match the previously entered password.",
     "document-type-validation": "Please select a document type to continue.",
-    "name-validation": "Please enter a valid name."
+    "name-validation": "Please enter a valid name.",
+    "add-asset-button": "Add asset",
+    "asset-label": "Ticker or asset name:",
+    "asset-hint": "Example MYFC3..."
 }
