@@ -39,7 +39,9 @@ class DocumentEditorService {
       //TODO: Implementar outros tipos de itens.
       return switch (documentModel.type) {
         DocumentType.monthlyExpenseControl => [],
-        DocumentType.investmentControl => [],
+        DocumentType.investmentControl => query.docs
+            .map((doc) => InvestimentControlItemModel.fromMap(doc.data()))
+            .toList(),
         DocumentType.annotation => query.docs
             .map((doc) => AnnotationItemModel.fromMap(doc.data()))
             .toList(),
