@@ -126,7 +126,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
       DocumentType.investmentControl => [
-          if (controller.selectedGroup == null)
+          if (controller.selectedGroup == null) ...[
             FloatingBottomMenuItem(
               icon: Icons.post_add_rounded,
               tooltip: 'add-asset-button'.i18n(),
@@ -147,7 +147,50 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 );
               },
             ),
+          ],
           if (controller.selectedGroup != null) ...[
+            FloatingBottomMenuItem(
+              icon: Icons.attach_money,
+              tooltip: 'add-buy-info-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      icon: Icons.attach_money,
+                      title: 'add-buy-info-button'.i18n(),
+                      controller: controller,
+                      groupingModel: controller.selectedGroup,
+                    );
+                  },
+                );
+              },
+            ),
+            FloatingBottomMenuItem(
+              icon: Icons.money_off,
+              tooltip: 'add-sell-info-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      icon: Icons.money_off,
+                      title: 'add-sell-info-button'.i18n(),
+                      controller: controller,
+                      groupingModel: controller.selectedGroup,
+                    );
+                  },
+                );
+              },
+            ),
             FloatingBottomMenuItem(
               icon: CupertinoIcons.pencil,
               tooltip: 'edit-asset-button'.i18n(),

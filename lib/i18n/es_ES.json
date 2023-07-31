@@ -136,5 +136,7 @@
     "existing-asset-dialog-content": "El activo \"%s\" ya existe en su documento.",
     "edit-asset-button": "Editar activo",
     "delete-asset-button": "Eliminar activo",
-    "delete-asset-confirmation-text": "¿Realmente desea eliminar este activo?\n\nToda la información de compra y venta de este activo también se eliminará."
+    "delete-asset-confirmation-text": "¿Realmente desea eliminar este activo?\n\nToda la información de compra y venta de este activo también se eliminará.",
+    "add-buy-info-button": "Informar compra",
+    "add-sell-info-button": "Informar venta"
 }
