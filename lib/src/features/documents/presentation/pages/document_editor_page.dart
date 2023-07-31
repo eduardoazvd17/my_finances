@@ -149,7 +149,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
-              icon: Icons.post_add_rounded,
+              icon: CupertinoIcons.pencil,
               tooltip: 'edit-asset-button'.i18n(),
               showTooltip: true,
               onTap: () {
