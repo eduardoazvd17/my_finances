@@ -150,8 +150,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           ],
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
-              icon: Icons.attach_money,
-              tooltip: 'add-buy-info-button'.i18n(),
+              icon: Icons.add,
+              tooltip: 'add-asset-operation-button'.i18n(),
               showTooltip: true,
               onTap: () {
                 showModalBottomSheet(
@@ -161,29 +161,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   useSafeArea: true,
                   builder: (context) {
                     return AddOrEditItemBottomSheetModal(
-                      icon: Icons.attach_money,
-                      title: 'add-buy-info-button'.i18n(),
-                      controller: controller,
-                      groupingModel: controller.selectedGroup,
-                    );
-                  },
-                );
-              },
-            ),
-            FloatingBottomMenuItem(
-              icon: Icons.money_off,
-              tooltip: 'add-sell-info-button'.i18n(),
-              showTooltip: true,
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  barrierColor: Colors.black87,
-                  isScrollControlled: true,
-                  useSafeArea: true,
-                  builder: (context) {
-                    return AddOrEditItemBottomSheetModal(
-                      icon: Icons.money_off,
-                      title: 'add-sell-info-button'.i18n(),
+                      icon: Icons.add,
+                      title: 'add-asset-operation-button'.i18n(),
                       controller: controller,
                       groupingModel: controller.selectedGroup,
                     );

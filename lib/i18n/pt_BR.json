@@ -137,6 +137,5 @@
     "edit-asset-button": "Editar ativo",
     "delete-asset-button": "Excluir ativo",
     "delete-asset-confirmation-text": "Deseja realmente excluir esse ativo?\n\nTodas as informações de compra e venda deste ativo também serão excluídas.",
-    "add-buy-info-button": "Informar compra",
-    "add-sell-info-button": "Informar venda"
+    "add-asset-operation-button": "Inserir operação"
 }

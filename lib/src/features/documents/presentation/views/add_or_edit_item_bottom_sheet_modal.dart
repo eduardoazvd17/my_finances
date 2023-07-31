@@ -9,22 +9,23 @@ import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../data/enums/document_type.dart';
+import '../../data/enums/investiment_input_type.dart';
 import '../controllers/document_editor_controller.dart';
 
 class AddOrEditItemBottomSheetModal extends StatefulWidget {
   final IconData icon;
   final String title;
+  final DocumentEditorController controller;
   final ItemModel? itemModel;
   final GroupingModel? groupingModel;
-  final DocumentEditorController controller;
 
   const AddOrEditItemBottomSheetModal({
     super.key,
     required this.icon,
     required this.title,
+    required this.controller,
     this.itemModel,
     this.groupingModel,
-    required this.controller,
   });
 
   @override

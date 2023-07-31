@@ -1,3 +1,5 @@
+import 'package:myfinances/src/features/documents/data/enums/investiment_input_type.dart';
+
 class ItemModel {
   final String id;
   final String name;
@@ -17,7 +19,7 @@ class ItemModel {
     return {
       'id': id,
       'name': name,
-      'creationDate': creationDate,
+      'creationDate': creationDate.millisecondsSinceEpoch,
       'description': description,
       'groupingId': groupingId,
     };
@@ -56,7 +58,6 @@ class AnnotationItemModel extends ItemModel {
   }
 
   AnnotationItemModel editAndCopy({
-    String? id,
     String? name,
     String? description,
     String? groupingId,
@@ -64,7 +65,7 @@ class AnnotationItemModel extends ItemModel {
     double? price,
   }) {
     return AnnotationItemModel(
-      id: id ?? this.id,
+      id: id,
       name: name ?? this.name,
       creationDate: creationDate,
       description: description,
@@ -99,13 +100,67 @@ class AnnotationItemModel extends ItemModel {
   }
 }
 
-// class InvestimentControlItemModel extends ItemModel {
-//   const InvestimentControlItemModel({
-//     required super.name,
-//     super.groupingId,
-//     super.description,
-//   });
-// }
+class InvestimentControlItemModel extends ItemModel {
+  final InputType inputType;
+  final int quantity;
+  final double price;
+  final DateTime date;
+
+  const InvestimentControlItemModel({
+    required super.id,
+    required super.creationDate,
+    super.name = '',
+    required super.groupingId,
+    super.description,
+    required this.inputType,
+    required this.quantity,
+    required this.price,
+    required this.date,
+  });
+
+  InvestimentControlItemModel editAndCopy({
+    String? description,
+    int? quantity,
+    double? price,
+  }) {
+    return InvestimentControlItemModel(
+      id: id,
+      name: name,
+      description: description,
+      creationDate: creationDate,
+      groupingId: groupingId,
+      inputType: inputType,
+      quantity: quantity ?? this.quantity,
+      price: price ?? this.price,
+      date: date,
+    );
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return super.toMap()
+      ..addAll({
+        'inputType': inputType.index,
+        'quantity': quantity,
+        'price': price.toStringAsFixed(2),
+        'date': date.millisecondsSinceEpoch,
+      });
+  }
+
+  factory InvestimentControlItemModel.fromMap(Map<String, dynamic> map) {
+    return InvestimentControlItemModel(
+      id: map['id'],
+      name: map['name'],
+      creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
+      description: map['description'],
+      groupingId: map['groupingId'],
+      inputType: InputType.values[map['inputType']],
+      quantity: map['quantity'],
+      price: double.tryParse(map['price'] ?? '') ?? 0.0,
+      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
+    );
+  }
+}
 
 // class PointsAndAirlineMilesItemModel extends ItemModel {
 //   const PointsAndAirlineMilesItemModel({
