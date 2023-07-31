@@ -137,5 +137,7 @@
     "edit-asset-button": "Editar activo",
     "delete-asset-button": "Eliminar activo",
     "delete-asset-confirmation-text": "¿Realmente desea eliminar este activo?\n\nToda la información de compra y venta de este activo también se eliminará.",
-    "add-asset-operation-button": "Insertar operación"
+    "add-asset-operation-button": "Insertar operación",
+    "operation-type-title-0": "Compra",
+    "operation-type-title-1": "Venta"
 }

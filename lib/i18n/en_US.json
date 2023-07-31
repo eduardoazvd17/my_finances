@@ -137,5 +137,7 @@
     "edit-asset-button": "Edit asset",
     "delete-asset-button": "Delete asset",
     "delete-asset-confirmation-text": "Do you really want to delete this asset?\n\nAll buy and sell information for this asset will also be deleted.",
-    "add-asset-operation-button": "Insert operation"
+    "add-asset-operation-button": "Insert operation",
+    "operation-type-title-0": "Purchase",
+    "operation-type-title-1": "Sale"
 }

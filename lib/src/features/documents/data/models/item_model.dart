@@ -1,4 +1,4 @@
-import 'package:myfinances/src/features/documents/data/enums/investiment_input_type.dart';
+import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 
 class ItemModel {
   final String id;
@@ -101,7 +101,7 @@ class AnnotationItemModel extends ItemModel {
 }
 
 class InvestimentControlItemModel extends ItemModel {
-  final InputType inputType;
+  final OperationType operationType;
   final int quantity;
   final double price;
   final DateTime date;
@@ -112,7 +112,7 @@ class InvestimentControlItemModel extends ItemModel {
     super.name = '',
     required super.groupingId,
     super.description,
-    required this.inputType,
+    required this.operationType,
     required this.quantity,
     required this.price,
     required this.date,
@@ -129,7 +129,7 @@ class InvestimentControlItemModel extends ItemModel {
       description: description,
       creationDate: creationDate,
       groupingId: groupingId,
-      inputType: inputType,
+      operationType: operationType,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
       date: date,
@@ -140,7 +140,7 @@ class InvestimentControlItemModel extends ItemModel {
   Map<String, dynamic> toMap() {
     return super.toMap()
       ..addAll({
-        'inputType': inputType.index,
+        'operationType': operationType.index,
         'quantity': quantity,
         'price': price.toStringAsFixed(2),
         'date': date.millisecondsSinceEpoch,
@@ -154,7 +154,7 @@ class InvestimentControlItemModel extends ItemModel {
       creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
       description: map['description'],
       groupingId: map['groupingId'],
-      inputType: InputType.values[map['inputType']],
+      operationType: OperationType.values[map['operationType']],
       quantity: map['quantity'],
       price: double.tryParse(map['price'] ?? '') ?? 0.0,
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
