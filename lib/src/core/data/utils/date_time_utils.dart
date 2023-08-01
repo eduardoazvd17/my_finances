@@ -29,4 +29,9 @@ class DateTimeUtils {
     final weekDay = DateFormat.EEEE(_localeString).format(date);
     return '$weekDay, ${DateFormat.yMMMMd(_localeString).format(date)} - $time';
   }
+
+  static String formatDate(DateTime date) {
+    final weekDay = DateFormat.EEEE(_localeString).format(date);
+    return '$weekDay, ${DateFormat.yMd(_localeString).format(date)}';
+  }
 }

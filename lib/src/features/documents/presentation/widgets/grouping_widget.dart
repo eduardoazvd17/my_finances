@@ -114,7 +114,7 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
   }
 
   Widget _trailingWidgetByDocumentType() {
-    //TODO: Implementar outros tipos de itens.
+    //TODO: Gropuping trailing para cada tipo de DocumentType.
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: switch (controller.documentModel.type) {

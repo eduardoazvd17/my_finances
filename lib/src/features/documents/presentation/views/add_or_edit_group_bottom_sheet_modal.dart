@@ -65,7 +65,7 @@ class _AddOrEditGroupBottomSheetModalState
   }
 
   List<Widget> _buildLayoutByDocumentType(BuildContext context) {
-    //TODO: Implementar outros tipos de itens.
+    //TODO: Layout para cada tipo de DocumentType.
     return switch (widget.controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
       DocumentType.investmentControl => [

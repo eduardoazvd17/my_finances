@@ -122,7 +122,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   List<FloatingBottomMenuItem> _getDocumentFloatingMenuItems(
     BuildContext context,
   ) {
-    //TODO: Implementar outros tipos de itens.
+    //TODO: Menu para cada tipo de ItemModel.
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
       DocumentType.investmentControl => [

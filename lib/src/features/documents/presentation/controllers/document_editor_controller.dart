@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 import 'package:myfinances/src/features/documents/data/services/document_editor_service.dart';
@@ -148,7 +149,7 @@ class DocumentEditorController extends GetxController {
         throw AppError(message: 'name-validation'.i18n());
       }
 
-      final ItemModel newItemModel;
+      final AnnotationItemModel newItemModel;
       if (itemModel == null) {
         newItemModel = await _documentEditorService.addAnnotationItem(
           name: newName,
@@ -228,7 +229,65 @@ class DocumentEditorController extends GetxController {
     _isLoading.value = false;
   }
 
-  //TODO: Implementar outros tipos de itens.
+  Future<bool> addOrEditInvestimentItem({
+    InvestimentControlItemModel? itemModel,
+    required String newGroupingId,
+    required OperationType? newOperationType,
+    required int? newQuantity,
+    required double? newPrice,
+    required String newDescription,
+    required DateTime newDate,
+  }) async {
+    try {
+      _isLoading.value = true;
+
+      if (newOperationType == null) {
+        throw AppError(message: 'operation-type-validation'.i18n());
+      }
+
+      if (newQuantity == null) {
+        throw AppError(message: 'quantity-validation'.i18n());
+      }
+
+      if (newPrice == null) {
+        throw AppError(message: 'price-validation'.i18n());
+      }
+
+      final InvestimentControlItemModel newItemModel;
+      if (itemModel == null) {
+        newItemModel = await _documentEditorService.addInvestimentItem(
+          groupingId: newGroupingId,
+          operationType: newOperationType,
+          quantity: newQuantity,
+          price: newPrice,
+          description: newDescription,
+          date: newDate,
+        );
+      } else {
+        newItemModel = await _documentEditorService.editInvestimentItem(
+          itemModel: itemModel,
+          newOperationType: newOperationType,
+          newQuantity: newQuantity,
+          newPrice: newPrice,
+          newDescription: newDescription,
+          newDate: newDate,
+        );
+      }
+
+      _items.remove(itemModel);
+      _items.add(newItemModel);
+      if (selectedItem?.id == itemModel?.id && itemModel != null) {
+        selectedItem = newItemModel;
+      }
+      sortItems();
+      _isLoading.value = false;
+      return true;
+    } on AppError catch (appError) {
+      _isLoading.value = false;
+      appError.showDialog();
+      return false;
+    }
+  }
 
   Future<void> deleteItem(ItemModel itemModel) async {
     _isLoading.value = true;

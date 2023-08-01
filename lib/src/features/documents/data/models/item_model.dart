@@ -24,8 +24,6 @@ class ItemModel {
       'groupingId': groupingId,
     };
   }
-
-  //TODO: Implementar outros tipos de itens.
 }
 
 class AnnotationItemModel extends ItemModel {
@@ -120,8 +118,10 @@ class InvestimentControlItemModel extends ItemModel {
 
   InvestimentControlItemModel editAndCopy({
     String? description,
+    OperationType? operationType,
     int? quantity,
     double? price,
+    DateTime? date,
   }) {
     return InvestimentControlItemModel(
       id: id,
@@ -129,10 +129,10 @@ class InvestimentControlItemModel extends ItemModel {
       description: description,
       creationDate: creationDate,
       groupingId: groupingId,
-      operationType: operationType,
+      operationType: operationType ?? this.operationType,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
-      date: date,
+      date: date ?? this.date,
     );
   }
 

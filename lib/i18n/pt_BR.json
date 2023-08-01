@@ -139,5 +139,12 @@
     "delete-asset-confirmation-text": "Deseja realmente excluir esse ativo?\n\nTodas as informações de compra e venda deste ativo também serão excluídas.",
     "add-asset-operation-button": "Inserir operação",
     "operation-type-title-0": "Compra",
-    "operation-type-title-1": "Venda"
+    "operation-type-title-1": "Venda",
+    "operation-type-label": "Tipo de operação",
+    "asset-quota-quantity-label": "Quantidade",
+    "asset-quota-price-label": "Preço unitário",
+    "operation-date-picker-label": "Data da operação:",
+    "operation-type-validation": "Selecione um tipo de operação válido.",
+    "quantity-validation": "Insira uma quantidade válida.",
+    "price-validation": "Insira um preço válido."
 }

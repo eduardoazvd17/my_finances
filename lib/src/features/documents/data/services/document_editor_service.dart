@@ -5,6 +5,7 @@ import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/database_model.dart';
 import '../enums/document_type.dart';
+import '../enums/operation_type.dart';
 import '../models/document_model.dart';
 
 class DocumentEditorService {
@@ -36,7 +37,7 @@ class DocumentEditorService {
       final query =
           await _database.documentItemsCollection(documentModel.id).get();
 
-      //TODO: Implementar outros tipos de itens.
+      //TODO: Criação de ItemModel para cada tipo de DocumentType.
       return switch (documentModel.type) {
         DocumentType.monthlyExpenseControl => [],
         DocumentType.investmentControl => query.docs
@@ -129,7 +130,7 @@ class DocumentEditorService {
     }
   }
 
-  Future<ItemModel> addAnnotationItem({
+  Future<AnnotationItemModel> addAnnotationItem({
     required String name,
     required String? description,
     required String? groupingId,
@@ -156,7 +157,7 @@ class DocumentEditorService {
     }
   }
 
-  Future<ItemModel> editAnnotationItem({
+  Future<AnnotationItemModel> editAnnotationItem({
     required AnnotationItemModel itemModel,
     required String? newName,
     required String? newDescription,
@@ -231,6 +232,72 @@ class DocumentEditorService {
             .doc(id)
             .update({'isChecked': false});
       }
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<InvestimentControlItemModel> addInvestimentItem({
+    required String groupingId,
+    required OperationType operationType,
+    required int quantity,
+    required double price,
+    required String? description,
+    required DateTime date,
+  }) async {
+    try {
+      final docRef = _database.documentItemsCollection(documentModel.id).doc();
+      final InvestimentControlItemModel itemModel = InvestimentControlItemModel(
+        id: docRef.id,
+        creationDate: DateTime.now(),
+        groupingId: groupingId,
+        operationType: operationType,
+        quantity: quantity,
+        price: price,
+        date: date,
+      );
+      await docRef.set(itemModel.toMap());
+      return itemModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<InvestimentControlItemModel> editInvestimentItem({
+    required InvestimentControlItemModel itemModel,
+    required OperationType newOperationType,
+    required int newQuantity,
+    required double newPrice,
+    required String? newDescription,
+    required DateTime newDate,
+  }) async {
+    if (itemModel.operationType == newOperationType &&
+        itemModel.quantity == newQuantity &&
+        itemModel.price == newPrice &&
+        itemModel.description == newDescription &&
+        itemModel.date == newDate) {
+      return itemModel;
+    }
+
+    try {
+      final InvestimentControlItemModel newItemModel = itemModel.editAndCopy(
+        description: newDescription,
+        operationType: newOperationType,
+        quantity: newQuantity,
+        price: newPrice,
+        date: newDate,
+      );
+
+      await _database
+          .documentItemsCollection(documentModel.id)
+          .doc(newItemModel.id)
+          .set(newItemModel.toMap());
+
+      return newItemModel;
     } on AppError catch (_) {
       rethrow;
     } catch (_) {

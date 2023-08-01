@@ -139,5 +139,12 @@
     "delete-asset-confirmation-text": "Do you really want to delete this asset?\n\nAll buy and sell information for this asset will also be deleted.",
     "add-asset-operation-button": "Insert operation",
     "operation-type-title-0": "Purchase",
-    "operation-type-title-1": "Sale"
+    "operation-type-title-1": "Sale",
+    "operation-type-label": "Operation type",
+    "asset-quota-quantity-label": "Amount",
+    "asset-quota-price-label": "Unit price",
+    "operation-date-picker-label": "Operation date:",
+    "operation-type-validation": "Please select a valid operation type.",
+    "quantity-validation": "Please enter a valid quantity.",
+    "price-validation": "Please enter a valid price."
 }

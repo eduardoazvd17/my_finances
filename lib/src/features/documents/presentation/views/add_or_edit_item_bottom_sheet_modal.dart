@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
 import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/drop_down_button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/text_field_widget.dart';
+import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 
@@ -39,6 +42,8 @@ class _AddOrEditItemBottomSheetModalState
   late final TextEditingController _quantityController;
   late final TextEditingController _priceController;
   GroupingModel? _selectedGrouping;
+  OperationType? _selectedOperationType;
+  DateTime? _selectedDateTime;
 
   bool get isEditing => widget.itemModel != null;
 
@@ -52,6 +57,18 @@ class _AddOrEditItemBottomSheetModalState
       case DocumentType.monthlyExpenseControl:
         break;
       case DocumentType.investmentControl:
+        final investiment = widget.itemModel as InvestimentControlItemModel?;
+        _selectedOperationType = investiment?.operationType;
+        _quantityController = TextEditingController(
+          text: investiment?.quantity.toString(),
+        );
+        _priceController = TextEditingController(
+          text: investiment?.price
+              .toStringAsFixed(2)
+              .replaceAll('.00', '')
+              .replaceAll(',00', ''),
+        );
+        _selectedDateTime = investiment?.date ?? DateTime.now();
         break;
       case DocumentType.annotation:
         final annotation = widget.itemModel as AnnotationItemModel?;
@@ -93,16 +110,32 @@ class _AddOrEditItemBottomSheetModalState
   }
 
   List<Widget> _buildLayoutByDocumentType() {
-    //TODO: Implementar outros tipos de itens.
+    //TODO: Layout para cada tipo de DocumentType.
     return switch (widget.controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
-      DocumentType.investmentControl => [],
-      DocumentType.annotation => [
-          _nameTextFieldWidget(),
-          _descriptionTextFieldWidget(),
+      DocumentType.investmentControl => [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Center(
+              child: Text(
+                _selectedGrouping!.name,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          _operationTypeSelectionWidget(),
           Row(
             children: [
-              Expanded(child: _quantityTextFieldWidget()),
+              Expanded(
+                child: _quantityTextFieldWidget(
+                  label: 'asset-quota-quantity-label'.i18n(),
+                  optional: false,
+                ),
+              ),
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
@@ -113,7 +146,55 @@ class _AddOrEditItemBottomSheetModalState
                   ),
                 ),
               ),
-              Expanded(child: _priceTextFieldWidget()),
+              Expanded(
+                child: _priceTextFieldWidget(
+                  label: 'asset-quota-price-label'.i18n(),
+                  optional: false,
+                ),
+              ),
+            ],
+          ),
+          _dateTimePickerWidget(),
+          _descriptionTextFieldWidget(),
+          _buttonsWidget(() async {
+            return await widget.controller.addOrEditInvestimentItem(
+              itemModel: widget.itemModel as InvestimentControlItemModel?,
+              newGroupingId: _selectedGrouping!.id,
+              newOperationType: _selectedOperationType,
+              newQuantity: int.tryParse(_quantityController.text.trim()),
+              newPrice: double.tryParse(
+                _priceController.text.trim().replaceAll(',', '.'),
+              ),
+              newDate: _selectedDateTime ?? DateTime.now(),
+              newDescription: _descriptionController.text.trim(),
+            );
+          }),
+        ],
+      DocumentType.annotation => [
+          _nameTextFieldWidget(),
+          _descriptionTextFieldWidget(),
+          Row(
+            children: [
+              Expanded(
+                child: _quantityTextFieldWidget(
+                  label: 'item-quantity-label'.i18n(),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'X',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: _priceTextFieldWidget(
+                  label: 'item-price-label'.i18n(),
+                ),
+              ),
             ],
           ),
           _groupSelectionWidget(),
@@ -154,27 +235,31 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _quantityTextFieldWidget() {
+  Widget _quantityTextFieldWidget({
+    required String label,
+    bool optional = true,
+  }) {
     return TextFieldWidget(
-      label: 'item-quantity-label'.i18n(),
-      hint: 'optional-text'.i18n(),
+      label: label,
+      hint: optional ? 'optional-text'.i18n() : '',
       controller: _quantityController,
       textCapitalization: TextCapitalization.none,
       textInputType: const TextInputType.numberWithOptions(decimal: false),
       focusNode: FocusNode(),
-      maxLength: 3,
     );
   }
 
-  Widget _priceTextFieldWidget() {
+  Widget _priceTextFieldWidget({
+    required String label,
+    bool optional = true,
+  }) {
     return TextFieldWidget(
-      label: 'item-price-label'.i18n(),
-      hint: 'optional-text'.i18n(),
+      label: label,
+      hint: optional ? 'optional-text'.i18n() : '',
       controller: _priceController,
       textCapitalization: TextCapitalization.none,
       textInputType: const TextInputType.numberWithOptions(decimal: true),
       focusNode: FocusNode(),
-      maxLength: 10,
     );
   }
 
@@ -219,6 +304,97 @@ class _AddOrEditItemBottomSheetModalState
                   },
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _operationTypeSelectionWidget() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('operation-type-label'.i18n()),
+          DropDownButtonWidget<OperationType?>(
+            hintText: 'select-text'.i18n(),
+            value: _selectedOperationType,
+            onChanged: (operation) {
+              setState(() => _selectedOperationType = operation);
+            },
+            items: [
+              DropdownMenuItem(
+                value: null,
+                child: Text(
+                  'select-text'.i18n(),
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ),
+              ...OperationType.values.map(
+                (operation) {
+                  return DropdownMenuItem(
+                    value: operation,
+                    child: Row(
+                      children: [
+                        operation.icon,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            operation.title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _dateTimePickerWidget() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('operation-date-picker-label'.i18n()),
+                Text(
+                  DateTimeUtils.formatDate(_selectedDateTime ?? DateTime.now()),
+                  style: TextStyle(color: Colors.grey[600]),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: () async {
+              final DateTime now = DateTime.now();
+              final DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: _selectedDateTime ?? now,
+                firstDate: DateTime(2000, 1, 1),
+                lastDate: now,
+              );
+              setState(() {
+                _selectedDateTime = pickedDate ?? now;
+              });
+            },
+            icon: const Icon(
+              CupertinoIcons.calendar_badge_plus,
+              size: 30,
             ),
           ),
         ],
