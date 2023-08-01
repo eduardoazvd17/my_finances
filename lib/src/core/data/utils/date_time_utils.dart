@@ -17,13 +17,15 @@ class DateTimeUtils {
   }
 
   static String formatFullDateShorted(DateTime date) {
-    final time = '${date.hour}:${date.minute}';
+    final time =
+        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
     final weekDay = DateFormat.E(_localeString).format(date);
     return '$weekDay, ${DateFormat.yMd(_localeString).format(date)} $time';
   }
 
   static String formatFullDate(DateTime date) {
-    final time = '${date.hour}:${date.minute}';
+    final time =
+        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
     final weekDay = DateFormat.EEEE(_localeString).format(date);
     return '$weekDay, ${DateFormat.yMMMMd(_localeString).format(date)} - $time';
   }
