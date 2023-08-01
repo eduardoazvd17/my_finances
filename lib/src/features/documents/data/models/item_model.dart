@@ -1,3 +1,4 @@
+import 'package:myfinances/src/core/data/utils/currency_utils.dart';
 import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 
 class ItemModel {
@@ -103,6 +104,10 @@ class InvestimentControlItemModel extends ItemModel {
   final int quantity;
   final double price;
   final DateTime date;
+
+  @override
+  String get name =>
+      '${operationType.char} ${CurrencyUtils.format(quantity * price)} (${quantity}x${price.toStringAsFixed(2)})';
 
   const InvestimentControlItemModel({
     required super.id,

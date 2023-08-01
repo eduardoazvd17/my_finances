@@ -7,6 +7,7 @@ enum OperationType {
 }
 
 extension OperationTypeExtension on OperationType {
+  String get char => 'operation-type-char-$index'.i18n();
   String get title => 'operation-type-title-$index'.i18n();
 
   Icon get icon {

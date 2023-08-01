@@ -126,7 +126,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [],
       DocumentType.investmentControl => [
-          if (controller.selectedGroup == null) ...[
+          if (controller.selectedGroup == null &&
+              controller.selectedItem == null) ...[
             FloatingBottomMenuItem(
               icon: Icons.post_add_rounded,
               tooltip: 'add-asset-button'.i18n(),
@@ -204,6 +205,51 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                     invertButtonColor: true,
                     onConfirm: () {
                       controller.deleteGroup(controller.selectedGroup!);
+                    },
+                  ),
+                  barrierColor: Colors.black87,
+                );
+              },
+            ),
+          ],
+          if (controller.selectedItem != null) ...[
+            FloatingBottomMenuItem(
+              icon: CupertinoIcons.pencil,
+              tooltip: 'edit-asset-operation-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  barrierColor: Colors.black87,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      icon: CupertinoIcons.pencil,
+                      title: 'edit-asset-operation-button'.i18n(),
+                      controller: controller,
+                      groupingModel: controller.groups.firstWhereOrNull(
+                        (e) => e.id == controller.selectedItem!.groupingId,
+                      ),
+                      itemModel: controller.selectedItem,
+                    );
+                  },
+                );
+              },
+            ),
+            FloatingBottomMenuItem(
+              icon: CupertinoIcons.delete,
+              tooltip: 'delete-asset-operation-button'.i18n(),
+              foregroundColor: Colors.red,
+              showTooltip: true,
+              onTap: () {
+                Get.dialog(
+                  CustomDialog(
+                    title: 'delete-asset-operation-button'.i18n(),
+                    content: 'delete-asset-operation-confirmation-text'.i18n(),
+                    invertButtonColor: true,
+                    onConfirm: () {
+                      controller.deleteItem(controller.selectedItem!);
                     },
                   ),
                   barrierColor: Colors.black87,

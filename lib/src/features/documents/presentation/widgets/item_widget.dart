@@ -33,13 +33,19 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
   }
 
   Widget _monthlyExpenseControlItemTile(BuildContext context) {
-    //final MonthlyExpenseControlItemModel item = this.item as MonthlyExpenseControlItemModel;
-    return Container();
+    //final MonthlyExpenseControlItemModel itemModel = this.itemModel as MonthlyExpenseControlItemModel;
+    return _itemBaseWidget(
+      context: context,
+    );
   }
 
   Widget _investmentControlItemTile(BuildContext context) {
-    //final InvestimentControlItemModel item = this.item as InvestimentControlItemModel;
-    return Container();
+    final InvestimentControlItemModel itemModel =
+        this.itemModel as InvestimentControlItemModel;
+    return _itemBaseWidget(
+      context: context,
+      middleExpanded: Text(itemModel.name),
+    );
   }
 
   Widget _annotationItemTile(BuildContext context) {
@@ -87,8 +93,10 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
   }
 
   Widget _pointsAndAirlineMilesItemTile(BuildContext context) {
-    //final PointsAndAirlineMilesItemModel item = this.item as PointsAndAirlineMilesItemModel;
-    return Container();
+    //final PointsAndAirlineMilesItemModel itemModel = this.itemModel as PointsAndAirlineMilesItemModel;
+    return _itemBaseWidget(
+      context: context,
+    );
   }
 
   Widget _itemBaseWidget({
