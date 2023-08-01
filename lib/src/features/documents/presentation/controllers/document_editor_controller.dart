@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
@@ -50,8 +51,11 @@ class DocumentEditorController extends GetxController {
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
   List<GroupingModel> get groups => _groups.toList();
-  void sortGroups() => _groups
-      .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+  void sortGroups() {
+    _groups.sort((a, b) {
+      return a.creationDate.compareTo(b.creationDate);
+    });
+  }
 
   final Rx<GroupingModel?> _selectedGroup = Rx<GroupingModel?>(null);
   GroupingModel? get selectedGroup => _selectedGroup.value;
@@ -124,8 +128,11 @@ class DocumentEditorController extends GetxController {
       _items.where((item) => item.groupingId == null).toList();
   List<ItemModel> getItemsByGroup(String groupingId) =>
       _items.where((item) => item.groupingId == groupingId).toList();
-  void sortItems() => _items
-      .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+  void sortItems() {
+    _items.sort((a, b) {
+      return a.creationDate.compareTo(b.creationDate);
+    });
+  }
 
   final Rx<ItemModel?> _selectedItem = Rx<ItemModel?>(null);
   ItemModel? get selectedItem => _selectedItem.value;
