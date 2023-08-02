@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:localization/localization.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
@@ -129,7 +130,7 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                     OperationType.buy => e.quantity,
                     OperationType.sell => -e.quantity,
                   },
-                ).reduce((a, b) => a + b)}',
+                ).reduce((a, b) => a + b)} ${'quota-text'.i18n()}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         DocumentType.annotation => Text(

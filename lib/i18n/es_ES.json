@@ -151,5 +151,6 @@
     "price-validation": "Ingrese un precio válido.",
     "edit-asset-operation-button": "Operación de edición",
     "delete-asset-operation-button": "Operación de eliminación",
-    "delete-asset-operation-confirmation-text": "¿Realmente desea eliminar esta operación?"
+    "delete-asset-operation-confirmation-text": "¿Realmente desea eliminar esta operación?",
+    "quota-text": "Cuotas"
 }
