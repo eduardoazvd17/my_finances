@@ -116,22 +116,24 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
   }
 
   Widget _trailingWidgetByDocumentType() {
+    final itemsByGroup = controller.getItemsByGroup(groupingModel.id);
+
     //TODO: Gropuping trailing para cada tipo de DocumentType.
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: switch (controller.documentModel.type) {
         DocumentType.monthlyExpenseControl => Container(),
         DocumentType.investmentControl => Text(
-            '${controller.getItemsByGroup(groupingModel.id).cast<InvestimentControlItemModel>().map(
+            '${itemsByGroup.isEmpty ? 0 : itemsByGroup.cast<InvestimentControlItemModel>().map(
                   (e) => switch (e.operationType) {
                     OperationType.buy => e.quantity,
                     OperationType.sell => -e.quantity,
                   },
-                ).reduce((a, b) => a + b)}x',
+                ).reduce((a, b) => a + b)}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         DocumentType.annotation => Text(
-            '${controller.getItemsByGroup(groupingModel.id).length}',
+            '${itemsByGroup.length}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         DocumentType.pointsAndAirlineMiles => Container(),
