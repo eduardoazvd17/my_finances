@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
