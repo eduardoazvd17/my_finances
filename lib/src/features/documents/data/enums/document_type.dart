@@ -26,7 +26,7 @@ extension DocumentTypeExtension on DocumentType {
   //TODO: Remover quanto implementar outros tipos de itens.
   bool get isEnabled => switch (this) {
         DocumentType.monthlyExpenseControl => false,
-        DocumentType.investmentControl => false,
+        DocumentType.investmentControl => true,
         DocumentType.annotation => true,
         DocumentType.pointsAndAirlineMiles => false,
       };
