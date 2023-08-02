@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
+import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 
 import '../../../../core/data/utils/currency_utils.dart';
@@ -45,9 +46,11 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
         this.itemModel as InvestimentControlItemModel;
     return _itemBaseWidget(
       context: context,
-      middleExpanded: Text(itemModel.name),
+      leading: itemModel.operationType.icon,
+      middleExpanded: Text(itemModel.shortName),
       trailing: Text(
-        DateTimeUtils.formatShortDate(itemModel.date),
+        DateTimeUtils.format2LinesDate(itemModel.date),
+        textAlign: TextAlign.center,
       ),
     );
   }

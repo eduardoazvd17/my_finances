@@ -38,6 +38,12 @@ class DateTimeUtils {
     return DateFormat.yMd(_localeString).format(date);
   }
 
+  static String format2LinesDate(DateTime date) {
+    final String dateString = DateFormat.yMd(_localeString).format(date);
+    final split = dateString.split('/');
+    return '${split[0]}/${split[1]}\n${split[2]}';
+  }
+
   static String _time(DateTime date) {
     return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
   }

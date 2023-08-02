@@ -5,7 +5,9 @@ import 'package:myfinances/src/features/documents/presentation/controllers/docum
 import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
 import '../../data/enums/document_type.dart';
+import '../../data/enums/operation_type.dart';
 import '../../data/models/grouping_model.dart';
+import '../../data/models/item_model.dart';
 
 class GroupingWidget extends GetWidget<DocumentEditorController> {
   final GroupingModel groupingModel;
@@ -119,7 +121,15 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: switch (controller.documentModel.type) {
         DocumentType.monthlyExpenseControl => Container(),
-        DocumentType.investmentControl => Container(),
+        DocumentType.investmentControl => Text(
+            '${controller.getItemsByGroup(groupingModel.id).cast<InvestimentControlItemModel>().map(
+                  (e) => switch (e.operationType) {
+                    OperationType.buy => e.quantity,
+                    OperationType.sell => -e.quantity,
+                  },
+                ).reduce((a, b) => a + b)}x',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
         DocumentType.annotation => Text(
             '${controller.getItemsByGroup(groupingModel.id).length}',
             style: const TextStyle(fontWeight: FontWeight.bold),

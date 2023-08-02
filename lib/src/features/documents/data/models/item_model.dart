@@ -106,8 +106,13 @@ class InvestimentControlItemModel extends ItemModel {
   final DateTime date;
 
   @override
-  String get name =>
-      '${operationType.char} ${CurrencyUtils.format(quantity * price)} (${quantity}x${price.toStringAsFixed(2)})';
+  String get name {
+    return '${operationType.char} ${CurrencyUtils.format(quantity * price)} (${quantity}x${price.toStringAsFixed(2)})';
+  }
+
+  String get shortName {
+    return '${CurrencyUtils.format(quantity * price)}\n${quantity}x ${price.toStringAsFixed(2)}';
+  }
 
   const InvestimentControlItemModel({
     required super.id,
