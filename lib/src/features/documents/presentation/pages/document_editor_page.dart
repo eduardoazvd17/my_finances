@@ -6,6 +6,7 @@ import 'package:myfinances/src/core/data/utils/currency_utils.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/views/add_or_edit_item_bottom_sheet_modal.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/annotation_item_total_tile.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
@@ -449,105 +450,78 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     final styleSubContent = TextStyle(color: Colors.grey[600]!);
 
     //TODO: Totalização de dados para cada tipo de DocumentType.
-    return Obx(
-      () => Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: switch (controller.documentModel.type) {
-          DocumentType.monthlyExpenseControl => [],
-          DocumentType.investmentControl => [],
-          DocumentType.annotation => [
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text('total-label'.i18n(), style: styleLabel),
-                        ),
-                        Text(
-                          CurrencyUtils.format(
-                            controller.items.isEmpty
-                                ? 0
-                                : controller.items
-                                    .map((i) {
-                                      return ((i as AnnotationItemModel)
-                                                  .quantity ??
-                                              1) *
-                                          (i.price ?? 0);
-                                    })
-                                    .reduce((a, b) => a + b)
-                                    .toDouble(),
-                          ),
-                          style: const TextStyle(color: Colors.green),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'items-quantity-text'.i18n([
-                        controller.items.length.toString(),
-                      ]),
-                      style: styleSubContent,
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Text(
-                    'total-by-grouping-text'.i18n(),
-                    style: styleLabel,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: switch (controller.documentModel.type) {
+        DocumentType.monthlyExpenseControl => [],
+        DocumentType.investmentControl => [
+            const Divider(),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: Center(
+                    child: Text('resume-text'.i18n(), style: styleLabel),
                   ),
                 ),
-              ),
-              ...controller.groups.map(
-                (g) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (controller.getItemsByGroup(g.id).isEmpty)
-                      Container()
-                    else ...[
-                      const SizedBox(height: 5),
-                      Row(
-                        children: [
-                          Expanded(child: Text(g.name)),
-                          Text(
-                            CurrencyUtils.format(
-                              controller
-                                  .getItemsByGroup(g.id)
-                                  .map((i) {
-                                    return ((i as AnnotationItemModel)
-                                                .quantity ??
-                                            1) *
-                                        (i.price ?? 0);
-                                  })
-                                  .reduce((a, b) => a + b)
-                                  .toDouble(),
-                            ),
-                            style: const TextStyle(color: Colors.lightGreen),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'items-quantity-text'.i18n([
-                          controller.getItemsByGroup(g.id).length.toString(),
-                        ]),
-                        style: styleSubContent,
-                      ),
-                      const SizedBox(height: 5),
-                    ],
-                  ],
+                //...controller.groups.map((e) => null)
+              ],
+            ),
+          ],
+        DocumentType.annotation => [
+            const Divider(),
+            AnnotationItemTotalTile(
+              title: 'total-label'.i18n(),
+              price: controller.items.isEmpty
+                  ? 0
+                  : controller.items
+                      .map((i) {
+                        return ((i as AnnotationItemModel).quantity ?? 1) *
+                            (i.price ?? 0);
+                      })
+                      .reduce((a, b) => a + b)
+                      .toDouble(),
+              quantity: controller.items.length,
+            ),
+            const Divider(),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Text(
+                  'total-by-grouping-text'.i18n(),
+                  style: styleLabel,
                 ),
               ),
-            ],
-          DocumentType.pointsAndAirlineMiles => [],
-        },
-      ),
+            ),
+            ...controller.groups.map(
+              (g) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (controller.getItemsByGroup(g.id).isEmpty)
+                    Container()
+                  else
+                    AnnotationItemTotalTile(
+                      title: 'total-label'.i18n(),
+                      price: controller.getItemsByGroup(g.id).isEmpty
+                          ? 0
+                          : controller
+                              .getItemsByGroup(g.id)
+                              .map((i) {
+                                return ((i as AnnotationItemModel).quantity ??
+                                        1) *
+                                    (i.price ?? 0);
+                              })
+                              .reduce((a, b) => a + b)
+                              .toDouble(),
+                      quantity: controller.getItemsByGroup(g.id).length,
+                    ),
+                ],
+              ),
+            ),
+          ],
+        DocumentType.pointsAndAirlineMiles => [],
+      },
     );
   }
 }
