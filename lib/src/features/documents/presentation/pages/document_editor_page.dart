@@ -464,61 +464,61 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               ),
             ),
             ...controller.groups.map((g) {
-              final itemsByGroup = controller.getItemsByGroup(g.id);
+              final itemsByGroup = controller
+                  .getItemsByGroup(g.id)
+                  .cast<InvestimentControlItemModel>();
 
-              if (itemsByGroup.isEmpty) return Container();
+              if (itemsByGroup.isEmpty) {
+                return Container();
+              } else {
+                final purchasesItems = itemsByGroup.where((i) {
+                  return i.operationType == OperationType.buy;
+                });
 
-              return InvestimentItemTotalTile(
-                title: g.name,
-                purchasesValue: itemsByGroup
-                    .where((i) {
-                      return (i as InvestimentControlItemModel).operationType ==
-                          OperationType.buy;
-                    })
-                    .map((i) =>
-                        (i as InvestimentControlItemModel).quantity * i.price)
-                    .reduce((a, b) => a + b),
-                purchasesQuotas: itemsByGroup
-                    .where((i) {
-                      return (i as InvestimentControlItemModel).operationType ==
-                          OperationType.buy;
-                    })
-                    .map((i) => (i as InvestimentControlItemModel).quantity)
-                    .reduce((a, b) => a + b),
-                salesValue: itemsByGroup
-                    .where((i) {
-                      return (i as InvestimentControlItemModel).operationType ==
-                          OperationType.sell;
-                    })
-                    .map((i) =>
-                        (i as InvestimentControlItemModel).quantity * i.price)
-                    .reduce((a, b) => a + b),
-                salesQuotas: itemsByGroup
-                    .where((i) {
-                      return (i as InvestimentControlItemModel).operationType ==
-                          OperationType.sell;
-                    })
-                    .map((i) => (i as InvestimentControlItemModel).quantity)
-                    .reduce((a, b) => a + b),
-                quotasValue: itemsByGroup
-                    .cast<InvestimentControlItemModel>()
-                    .map(
-                      (e) => switch (e.operationType) {
-                        OperationType.buy => e.quantity * e.price,
-                        OperationType.sell => -(e.quantity * e.price),
-                      },
-                    )
-                    .reduce((a, b) => a + b),
-                quotas: itemsByGroup
-                    .cast<InvestimentControlItemModel>()
-                    .map(
-                      (e) => switch (e.operationType) {
-                        OperationType.buy => e.quantity,
-                        OperationType.sell => -e.quantity,
-                      },
-                    )
-                    .reduce((a, b) => a + b),
-              );
+                final salesItems = itemsByGroup.where((i) {
+                  return i.operationType == OperationType.sell;
+                });
+
+                return InvestimentItemTotalTile(
+                  title: g.name,
+                  purchasesValue: purchasesItems.isEmpty
+                      ? 0
+                      : purchasesItems
+                          .map((i) => i.quantity * i.price)
+                          .reduce((a, b) => a + b),
+                  purchasesQuotas: purchasesItems.isEmpty
+                      ? 0
+                      : purchasesItems
+                          .map((i) => i.quantity)
+                          .reduce((a, b) => a + b),
+                  salesValue: salesItems.isEmpty
+                      ? 0
+                      : salesItems
+                          .map((i) => i.quantity * i.price)
+                          .reduce((a, b) => a + b),
+                  salesQuotas: salesItems.isEmpty
+                      ? 0
+                      : salesItems
+                          .map((i) => i.quantity)
+                          .reduce((a, b) => a + b),
+                  quotasValue: purchasesItems.isEmpty && salesItems.isEmpty
+                      ? 0
+                      : itemsByGroup
+                          .map((e) => switch (e.operationType) {
+                                OperationType.buy => e.quantity * e.price,
+                                OperationType.sell => -(e.quantity * e.price),
+                              })
+                          .reduce((a, b) => a + b),
+                  quotas: purchasesItems.isEmpty && salesItems.isEmpty
+                      ? 0
+                      : itemsByGroup
+                          .map((e) => switch (e.operationType) {
+                                OperationType.buy => e.quantity,
+                                OperationType.sell => -e.quantity,
+                              })
+                          .reduce((a, b) => a + b),
+                );
+              }
             }),
           ],
         DocumentType.annotation => [
@@ -528,9 +528,9 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               price: controller.items.isEmpty
                   ? 0
                   : controller.items
+                      .cast<AnnotationItemModel>()
                       .map((i) {
-                        return ((i as AnnotationItemModel).quantity ?? 1) *
-                            (i.price ?? 0);
+                        return (i.quantity ?? 1) * (i.price ?? 0);
                       })
                       .reduce((a, b) => a + b)
                       .toDouble(),
@@ -548,21 +548,25 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
             ...controller.groups.map(
               (g) {
-                final itemsByGroup = controller.getItemsByGroup(g.id);
+                final itemsByGroup = controller
+                    .getItemsByGroup(g.id)
+                    .cast<AnnotationItemModel>();
 
-                if (itemsByGroup.isEmpty) return Container();
+                if (itemsByGroup.isEmpty) {
+                  return Container();
+                } else {
+                  final Iterable<double> itemsPrice = itemsByGroup.map((i) {
+                    return (i.quantity ?? 1) * (i.price ?? 0);
+                  });
 
-                return AnnotationItemTotalTile(
-                  title: 'total-label'.i18n(),
-                  price: itemsByGroup
-                      .map((i) {
-                        return ((i as AnnotationItemModel).quantity ?? 1) *
-                            (i.price ?? 0);
-                      })
-                      .reduce((a, b) => a + b)
-                      .toDouble(),
-                  quantity: itemsByGroup.length,
-                );
+                  return AnnotationItemTotalTile(
+                    title: 'total-label'.i18n(),
+                    price: itemsPrice.isEmpty
+                        ? 0
+                        : itemsPrice.reduce((a, b) => a + b).toDouble(),
+                    quantity: itemsByGroup.length,
+                  );
+                }
               },
             ),
           ],
