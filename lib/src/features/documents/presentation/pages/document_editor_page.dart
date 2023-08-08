@@ -447,7 +447,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
   Widget _getInfoAdditionalContentByDocumentType() {
     const styleLabel = TextStyle(fontWeight: FontWeight.bold);
-    final styleSubContent = TextStyle(color: Colors.grey[600]!);
 
     //TODO: Totalização de dados para cada tipo de DocumentType.
     return Column(
