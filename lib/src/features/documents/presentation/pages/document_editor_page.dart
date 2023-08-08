@@ -9,11 +9,13 @@ import 'package:myfinances/src/features/documents/presentation/widgets/annotatio
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/investiment_item_total_tile.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 import '../../data/enums/document_type.dart';
+import '../../data/enums/operation_type.dart';
 import '../../data/models/item_model.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 import '../views/add_or_edit_group_bottom_sheet_modal.dart';
@@ -455,17 +457,69 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         DocumentType.monthlyExpenseControl => [],
         DocumentType.investmentControl => [
             const Divider(),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Center(
-                    child: Text('resume-text'.i18n(), style: styleLabel),
-                  ),
-                ),
-                //...controller.groups.map((e) => null)
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Center(
+                child: Text('resume-text'.i18n(), style: styleLabel),
+              ),
             ),
+            ...controller.groups.map((g) {
+              final itemsByGroup = controller.getItemsByGroup(g.id);
+
+              if (itemsByGroup.isEmpty) return Container();
+
+              return InvestimentItemTotalTile(
+                title: g.name,
+                purchasesValue: itemsByGroup
+                    .where((i) {
+                      return (i as InvestimentControlItemModel).operationType ==
+                          OperationType.buy;
+                    })
+                    .map((i) =>
+                        (i as InvestimentControlItemModel).quantity * i.price)
+                    .reduce((a, b) => a + b),
+                purchasesQuotas: itemsByGroup
+                    .where((i) {
+                      return (i as InvestimentControlItemModel).operationType ==
+                          OperationType.buy;
+                    })
+                    .map((i) => (i as InvestimentControlItemModel).quantity)
+                    .reduce((a, b) => a + b),
+                salesValue: itemsByGroup
+                    .where((i) {
+                      return (i as InvestimentControlItemModel).operationType ==
+                          OperationType.sell;
+                    })
+                    .map((i) =>
+                        (i as InvestimentControlItemModel).quantity * i.price)
+                    .reduce((a, b) => a + b),
+                salesQuotas: itemsByGroup
+                    .where((i) {
+                      return (i as InvestimentControlItemModel).operationType ==
+                          OperationType.sell;
+                    })
+                    .map((i) => (i as InvestimentControlItemModel).quantity)
+                    .reduce((a, b) => a + b),
+                quotasValue: itemsByGroup
+                    .cast<InvestimentControlItemModel>()
+                    .map(
+                      (e) => switch (e.operationType) {
+                        OperationType.buy => e.quantity * e.price,
+                        OperationType.sell => -(e.quantity * e.price),
+                      },
+                    )
+                    .reduce((a, b) => a + b),
+                quotas: itemsByGroup
+                    .cast<InvestimentControlItemModel>()
+                    .map(
+                      (e) => switch (e.operationType) {
+                        OperationType.buy => e.quantity,
+                        OperationType.sell => -e.quantity,
+                      },
+                    )
+                    .reduce((a, b) => a + b),
+              );
+            }),
           ],
         DocumentType.annotation => [
             const Divider(),
@@ -493,29 +547,23 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               ),
             ),
             ...controller.groups.map(
-              (g) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (controller.getItemsByGroup(g.id).isEmpty)
-                    Container()
-                  else
-                    AnnotationItemTotalTile(
-                      title: 'total-label'.i18n(),
-                      price: controller.getItemsByGroup(g.id).isEmpty
-                          ? 0
-                          : controller
-                              .getItemsByGroup(g.id)
-                              .map((i) {
-                                return ((i as AnnotationItemModel).quantity ??
-                                        1) *
-                                    (i.price ?? 0);
-                              })
-                              .reduce((a, b) => a + b)
-                              .toDouble(),
-                      quantity: controller.getItemsByGroup(g.id).length,
-                    ),
-                ],
-              ),
+              (g) {
+                final itemsByGroup = controller.getItemsByGroup(g.id);
+
+                if (itemsByGroup.isEmpty) return Container();
+
+                return AnnotationItemTotalTile(
+                  title: 'total-label'.i18n(),
+                  price: itemsByGroup
+                      .map((i) {
+                        return ((i as AnnotationItemModel).quantity ?? 1) *
+                            (i.price ?? 0);
+                      })
+                      .reduce((a, b) => a + b)
+                      .toDouble(),
+                  quantity: itemsByGroup.length,
+                );
+              },
             ),
           ],
         DocumentType.pointsAndAirlineMiles => [],
