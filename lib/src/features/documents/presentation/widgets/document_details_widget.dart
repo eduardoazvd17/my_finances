@@ -8,8 +8,11 @@ import '../../data/models/document_model.dart';
 class DocumentDetailsWidget extends StatelessWidget {
   final DocumentModel documentModel;
   final bool showHeader;
-  const DocumentDetailsWidget(
-      {super.key, required this.documentModel, this.showHeader = true});
+  const DocumentDetailsWidget({
+    super.key,
+    required this.documentModel,
+    this.showHeader = true,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -18,12 +18,14 @@ class DocumentDetailsBottomSheetModalWidget extends StatefulWidget {
     String? newName,
   })? onEdit;
   final Function(DocumentModel)? onDelete;
+  final Widget? additionalContent;
 
   const DocumentDetailsBottomSheetModalWidget({
     super.key,
     required this.documentModel,
     this.onEdit,
     this.onDelete,
+    this.additionalContent,
   });
 
   @override
@@ -52,8 +54,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
               const Divider(),
             ],
             if (widget.onDelete != null) _deleteButton(context),
-            if (widget.onDelete == null && widget.onEdit == null)
-              const SizedBox(height: 50),
+            if (widget.additionalContent != null) widget.additionalContent!,
           ],
         ),
       ),

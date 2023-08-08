@@ -152,5 +152,8 @@
     "edit-asset-operation-button": "Edit operation",
     "delete-asset-operation-button": "Delete operation",
     "delete-asset-operation-confirmation-text": "Do you really want to delete this operation?",
-    "quota-text": "Quotas"
+    "quota-text": "Quotas",
+    "total-label": "Total:",
+    "total-by-grouping-text": "Total by grouping",
+    "items-quantity-text": "Added items: %s"
 }
