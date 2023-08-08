@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:localization/localization.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/data/utils/currency_utils.dart';
 import '../../data/enums/operation_type.dart';
@@ -26,18 +25,40 @@ class InvestimentItemTotalTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(
-            '${OperationType.buy.title}s: ${CurrencyUtils.format(purchasesValue)}',
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Text('$quotas ${CurrencyUtils.format(quotasValue)}'),
+            ],
           ),
-          Text(
-            '${OperationType.sell.title}s: ${CurrencyUtils.format(salesValue)}',
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  '${OperationType.buy.char} $purchasesQuotas ${CurrencyUtils.format(purchasesValue)}',
+                  style: const TextStyle(color: Colors.green),
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  '${OperationType.sell.char} $salesQuotas ${CurrencyUtils.format(salesValue)}',
+                  style: TextStyle(color: Colors.red[200]),
+                ),
+              ),
+            ],
           ),
-          Text('${'quota-text'.i18n()}: $quotas'),
         ],
       ),
     );

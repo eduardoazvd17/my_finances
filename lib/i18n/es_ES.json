@@ -155,5 +155,6 @@
     "quota-text": "Cuotas",
     "total-label": "Total:",
     "total-by-grouping-text": "Total por agrupación",
-    "items-quantity-text": "Artículos agregados: %s"
+    "items-quantity-text": "Artículos agregados: %s",
+    "resume-text": "Resumen"
 }

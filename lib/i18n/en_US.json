@@ -155,5 +155,6 @@
     "quota-text": "Quotas",
     "total-label": "Total:",
     "total-by-grouping-text": "Total by grouping",
-    "items-quantity-text": "Added items: %s"
+    "items-quantity-text": "Added items: %s",
+    "resume-text": "Summary"
 }

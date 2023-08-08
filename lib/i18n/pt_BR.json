@@ -155,5 +155,6 @@
     "quota-text": "Cotas",
     "total-label": "Total:",
     "total-by-grouping-text": "Total por agrupamento",
-    "items-quantity-text": "Itens adicionados: %s"
+    "items-quantity-text": "Itens adicionados: %s",
+    "resume-text": "Resumo"
 }
