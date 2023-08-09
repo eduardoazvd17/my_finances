@@ -560,7 +560,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   });
 
                   return AnnotationItemTotalTile(
-                    title: 'total-label'.i18n(),
+                    title: g.name,
                     price: itemsPrice.isEmpty
                         ? 0
                         : itemsPrice.reduce((a, b) => a + b).toDouble(),
