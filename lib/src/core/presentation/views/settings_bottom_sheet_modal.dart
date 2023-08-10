@@ -41,11 +41,6 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       children: [
         _languageTile(context),
         const Divider(),
-        _dateFormatTile(context),
-        _timeFormatTile(context),
-        const Divider(),
-        _currencyFormatTile(context),
-        const Divider(),
         _themeTile(context),
       ],
     );
@@ -54,14 +49,62 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
   Widget _getAuthTiles(BuildContext context) {
     return Column(
       children: [
+        _myProfileTile(context),
+        const Divider(),
         if (!kIsWeb) ...[
           _biometricTile(context),
           const Divider(),
         ],
-        _getNoAuthTiles(context),
+        _languageTile(context),
+        const Divider(),
+        _dateFormatTile(context),
+        _timeFormatTile(context),
+        const Divider(),
+        _currencyFormatTile(context),
+        const Divider(),
+        _themeTile(context),
         const Divider(),
         _logoutTile(),
       ],
+    );
+  }
+
+  Widget _myProfileTile(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        //TODO: Abrir página de meu perfil.
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'my-profile-button'.i18n(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.normal),
+                    maxLines: 1,
+                  ),
+                  Text(
+                    controller.user!.name,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            ),
+            const Icon(CupertinoIcons.person, size: 30),
+          ],
+        ),
+      ),
     );
   }
 
@@ -73,12 +116,18 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       onChanged: controller.canEnableBiometrics
           ? controller.setIsBiometricsEnabled
           : null,
-      title: Text('enable-biometrics-button'.i18n()),
+      title: Text(
+        'enable-biometrics-button'.i18n(),
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.normal),
+      ),
       subtitle: controller.canEnableBiometrics
           ? null
           : Text(
               "*${'cannot-enable-biometrics-text'.i18n()}",
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              style: TextStyle(color: Colors.red[200]),
             ),
     );
   }
@@ -174,7 +223,13 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
     return SwitchListTile(
       value: i18nController.dateUse24hFormat,
       onChanged: i18nController.setDateUse24hFormat,
-      title: Text('use-24h-format-button'.i18n()),
+      title: Text(
+        'use-24h-format-button'.i18n(),
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.normal),
+      ),
     );
   }
 
