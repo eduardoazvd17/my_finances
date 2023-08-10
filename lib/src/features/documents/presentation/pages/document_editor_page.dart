@@ -569,6 +569,18 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 }
               },
             ),
+            if (controller.itemsWithoutGroup.isNotEmpty)
+              AnnotationItemTotalTile(
+                title: 'items-without-group'.i18n([
+                  controller.itemsWithoutGroup.length.toString(),
+                ]),
+                price: controller.itemsWithoutGroup
+                    .cast<AnnotationItemModel>()
+                    .map((e) => e.price ?? 0)
+                    .reduce((a, b) => a + b)
+                    .toDouble(),
+                quantity: null,
+              ),
           ],
         DocumentType.pointsAndAirlineMiles => [],
       },

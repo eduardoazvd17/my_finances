@@ -156,5 +156,6 @@
     "total-label": "Total:",
     "total-by-grouping-text": "Total by grouping",
     "items-quantity-text": "Added items: %s",
-    "resume-text": "Summary"
+    "resume-text": "Summary",
+    "items-without-group": "Items without grouping (%s)"
 }

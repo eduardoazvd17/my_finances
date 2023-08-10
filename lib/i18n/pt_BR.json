@@ -156,5 +156,6 @@
     "total-label": "Total:",
     "total-by-grouping-text": "Total por agrupamento",
     "items-quantity-text": "Itens adicionados: %s",
-    "resume-text": "Resumo"
+    "resume-text": "Resumo",
+    "items-without-group": "Itens sem agrupamento (%s)"
 }

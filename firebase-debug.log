@@ -1,0 +1,82 @@
+[debug] [2023-08-09T11:29:10.299Z] ----------------------------------------------------------------------
+[debug] [2023-08-09T11:29:10.301Z] Command:       /usr/local/bin/firebase /Users/eduardoazevedo/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy
+[debug] [2023-08-09T11:29:10.302Z] CLI Version:   12.4.2
+[debug] [2023-08-09T11:29:10.302Z] Platform:      darwin
+[debug] [2023-08-09T11:29:10.302Z] Node Version:  v16.16.0
+[debug] [2023-08-09T11:29:10.306Z] Time:          Wed Aug 09 2023 08:29:10 GMT-0300 (Brasilia Standard Time)
+[debug] [2023-08-09T11:29:10.306Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-09T11:29:10.402Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-09T11:29:10.403Z] > authorizing via signed-in user (eduardoazvd17@gmail.com)
+[debug] [2023-08-09T11:29:10.404Z] [iam] checking project myfinancesbr for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-09T11:29:10.406Z] > refreshing access token with scopes: []
+[debug] [2023-08-09T11:29:10.408Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-08-09T11:29:10.409Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-09T11:29:10.670Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-08-09T11:29:10.673Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-09T11:29:10.687Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/myfinancesbr:testIamPermissions [none]
+[debug] [2023-08-09T11:29:10.687Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/myfinancesbr:testIamPermissions x-goog-quota-user=projects/myfinancesbr
+[debug] [2023-08-09T11:29:10.688Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myfinancesbr:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-09T11:29:11.662Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/myfinancesbr:testIamPermissions 200
+[debug] [2023-08-09T11:29:11.663Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/myfinancesbr:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-09T11:29:11.666Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/myfinancesbr [none]
+[debug] [2023-08-09T11:29:12.174Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/myfinancesbr 200
+[debug] [2023-08-09T11:29:12.174Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/myfinancesbr {"projectId":"myfinancesbr","projectNumber":"713898000759","displayName":"myfinances","name":"projects/myfinancesbr","resources":{"hostingSite":"myfinancesbr"},"state":"ACTIVE","etag":"1_5f4d8743-0d54-43c0-b222-8a640e2901bb"}
+[info] 
+[info] === Deploying to 'myfinancesbr'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2023-08-09T11:29:12.187Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions [none]
+[debug] [2023-08-09T11:29:12.188Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-08-09T11:29:13.597Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions 200
+[debug] [2023-08-09T11:29:13.598Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions {"name":"projects/713898000759/sites/myfinancesbr/versions/c5d8098c62a8c7f7","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[myfinancesbr]: beginning deploy... 
+[info] i  hosting[myfinancesbr]: found 34 files in build/web 
+[debug] [2023-08-09T11:29:13.620Z] [hosting] uploading with 200 concurrency
+[debug] [2023-08-09T11:29:13.863Z] [hosting] hash cache [YnVpbGQvd2Vi] stored for 34 files
+[debug] [2023-08-09T11:29:13.863Z] [hosting][hash queue][FINAL] {"max":234,"min":0,"avg":14.117647058823529,"active":0,"complete":34,"success":34,"errored":0,"retried":0,"total":34,"elapsed":239}
+[debug] [2023-08-09T11:29:13.864Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/713898000759/sites/myfinancesbr/versions/c5d8098c62a8c7f7:populateFiles [none]
+[debug] [2023-08-09T11:29:13.864Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/713898000759/sites/myfinancesbr/versions/c5d8098c62a8c7f7:populateFiles {"files":{"/favicon.png":"2a97faac410e2600d30c008445fbeb5b5b991b0c7fc5503d187af2a4d1c416a8","/manifest.json":"1139366ffc3efc329ee27e815437e04e0594e95150e685771312ca2b688bd6ba","/assets/assets/icons/icon.png":"632379d218396140642482a88398cd6a9887f4e28f98e355bd70c43b3c98866c","/assets/assets/images/logo.png":"37992bd896fac762107194462dd869f0be74acbfcd529072a32aa6cb59fdaac8","/assets/lib/i18n/en_US.json":"c353f027eb14cdaaf0ca54021a524feed19063a3fe9fbd510f6cabe7343d3d49","/assets/lib/i18n/es_ES.json":"9af82daf7cc981c9643cc911365fda560788519fbf92aab8989a5887c5609a98","/assets/lib/i18n/pt_BR.json":"ea688122d4ee44f62777cecd09f8d5f0a69262f9dbba46ffc6950433cfad8431","/assets/packages/localization/test/assets/lang/en_US.json":"cdad26b3ea4725d1979c2b225928d7d0619908f8e05d22201278485b4db393ea","/assets/packages/localization/test/assets/lang/pt_BR.json":"89846bf8878f77ef959aed6c4c5ae474d4ab64e93773f257a6e48e3df7762703","/assets/packages/localization/test/assets/lang2/en_US.json":"34afcf1551378b7b08cefe26ea5c8dc3af6021890d9eec9ea0b5dcad5d205acc","/assets/packages/localization/test/assets/lang2/pt_BR.json":"4fdef7cefecdd8202fc89e552203cf1d820d7025e46e98f926828c96a2135a78","/canvaskit/canvaskit.js":"2b6131a2bf3bffd6220fdca64ffcad3566aee5a62efef4ab0a381468c8d595df","/canvaskit/canvaskit.wasm":"a4bdc1a36efd1bdf68923bf39deea3850b1038fda68fb89d9913ea114ad77cea","/canvaskit/skwasm.js":"4d31279303d58f3e47751da0f1485c485f54e645d0f4018c7b739d813f7eaafe","/canvaskit/skwasm.wasm":"196b0c92ef2fec175d29ebeedb3f835c4bcf8292cf75b013b93da419022a4847","/canvaskit/skwasm.worker.js":"125427ebed610a77eee828e2eacc3567c6d5e60195d97cac1d9a3f126dcf85a1","/canvaskit/chromium/canvaskit.js":"10ec5a22cd3c3cff50d3205798dbc1cb2a223691b6654c64443344c5742ca1ad","/canvaskit/chromium/canvaskit.wasm":"4b0f2a5ee8d889f8dee6eab57395315ae160d267f67a80401df7f3a7f5725153","/icons/Icon-192.png":"442226746f7357efe3ed674f638dae45ee7858035ebfd8f85324fdb85aba0b99","/icons/Icon-512.png":"d7e18aba9667fcf56e53c54d583dfd2a4219a2db741541104273973014e9a3b6","/icons/Icon-maskable-192.png":"442226746f7357efe3ed674f638dae45ee7858035ebfd8f85324fdb85aba0b99","/icons/Icon-maskable-512.png":"d7e18aba9667fcf56e53c54d583dfd2a4219a2db741541104273973014e9a3b6","/index.html":"9a334fde8995217bdb60e6cdcef73331600ea181ca9e82859a5ae2ee1ba2cb3d","/flutter_service_worker.js":"2546dfe3080e3095350eb056bf3a59895a469b7f052f64391e63c89cf153961e","/version.json":"bb7aadeb65dac98f245b595ac476a0ee13b8b3bdd42247f2c921b1dd9b0daa72","/assets/AssetManifest.bin":"6ff2f55419adbef01b8ac5b8241c97b6e011b432c5dbe1e1dd2f9a45d961ebc1","/assets/AssetManifest.json":"c6819aa28c42553fe903712be10a4b4c64604289a9b1c9dd0f7078261c573da6","/assets/FontManifest.json":"9ea504185602e57d97b7c3517d382b8627a13c0181c490c96a9b55a5d5c8810c","/assets/fonts/MaterialIcons-Regular.otf":"6fb3c52569bfb1998242927ee82480efc731329ee0bd2ba8b4e81750fcf975ab","/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf":"44dc059a0653cfac4a3b185c96f6877f501c2aa8d096873f26c8c937c0cc69f2","/assets/shaders/ink_sparkle.frag":"7e2c4d11b7e2f4b97e4af6c3d7a3618158b451971f430b4befae8ea6aa756131","/flutter.js":"cc5bca0a2b8ec99223db7f9ab924b67cca075f0e4997f262749f06e34b5965ef","/assets/NOTICES":"5c440cfed4690982a79b946a755994011e5057cda2eba2a1eb7aaf442002e7f4","/main.dart.js":"0f1282ddc1e22b309a68aaf281bfaec603f17a2a498f9be1b8bdb8fc9b9967ba"}}
+[debug] [2023-08-09T11:29:14.931Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/713898000759/sites/myfinancesbr/versions/c5d8098c62a8c7f7:populateFiles 200
+[debug] [2023-08-09T11:29:14.931Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/713898000759/sites/myfinancesbr/versions/c5d8098c62a8c7f7:populateFiles {"uploadRequiredHashes":["0f1282ddc1e22b309a68aaf281bfaec603f17a2a498f9be1b8bdb8fc9b9967ba","9a334fde8995217bdb60e6cdcef73331600ea181ca9e82859a5ae2ee1ba2cb3d","2546dfe3080e3095350eb056bf3a59895a469b7f052f64391e63c89cf153961e"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files"}
+[debug] [2023-08-09T11:29:14.933Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/0f1282ddc1e22b309a68aaf281bfaec603f17a2a498f9be1b8bdb8fc9b9967ba [none]
+[debug] [2023-08-09T11:29:14.933Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/0f1282ddc1e22b309a68aaf281bfaec603f17a2a498f9be1b8bdb8fc9b9967ba [stream]
+[debug] [2023-08-09T11:29:14.934Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/9a334fde8995217bdb60e6cdcef73331600ea181ca9e82859a5ae2ee1ba2cb3d [none]
+[debug] [2023-08-09T11:29:14.934Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/9a334fde8995217bdb60e6cdcef73331600ea181ca9e82859a5ae2ee1ba2cb3d [stream]
+[debug] [2023-08-09T11:29:14.935Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/2546dfe3080e3095350eb056bf3a59895a469b7f052f64391e63c89cf153961e [none]
+[debug] [2023-08-09T11:29:14.935Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/2546dfe3080e3095350eb056bf3a59895a469b7f052f64391e63c89cf153961e [stream]
+[debug] [2023-08-09T11:29:14.937Z] [hosting][populate queue][FINAL] {"max":1072,"min":1072,"avg":1072,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1077}
+[debug] [2023-08-09T11:29:14.937Z] [hosting] uploads queued: 3
+[debug] [2023-08-09T11:29:16.303Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/0f1282ddc1e22b309a68aaf281bfaec603f17a2a498f9be1b8bdb8fc9b9967ba 200
+[debug] [2023-08-09T11:29:16.303Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/0f1282ddc1e22b309a68aaf281bfaec603f17a2a498f9be1b8bdb8fc9b9967ba [stream]
+[debug] [2023-08-09T11:29:16.324Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/9a334fde8995217bdb60e6cdcef73331600ea181ca9e82859a5ae2ee1ba2cb3d 200
+[debug] [2023-08-09T11:29:16.324Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/9a334fde8995217bdb60e6cdcef73331600ea181ca9e82859a5ae2ee1ba2cb3d [stream]
+[debug] [2023-08-09T11:29:16.877Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/2546dfe3080e3095350eb056bf3a59895a469b7f052f64391e63c89cf153961e 200
+[debug] [2023-08-09T11:29:16.878Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/myfinancesbr/versions/c5d8098c62a8c7f7/files/2546dfe3080e3095350eb056bf3a59895a469b7f052f64391e63c89cf153961e [stream]
+[debug] [2023-08-09T11:29:16.879Z] [hosting][upload queue][FINAL] {"max":1946,"min":1372,"avg":1570,"active":0,"complete":3,"success":3,"errored":0,"retried":0,"total":3,"elapsed":1948}
+[info] ✔  hosting[myfinancesbr]: file upload complete 
+[debug] [2023-08-09T11:29:16.885Z] [hosting] deploy completed after 3285ms
+[debug] [2023-08-09T11:29:16.886Z] [
+  {
+    "config": {
+      "public": "build/web",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "site": "myfinancesbr"
+    },
+    "version": "projects/713898000759/sites/myfinancesbr/versions/c5d8098c62a8c7f7"
+  }
+]
+[info] i  hosting[myfinancesbr]: finalizing version... 
+[debug] [2023-08-09T11:29:16.889Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions/c5d8098c62a8c7f7 updateMask=status%2Cconfig
+[debug] [2023-08-09T11:29:16.890Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions/c5d8098c62a8c7f7 {"status":"FINALIZED","config":{}}
+[debug] [2023-08-09T11:29:17.909Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions/c5d8098c62a8c7f7 200
+[debug] [2023-08-09T11:29:17.909Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/versions/c5d8098c62a8c7f7 {"name":"projects/713898000759/sites/myfinancesbr/versions/c5d8098c62a8c7f7","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-08-09T11:29:13.169738Z","createUser":{"email":"eduardoazvd17@gmail.com"},"finalizeTime":"2023-08-09T11:29:17.818400Z","finalizeUser":{"email":"eduardoazvd17@gmail.com"}}
+[debug] [2023-08-09T11:29:17.909Z] [hosting] finalized version for myfinancesbr:[object Object]
+[info] ✔  hosting[myfinancesbr]: version finalized 
+[info] i  hosting[myfinancesbr]: releasing new version... 
+[debug] [2023-08-09T11:29:17.913Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/channels/live/releases versionName=projects%2F713898000759%2Fsites%2Fmyfinancesbr%2Fversions%2Fc5d8098c62a8c7f7
+[debug] [2023-08-09T11:29:17.913Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/myfinancesbr/channels/live/releases {}

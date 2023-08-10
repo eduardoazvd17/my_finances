@@ -6,7 +6,7 @@ import '../../../../core/data/utils/currency_utils.dart';
 class AnnotationItemTotalTile extends StatelessWidget {
   final String title;
   final double price;
-  final int quantity;
+  final int? quantity;
   const AnnotationItemTotalTile({
     super.key,
     required this.title,
@@ -32,10 +32,11 @@ class AnnotationItemTotalTile extends StatelessWidget {
               ),
             ],
           ),
-          Text(
-            'items-quantity-text'.i18n([quantity.toString()]),
-            style: TextStyle(color: Colors.grey[600]),
-          ),
+          if (quantity != null)
+            Text(
+              'items-quantity-text'.i18n([quantity.toString()]),
+              style: TextStyle(color: Colors.grey[600]),
+            ),
         ],
       ),
     );
