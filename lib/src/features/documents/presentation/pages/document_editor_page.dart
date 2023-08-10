@@ -61,8 +61,17 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _getDocumentContent() {
+    final ScrollController scrollController = ScrollController(
+      initialScrollOffset: controller.pageScrollPosition,
+    );
+
+    scrollController.addListener(() {
+      controller.pageScrollPosition = scrollController.offset;
+    });
+
     return Obx(
       () => ScrollViewWidget(
+        controller: scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

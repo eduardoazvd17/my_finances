@@ -45,6 +45,10 @@ class DocumentEditorController extends GetxController {
   double get menuScrollPosition => _menuScrollPosition.value;
   set menuScrollPosition(double value) => _menuScrollPosition.value = value;
 
+  final RxDouble _pageScrollPosition = RxDouble(0);
+  double get pageScrollPosition => _pageScrollPosition.value;
+  set pageScrollPosition(double value) => _pageScrollPosition.value = value;
+
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
 
