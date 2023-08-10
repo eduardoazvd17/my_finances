@@ -82,7 +82,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ...controller.itemsWithoutGroup.map((itemModel) {
               return ItemWidget(itemModel: itemModel);
             }),
-            ...AppCurrencyFormat.values.map((e) => Text(e.title)),
             const SizedBox(height: 125),
           ],
         ),
