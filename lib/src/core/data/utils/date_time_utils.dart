@@ -7,13 +7,17 @@ import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dar
 import '../enums/app_language.dart';
 
 class DateTimeUtils {
-  static String get _localeString {
+  static String get _dateLocaleString {
     final i18n = Get.find<I18nController>();
-
     if (i18n.selectedDateFormat != null) {
       return i18n.selectedDateFormat!.locale;
+    } else {
+      return _localeString;
     }
+  }
 
+  static String get _localeString {
+    final i18n = Get.find<I18nController>();
     final language = i18n.selectedLanguage;
     if (language == null &&
         i18n.supportedLocales.contains(i18n.selectedLocale)) {
@@ -26,26 +30,26 @@ class DateTimeUtils {
   static String formatFullDateShorted(DateTime date) {
     final String time = _time(date);
     final String weekDay = _weekDay(date, shortted: true);
-    return '$weekDay, ${DateFormat.yMd(_localeString).format(date)} $time';
+    return '$weekDay, ${DateFormat.yMd(_dateLocaleString).format(date)} $time';
   }
 
   static String formatFullDate(DateTime date) {
     final String time = _time(date);
     final String weekDay = _weekDay(date);
-    return '$weekDay, ${DateFormat.yMMMMd(_localeString).format(date)} - $time';
+    return '$weekDay, ${DateFormat.yMMMMd(_dateLocaleString).format(date)} - $time';
   }
 
   static String formatDate(DateTime date) {
     final weekDay = _weekDay(date);
-    return '$weekDay, ${DateFormat.yMd(_localeString).format(date)}';
+    return '$weekDay, ${DateFormat.yMd(_dateLocaleString).format(date)}';
   }
 
   static String formatShortDate(DateTime date) {
-    return DateFormat.yMd(_localeString).format(date);
+    return DateFormat.yMd(_dateLocaleString).format(date);
   }
 
   static String format2LinesDate(DateTime date) {
-    final String dateString = DateFormat.yMd(_localeString).format(date);
+    final String dateString = DateFormat.yMd(_dateLocaleString).format(date);
     final split = dateString.split('/');
     return '${split[0]}/${split[1]}\n${split[2]}';
   }
