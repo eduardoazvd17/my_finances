@@ -124,6 +124,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         context: context,
         barrierColor: Colors.black87,
         useSafeArea: true,
+        isScrollControlled: true,
         builder: (_) => const SettingsBottomSheetModal(),
       ),
     );
