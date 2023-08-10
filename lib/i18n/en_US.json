@@ -157,5 +157,7 @@
     "total-by-grouping-text": "Total by grouping",
     "items-quantity-text": "Added items: %s",
     "resume-text": "Summary",
-    "items-without-group": "Items without grouping (%s)"
+    "items-without-group": "Items without grouping (%s)",
+    "checked-items": "Checked items (%s)",
+    "unchecked-items": "Unchecked items (%s)"
 }

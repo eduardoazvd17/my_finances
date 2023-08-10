@@ -157,5 +157,7 @@
     "total-by-grouping-text": "Total por agrupamento",
     "items-quantity-text": "Itens adicionados: %s",
     "resume-text": "Resumo",
-    "items-without-group": "Itens sem agrupamento (%s)"
+    "items-without-group": "Itens sem agrupamento (%s)",
+    "checked-items": "Itens marcados (%s)",
+    "unchecked-items": "Itens desmarcados (%s)"
 }

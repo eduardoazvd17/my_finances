@@ -536,6 +536,46 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       .toDouble(),
               quantity: controller.items.length,
             ),
+            AnnotationItemTotalTile(
+              title: 'checked-items'.i18n([
+                controller.items
+                    .cast<AnnotationItemModel>()
+                    .where((i) => i.isChecked)
+                    .length
+                    .toString(),
+              ]),
+              price: controller.items.isEmpty
+                  ? 0
+                  : controller.items
+                      .cast<AnnotationItemModel>()
+                      .where((i) => i.isChecked)
+                      .map((i) {
+                        return (i.quantity ?? 1) * (i.price ?? 0);
+                      })
+                      .reduce((a, b) => a + b)
+                      .toDouble(),
+              quantity: null,
+            ),
+            AnnotationItemTotalTile(
+              title: 'unchecked-items'.i18n([
+                controller.items
+                    .cast<AnnotationItemModel>()
+                    .where((i) => !i.isChecked)
+                    .length
+                    .toString(),
+              ]),
+              price: controller.items.isEmpty
+                  ? 0
+                  : controller.items
+                      .cast<AnnotationItemModel>()
+                      .where((i) => !i.isChecked)
+                      .map((i) {
+                        return (i.quantity ?? 1) * (i.price ?? 0);
+                      })
+                      .reduce((a, b) => a + b)
+                      .toDouble(),
+              quantity: null,
+            ),
             const Divider(),
             Center(
               child: Padding(
