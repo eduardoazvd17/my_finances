@@ -159,5 +159,9 @@
     "resume-text": "Resumen",
     "items-without-group": "Elementos sin agrupamiento (%s)",
     "checked-items": "Elementos marcados (%s)",
-    "unchecked-items": "Elementos sin marcar (%s)"
+    "unchecked-items": "Elementos sin marcar (%s)",
+    "app-date-format-label": "Formato de fecha",
+    "app-date-format-null": "Automático",
+    "app-currency-format-label": "Moneda",
+    "app-currency-format-null": "Automático"
 }

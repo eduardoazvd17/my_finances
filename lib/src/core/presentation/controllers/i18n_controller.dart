@@ -117,6 +117,7 @@ class I18nController extends GetxController {
     if (!withoutSaving) LoadingWidget.dialog();
 
     _selectedCurrencyFormat.value = value;
+    Get.forceAppUpdate();
 
     if (!withoutSaving) {
       await _saveSelectedCurrencyFormat(value);
@@ -157,6 +158,7 @@ class I18nController extends GetxController {
     if (!withoutSaving) LoadingWidget.dialog();
 
     _selectedDateFormat.value = value;
+    Get.forceAppUpdate();
 
     if (!withoutSaving) {
       await _saveSelectedDateFormat(value);

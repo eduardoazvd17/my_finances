@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/enums/app_currency_format.dart';
+import 'package:myfinances/src/core/data/enums/app_date_format.dart';
 import 'package:myfinances/src/core/data/enums/app_language.dart';
 import 'package:myfinances/src/core/data/enums/app_theme.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
@@ -39,6 +41,10 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       children: [
         _languageTile(context),
         const Divider(),
+        _dateFormatTile(context),
+        const Divider(),
+        _currencyFormatTile(context),
+        const Divider(),
         _themeTile(context),
       ],
     );
@@ -51,9 +57,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
           _biometricTile(context),
           const Divider(),
         ],
-        _languageTile(context),
-        const Divider(),
-        _themeTile(context),
+        _getNoAuthTiles(context),
         const Divider(),
         _logoutTile(),
       ],
@@ -110,6 +114,92 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                     (language) => DropdownMenuItem(
                       value: language,
                       child: Text(language.title),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _dateFormatTile(BuildContext context) {
+    final I18nController i18nController = Get.find<I18nController>();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Text(
+            '${'app-date-format-label'.i18n()}:',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.normal),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: DropDownButtonWidget<AppDateFormat?>(
+                itemHeight: 50,
+                isExpanded: true,
+                value: i18nController.selectedDateFormat,
+                onChanged: (value) {
+                  i18nController.setSelectedDateFormat(value);
+                },
+                items: [
+                  DropdownMenuItem(
+                    value: null,
+                    child: Text('app-date-format-null'.i18n()),
+                  ),
+                  ...AppDateFormat.values.map(
+                    (date) => DropdownMenuItem(
+                      value: date,
+                      child: Text(date.title),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _currencyFormatTile(BuildContext context) {
+    final I18nController i18nController = Get.find<I18nController>();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Text(
+            '${'app-currency-format-label'.i18n()}:',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.normal),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: DropDownButtonWidget<AppCurrencyFormat?>(
+                itemHeight: 50,
+                isExpanded: true,
+                value: i18nController.selectedCurrencyFormat,
+                onChanged: (value) {
+                  i18nController.setSelectedCurrencyFormat(value);
+                },
+                items: [
+                  DropdownMenuItem(
+                    value: null,
+                    child: Text('app-currency-format-null'.i18n()),
+                  ),
+                  ...AppCurrencyFormat.values.map(
+                    (currency) => DropdownMenuItem(
+                      value: currency,
+                      child: Text(currency.title),
                     ),
                   )
                 ],

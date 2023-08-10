@@ -159,5 +159,9 @@
     "resume-text": "Summary",
     "items-without-group": "Items without grouping (%s)",
     "checked-items": "Checked items (%s)",
-    "unchecked-items": "Unchecked items (%s)"
+    "unchecked-items": "Unchecked items (%s)",
+    "app-date-format-label": "Date format",
+    "app-date-format-null": "Automatic",
+    "app-currency-format-label": "Currency",
+    "app-currency-format-null": "Automatic"
 }
