@@ -553,7 +553,10 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                     .length
                     .toString(),
               ]),
-              price: controller.items.isEmpty
+              price: controller.items
+                      .cast<AnnotationItemModel>()
+                      .where((i) => !i.isChecked)
+                      .isEmpty
                   ? 0
                   : controller.items
                       .cast<AnnotationItemModel>()
@@ -573,7 +576,10 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                     .length
                     .toString(),
               ]),
-              price: controller.items.isEmpty
+              price: controller.items
+                      .cast<AnnotationItemModel>()
+                      .where((i) => !i.isChecked)
+                      .isEmpty
                   ? 0
                   : controller.items
                       .cast<AnnotationItemModel>()
