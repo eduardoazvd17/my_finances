@@ -163,5 +163,6 @@
     "app-date-format-label": "Formato de fecha",
     "app-date-format-null": "Automático",
     "app-currency-format-label": "Moneda",
-    "app-currency-format-null": "Automático"
+    "app-currency-format-null": "Automático",
+    "use-24h-format-button": "Usar formato 24H"
 }

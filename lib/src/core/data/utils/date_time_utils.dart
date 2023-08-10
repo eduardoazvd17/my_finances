@@ -36,7 +36,7 @@ class DateTimeUtils {
   static String formatFullDate(DateTime date) {
     final String time = _time(date);
     final String weekDay = _weekDay(date);
-    return '$weekDay, ${DateFormat.yMMMMd(_dateLocaleString).format(date)} - $time';
+    return '$weekDay, ${DateFormat.yMMMMd(_localeString).format(date)} - $time';
   }
 
   static String formatDate(DateTime date) {
@@ -55,7 +55,19 @@ class DateTimeUtils {
   }
 
   static String _time(DateTime date) {
-    return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    final i18n = Get.find<I18nController>();
+    if (!i18n.dateUse24hFormat) {
+      if (date.hour < 12) {
+        return '${date.hour.toString()}:${date.minute.toString().padLeft(2, '0')} AM';
+      } else if (date.hour == 12) {
+        return '${date.hour.toString()}:${date.minute.toString().padLeft(2, '0')} PM';
+      } else {
+        final hourIn12format = date.hour % 12;
+        return '${hourIn12format.toString()}:${date.minute.toString().padLeft(2, '0')} PM';
+      }
+    } else {
+      return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    }
   }
 
   static String _weekDay(DateTime date, {bool shortted = false}) {

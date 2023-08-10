@@ -42,6 +42,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         _languageTile(context),
         const Divider(),
         _dateFormatTile(context),
+        _timeFormatTile(context),
         const Divider(),
         _currencyFormatTile(context),
         const Divider(),
@@ -165,6 +166,15 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _timeFormatTile(BuildContext context) {
+    final I18nController i18nController = Get.find<I18nController>();
+    return SwitchListTile(
+      value: i18nController.dateUse24hFormat,
+      onChanged: i18nController.setDateUse24hFormat,
+      title: Text('use-24h-format-button'.i18n()),
     );
   }
 

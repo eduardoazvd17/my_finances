@@ -7,9 +7,9 @@ enum AppDateFormat {
 extension AppDateFormatExtension on AppDateFormat {
   String get title {
     return switch (this) {
-      AppDateFormat.dmy => '30/12/2023',
-      AppDateFormat.mdy => '12/30/2023',
-      AppDateFormat.ymd => '2023/12/30',
+      AppDateFormat.dmy => 'dd/MM/yyyy',
+      AppDateFormat.mdy => 'MM/dd/yyyy',
+      AppDateFormat.ymd => 'yyyy/MM/dd',
     };
   }
 

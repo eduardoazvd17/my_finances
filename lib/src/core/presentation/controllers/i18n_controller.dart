@@ -19,6 +19,7 @@ class I18nController extends GetxController {
     _loadSelectedLanguage();
     _loadSelectedCurrencyFormat();
     _loadSelectedDateFormat();
+    _loadDateUse24hFormat();
     super.onInit();
   }
 
@@ -187,6 +188,39 @@ class I18nController extends GetxController {
           withoutSaving: true,
         );
       }
+    } catch (_) {}
+  }
+
+  final Rx<bool> _dateUse24hFormat = Rx<bool>(false);
+  bool get dateUse24hFormat => _dateUse24hFormat.value;
+
+  Future<void> setDateUse24hFormat(
+    bool value, {
+    bool withoutSaving = false,
+  }) async {
+    if (!withoutSaving) LoadingWidget.dialog();
+
+    _dateUse24hFormat.value = value;
+    Get.forceAppUpdate();
+
+    if (!withoutSaving) {
+      await _saveDateUse24hFormat(value);
+      Get.close(1);
+    }
+  }
+
+  Future<void> _saveDateUse24hFormat(bool value) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('AppDateUse24hFormat', value);
+    } catch (_) {}
+  }
+
+  Future<void> _loadDateUse24hFormat() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final bool? value = prefs.getBool('AppDateUse24hFormat');
+      setDateUse24hFormat(value ?? false, withoutSaving: true);
     } catch (_) {}
   }
 }
