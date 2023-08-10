@@ -77,16 +77,22 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                               controller.selectedGroup = groupingModel;
                             }
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                              vertical: 10,
-                            ),
-                            child: Text(groupingModel.name),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 10,
+                                  ),
+                                  child: Text(groupingModel.name),
+                                ),
+                              ),
+                              _trailingWidgetByDocumentType(),
+                            ],
                           ),
                         ),
                       ),
-                      _trailingWidgetByDocumentType(),
                     ],
                   ),
                   if (_controller.isExpanded)
