@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:myfinances/src/core/data/enums/app_currency_format.dart';
 import '../enums/app_language.dart';
 import '../../presentation/controllers/i18n_controller.dart';
 
@@ -16,7 +17,11 @@ class CurrencyUtils {
   }
 
   static String format(double value) {
-    final format = NumberFormat.simpleCurrency(locale: _localeString);
-    return format.format(value);
+    final i18n = Get.find<I18nController>();
+    if (i18n.selectedCurrencyFormat != null) {
+      return i18n.selectedCurrencyFormat!.format(value);
+    } else {
+      return NumberFormat.simpleCurrency(locale: _localeString).format(value);
+    }
   }
 }

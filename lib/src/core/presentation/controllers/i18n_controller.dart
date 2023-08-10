@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/enums/app_currency_format.dart';
 import 'package:myfinances/src/core/data/enums/app_language.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../data/enums/app_date_format.dart';
 
 class I18nController extends GetxController {
   i18nController() {
@@ -14,6 +17,8 @@ class I18nController extends GetxController {
   @override
   void onInit() {
     _loadSelectedLanguage();
+    _loadSelectedCurrencyFormat();
+    _loadSelectedDateFormat();
     super.onInit();
   }
 
@@ -100,4 +105,86 @@ class I18nController extends GetxController {
   }
 
   Locale? get selectedLocale => selectedLanguage?.locale ?? Get.deviceLocale;
+
+  final Rx<AppCurrencyFormat?> _selectedCurrencyFormat =
+      Rx<AppCurrencyFormat?>(null);
+  AppCurrencyFormat? get selectedCurrencyFormat =>
+      _selectedCurrencyFormat.value;
+  Future<void> setSelectedCurrencyFormat(
+    AppCurrencyFormat? value, {
+    bool withoutSaving = false,
+  }) async {
+    if (!withoutSaving) LoadingWidget.dialog();
+
+    _selectedCurrencyFormat.value = value;
+
+    if (!withoutSaving) {
+      await _saveSelectedCurrencyFormat(value);
+      Get.close(1);
+    }
+  }
+
+  Future<void> _saveSelectedCurrencyFormat(AppCurrencyFormat? value) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (value != null) {
+        await prefs.setInt('AppCurrencyFormat', value.index);
+      } else {
+        await prefs.remove('AppCurrencyFormat');
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _loadSelectedCurrencyFormat() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final int? index = prefs.getInt('AppCurrencyFormat');
+      if (index != null) {
+        setSelectedCurrencyFormat(
+          AppCurrencyFormat.values[index],
+          withoutSaving: true,
+        );
+      }
+    } catch (_) {}
+  }
+
+  final Rx<AppDateFormat?> _selectedDateFormat = Rx<AppDateFormat?>(null);
+  AppDateFormat? get selectedDateFormat => _selectedDateFormat.value;
+  Future<void> setSelectedDateFormat(
+    AppDateFormat? value, {
+    bool withoutSaving = false,
+  }) async {
+    if (!withoutSaving) LoadingWidget.dialog();
+
+    _selectedDateFormat.value = value;
+
+    if (!withoutSaving) {
+      await _saveSelectedDateFormat(value);
+      Get.close(1);
+    }
+  }
+
+  Future<void> _saveSelectedDateFormat(AppDateFormat? value) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (value != null) {
+        await prefs.setInt('AppDateFormat', value.index);
+      } else {
+        await prefs.remove('AppDateFormat');
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _loadSelectedDateFormat() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final int? index = prefs.getInt('AppDateFormat');
+      if (index != null) {
+        setSelectedDateFormat(
+          AppDateFormat.values[index],
+          withoutSaving: true,
+        );
+      }
+    } catch (_) {}
+  }
 }

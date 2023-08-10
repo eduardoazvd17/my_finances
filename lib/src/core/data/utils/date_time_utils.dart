@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:myfinances/src/core/data/enums/app_date_format.dart';
 import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
 
 import '../enums/app_language.dart';
@@ -8,6 +9,11 @@ import '../enums/app_language.dart';
 class DateTimeUtils {
   static String get _localeString {
     final i18n = Get.find<I18nController>();
+
+    if (i18n.selectedDateFormat != null) {
+      return i18n.selectedDateFormat!.locale;
+    }
+
     final language = i18n.selectedLanguage;
     if (language == null &&
         i18n.supportedLocales.contains(i18n.selectedLocale)) {
