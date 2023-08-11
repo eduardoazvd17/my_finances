@@ -115,4 +115,6 @@ class AppController extends GetxController {
       Get.close(1);
     }
   }
+
+  void goToMyProfilePage() => AppRoutes.goToMyProfilePage();
 }

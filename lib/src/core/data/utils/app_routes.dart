@@ -6,11 +6,13 @@ import 'package:myfinances/src/features/authentication/presentation/pages/welcom
 import 'package:myfinances/src/features/documents/data/bindings/document_editor_binding.dart';
 import 'package:myfinances/src/features/documents/presentation/pages/document_editor_page.dart';
 import 'package:myfinances/src/features/documents/presentation/pages/documents_page.dart';
+import 'package:myfinances/src/features/my_profile/data/bindings/my_profile_binding.dart';
 
 import '../../../features/authentication/data/bindings/auth_binding.dart';
 import '../../../features/documents/data/bindings/documents_binding.dart';
 import '../../../features/documents/data/models/document_model.dart';
 import '../../../features/documents/presentation/pages/add_document_page.dart';
+import '../../../features/my_profile/presentation/pages/my_profile_page.dart';
 import '../middlewares/auth_middleware.dart';
 
 class AppRoutes {
@@ -20,6 +22,7 @@ class AppRoutes {
   static const String _documents = "/documents";
   static const String _addDocument = "$_documents/addDocument";
   static const String _documentEditor = "$_documents/editor";
+  static const String _myProfile = "/myProfile";
 
   static String get initialRoute => _welcome;
 
@@ -36,6 +39,8 @@ class AppRoutes {
       arguments: documentModel,
     );
   }
+
+  static void goToMyProfilePage() => _navigate(_myProfile);
 
   static List<GetPage> getGetPages() {
     return [
@@ -76,6 +81,13 @@ class AppRoutes {
         page: () => const DocumentEditorPage(),
         binding: DocumentEditorBinding(),
         transition: _getTransition(_documentEditor),
+        middlewares: [AuthMiddleware()],
+      ),
+      GetPage(
+        name: _myProfile,
+        page: () => const MyProfilePage(),
+        binding: MyProfileBinding(),
+        transition: _getTransition(_myProfile),
         middlewares: [AuthMiddleware()],
       ),
     ];

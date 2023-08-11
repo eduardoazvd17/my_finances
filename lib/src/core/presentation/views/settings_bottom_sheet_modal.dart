@@ -71,9 +71,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
 
   Widget _myProfileTile(BuildContext context) {
     return InkWell(
-      onTap: () {
-        //TODO: Abrir página de meu perfil.
-      },
+      onTap: controller.goToMyProfilePage,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
