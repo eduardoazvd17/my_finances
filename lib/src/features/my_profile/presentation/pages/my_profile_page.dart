@@ -8,6 +8,8 @@ import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart
 
 import 'package:myfinances/src/features/my_profile/presentation/controllers/my_profile_controller.dart';
 
+import '../../../../core/presentation/widgets/profile_picture_widget.dart';
+
 class MyProfilePage extends GetWidget<MyProfileController> {
   const MyProfilePage({super.key});
 
@@ -18,23 +20,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
       body: ScrollViewWidget(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                child: ClipOval(
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    color: Theme.of(context).primaryColor,
-                    child: const Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Icon(CupertinoIcons.person,
-                          size: 50, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            const ProfilePictureWidget(),
             Obx(
               () => itemTile(
                 label: 'name-text'.i18n(),

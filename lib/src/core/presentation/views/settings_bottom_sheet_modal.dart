@@ -14,6 +14,7 @@ import 'package:myfinances/src/core/presentation/controllers/theme_controller.da
 import '../widgets/bottom_sheet_modal_widget.dart';
 import '../widgets/custom_dialog.dart';
 import '../widgets/drop_down_button_widget.dart';
+import '../widgets/profile_picture_widget.dart';
 
 class SettingsBottomSheetModal extends GetWidget<AppController> {
   const SettingsBottomSheetModal({super.key});
@@ -99,7 +100,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                 ],
               ),
             ),
-            const Icon(CupertinoIcons.person, size: 30),
+            const ProfilePictureWidget(size: 50),
           ],
         ),
       ),
