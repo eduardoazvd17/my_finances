@@ -165,5 +165,8 @@
     "app-currency-format-label": "Moneda",
     "app-currency-format-null": "Automático",
     "use-24h-format-button": "Usar formato 24H",
-    "my-profile-boton": "Mi perfil"
+    "my-profile-boton": "Mi perfil",
+    "name-text": "Nombre",
+    "email-text": "Correo electrónico",
+    "password-text": "Contraseña"
 }
