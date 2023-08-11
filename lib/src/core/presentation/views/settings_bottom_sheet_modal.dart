@@ -12,7 +12,6 @@ import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dar
 import 'package:myfinances/src/core/presentation/controllers/theme_controller.dart';
 
 import '../widgets/bottom_sheet_modal_widget.dart';
-import '../widgets/custom_dialog.dart';
 import '../widgets/drop_down_button_widget.dart';
 import '../widgets/profile_picture_widget.dart';
 
@@ -64,8 +63,6 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         _currencyFormatTile(context),
         const Divider(),
         _themeTile(context),
-        const Divider(),
-        _logoutTile(),
       ],
     );
   }
@@ -313,26 +310,6 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _logoutTile() {
-    return ListTile(
-      onTap: () {
-        Get.dialog(
-          CustomDialog(
-            title: 'logout-button'.i18n(),
-            content: 'logout-confirmation-text'.i18n(),
-            onConfirm: controller.logout,
-            invertButtonColor: true,
-          ),
-          barrierColor: Colors.black87,
-        );
-      },
-      trailing: const Icon(Icons.exit_to_app),
-      iconColor: Colors.red,
-      title: Text('logout-button'.i18n()),
-      textColor: Colors.red,
     );
   }
 }
