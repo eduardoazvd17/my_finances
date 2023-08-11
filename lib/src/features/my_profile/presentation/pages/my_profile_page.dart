@@ -37,7 +37,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               label: 'password-text'.i18n(),
               content: '********',
             ),
-            _logoutButton(),
+            Center(child: _logoutButton()),
           ],
         ),
       ),
@@ -84,25 +84,24 @@ class MyProfilePage extends GetWidget<MyProfileController> {
   }
 
   Widget _logoutButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        onTap: () {
-          Get.dialog(
-            CustomDialog(
-              title: 'logout-button'.i18n(),
-              content: 'logout-confirmation-text'.i18n(),
-              onConfirm: AppController.instance.logout,
-              invertButtonColor: true,
-            ),
-            barrierColor: Colors.black87,
-          );
-        },
-        trailing: const Icon(Icons.exit_to_app),
-        iconColor: Colors.red,
-        title: Text('logout-button'.i18n()),
-        textColor: Colors.red,
+    return InkWell(
+      onTap: () {
+        Get.dialog(
+          CustomDialog(
+            title: 'logout-button'.i18n(),
+            content: 'logout-confirmation-text'.i18n(),
+            onConfirm: AppController.instance.logout,
+            invertButtonColor: true,
+          ),
+          barrierColor: Colors.black87,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Text(
+          'logout-button'.i18n(),
+          style: const TextStyle(color: Colors.red),
+        ),
       ),
     );
   }
