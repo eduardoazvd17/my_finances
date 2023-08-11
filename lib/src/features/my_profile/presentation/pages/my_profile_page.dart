@@ -100,7 +100,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
         padding: const EdgeInsets.all(16),
         child: Text(
           'logout-button'.i18n(),
-          style: const TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.red[200]),
         ),
       ),
     );
