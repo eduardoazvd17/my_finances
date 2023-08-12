@@ -11,6 +11,7 @@ import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/document_tile_widget.dart';
 
+import '../../../../core/presentation/controllers/app_controller.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
 import '../../../../core/presentation/widgets/profile_picture_widget.dart';
@@ -24,13 +25,9 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
-        title: AppLogo(size: 35),
+        title: _myProfileWidget(),
         centerTitle: false,
-        actions: [
-          _myProfileButton(),
-          const SizedBox(width: 2.5),
-          _settingsMenuButton(context),
-        ],
+        actions: [_settingsMenuButton(context)],
       ),
       floatingBottomMenu: _addDocumentFloatingButton(context),
       body: ListHeaderWidget(
@@ -120,10 +117,23 @@ class DocumentsPage extends GetWidget<DocumentsController> {
     );
   }
 
-  Widget _myProfileButton() {
-    return ProfilePictureWidget(
-      size: 25,
-      onTap: controller.goToMyProfilePage,
+  Widget _myProfileWidget() {
+    return Row(
+      children: [
+        ProfilePictureWidget(
+          size: 50,
+          onTap: controller.goToMyProfilePage,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Text(
+            'hello-text'.i18n([
+              AppController.instance.user!.name.split(' ').first,
+            ]),
+            textScaleFactor: 1.0,
+          ),
+        ),
+      ],
     );
   }
 

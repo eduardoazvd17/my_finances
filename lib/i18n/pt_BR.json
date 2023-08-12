@@ -168,5 +168,6 @@
     "my-profile-button": "Meu perfil",
     "name-text": "Nome",
     "email-text": "E-mail",
-    "password-text": "Senha"
+    "password-text": "Senha",
+    "hello-text": "Olá, %s."
 }
