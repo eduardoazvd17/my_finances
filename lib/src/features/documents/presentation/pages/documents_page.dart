@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/views/settings_bottom_sheet_modal.dart';
 import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/list_header_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
