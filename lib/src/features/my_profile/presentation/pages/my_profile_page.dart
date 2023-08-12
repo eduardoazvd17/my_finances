@@ -40,7 +40,10 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               label: 'password-text'.i18n(),
               content: '********',
             ),
-            Center(child: _logoutButton()),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Center(child: _logoutButton()),
+            ),
           ],
         ),
       ),
