@@ -13,6 +13,7 @@ import 'package:myfinances/src/features/documents/presentation/widgets/document_
 
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
+import '../../../../core/presentation/widgets/profile_picture_widget.dart';
 import '../controllers/documents_controller.dart';
 import '../views/documents_order_bottom_sheet_modal.dart';
 
@@ -26,6 +27,8 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         title: AppLogo(size: 35),
         centerTitle: false,
         actions: [
+          _myProfileButton(),
+          const SizedBox(width: 2.5),
           _settingsMenuButton(context),
         ],
       ),
@@ -114,6 +117,13 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           );
         }).toList(),
       ),
+    );
+  }
+
+  Widget _myProfileButton() {
+    return ProfilePictureWidget(
+      size: 25,
+      onTap: controller.goToMyProfilePage,
     );
   }
 

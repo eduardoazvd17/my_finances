@@ -13,7 +13,6 @@ import 'package:myfinances/src/core/presentation/controllers/theme_controller.da
 
 import '../widgets/bottom_sheet_modal_widget.dart';
 import '../widgets/drop_down_button_widget.dart';
-import '../widgets/profile_picture_widget.dart';
 
 class SettingsBottomSheetModal extends GetWidget<AppController> {
   const SettingsBottomSheetModal({super.key});
@@ -49,8 +48,6 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
   Widget _getAuthTiles(BuildContext context) {
     return Column(
       children: [
-        _myProfileTile(context),
-        const Divider(),
         if (!kIsWeb) ...[
           _biometricTile(context),
           const Divider(),
@@ -64,43 +61,6 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         const Divider(),
         _themeTile(context),
       ],
-    );
-  }
-
-  Widget _myProfileTile(BuildContext context) {
-    return InkWell(
-      onTap: controller.goToMyProfilePage,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'my-profile-button'.i18n(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontWeight: FontWeight.normal),
-                    maxLines: 1,
-                  ),
-                  Text(
-                    controller.user!.name,
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    maxLines: 1,
-                  ),
-                ],
-              ),
-            ),
-            const ProfilePictureWidget(size: 50),
-          ],
-        ),
-      ),
     );
   }
 

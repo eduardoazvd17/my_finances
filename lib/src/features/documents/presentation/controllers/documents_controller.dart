@@ -207,4 +207,6 @@ class DocumentsController extends GetxController {
       documentModel: documentModel,
     );
   }
+
+  void goToMyProfilePage() => AppRoutes.goToMyProfilePage();
 }
