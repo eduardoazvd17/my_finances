@@ -18,7 +18,10 @@ class MyProfilePage extends GetWidget<MyProfileController> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      appBar: AppBar(title: Text('my-profile-button'.i18n())),
+      appBar: AppBar(
+        title: Text('my-profile-button'.i18n()),
+        actions: [_logoutButton(onlyIcon: true)],
+      ),
       body: ScrollViewWidget(
         child: Column(
           children: [
@@ -83,26 +86,36 @@ class MyProfilePage extends GetWidget<MyProfileController> {
     );
   }
 
-  Widget _logoutButton() {
-    return InkWell(
-      onTap: () {
-        Get.dialog(
-          CustomDialog(
-            title: 'logout-button'.i18n(),
-            content: 'logout-confirmation-text'.i18n(),
-            onConfirm: AppController.instance.logout,
-            invertButtonColor: true,
-          ),
-          barrierColor: Colors.black87,
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(
-          'logout-button'.i18n(),
-          style: TextStyle(color: Colors.red[200]),
+  Widget _logoutButton({bool onlyIcon = false}) {
+    void logout() {
+      Get.dialog(
+        CustomDialog(
+          title: 'logout-button'.i18n(),
+          content: 'logout-confirmation-text'.i18n(),
+          onConfirm: AppController.instance.logout,
+          invertButtonColor: true,
         ),
-      ),
-    );
+        barrierColor: Colors.black87,
+      );
+    }
+
+    if (onlyIcon) {
+      return IconButton(
+        onPressed: logout,
+        tooltip: 'logout-button'.i18n(),
+        icon: Icon(Icons.exit_to_app, color: Colors.red[200]),
+      );
+    } else {
+      return InkWell(
+        onTap: logout,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            'logout-button'.i18n(),
+            style: TextStyle(color: Colors.red[200]),
+          ),
+        ),
+      );
+    }
   }
 }
