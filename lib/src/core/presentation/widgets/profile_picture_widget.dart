@@ -25,9 +25,11 @@ class ProfilePictureWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(size / 5),
           child: const FittedBox(
-            child: Icon(
-              CupertinoIcons.person,
-              color: Colors.white,
+            child: Center(
+              child: Icon(
+                CupertinoIcons.person,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
