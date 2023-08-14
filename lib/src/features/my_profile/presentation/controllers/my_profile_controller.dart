@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/data/utils/app_routes.dart';
 import '../../../../core/presentation/controllers/app_controller.dart';
 
 class MyProfileController extends GetxController {
@@ -45,4 +46,6 @@ class MyProfileController extends GetxController {
   Future<bool> editPassword() async {
     return true;
   }
+
+  void goToChangePasswordPage() => AppRoutes.goToMyChangePasswordPage();
 }

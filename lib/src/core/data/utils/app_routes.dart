@@ -7,6 +7,7 @@ import 'package:myfinances/src/features/documents/data/bindings/document_editor_
 import 'package:myfinances/src/features/documents/presentation/pages/document_editor_page.dart';
 import 'package:myfinances/src/features/documents/presentation/pages/documents_page.dart';
 import 'package:myfinances/src/features/my_profile/data/bindings/my_profile_binding.dart';
+import 'package:myfinances/src/features/my_profile/presentation/pages/change_password_page.dart';
 
 import '../../../features/authentication/data/bindings/auth_binding.dart';
 import '../../../features/documents/data/bindings/documents_binding.dart';
@@ -23,6 +24,7 @@ class AppRoutes {
   static const String _addDocument = "$_documents/addDocument";
   static const String _documentEditor = "$_documents/editor";
   static const String _myProfile = "/myProfile";
+  static const String _changePassword = "$_myProfile/changePassword";
 
   static String get initialRoute => _welcome;
 
@@ -41,6 +43,7 @@ class AppRoutes {
   }
 
   static void goToMyProfilePage() => _navigate(_myProfile);
+  static void goToMyChangePasswordPage() => _navigate(_changePassword);
 
   static List<GetPage> getGetPages() {
     return [
@@ -88,6 +91,13 @@ class AppRoutes {
         page: () => const MyProfilePage(),
         binding: MyProfileBinding(),
         transition: _getTransition(_myProfile),
+        middlewares: [AuthMiddleware()],
+      ),
+      GetPage(
+        name: _changePassword,
+        page: () => const ChangePasswordPage(),
+        binding: MyProfileBinding(),
+        transition: _getTransition(_changePassword),
         middlewares: [AuthMiddleware()],
       ),
     ];

@@ -86,7 +86,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               label: 'password-text'.i18n(),
               content: '••••••••',
               trailing: TextButton(
-                onPressed: () {},
+                onPressed: controller.goToChangePasswordPage,
                 child: Text('change-password-button'.i18n()),
               ),
             ),
