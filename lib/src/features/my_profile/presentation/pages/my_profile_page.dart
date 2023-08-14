@@ -96,7 +96,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               child: Center(child: _logoutButton()),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
+              padding: const EdgeInsets.only(top: 30.0),
               child: Center(child: _deleteAccountButton()),
             ),
           ],
