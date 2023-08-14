@@ -123,6 +123,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       children: [
         ProfilePictureWidget(
           size: 50,
+          url: AppController.instance.user?.photoUrl,
           onTap: controller.goToMyProfilePage,
         ),
         Padding(

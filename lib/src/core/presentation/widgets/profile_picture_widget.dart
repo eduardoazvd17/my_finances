@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:myfinances/src/core/presentation/widgets/elevation_widget.dart';
 
 class ProfilePictureWidget extends StatelessWidget {
+  final String? url;
   final double size;
   final void Function()? onTap;
   const ProfilePictureWidget({
     super.key,
+    required this.url,
     this.size = 150,
     this.onTap,
   });
@@ -18,25 +20,34 @@ class ProfilePictureWidget extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(100),
-        child: Container(
-          height: size,
-          width: size,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Theme.of(context).primaryColor,
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(size / 5),
-            child: const FittedBox(
-              child: Center(
-                child: Icon(
-                  CupertinoIcons.person,
-                  color: Colors.white,
+        child: url != null
+            ? ClipOval(
+                child: Image.network(
+                  url!,
+                  height: size,
+                  width: size,
+                  fit: BoxFit.fill,
+                ),
+              )
+            : Container(
+                height: size,
+                width: size,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).primaryColor,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(size / 5),
+                  child: const FittedBox(
+                    child: Center(
+                      child: Icon(
+                        CupertinoIcons.person,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }

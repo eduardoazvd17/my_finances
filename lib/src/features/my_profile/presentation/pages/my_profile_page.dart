@@ -27,31 +27,33 @@ class MyProfilePage extends GetWidget<MyProfileController> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const ProfilePictureWidget(),
-                  const SizedBox(width: 16),
-                  Column(
-                    children: controller.photoUrl == null
-                        ? [
-                            TextButton(
-                              onPressed: () {},
-                              child: Text('add-photo-button'.i18n()),
-                            ),
-                          ]
-                        : [
-                            TextButton(
-                              onPressed: () {},
-                              child: Text('edit-photo-button'.i18n()),
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text('remove-photo-button'.i18n()),
-                            ),
-                          ],
-                  ),
-                ],
+              child: Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ProfilePictureWidget(url: controller.photoUrl),
+                    const SizedBox(width: 16),
+                    Column(
+                      children: controller.photoUrl == null
+                          ? [
+                              TextButton(
+                                onPressed: () {},
+                                child: Text('add-photo-button'.i18n()),
+                              ),
+                            ]
+                          : [
+                              TextButton(
+                                onPressed: () {},
+                                child: Text('edit-photo-button'.i18n()),
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text('remove-photo-button'.i18n()),
+                              ),
+                            ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Obx(
