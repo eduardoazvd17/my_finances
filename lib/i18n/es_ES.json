@@ -183,5 +183,7 @@
     "new-password-hint": "Ingrese una nueva contraseña...",
     "new-password2-label": "Confirmación de nueva contraseña:",
     "new-password2-hint": "Repite tu nueva contraseña...",
-    "send-button": "Enviar"
+    "send-button": "Enviar",
+    "delete-account-button": "Eliminar cuenta de forma permanente",
+    "delete-account-confirmation-text": "¿Realmente desea eliminar su cuenta?\n\nTodos sus documentos y datos ingresados se eliminarán de FORMA PERMANENTE junto con su cuenta."
 }

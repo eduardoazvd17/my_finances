@@ -94,6 +94,10 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               padding: const EdgeInsets.only(top: 20.0),
               child: Center(child: _logoutButton()),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Center(child: _deleteAccountButton()),
+            ),
           ],
         ),
       ),
@@ -165,5 +169,28 @@ class MyProfilePage extends GetWidget<MyProfileController> {
         ),
       );
     }
+  }
+
+  Widget _deleteAccountButton() {
+    return InkWell(
+      onTap: () {
+        Get.dialog(
+          CustomDialog(
+            title: 'delete-account-button'.i18n(),
+            content: 'delete-account-confirmation-text'.i18n(),
+            onConfirm: controller.deleteAccount,
+            invertButtonColor: true,
+          ),
+          barrierColor: Colors.black87,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Text(
+          'delete-account-button'.i18n(),
+          style: const TextStyle(color: Colors.red),
+        ),
+      ),
+    );
   }
 }

@@ -51,4 +51,6 @@ class MyProfileController extends GetxController {
   Future<void> changeNickname() async {}
 
   Future<void> changePassword() async {}
+
+  Future<void> deleteAccount() async {}
 }
