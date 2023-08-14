@@ -67,6 +67,17 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                 ),
               ),
             ),
+            Obx(
+              () => itemTile(
+                label: 'nickname-text'.i18n(),
+                content: controller.nickname,
+                trailing: IconButton(
+                  onPressed: () {},
+                  tooltip: 'edit-text'.i18n(),
+                  icon: const Icon(CupertinoIcons.pen),
+                ),
+              ),
+            ),
             itemTile(
               label: 'email-text'.i18n(),
               content: controller.email,

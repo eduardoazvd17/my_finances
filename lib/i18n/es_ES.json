@@ -174,5 +174,7 @@
     "change-password-button": "Cambiar contraseña",
     "add-photo-button": "Agregar foto",
     "edit-photo-button": "Editar foto",
-    "remove-photo-button": "Quitar foto"
+    "remove-photo-button": "Quitar foto",
+    "edit-text": "Editar",
+    "nickname-text": "Apodo"
 }

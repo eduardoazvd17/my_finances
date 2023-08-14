@@ -174,5 +174,7 @@
     "change-password-button": "Alterar senha",
     "add-photo-button": "Adicionar foto",
     "edit-photo-button": "Editar foto",
-    "remove-photo-button": "Remover foto"
+    "remove-photo-button": "Remover foto",
+    "edit-text": "Editar",
+    "nickname-text": "Apelido"
 }
