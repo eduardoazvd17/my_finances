@@ -39,17 +39,16 @@ class MyProfileController extends GetxController {
   final password2Controller = TextEditingController();
   final password2Focus = FocusNode();
 
-  Future<bool> editName() async {
-    return true;
+  void goToChangePasswordPage() {
+    oldPasswordController.clear();
+    passwordController.clear();
+    password2Controller.clear();
+    AppRoutes.goToMyChangePasswordPage();
   }
 
-  Future<bool> editPassword() async {
-    return true;
-  }
+  Future<void> changeName() async {}
 
-  void goToChangePasswordPage() => AppRoutes.goToMyChangePasswordPage();
+  Future<void> changeNickname() async {}
 
-  Future<void> changePassword() async {
-    Get.close(1);
-  }
+  Future<void> changePassword() async {}
 }
