@@ -24,6 +24,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
+        toolbarHeight: 96,
         title: _myProfileWidget(),
         centerTitle: false,
         actions: [_settingsMenuButton(context)],
@@ -117,19 +118,20 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   }
 
   Widget _myProfileWidget() {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ProfilePictureWidget(
           size: 50,
           onTap: controller.goToMyProfilePage,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.only(top: 10),
           child: Text(
             'hello-text'.i18n([
               AppController.instance.user!.name.split(' ').first,
             ]),
-            textScaleFactor: 1.0,
+            maxLines: 1,
           ),
         ),
       ],
