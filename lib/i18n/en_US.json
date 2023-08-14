@@ -169,5 +169,6 @@
     "name-text": "Name",
     "email-text": "Email",
     "password-text": "Password",
-    "hello-text": "Hello, %s."
+    "hello-text": "Hello, %s.",
+    "empty-document-total-itext": "Add data to document to view totals here."
 }
