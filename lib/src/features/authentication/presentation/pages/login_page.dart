@@ -74,6 +74,10 @@ class LoginPage extends GetWidget<AuthController> {
                   children: [
                     Expanded(
                       child: ButtonWidget(
+                        icon: const Icon(
+                          CupertinoIcons.person,
+                          color: Colors.white,
+                        ),
                         text: 'make-login-button'.i18n(),
                         backgroundColor: Theme.of(context).primaryColor,
                         foregroundColor: Colors.white,

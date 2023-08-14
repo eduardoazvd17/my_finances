@@ -148,6 +148,10 @@ class WelcomePage extends GetWidget<AuthController> {
             children: [
               Expanded(
                 child: ButtonWidget(
+                  icon: const Icon(
+                    CupertinoIcons.person,
+                    color: Colors.white,
+                  ),
                   text: 'login-button'.i18n(),
                   backgroundColor: Theme.of(context).primaryColor,
                   foregroundColor: Colors.white,
@@ -163,6 +167,10 @@ class WelcomePage extends GetWidget<AuthController> {
             children: [
               Expanded(
                 child: ButtonWidget(
+                  icon: Icon(
+                    CupertinoIcons.person_add,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   text: 'register-button'.i18n(),
                   onTap: controller.goToRegisterPage,
                 ),

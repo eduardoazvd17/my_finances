@@ -185,5 +185,7 @@
     "new-password2-hint": "Repeat your new password...",
     "send-button": "Send",
     "delete-account-button": "Permanently delete account",
-    "delete-account-confirmation-text": "Do you really want to delete your account?\n\nAll your documents and entered data will be PERMANENTLY deleted along with your account."
+    "delete-account-confirmation-text": "Do you really want to delete your account?\n\nAll your documents and entered data will be PERMANENTLY deleted along with your account.",
+    "change-button": "Change",
+    "confirm-button": "Confirm"
 }

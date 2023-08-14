@@ -185,5 +185,7 @@
     "new-password2-hint": "Repita sua nova senha...",
     "send-button": "Enviar",
     "delete-account-button": "Excluir conta permanentemente",
-    "delete-account-confirmation-text": "Deseja realmente excluir sua conta?\n\nTodos os seus documentos e os dados inseridos serão excluídos PERMANENTEMENTE junto com a sua conta."
+    "delete-account-confirmation-text": "Deseja realmente excluir sua conta?\n\nTodos os seus documentos e os dados inseridos serão excluídos PERMANENTEMENTE junto com a sua conta.",
+    "change-button": "Alterar",
+    "confirm-button": "Confirmar"
 }

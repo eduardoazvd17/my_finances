@@ -98,6 +98,10 @@ class RegisterPage extends GetWidget<AuthController> {
                         children: [
                           Expanded(
                             child: ButtonWidget(
+                              icon: const Icon(
+                                CupertinoIcons.person_add,
+                                color: Colors.white,
+                              ),
                               text: 'make-register-button'.i18n(),
                               backgroundColor: Theme.of(context).primaryColor,
                               foregroundColor: Colors.white,

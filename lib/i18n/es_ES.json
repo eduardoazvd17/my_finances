@@ -185,5 +185,7 @@
     "new-password2-hint": "Repite tu nueva contraseña...",
     "send-button": "Enviar",
     "delete-account-button": "Eliminar cuenta de forma permanente",
-    "delete-account-confirmation-text": "¿Realmente desea eliminar su cuenta?\n\nTodos sus documentos y datos ingresados se eliminarán de FORMA PERMANENTE junto con su cuenta."
+    "delete-account-confirmation-text": "¿Realmente desea eliminar su cuenta?\n\nTodos sus documentos y datos ingresados se eliminarán de FORMA PERMANENTE junto con su cuenta.",
+    "change-button": "Cambiar",
+    "confirm-button": "Confirmar"
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
+import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
@@ -158,21 +159,28 @@ class MyProfilePage extends GetWidget<MyProfileController> {
         icon: Icon(Icons.exit_to_app, color: Colors.red[200]),
       );
     } else {
-      return InkWell(
-        onTap: logout,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            'logout-button'.i18n(),
-            style: TextStyle(color: Colors.red[200]),
-          ),
+      return ButtonWidget(
+        icon: Icon(
+          Icons.exit_to_app,
+          color: Colors.red[200],
         ),
+        text: 'logout-button'.i18n(),
+        foregroundColor: Colors.red[200],
+        borderColor: Colors.red[200],
+        onTap: logout,
       );
     }
   }
 
   Widget _deleteAccountButton() {
-    return InkWell(
+    return ButtonWidget(
+      icon: const Icon(
+        CupertinoIcons.delete,
+        color: Colors.red,
+      ),
+      text: 'delete-account-button'.i18n(),
+      foregroundColor: Colors.red,
+      borderColor: Colors.red,
       onTap: () {
         Get.dialog(
           CustomDialog(
@@ -184,13 +192,6 @@ class MyProfilePage extends GetWidget<MyProfileController> {
           barrierColor: Colors.black87,
         );
       },
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(
-          'delete-account-button'.i18n(),
-          style: const TextStyle(color: Colors.red),
-        ),
-      ),
     );
   }
 }
