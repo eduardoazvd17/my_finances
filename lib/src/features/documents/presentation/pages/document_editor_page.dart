@@ -456,6 +456,19 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _getInfoAdditionalContentByDocumentType() {
+    if (controller.items.isEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Text('empty-document-total-text'.i18n()),
+          ),
+        ],
+      );
+    }
+
     const styleLabel = TextStyle(fontWeight: FontWeight.bold);
 
     //TODO: Totalização de dados para cada tipo de DocumentType.
