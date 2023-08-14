@@ -555,7 +555,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               ]),
               price: controller.items
                       .cast<AnnotationItemModel>()
-                      .where((i) => !i.isChecked)
+                      .where((i) => i.isChecked)
                       .isEmpty
                   ? 0
                   : controller.items
