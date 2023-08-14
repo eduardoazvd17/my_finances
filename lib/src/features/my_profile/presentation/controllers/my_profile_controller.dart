@@ -5,18 +5,24 @@ import '../../../../core/presentation/controllers/app_controller.dart';
 
 class MyProfileController extends GetxController {
   late final RxString _name;
+  late final RxString _nickname;
+  late final Rx<String?> _photoUrl;
   late final RxString _email;
   late final RxString _passwordHash;
 
   @override
   void onInit() {
     _name = RxString(AppController.instance.user!.name);
+    _nickname = RxString(AppController.instance.user!.nickname);
+    _photoUrl = Rx<String?>(AppController.instance.user!.photoUrl);
     _email = RxString(AppController.instance.user!.email);
     _passwordHash = RxString(AppController.instance.user!.password);
     super.onInit();
   }
 
   String get name => _name.value;
+  String get nickname => _nickname.value;
+  String? get photoUrl => _photoUrl.value;
   String get email => _email.value;
   String get passwordHash => _passwordHash.value;
 

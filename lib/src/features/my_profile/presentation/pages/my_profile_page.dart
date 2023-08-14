@@ -25,11 +25,44 @@ class MyProfilePage extends GetWidget<MyProfileController> {
       body: ScrollViewWidget(
         child: Column(
           children: [
-            const ProfilePictureWidget(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const ProfilePictureWidget(),
+                  const SizedBox(width: 16),
+                  Column(
+                    children: controller.photoUrl == null
+                        ? [
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('add-photo-button'.i18n()),
+                            ),
+                          ]
+                        : [
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('edit-photo-button'.i18n()),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('remove-photo-button'.i18n()),
+                            ),
+                          ],
+                  ),
+                ],
+              ),
+            ),
             Obx(
               () => itemTile(
                 label: 'name-text'.i18n(),
                 content: controller.name,
+                trailing: IconButton(
+                  onPressed: () {},
+                  tooltip: 'edit-text'.i18n(),
+                  icon: const Icon(CupertinoIcons.pen),
+                ),
               ),
             ),
             itemTile(
@@ -38,7 +71,11 @@ class MyProfilePage extends GetWidget<MyProfileController> {
             ),
             itemTile(
               label: 'password-text'.i18n(),
-              content: '********',
+              content: '••••••••',
+              trailing: TextButton(
+                onPressed: () {},
+                child: Text('change-password-button'.i18n()),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
@@ -53,7 +90,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
   Widget itemTile({
     required String label,
     required String content,
-    void Function()? onEdit,
+    Widget? trailing,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -64,7 +101,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 8.0,
-              vertical: onEdit != null ? 0 : 10,
+              vertical: trailing != null ? 0 : 10,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,12 +109,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                 Row(
                   children: [
                     Expanded(child: Text(content)),
-                    if (onEdit != null)
-                      IconButton(
-                        onPressed: onEdit,
-                        tooltip: 'edit-text'.i18n(),
-                        icon: const Icon(CupertinoIcons.pen),
-                      ),
+                    if (trailing != null) trailing
                   ],
                 ),
               ],

@@ -128,9 +128,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Text(
-            'hello-text'.i18n([
-              AppController.instance.user!.name.split(' ').first,
-            ]),
+            'hello-text'.i18n([AppController.instance.user!.nickname]),
             maxLines: 1,
           ),
         ),

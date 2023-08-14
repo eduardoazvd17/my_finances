@@ -5,13 +5,19 @@ class UserModel extends Equatable {
   final String name;
   final String email;
   final String password;
+  final String? photoUrl;
+  final String? _nickname;
+
+  String get nickname => _nickname ?? name.split(' ').first;
 
   const UserModel({
     required this.id,
     required this.name,
     required this.email,
     required this.password,
-  });
+    this.photoUrl,
+    String? nickname,
+  }) : _nickname = nickname;
 
   Map<String, dynamic> toMap() {
     return {
@@ -19,6 +25,8 @@ class UserModel extends Equatable {
       'name': name,
       'email': email,
       'password': password,
+      'photoUrl': photoUrl,
+      'nickname': _nickname,
     };
   }
 
@@ -28,6 +36,8 @@ class UserModel extends Equatable {
       name: map['name'],
       email: map['email'],
       password: map['password'],
+      photoUrl: map['photoUrl'],
+      nickname: map['nickname'],
     );
   }
 

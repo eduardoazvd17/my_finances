@@ -170,5 +170,9 @@
     "email-text": "Email",
     "password-text": "Password",
     "hello-text": "Hello, %s.",
-    "empty-document-total-itext": "Add data to document to view totals here."
+    "empty-document-total-itext": "Add data to document to view totals here.",
+    "change-password-button": "Change password",
+    "add-photo-button": "Add photo",
+    "edit-photo-button": "Edit photo",
+    "remove-photo-button": "Remove photo"
 }
