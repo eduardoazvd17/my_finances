@@ -176,5 +176,12 @@
     "edit-photo-button": "Editar foto",
     "remove-photo-button": "Quitar foto",
     "edit-text": "Editar",
-    "nickname-text": "Apodo"
+    "nickname-text": "Apodo",
+    "old-password-label": "Contraseña actual:",
+    "old-password-hint": "Ingresa tu contraseña actual...",
+    "new-password-label": "Nueva contraseña:",
+    "new-password-hint": "Ingrese una nueva contraseña...",
+    "new-password2-label": "Confirmación de nueva contraseña:",
+    "new-password2-hint": "Repite tu nueva contraseña...",
+    "send-button": "Enviar"
 }

@@ -48,4 +48,8 @@ class MyProfileController extends GetxController {
   }
 
   void goToChangePasswordPage() => AppRoutes.goToMyChangePasswordPage();
+
+  Future<void> changePassword() async {
+    Get.close(1);
+  }
 }

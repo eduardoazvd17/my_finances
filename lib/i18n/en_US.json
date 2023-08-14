@@ -176,5 +176,12 @@
     "edit-photo-button": "Edit photo",
     "remove-photo-button": "Remove photo",
     "edit-text": "Edit",
-    "nickname-text": "Nickname"
+    "nickname-text": "Nickname",
+    "old-password-label": "Current password:",
+    "old-password-hint": "Enter your current password...",
+    "new-password-label": "New password:",
+    "new-password-hint": "Enter a new password...",
+    "new-password2-label": "New password confirmation:",
+    "new-password2-hint": "Repeat your new password...",
+    "send-button": "Send"
 }
