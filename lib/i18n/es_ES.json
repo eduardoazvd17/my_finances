@@ -187,5 +187,14 @@
     "delete-account-button": "Eliminar cuenta de forma permanente",
     "delete-account-confirmation-text": "¿Realmente desea eliminar su cuenta?\n\nTodos sus documentos y datos ingresados se eliminarán de FORMA PERMANENTE junto con su cuenta.",
     "change-button": "Cambiar",
-    "confirm-button": "Confirmar"
+    "confirm-button": "Confirmar",
+    "old-password-validation": "Tu contraseña actual es incorrecta.",
+    "new-password-validation": "Tu nueva contraseña no puede ser igual a la actual.",
+    "new-password2-validation": "La confirmación de la nueva contraseña debe ser la misma que la nueva contraseña.",
+    "change-name-dialog-title": "Cambiar nombre",
+    "change-name-label": "¿Cuál es tu nombre?",
+    "change-name-hint": "Escribe tu nombre...",
+    "change-nickname-dialog-title": "Cambiar apodo",
+    "change-nickname-label": "¿Cómo te gustaría que te llamaran?",
+    "change-nickname-hint": "Ingresa tu apodo..."
 }

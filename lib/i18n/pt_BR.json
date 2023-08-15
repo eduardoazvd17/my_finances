@@ -187,5 +187,14 @@
     "delete-account-button": "Excluir conta permanentemente",
     "delete-account-confirmation-text": "Deseja realmente excluir sua conta?\n\nTodos os seus documentos e os dados inseridos serão excluídos PERMANENTEMENTE junto com a sua conta.",
     "change-button": "Alterar",
-    "confirm-button": "Confirmar"
+    "confirm-button": "Confirmar",
+    "old-password-validation": "Sua senha atual está incorreta.",
+    "new-password-validation": "Sua nova senha não pode ser igual a atual.",
+    "new-password2-validation": "A confirmação de nova senha deve ser igual a nova senha.",
+    "change-name-dialog-title": "Alterar nome",
+    "change-name-label": "Como você se chama?",
+    "change-name-hint": "Digite seu nome...",
+    "change-nickname-dialog-title": "Alterar apelido",
+    "change-nickname-label": "Como você gostaria de ser chamado?",
+    "change-nickname-hint": "Digite seu apelido..."
 }

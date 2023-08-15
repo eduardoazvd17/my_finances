@@ -9,6 +9,7 @@ class UserModel extends Equatable {
   final String? _nickname;
 
   String get nickname => _nickname ?? name.split(' ').first;
+  String? get rawNickname => _nickname;
 
   const UserModel({
     required this.id,
@@ -58,5 +59,5 @@ class UserModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, name, nickname, email, password, photoUrl];
 }

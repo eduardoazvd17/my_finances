@@ -187,5 +187,14 @@
     "delete-account-button": "Permanently delete account",
     "delete-account-confirmation-text": "Do you really want to delete your account?\n\nAll your documents and entered data will be PERMANENTLY deleted along with your account.",
     "change-button": "Change",
-    "confirm-button": "Confirm"
+    "confirm-button": "Confirm",
+    "old-password-validation": "Your current password is incorrect.",
+    "new-password-validation": "Your new password cannot be the same as your current one.",
+    "new-password2-validation": "The new password confirmation must be the same as the new password.",
+    "change-name-dialog-title": "Change name",
+    "change-name-label": "What is your name?",
+    "change-name-hint": "Type your name...",
+    "change-nickname-dialog-title": "Change nickname",
+    "change-nickname-label": "What would you like to be called?",
+    "change-nickname-hint": "Enter your nickname..."
 }

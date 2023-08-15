@@ -53,4 +53,15 @@ class MyProfileService {
       throw AppError.generic();
     }
   }
+
+  Future<bool> deleteAccount({required String userId}) async {
+    try {
+      //TODO: Deletar conta e todos os documentos e dados.
+      return true;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
 }

@@ -12,6 +12,7 @@ import 'package:myfinances/src/features/my_profile/presentation/controllers/my_p
 
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../../../../core/presentation/widgets/profile_picture_widget.dart';
+import '../../../../core/presentation/widgets/text_field_widget.dart';
 
 class MyProfilePage extends GetWidget<MyProfileController> {
   const MyProfilePage({super.key});
@@ -62,7 +63,17 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                 label: 'name-text'.i18n(),
                 content: controller.name,
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.nameController.text = controller.name;
+                    _showChangeDialog(
+                      title: 'change-name-dialog-title'.i18n(),
+                      onConfirm: controller.changeName,
+                      textFieldLabel: 'change-name-label'.i18n(),
+                      textFieldHint: 'change-name-hint'.i18n(),
+                      textFieldController: controller.nameController,
+                      textFieldFocusNode: controller.nameFocus,
+                    );
+                  },
                   tooltip: 'edit-text'.i18n(),
                   icon: const Icon(CupertinoIcons.pen),
                 ),
@@ -73,7 +84,17 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                 label: 'nickname-text'.i18n(),
                 content: controller.nickname,
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.nicknameController.text = controller.nickname;
+                    _showChangeDialog(
+                      title: 'change-nickname-dialog-title'.i18n(),
+                      onConfirm: controller.changeNickname,
+                      textFieldLabel: 'change-nickname-label'.i18n(),
+                      textFieldHint: 'change-nickname-hint'.i18n(),
+                      textFieldController: controller.nicknameController,
+                      textFieldFocusNode: controller.nicknameFocus,
+                    );
+                  },
                   tooltip: 'edit-text'.i18n(),
                   icon: const Icon(CupertinoIcons.pen),
                 ),
@@ -170,6 +191,39 @@ class MyProfilePage extends GetWidget<MyProfileController> {
         onTap: logout,
       );
     }
+  }
+
+  void _showChangeDialog({
+    required String title,
+    required void Function() onConfirm,
+    required String textFieldLabel,
+    required String textFieldHint,
+    required TextEditingController textFieldController,
+    required FocusNode textFieldFocusNode,
+  }) {
+    Get.dialog(
+      CustomDialog(
+        autoClose: false,
+        title: title,
+        confirmButtonText: 'change-button'.i18n(),
+        onConfirm: onConfirm,
+        closeButtonText: 'cancel-button'.i18n(),
+        onClose: () => Get.close(1),
+        child: TextFieldWidget(
+          autofocus: true,
+          label: textFieldLabel,
+          hint: textFieldHint,
+          controller: textFieldController,
+          focusNode: textFieldFocusNode,
+          textCapitalization: TextCapitalization.sentences,
+          textInputType: TextInputType.text,
+          textInputAction: TextInputAction.done,
+          onSubmitted: (_) => onConfirm(),
+        ),
+      ),
+      barrierDismissible: false,
+      barrierColor: Colors.black87,
+    );
   }
 
   Widget _deleteAccountButton() {
