@@ -19,6 +19,22 @@ class UserModel extends Equatable {
     String? nickname,
   }) : _nickname = nickname;
 
+  UserModel editAndCopy({
+    String? name,
+    String? password,
+    required String? photoUrl,
+    required String? nickname,
+  }) {
+    return UserModel(
+      id: id,
+      name: name ?? this.name,
+      email: email,
+      password: password ?? this.password,
+      photoUrl: photoUrl,
+      nickname: nickname,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

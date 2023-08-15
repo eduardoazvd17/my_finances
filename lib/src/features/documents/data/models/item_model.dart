@@ -58,10 +58,10 @@ class AnnotationItemModel extends ItemModel {
 
   AnnotationItemModel editAndCopy({
     String? name,
-    String? description,
-    String? groupingId,
-    int? quantity,
-    double? price,
+    required String? description,
+    required String? groupingId,
+    required int? quantity,
+    required double? price,
   }) {
     return AnnotationItemModel(
       id: id,
@@ -127,7 +127,7 @@ class InvestimentControlItemModel extends ItemModel {
   });
 
   InvestimentControlItemModel editAndCopy({
-    String? description,
+    required String? description,
     OperationType? operationType,
     int? quantity,
     double? price,
