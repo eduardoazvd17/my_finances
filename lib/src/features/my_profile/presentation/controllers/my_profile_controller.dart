@@ -3,8 +3,15 @@ import 'package:get/get.dart';
 
 import '../../../../core/data/utils/app_routes.dart';
 import '../../../../core/presentation/controllers/app_controller.dart';
+import '../../data/services/my_profile_service.dart';
 
 class MyProfileController extends GetxController {
+  final MyProfileService _service;
+  
+  MyProfileController({
+    required MyProfileService service,
+  }) : _service = service;
+
   late final RxString _name;
   late final RxString _nickname;
   late final Rx<String?> _photoUrl;
