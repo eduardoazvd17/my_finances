@@ -34,26 +34,27 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ProfilePictureWidget(url: controller.photoUrl),
-                    const SizedBox(width: 16),
-                    Column(
-                      children: controller.photoUrl == null
-                          ? [
-                              TextButton(
-                                onPressed: () {},
-                                child: Text('add-photo-button'.i18n()),
-                              ),
-                            ]
-                          : [
-                              TextButton(
-                                onPressed: () {},
-                                child: Text('edit-photo-button'.i18n()),
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text('remove-photo-button'.i18n()),
-                              ),
-                            ],
-                    ),
+                    //TODO: Implementar possibilidade de anexar foto de perfil.
+                    // const SizedBox(width: 16),
+                    // Column(
+                    //   children: controller.photoUrl == null
+                    //       ? [
+                    //           TextButton(
+                    //             onPressed: () {},
+                    //             child: Text('add-photo-button'.i18n()),
+                    //           ),
+                    //         ]
+                    //       : [
+                    //           TextButton(
+                    //             onPressed: () {},
+                    //             child: Text('edit-photo-button'.i18n()),
+                    //           ),
+                    //           TextButton(
+                    //             onPressed: () {},
+                    //             child: Text('remove-photo-button'.i18n()),
+                    //           ),
+                    //         ],
+                    // ),
                   ],
                 ),
               ),
