@@ -79,6 +79,7 @@ class MyProfileController extends GetxController {
       final String newName = nameController.text.trim();
 
       if (newName == AppController.instance.user!.name) {
+        Get.close(1);
         return;
       }
 
@@ -117,6 +118,7 @@ class MyProfileController extends GetxController {
       final String newNickname = nicknameController.text.trim();
 
       if (newNickname == AppController.instance.user!.rawNickname) {
+        Get.close(1);
         return;
       }
 
