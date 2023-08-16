@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 class AppThemes {
   static const Color _primaryColor = Colors.indigo;
-  static const Color _secondaryColor = Colors.blueGrey;
   static final Color _lightBackgroundColor = Colors.blueGrey[100]!;
   static const Color _darkBackgroundColor = Colors.black;
 
@@ -11,7 +10,8 @@ class AppThemes {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primaryColor,
-        secondary: _secondaryColor,
+        secondary: _primaryColor,
+        tertiary: _primaryColor,
         surfaceTint: _lightBackgroundColor,
         brightness: Brightness.light,
       ),
@@ -30,7 +30,8 @@ class AppThemes {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primaryColor,
-        secondary: _secondaryColor,
+        secondary: _primaryColor,
+        tertiary: _primaryColor,
         surfaceTint: _darkBackgroundColor,
         brightness: Brightness.dark,
       ),
