@@ -55,7 +55,19 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                                 child: Text('edit-photo-button'.i18n()),
                               ),
                               TextButton(
-                                onPressed: controller.removeProfilePicture,
+                                onPressed: () {
+                                  Get.dialog(
+                                    CustomDialog(
+                                      title: 'remove-photo-button'.i18n(),
+                                      content: 'remove-photo-confirmation-text'
+                                          .i18n(),
+                                      onConfirm:
+                                          controller.removeProfilePicture,
+                                      invertButtonColor: true,
+                                    ),
+                                    barrierColor: Colors.black87,
+                                  );
+                                },
                                 child: Text('remove-photo-button'.i18n()),
                               ),
                             ],

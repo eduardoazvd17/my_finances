@@ -233,6 +233,7 @@ class MyProfileController extends GetxController {
   }
 
   Future<void> changeProfilePicture(ImageSource source) async {
+    AppController.instance.pauseAuthOverlay();
     final File? photoFile = await ImageUtils.pickImage(source);
     if (photoFile != null) {
       try {
@@ -255,6 +256,7 @@ class MyProfileController extends GetxController {
         appError.showDialog();
       }
     }
+    AppController.instance.resumeAuthOverlay();
   }
 
   Future<void> removeProfilePicture() async {
@@ -277,5 +279,11 @@ class MyProfileController extends GetxController {
       Get.close(1);
       appError.showDialog();
     }
+  }
+
+  @override
+  void onClose() {
+    AppController.instance.resumeAuthOverlay();
+    super.onClose();
   }
 }

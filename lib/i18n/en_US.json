@@ -199,5 +199,6 @@
     "change-nickname-hint": "Enter your nickname...",
     "image-cropper-toolbar-title": "Set photo area",
     "image-source-camera-text": "Take picture using camera",
-    "image-source-gallery-text": "Choose a photo from the gallery"
+    "image-source-gallery-text": "Choose a photo from the gallery",
+    "remove-photo-confirmation-text": "Do you really want to remove your profile picture?"
 }

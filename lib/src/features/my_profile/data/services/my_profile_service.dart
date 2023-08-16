@@ -38,13 +38,17 @@ class MyProfileService {
       final Reference storageReference =
           _database.userProfilePictureStorageReference(userId);
 
+      final String? url;
       if (file == null) {
         await storageReference.delete();
-        return null;
+        url = null;
       } else {
         await storageReference.putFile(file);
-        return storageReference.getDownloadURL();
+        url = await storageReference.getDownloadURL();
       }
+
+      await _database.usersCollection.doc(userId).update({'photoUrl': url});
+      return url;
     } on AppError catch (_) {
       rethrow;
     } catch (_) {

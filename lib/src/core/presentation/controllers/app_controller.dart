@@ -93,6 +93,7 @@ class AppController extends GetxController {
   }
 
   Future<void> showAuthOverlay() async {
+    if (_pauseAuthOverlay.value) return;
     if (!Get.currentRoute.contains(AppRoutes.initialRoute) &&
         user != null &&
         isBiometricsEnabled &&
@@ -108,6 +109,10 @@ class AppController extends GetxController {
       );
     }
   }
+
+  final RxBool _pauseAuthOverlay = RxBool(false);
+  void pauseAuthOverlay() => _pauseAuthOverlay.value = true;
+  void resumeAuthOverlay() => _pauseAuthOverlay.value = false;
 
   Future<void> closeAuthOverlay() async {
     final result = await requestAuth();

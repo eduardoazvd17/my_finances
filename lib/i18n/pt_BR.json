@@ -199,5 +199,6 @@
     "change-nickname-hint": "Digite seu apelido...",
     "image-cropper-toolbar-title": "Defina a área da foto",
     "image-source-camera-text": "Tirar foto usando a câmera",
-    "image-source-gallery-text": "Escolher uma foto da galeria"
+    "image-source-gallery-text": "Escolher uma foto da galeria",
+    "remove-photo-confirmation-text": "Deseja realmente remover sua foto de perfil?"
 }
