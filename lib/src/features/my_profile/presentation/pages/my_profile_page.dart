@@ -235,6 +235,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
             text: 'delete-account-button'.i18n(),
             foregroundColor: Colors.white,
             backgroundColor: Colors.red,
+            borderColor: Colors.red,
             onTap: () {
               Get.dialog(
                 CustomDialog(
