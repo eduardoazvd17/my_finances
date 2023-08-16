@@ -23,14 +23,14 @@ class PictureSourceSelectionBottomSheetModal extends StatelessWidget {
           _getIconTile(
             icon: CupertinoIcons.camera,
             text: 'image-source-camera-text'.i18n(),
-            color: Colors.grey[600]!,
+            color: Colors.purple,
             onTap: onTapCamera,
           ),
           const Divider(),
           _getIconTile(
             icon: CupertinoIcons.photo,
             text: 'image-source-gallery-text'.i18n(),
-            color: Colors.grey[600]!,
+            color: Colors.orange,
             onTap: onTapGallery,
           ),
         ],
@@ -54,21 +54,10 @@ class PictureSourceSelectionBottomSheetModal extends StatelessWidget {
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                icon,
-                color: color,
-                size: 40,
-              ),
+              padding: const EdgeInsets.all(16.0),
+              child: Icon(icon, color: color, size: 40),
             ),
-            Expanded(
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16),
-                textScaleFactor: 1.0,
-              ),
-            ),
+            Expanded(child: Text(text, textAlign: TextAlign.center)),
           ],
         ),
       ),
