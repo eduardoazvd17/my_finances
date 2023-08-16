@@ -170,7 +170,7 @@
     "email-text": "Correo electrónico",
     "password-text": "Contraseña",
     "hello-text": "Hola, %s.",
-    "empty-document-total-itext": "Agregue datos al documento para ver los totales aquí.",
+    "empty-document-total-text": "Agregue datos al documento para ver los totales aquí.",
     "change-password-button": "Cambiar contraseña",
     "add-photo-button": "Agregar foto",
     "edit-photo-button": "Editar foto",
