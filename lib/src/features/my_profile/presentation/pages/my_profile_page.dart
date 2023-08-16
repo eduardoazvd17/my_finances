@@ -58,11 +58,15 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                                 onPressed: () {
                                   Get.dialog(
                                     CustomDialog(
+                                      autoClose: false,
                                       title: 'remove-photo-button'.i18n(),
                                       content: 'remove-photo-confirmation-text'
                                           .i18n(),
-                                      onConfirm:
-                                          controller.removeProfilePicture,
+                                      onConfirm: () async {
+                                        Get.close(1);
+                                        await controller.removeProfilePicture();
+                                      },
+                                      onClose: Get.back,
                                       invertButtonColor: true,
                                     ),
                                     barrierColor: Colors.black87,
