@@ -66,12 +66,9 @@ class _DocumentDetailsBottomSheetModalWidgetState
       children: [
         Expanded(
           child: ButtonWidget(
-            icon: Icon(
-              _isFavorite ?? widget.documentModel.isFavorite
-                  ? CupertinoIcons.heart_fill
-                  : CupertinoIcons.heart,
-              color: Colors.red[300],
-            ),
+            icon: (_isFavorite ?? widget.documentModel.isFavorite)
+                ? CupertinoIcons.heart_fill
+                : CupertinoIcons.heart,
             text: _isFavorite ?? widget.documentModel.isFavorite
                 ? 'remove-from-favorite-button'.i18n()
                 : 'add-to-favorite-button'.i18n(),
@@ -101,10 +98,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
       children: [
         Expanded(
           child: ButtonWidget(
-            icon: Icon(
-              CupertinoIcons.pencil,
-              color: Theme.of(context).primaryColor,
-            ),
+            icon: CupertinoIcons.pencil,
             borderColor: Colors.transparent,
             text: 'rename-button'.i18n(),
             onTap: () {
@@ -156,7 +150,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
       children: [
         Expanded(
           child: ButtonWidget(
-            icon: const Icon(CupertinoIcons.trash, color: Colors.red),
+            icon: CupertinoIcons.trash,
             text: 'delete-button'.i18n(),
             foregroundColor: Colors.red,
             borderColor: Colors.transparent,

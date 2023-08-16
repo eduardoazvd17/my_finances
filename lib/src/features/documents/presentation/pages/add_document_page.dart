@@ -127,10 +127,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                 children: [
                   Expanded(
                     child: ButtonWidget(
-                      icon: const Icon(
-                        CupertinoIcons.add,
-                        color: Colors.white,
-                      ),
+                      icon: CupertinoIcons.add,
                       text: 'add-button'.i18n(),
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white,

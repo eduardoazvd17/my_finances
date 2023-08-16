@@ -4,10 +4,11 @@ class ButtonWidget extends StatelessWidget {
   final String text;
   final void Function() onTap;
   final double borderRadius;
-  final Icon? icon;
+  final IconData? icon;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Color? borderColor;
+  final bool isDisabled;
 
   const ButtonWidget({
     super.key,
@@ -18,19 +19,22 @@ class ButtonWidget extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.borderColor,
+    this.isDisabled = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isDisabled ? null : onTap,
       highlightColor: Colors.grey.withOpacity(0.25),
       borderRadius: BorderRadius.circular(borderRadius),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: backgroundColor,
+          color: isDisabled ? Colors.transparent : backgroundColor,
           border: Border.all(
-            color: borderColor ?? Theme.of(context).primaryColor,
+            color: isDisabled
+                ? Colors.grey[600]!
+                : (borderColor ?? Theme.of(context).primaryColor),
           ),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
@@ -43,13 +47,20 @@ class ButtonWidget extends StatelessWidget {
               if (icon != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: icon,
+                  child: Icon(
+                    icon,
+                    color: isDisabled
+                        ? Colors.grey[600]!
+                        : (foregroundColor ?? Theme.of(context).primaryColor),
+                  ),
                 ),
               Expanded(
                 child: Text(
                   text,
                   style: TextStyle(
-                    color: foregroundColor ?? Theme.of(context).primaryColor,
+                    color: isDisabled
+                        ? Colors.grey[600]!
+                        : (foregroundColor ?? Theme.of(context).primaryColor),
                   ),
                   textAlign: TextAlign.center,
                 ),

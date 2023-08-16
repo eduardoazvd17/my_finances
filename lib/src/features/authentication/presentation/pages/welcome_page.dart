@@ -82,10 +82,7 @@ class WelcomePage extends GetWidget<AuthController> {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  icon: const Icon(
-                    CupertinoIcons.lock_open,
-                    color: Colors.white,
-                  ),
+                  icon: CupertinoIcons.lock_open,
                   text: 'continue-as-button'.i18n([controller.lastUserName]),
                   backgroundColor: Theme.of(context).primaryColor,
                   foregroundColor: Colors.white,
@@ -101,10 +98,7 @@ class WelcomePage extends GetWidget<AuthController> {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  icon: Icon(
-                    Icons.exit_to_app,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  icon: Icons.exit_to_app,
                   text: 'logout-button'.i18n(),
                   borderColor: Colors.transparent,
                   onTap: () {
@@ -148,10 +142,7 @@ class WelcomePage extends GetWidget<AuthController> {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  icon: const Icon(
-                    CupertinoIcons.person,
-                    color: Colors.white,
-                  ),
+                  icon: CupertinoIcons.person,
                   text: 'login-button'.i18n(),
                   backgroundColor: Theme.of(context).primaryColor,
                   foregroundColor: Colors.white,
@@ -167,10 +158,7 @@ class WelcomePage extends GetWidget<AuthController> {
             children: [
               Expanded(
                 child: ButtonWidget(
-                  icon: Icon(
-                    CupertinoIcons.person_add,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  icon: CupertinoIcons.person_add,
                   text: 'register-button'.i18n(),
                   onTap: controller.goToRegisterPage,
                 ),

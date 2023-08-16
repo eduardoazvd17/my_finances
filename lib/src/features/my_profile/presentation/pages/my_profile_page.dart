@@ -182,10 +182,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
       );
     } else {
       return ButtonWidget(
-        icon: Icon(
-          Icons.exit_to_app,
-          color: Colors.red[200],
-        ),
+        icon: Icons.exit_to_app,
         text: 'logout-button'.i18n(),
         foregroundColor: Colors.red[200],
         borderColor: Colors.red[200],
@@ -229,10 +226,8 @@ class MyProfilePage extends GetWidget<MyProfileController> {
 
   Widget _deleteAccountButton() {
     return ButtonWidget(
-      icon: const Icon(
-        CupertinoIcons.delete,
-        color: Colors.red,
-      ),
+      isDisabled: true,
+      icon: CupertinoIcons.delete,
       text: 'delete-account-button'.i18n(),
       foregroundColor: Colors.red,
       borderColor: Colors.red,

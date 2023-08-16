@@ -44,10 +44,7 @@ class AuthOverlayView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ButtonWidget(
-                              icon: const Icon(
-                                CupertinoIcons.lock_open,
-                                color: Colors.white,
-                              ),
+                              icon: CupertinoIcons.lock_open,
                               text: 'unlock-button'.i18n(),
                               backgroundColor: Theme.of(context).primaryColor,
                               foregroundColor: Colors.white,
@@ -66,10 +63,7 @@ class AuthOverlayView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ButtonWidget(
-                              icon: Icon(
-                                Icons.exit_to_app,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                              icon: Icons.exit_to_app,
                               text: 'logout-button'.i18n(),
                               borderColor: Colors.transparent,
                               onTap: () {

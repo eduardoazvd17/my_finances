@@ -53,10 +53,7 @@ class ChangePasswordPage extends GetWidget<MyProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 25.0),
                 child: ButtonWidget(
-                  icon: const Icon(
-                    Icons.lock_person_outlined,
-                    color: Colors.white,
-                  ),
+                  icon: Icons.lock_person_outlined,
                   foregroundColor: Colors.white,
                   backgroundColor: Theme.of(context).primaryColor,
                   text: 'change-button'.i18n(),

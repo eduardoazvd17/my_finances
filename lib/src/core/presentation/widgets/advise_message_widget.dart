@@ -55,10 +55,7 @@ class AdviseMessageWidget extends StatelessWidget {
               child: ButtonWidget(
                 text: actionButtonText!,
                 onTap: onAction!,
-                icon: Icon(
-                  actionButtonIcon,
-                  color: Theme.of(context).primaryColor,
-                ),
+                icon: actionButtonIcon,
               ),
             ),
         ],
