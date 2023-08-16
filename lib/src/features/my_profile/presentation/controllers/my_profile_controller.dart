@@ -219,7 +219,7 @@ class MyProfileController extends GetxController {
     return md5.convert(utf8.encode(value)).toString();
   }
 
-  void _changeCurrentUser(UserModel user) {
+  Future<void> _changeCurrentUser(UserModel user) async {
     AppController.instance.setUser(user);
     _photoUrl.value = user.photoUrl;
     _name.value = user.name;
@@ -227,5 +227,6 @@ class MyProfileController extends GetxController {
     _email.value = user.email;
     _passwordHash.value = user.password;
     Get.forceAppUpdate();
+    await _service.updateSavedCredentials(user);
   }
 }

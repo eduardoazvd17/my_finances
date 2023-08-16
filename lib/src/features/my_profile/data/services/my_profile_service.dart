@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:credentials_manager/credentials_manager.dart';
+import 'package:flutter/foundation.dart';
+import 'package:myfinances/src/core/data/models/user_model.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/database_model.dart';
@@ -90,6 +93,24 @@ class MyProfileService {
       rethrow;
     } catch (_) {
       throw AppError.generic();
+    }
+  }
+
+  Future<void> updateSavedCredentials(UserModel userModel) async {
+    if (kIsWeb) {
+      final prefs = await _database.sharedPreferences;
+      prefs.setString('LoggedUserID', userModel.id);
+      prefs.setString('LoggedUserPasswordHash', userModel.password);
+    } else {
+      await _database.credentialsManager.removeAllCredentials();
+      await _database.credentialsManager.saveCredential(
+        CredentialModel(
+          id: userModel.id,
+          loginOrEmail: userModel.email,
+          password: userModel.password,
+          name: userModel.name,
+        ),
+      );
     }
   }
 }

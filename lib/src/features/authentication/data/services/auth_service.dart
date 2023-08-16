@@ -22,8 +22,9 @@ class AuthService {
       if (kIsWeb) {
         final prefs = await _database.sharedPreferences;
         final String? userId = prefs.getString('LoggedUserID');
+        final String? password = prefs.getString('LoggedUserPasswordHash');
         if (userId != null) {
-          return await checkIfUserExists(userId);
+          return await checkIfUserExists(userId, password: password);
         }
       } else {
         final List<CredentialModel> credentials =
@@ -63,6 +64,7 @@ class AuthService {
           if (kIsWeb) {
             final prefs = await _database.sharedPreferences;
             prefs.setString('LoggedUserID', userModel.id);
+            prefs.setString('LoggedUserPasswordHash', userModel.password);
           } else {
             await _database.credentialsManager.removeAllCredentials();
             await _database.credentialsManager.saveCredential(
@@ -111,6 +113,7 @@ class AuthService {
         if (kIsWeb) {
           final prefs = await _database.sharedPreferences;
           prefs.setString('LoggedUserID', userModel.id);
+          prefs.setString('LoggedUserPasswordHash', userModel.password);
         } else {
           await _database.credentialsManager.removeAllCredentials();
           await _database.credentialsManager.saveCredential(
