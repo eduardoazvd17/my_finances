@@ -118,9 +118,10 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               child: Center(child: _logoutButton()),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Center(child: _deleteAccountButton()),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -225,23 +226,33 @@ class MyProfilePage extends GetWidget<MyProfileController> {
   }
 
   Widget _deleteAccountButton() {
-    return ButtonWidget(
-      isDisabled: true,
-      icon: CupertinoIcons.delete,
-      text: 'delete-account-button'.i18n(),
-      foregroundColor: Colors.red,
-      borderColor: Colors.red,
-      onTap: () {
-        Get.dialog(
-          CustomDialog(
-            title: 'delete-account-button'.i18n(),
-            content: 'delete-account-confirmation-text'.i18n(),
-            onConfirm: controller.deleteAccount,
-            invertButtonColor: true,
+    return Obx(
+      () => Column(
+        children: [
+          ButtonWidget(
+            isDisabled: !controller.deleteAccountConfirmation,
+            icon: CupertinoIcons.delete,
+            text: 'delete-account-button'.i18n(),
+            foregroundColor: Colors.red,
+            borderColor: Colors.red,
+            onTap: () {
+              Get.dialog(
+                CustomDialog(
+                  title: 'delete-account-button'.i18n(),
+                  content: 'delete-account-confirmation-text'.i18n(),
+                  onConfirm: controller.deleteAccount,
+                  invertButtonColor: true,
+                ),
+                barrierColor: Colors.black87,
+              );
+              controller.deleteAccountConfirmation = false;
+            },
+            onTapDisabled: () {
+              controller.deleteAccountConfirmation = true;
+            },
           ),
-          barrierColor: Colors.black87,
-        );
-      },
+        ],
+      ),
     );
   }
 }

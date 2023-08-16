@@ -59,6 +59,11 @@ class MyProfileController extends GetxController {
   final password2Controller = TextEditingController();
   final password2Focus = FocusNode();
 
+  final RxBool _deleteAccountConfirmation = RxBool(false);
+  bool get deleteAccountConfirmation => _deleteAccountConfirmation.value;
+  set deleteAccountConfirmation(bool value) =>
+      _deleteAccountConfirmation.value = value;
+
   void goToChangePasswordPage() {
     oldPasswordController.clear();
     passwordController.clear();

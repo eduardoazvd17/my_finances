@@ -9,6 +9,7 @@ class ButtonWidget extends StatelessWidget {
   final Color? foregroundColor;
   final Color? borderColor;
   final bool isDisabled;
+  final void Function()? onTapDisabled;
 
   const ButtonWidget({
     super.key,
@@ -20,12 +21,13 @@ class ButtonWidget extends StatelessWidget {
     this.foregroundColor,
     this.borderColor,
     this.isDisabled = false,
+    this.onTapDisabled,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: isDisabled ? null : onTap,
+      onTap: isDisabled ? onTapDisabled : onTap,
       highlightColor: Colors.grey.withOpacity(0.25),
       borderRadius: BorderRadius.circular(borderRadius),
       child: DecoratedBox(
