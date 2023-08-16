@@ -233,8 +233,8 @@ class MyProfilePage extends GetWidget<MyProfileController> {
             isDisabled: !controller.deleteAccountConfirmation,
             icon: CupertinoIcons.delete,
             text: 'delete-account-button'.i18n(),
-            foregroundColor: Colors.red,
-            borderColor: Colors.red,
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.red,
             onTap: () {
               Get.dialog(
                 CustomDialog(
