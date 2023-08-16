@@ -40,11 +40,8 @@ class LoadingWidget extends StatelessWidget {
             height: size,
             width: size,
             child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Image.asset(
-                "assets/images/logo.png",
-                opacity: const AlwaysStoppedAnimation(0.5),
-              ).animate().fade(),
+              padding: const EdgeInsets.all(20),
+              child: Image.asset("assets/images/logo.png").animate().fade(),
             ),
           ),
         SizedBox(
@@ -52,7 +49,7 @@ class LoadingWidget extends StatelessWidget {
           width: size,
           child: CircularProgressIndicator(
             color: Theme.of(context).primaryColor,
-            strokeWidth: 5,
+            strokeWidth: 6,
           ),
         ),
       ],
@@ -79,7 +76,7 @@ class LoadingWidget extends StatelessWidget {
         children: [
           _progressWidget(context),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0),
+            padding: const EdgeInsets.only(left: 20.0),
             child: _textWidget(context),
           ),
         ],
@@ -90,7 +87,7 @@ class LoadingWidget extends StatelessWidget {
         children: [
           _progressWidget(context),
           Padding(
-            padding: const EdgeInsets.only(top: 15.0),
+            padding: const EdgeInsets.only(top: 20.0),
             child: _textWidget(context),
           ),
         ],
