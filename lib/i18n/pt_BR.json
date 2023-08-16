@@ -196,5 +196,8 @@
     "change-name-hint": "Digite seu nome...",
     "change-nickname-dialog-title": "Alterar apelido",
     "change-nickname-label": "Como você gostaria de ser chamado?",
-    "change-nickname-hint": "Digite seu apelido..."
+    "change-nickname-hint": "Digite seu apelido...",
+    "image-cropper-toolbar-title": "Defina a área da foto",
+    "image-source-camera-text": "Tirar foto usando a câmera",
+    "image-source-gallery-text": "Escolher uma foto da galeria"
 }

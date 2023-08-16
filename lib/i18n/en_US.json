@@ -196,5 +196,8 @@
     "change-name-hint": "Type your name...",
     "change-nickname-dialog-title": "Change nickname",
     "change-nickname-label": "What would you like to be called?",
-    "change-nickname-hint": "Enter your nickname..."
+    "change-nickname-hint": "Enter your nickname...",
+    "image-cropper-toolbar-title": "Set photo area",
+    "image-source-camera-text": "Take picture using camera",
+    "image-source-gallery-text": "Choose a photo from the gallery"
 }

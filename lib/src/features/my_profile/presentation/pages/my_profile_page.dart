@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
 import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
@@ -11,6 +12,7 @@ import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart
 import 'package:myfinances/src/features/my_profile/presentation/controllers/my_profile_controller.dart';
 
 import '../../../../core/presentation/widgets/custom_dialog.dart';
+import '../../../../core/presentation/widgets/picture_source_selection_bottom_sheet_modal.dart';
 import '../../../../core/presentation/widgets/profile_picture_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 
@@ -34,27 +36,30 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ProfilePictureWidget(url: controller.photoUrl),
-                    //TODO: Implementar possibilidade de anexar foto de perfil.
-                    // const SizedBox(width: 16),
-                    // Column(
-                    //   children: controller.photoUrl == null
-                    //       ? [
-                    //           TextButton(
-                    //             onPressed: () {},
-                    //             child: Text('add-photo-button'.i18n()),
-                    //           ),
-                    //         ]
-                    //       : [
-                    //           TextButton(
-                    //             onPressed: () {},
-                    //             child: Text('edit-photo-button'.i18n()),
-                    //           ),
-                    //           TextButton(
-                    //             onPressed: () {},
-                    //             child: Text('remove-photo-button'.i18n()),
-                    //           ),
-                    //         ],
-                    // ),
+                    const SizedBox(width: 16),
+                    Column(
+                      children: controller.photoUrl == null
+                          ? [
+                              TextButton(
+                                onPressed: () {
+                                  _showPictureSourceSelectionModal(context);
+                                },
+                                child: Text('add-photo-button'.i18n()),
+                              ),
+                            ]
+                          : [
+                              TextButton(
+                                onPressed: () {
+                                  _showPictureSourceSelectionModal(context);
+                                },
+                                child: Text('edit-photo-button'.i18n()),
+                              ),
+                              TextButton(
+                                onPressed: controller.removeProfilePicture,
+                                child: Text('remove-photo-button'.i18n()),
+                              ),
+                            ],
+                    ),
                   ],
                 ),
               ),
@@ -253,6 +258,20 @@ class MyProfilePage extends GetWidget<MyProfileController> {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  void _showPictureSourceSelectionModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      barrierColor: Colors.black87,
+      useSafeArea: true,
+      isScrollControlled: true,
+      builder: (_) => PictureSourceSelectionBottomSheetModal(
+        onTapCamera: () => controller.changeProfilePicture(ImageSource.camera),
+        onTapGallery: () =>
+            controller.changeProfilePicture(ImageSource.gallery),
       ),
     );
   }

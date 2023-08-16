@@ -1,14 +1,16 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/user_model.dart';
 import '../../../../core/data/utils/app_routes.dart';
+import '../../../../core/data/utils/image_utils.dart';
 import '../../../../core/presentation/controllers/app_controller.dart';
 import '../../data/services/my_profile_service.dart';
 
@@ -228,5 +230,52 @@ class MyProfileController extends GetxController {
     _passwordHash.value = user.password;
     Get.forceAppUpdate();
     await _service.updateSavedCredentials(user);
+  }
+
+  Future<void> changeProfilePicture(ImageSource source) async {
+    final File? photoFile = await ImageUtils.pickImage(source);
+    if (photoFile != null) {
+      try {
+        LoadingWidget.dialog();
+
+        final String? photoUrl = await _service.changeUserProfilePicture(
+          file: photoFile,
+          userId: AppController.instance.user!.id,
+        );
+
+        final UserModel newUser = AppController.instance.user!.editAndCopy(
+          photoUrl: photoUrl,
+          nickname: AppController.instance.user!.nickname,
+        );
+        _changeCurrentUser(newUser);
+
+        Get.close(1);
+      } on AppError catch (appError) {
+        Get.close(1);
+        appError.showDialog();
+      }
+    }
+  }
+
+  Future<void> removeProfilePicture() async {
+    try {
+      LoadingWidget.dialog();
+
+      await _service.changeUserProfilePicture(
+        file: null,
+        userId: AppController.instance.user!.id,
+      );
+
+      final UserModel newUser = AppController.instance.user!.editAndCopy(
+        photoUrl: null,
+        nickname: AppController.instance.user!.nickname,
+      );
+      _changeCurrentUser(newUser);
+
+      Get.close(1);
+    } on AppError catch (appError) {
+      Get.close(1);
+      appError.showDialog();
+    }
   }
 }
