@@ -5,3 +5,5 @@
 
 "CFBundleDisplayName" = "Minhas Finanças";
 "NSFaceIDUsageDescription" = "Autentique-se e proteja seus dados usando TouchID ou FaceID.";
+"NSPhotoLibraryUsageDescription" = "Permissão necessária para alterar sua foto de perfil";
+"NSCameraUsageDescription" = "Permissão necessária para alterar sua foto de perfil";

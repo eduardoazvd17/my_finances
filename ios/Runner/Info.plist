@@ -49,6 +49,10 @@
 		<true/>
 		<key>NSFaceIDUsageDescription</key>
 		<string>Authenticate and protect your data using TouchID or FaceID.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Permission required to change your profile picture</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Permission required to change your profile picture</string>
 		<key>UIStatusBarHidden</key>
 		<false/>
 	</dict>
