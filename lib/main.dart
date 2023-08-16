@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:credentials_manager/credentials_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
@@ -23,11 +24,12 @@ void main() async {
   );
   Get.lazyPut(
     () => DatabaseModel(
-      firestore: FirebaseFirestore.instanceFor(app: firebaseApp),
       credentialsManager: CredentialsManager(
         storageKey: firebaseApp.options.appId,
         useAndroidEncryptedSharedPreferences: true,
       ),
+      firestore: FirebaseFirestore.instanceFor(app: firebaseApp),
+      storage: FirebaseStorage.instanceFor(app: firebaseApp),
     ),
     fenix: true,
   );

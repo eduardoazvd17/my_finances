@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:credentials_manager/credentials_manager.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
 
@@ -20,6 +23,28 @@ class MyProfileService {
     try {
       await _database.usersCollection.doc(userId).update({'name': newName});
       return true;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<String?> changeUserProfilePicture({
+    required File? file,
+    required String userId,
+  }) async {
+    try {
+      final Reference storageReference =
+          _database.userProfilePictureStorageReference(userId);
+
+      if (file == null) {
+        await storageReference.delete();
+        return null;
+      } else {
+        await storageReference.putFile(file);
+        return storageReference.getDownloadURL();
+      }
     } on AppError catch (_) {
       rethrow;
     } catch (_) {
