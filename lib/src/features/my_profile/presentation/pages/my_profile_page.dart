@@ -179,14 +179,14 @@ class MyProfilePage extends GetWidget<MyProfileController> {
       return IconButton(
         onPressed: logout,
         tooltip: 'logout-button'.i18n(),
-        icon: Icon(Icons.exit_to_app, color: Colors.red[200]),
+        icon: Icon(Icons.exit_to_app, color: Colors.red[300]),
       );
     } else {
       return ButtonWidget(
         icon: Icons.exit_to_app,
         text: 'logout-button'.i18n(),
-        foregroundColor: Colors.red[200],
-        borderColor: Colors.red[200],
+        foregroundColor: Colors.red[300],
+        borderColor: Colors.red[300],
         onTap: logout,
       );
     }

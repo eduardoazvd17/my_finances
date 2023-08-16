@@ -54,7 +54,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
               Flexible(
                 child: Text(
                   '${OperationType.sell.char} $salesQuotas ${CurrencyUtils.format(salesValue)}',
-                  style: TextStyle(color: Colors.red[200]),
+                  style: TextStyle(color: Colors.red[300]),
                 ),
               ),
             ],

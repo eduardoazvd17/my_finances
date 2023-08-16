@@ -83,7 +83,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
           ? null
           : Text(
               "*${'cannot-enable-biometrics-text'.i18n()}",
-              style: TextStyle(color: Colors.red[200]),
+              style: TextStyle(color: Colors.red[300]),
             ),
     );
   }
