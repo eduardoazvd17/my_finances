@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:localization/localization.dart';
@@ -8,6 +9,7 @@ class ImageUtils {
   static Future<File?> pickImage(ImageSource source) async {
     try {
       final pickedImage = await _pickImage(source);
+      if (kIsWeb) return File(pickedImage!.path);
       final croppedImage = await _cropImage(pickedImage);
       return File(croppedImage!.path);
     } catch (_) {
