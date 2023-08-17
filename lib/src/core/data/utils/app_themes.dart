@@ -3,8 +3,14 @@ import 'package:flutter/services.dart';
 
 class AppThemes {
   static const Color _primaryColor = Colors.indigo;
+
   static final Color _lightBackgroundColor = Colors.blueGrey[100]!;
+  static final Color _lightSecondaryBackgroundColor = Colors.grey[100]!;
+
   static const Color _darkBackgroundColor = Colors.black;
+  static final Color _darkSecondaryBackgroundColor = Colors.grey[900]!;
+
+  static final Color commonColor = Colors.grey[600]!;
 
   static ThemeData get light {
     return ThemeData(
@@ -22,6 +28,14 @@ class AppThemes {
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
       ),
+      dialogBackgroundColor: _lightSecondaryBackgroundColor,
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: _lightSecondaryBackgroundColor,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: _lightSecondaryBackgroundColor,
+      ),
+      dividerColor: commonColor,
       useMaterial3: true,
     );
   }
@@ -42,6 +56,15 @@ class AppThemes {
         systemOverlayStyle: SystemUiOverlayStyle.light,
         centerTitle: true,
       ),
+      shadowColor: _darkSecondaryBackgroundColor,
+      dialogBackgroundColor: _darkSecondaryBackgroundColor,
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: _darkSecondaryBackgroundColor,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: _darkSecondaryBackgroundColor,
+      ),
+      dividerColor: commonColor,
       useMaterial3: true,
     );
   }

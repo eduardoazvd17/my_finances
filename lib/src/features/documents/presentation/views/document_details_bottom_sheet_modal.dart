@@ -136,7 +136,6 @@ class _DocumentDetailsBottomSheetModalWidgetState
                   ),
                 ),
                 barrierDismissible: false,
-                barrierColor: Colors.black87,
               );
             },
           ),
@@ -165,7 +164,6 @@ class _DocumentDetailsBottomSheetModalWidgetState
                     widget.onDelete?.call(widget.documentModel);
                   },
                 ),
-                barrierColor: Colors.black87,
               );
             },
           ),

@@ -4,6 +4,7 @@ import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
 import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents/data/models/document_model.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 
 class DocumentTileWidget extends StatelessWidget {
@@ -67,7 +68,7 @@ class DocumentTileWidget extends StatelessWidget {
                           child: Icon(
                             CupertinoIcons.calendar,
                             size: 18,
-                            color: Colors.grey[600],
+                            color: AppThemes.commonColor,
                           ),
                         ),
                       ),
@@ -75,7 +76,7 @@ class DocumentTileWidget extends StatelessWidget {
                         DateTimeUtils.formatFullDateShorted(
                           documentModel.creationDate,
                         ),
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: TextStyle(color: AppThemes.commonColor),
                       ),
                     ],
                   ),
@@ -95,7 +96,6 @@ class DocumentTileWidget extends StatelessWidget {
   void _openMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      barrierColor: Colors.black87,
       isScrollControlled: true,
       useSafeArea: true,
       builder: (context) {

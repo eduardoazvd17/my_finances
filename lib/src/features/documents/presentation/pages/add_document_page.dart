@@ -6,6 +6,7 @@ import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/documents_controller.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
@@ -58,7 +59,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                               Text(
                                 'add-document-type-label'.i18n(),
                                 style: TextStyle(
-                                  color: Colors.grey[600],
+                                  color: AppThemes.commonColor,
                                 ),
                               ),
                               const Divider(),
@@ -85,7 +86,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                                       size: 40,
                                       color: documentType.isEnabled
                                           ? null
-                                          : Colors.grey[600],
+                                          : AppThemes.commonColor,
                                     ),
                                   ),
                                   Expanded(
@@ -95,7 +96,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                                       style: documentType.isEnabled
                                           ? null
                                           : TextStyle(
-                                              color: Colors.grey[600],
+                                              color: AppThemes.commonColor,
                                             ),
                                     ),
                                   ),
@@ -114,7 +115,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
               return Text(
                 controller.selectedDocumentType?.description ?? '',
                 textAlign: TextAlign.justify,
-                style: TextStyle(color: Colors.grey[600]),
+                style: TextStyle(color: AppThemes.commonColor),
               );
             }),
             Padding(

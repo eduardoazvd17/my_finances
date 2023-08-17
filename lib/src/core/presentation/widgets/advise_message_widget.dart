@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
 
+import '../../data/utils/app_themes.dart';
+
 class AdviseMessageWidget extends StatelessWidget {
   final IconData icon;
   final String message;
@@ -47,7 +49,7 @@ class AdviseMessageWidget extends StatelessWidget {
             Text(
               description!,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
+              style: TextStyle(color: AppThemes.commonColor),
             ).animate().fade(),
           if (onAction != null && actionButtonText != null)
             Padding(

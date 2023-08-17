@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
+import '../../data/utils/app_themes.dart';
+
 class DropDownButtonWidget<T> extends StatelessWidget {
   final T value;
   final void Function(T?) onChanged;
@@ -29,7 +31,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
       isExpanded: true,
       iconSize: iconSize,
       iconEnabledColor: Theme.of(context).primaryColor,
-      iconDisabledColor: Colors.grey[600],
+      iconDisabledColor: AppThemes.commonColor,
       elevation: 24,
       underline: Divider(
         height: 5,

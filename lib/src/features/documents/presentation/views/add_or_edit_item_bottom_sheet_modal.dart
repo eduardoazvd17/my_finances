@@ -10,6 +10,7 @@ import 'package:myfinances/src/features/documents/data/enums/operation_type.dart
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../data/enums/document_type.dart';
 import '../controllers/document_editor_controller.dart';
@@ -287,7 +288,7 @@ class _AddOrEditItemBottomSheetModalState
                   child: Text(
                     'item-group-hint'.i18n(),
                     style: TextStyle(
-                      color: Colors.grey[600],
+                      color: AppThemes.commonColor,
                     ),
                   ),
                 ),
@@ -330,7 +331,7 @@ class _AddOrEditItemBottomSheetModalState
                 child: Text(
                   'select-text'.i18n(),
                   style: TextStyle(
-                    color: Colors.grey[600],
+                    color: AppThemes.commonColor,
                   ),
                 ),
               ),
@@ -374,7 +375,7 @@ class _AddOrEditItemBottomSheetModalState
                 Text('operation-date-picker-label'.i18n()),
                 Text(
                   DateTimeUtils.formatDate(_selectedDateTime ?? DateTime.now()),
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: TextStyle(color: AppThemes.commonColor),
                 ),
               ],
             ),

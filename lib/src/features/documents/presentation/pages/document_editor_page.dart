@@ -94,7 +94,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       onPressed: () {
         showModalBottomSheet(
           context: context,
-          barrierColor: Colors.black87,
           isScrollControlled: true,
           useSafeArea: true,
           builder: (context) {
@@ -148,7 +147,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -170,7 +168,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -191,7 +188,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -220,7 +216,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       controller.deleteGroup(controller.selectedGroup!);
                     },
                   ),
-                  barrierColor: Colors.black87,
                 );
               },
             ),
@@ -233,7 +228,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -265,7 +259,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       controller.deleteItem(controller.selectedItem!);
                     },
                   ),
-                  barrierColor: Colors.black87,
                 );
               },
             ),
@@ -281,7 +274,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -302,7 +294,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -345,7 +336,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       );
                     },
                   ),
-                  barrierColor: Colors.black87,
                 );
               },
             ),
@@ -357,7 +347,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -386,7 +375,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       controller.deleteGroup(controller.selectedGroup!);
                     },
                   ),
-                  barrierColor: Colors.black87,
                 );
               },
             ),
@@ -413,7 +401,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  barrierColor: Colors.black87,
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
@@ -445,7 +432,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       controller.deleteItem(controller.selectedItem!);
                     },
                   ),
-                  barrierColor: Colors.black87,
                 );
               },
             ),

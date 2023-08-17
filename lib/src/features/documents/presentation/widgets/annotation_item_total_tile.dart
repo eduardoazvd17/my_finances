@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/data/utils/currency_utils.dart';
 
 class AnnotationItemTotalTile extends StatelessWidget {
@@ -35,7 +36,7 @@ class AnnotationItemTotalTile extends StatelessWidget {
           if (quantity != null)
             Text(
               'items-quantity-text'.i18n([quantity.toString()]),
-              style: TextStyle(color: Colors.grey[600]),
+              style: TextStyle(color: AppThemes.commonColor),
             ),
         ],
       ),

@@ -66,7 +66,7 @@ class CustomDialog extends StatelessWidget {
               ],
             ),
           ),
-          Divider(thickness: 2, color: Colors.grey[100]!, height: 5),
+          const Divider(thickness: 2, height: 5),
           if (content != null && child == null)
             Padding(
               padding: const EdgeInsets.all(16.0),

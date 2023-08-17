@@ -142,7 +142,6 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       icon: const Icon(CupertinoIcons.settings),
       onPressed: () => showModalBottomSheet(
         context: context,
-        barrierColor: Colors.black87,
         useSafeArea: true,
         isScrollControlled: true,
         builder: (_) => const SettingsBottomSheetModal(),
@@ -174,7 +173,6 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       onTap: () {
         showModalBottomSheet(
           context: context,
-          barrierColor: Colors.black87,
           useSafeArea: true,
           builder: (_) => const DocumentsOrderBottomSheetModal(),
         );

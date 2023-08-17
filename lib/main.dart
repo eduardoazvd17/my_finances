@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/bindings/app_binding.dart';
-import 'package:myfinances/src/core/data/enums/app_theme.dart';
+import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
 import 'package:myfinances/src/core/data/models/database_model.dart';
 import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
 
@@ -68,7 +68,7 @@ class MyFinancesApp extends GetWidget<I18nController> {
         },
         maximumSize: Size(800, Get.height),
         enabled: kIsWeb,
-        backgroundColor: themeController.selectedTheme.webFrameBackgroundColor,
+        backgroundColor: AppThemes.commonColor,
       );
     });
   }

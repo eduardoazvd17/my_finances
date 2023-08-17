@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
 import '../../data/models/document_model.dart';
 
@@ -77,7 +78,7 @@ class DocumentDetailsWidget extends StatelessWidget {
             Text(
               description,
               style: TextStyle(
-                color: Colors.grey[600],
+                color: AppThemes.commonColor,
               ),
             ),
         ],

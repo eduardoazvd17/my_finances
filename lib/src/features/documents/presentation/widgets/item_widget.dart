@@ -4,6 +4,7 @@ import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
 import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/data/utils/currency_utils.dart';
 import '../../data/models/item_model.dart';
 import '../../data/enums/document_type.dart';
@@ -64,7 +65,7 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
           ? Text(
               '${itemModel.quantity}x',
               style: TextStyle(
-                color: Colors.grey[600],
+                color: AppThemes.commonColor,
                 decoration:
                     itemModel.isChecked ? TextDecoration.lineThrough : null,
               ),
@@ -90,7 +91,7 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
           ? Text(
               itemModel.description!,
               style: TextStyle(
-                color: Colors.grey[600],
+                color: AppThemes.commonColor,
                 decoration:
                     itemModel.isChecked ? TextDecoration.lineThrough : null,
               ),

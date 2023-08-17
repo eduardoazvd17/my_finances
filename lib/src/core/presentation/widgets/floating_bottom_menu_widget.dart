@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
+import '../../data/utils/app_themes.dart';
+
 class FloatingBottomMenuWidget extends StatelessWidget {
   final String? selectedName;
   final void Function() onRemoveSelected;
@@ -21,15 +23,17 @@ class FloatingBottomMenuWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         decoration: BoxDecoration(
+          color: Theme.of(context).dialogBackgroundColor,
           border: Border.all(
             width: 1,
-            color: Colors.grey[600]!,
+            color: AppThemes.commonColor,
           ),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Material(
           borderRadius: BorderRadius.circular(15),
           elevation: 8,
+          color: Theme.of(context).dialogBackgroundColor,
           child: AnimatedSize(
             curve: Curves.ease,
             duration: const Duration(milliseconds: 350),
@@ -57,7 +61,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                             child: Text(
                               'selected-label'.i18n(),
                               style: TextStyle(
-                                color: Colors.grey[600],
+                                color: AppThemes.commonColor,
                               ),
                             ),
                           ),
@@ -78,7 +82,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                               borderRadius: BorderRadius.circular(15),
                               child: Icon(
                                 Icons.close,
-                                color: Colors.grey[600],
+                                color: AppThemes.commonColor,
                               ),
                             ),
                           ),
@@ -106,7 +110,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                                   child: Container(
                                     width: 0.5,
                                     height: 25,
-                                    color: Colors.grey[600],
+                                    color: AppThemes.commonColor,
                                   ),
                                 ),
                                 item,

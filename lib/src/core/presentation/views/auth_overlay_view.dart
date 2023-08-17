@@ -74,7 +74,6 @@ class AuthOverlayView extends StatelessWidget {
                                     onConfirm: AppController.instance.logout,
                                     invertButtonColor: true,
                                   ),
-                                  barrierColor: Colors.black87,
                                 );
                               },
                             ),

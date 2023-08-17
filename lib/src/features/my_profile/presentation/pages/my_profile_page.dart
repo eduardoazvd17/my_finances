@@ -12,6 +12,7 @@ import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart
 
 import 'package:myfinances/src/features/my_profile/presentation/controllers/my_profile_controller.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../../../../core/presentation/widgets/picture_source_selection_bottom_sheet_modal.dart';
 import '../../../../core/presentation/widgets/profile_picture_widget.dart';
@@ -70,7 +71,6 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                                       onClose: Get.back,
                                       invertButtonColor: true,
                                     ),
-                                    barrierColor: Colors.black87,
                                   );
                                 },
                                 child: Text('remove-photo-button'.i18n()),
@@ -160,7 +160,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(color: Colors.grey[600])),
+          Text(label, style: TextStyle(color: AppThemes.commonColor)),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 8.0,
@@ -193,7 +193,6 @@ class MyProfilePage extends GetWidget<MyProfileController> {
           onConfirm: AppController.instance.logout,
           invertButtonColor: true,
         ),
-        barrierColor: Colors.black87,
       );
     }
 
@@ -243,7 +242,6 @@ class MyProfilePage extends GetWidget<MyProfileController> {
         ),
       ),
       barrierDismissible: false,
-      barrierColor: Colors.black87,
     );
   }
 
@@ -266,7 +264,6 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                   onConfirm: controller.deleteAccount,
                   invertButtonColor: true,
                 ),
-                barrierColor: Colors.black87,
               );
               controller.deleteAccountConfirmation = false;
             },
@@ -285,7 +282,6 @@ class MyProfilePage extends GetWidget<MyProfileController> {
     } else {
       showModalBottomSheet(
         context: context,
-        barrierColor: Colors.black87,
         useSafeArea: true,
         isScrollControlled: true,
         builder: (_) => PictureSourceSelectionBottomSheetModal(

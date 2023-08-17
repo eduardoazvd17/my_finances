@@ -6,7 +6,7 @@ import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/enums/app_currency_format.dart';
 import 'package:myfinances/src/core/data/enums/app_date_format.dart';
 import 'package:myfinances/src/core/data/enums/app_language.dart';
-import 'package:myfinances/src/core/data/enums/app_theme.dart';
+import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
 import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
 import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
 import 'package:myfinances/src/core/presentation/controllers/theme_controller.dart';
@@ -248,7 +248,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),
-              child: DropDownButtonWidget<AppTheme>(
+              child: DropDownButtonWidget<AppThemeMode>(
                 itemHeight: 50,
                 isExpanded: true,
                 value: themeController.selectedTheme,
@@ -257,7 +257,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                     themeController.setSelectedTheme(value);
                   }
                 },
-                items: AppTheme.values
+                items: AppThemeMode.values
                     .map(
                       (theme) => DropdownMenuItem(
                         value: theme,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../data/utils/app_themes.dart';
+
 class ButtonWidget extends StatelessWidget {
   final String text;
   final void Function() onTap;
@@ -35,7 +37,7 @@ class ButtonWidget extends StatelessWidget {
           color: isDisabled ? Colors.transparent : backgroundColor,
           border: Border.all(
             color: isDisabled
-                ? Colors.grey[600]!
+                ? AppThemes.commonColor
                 : (borderColor ?? Theme.of(context).primaryColor),
           ),
           borderRadius: BorderRadius.circular(borderRadius),
@@ -52,7 +54,7 @@ class ButtonWidget extends StatelessWidget {
                   child: Icon(
                     icon,
                     color: isDisabled
-                        ? Colors.grey[600]!
+                        ? AppThemes.commonColor
                         : (foregroundColor ?? Theme.of(context).primaryColor),
                   ),
                 ),
@@ -61,7 +63,7 @@ class ButtonWidget extends StatelessWidget {
                   text,
                   style: TextStyle(
                     color: isDisabled
-                        ? Colors.grey[600]!
+                        ? AppThemes.commonColor
                         : (foregroundColor ?? Theme.of(context).primaryColor),
                   ),
                   textAlign: TextAlign.center,

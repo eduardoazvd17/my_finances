@@ -8,6 +8,7 @@ import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/views/settings_bottom_sheet_modal.dart';
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../controllers/auth_controller.dart';
@@ -66,7 +67,7 @@ class WelcomePage extends GetWidget<AuthController> {
           child: Text(
             'slogan-text'.i18n(),
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey[600]),
+            style: TextStyle(color: AppThemes.commonColor),
           ),
         )
       ],
@@ -109,7 +110,6 @@ class WelcomePage extends GetWidget<AuthController> {
                         onConfirm: controller.cancelAutoLogin,
                         invertButtonColor: true,
                       ),
-                      barrierColor: Colors.black87,
                     );
                   },
                 ),
@@ -126,7 +126,6 @@ class WelcomePage extends GetWidget<AuthController> {
       icon: const Icon(CupertinoIcons.settings),
       onPressed: () => showModalBottomSheet(
         context: context,
-        barrierColor: Colors.black87,
         useSafeArea: true,
         builder: (_) => const SettingsBottomSheetModal(),
       ),

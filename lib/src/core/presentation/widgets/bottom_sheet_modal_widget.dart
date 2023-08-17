@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
+import '../../data/utils/app_themes.dart';
+
 class BottomSheetModalWidget extends StatelessWidget {
   final Widget child;
   final String? title;
@@ -43,7 +45,7 @@ class BottomSheetModalWidget extends StatelessWidget {
                     width: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey[600],
+                      color: AppThemes.commonColor,
                     ),
                   ),
                   _closeButton,
