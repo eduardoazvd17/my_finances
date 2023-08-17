@@ -27,33 +27,9 @@ class ProfilePictureWidget extends StatelessWidget {
                   height: size,
                   width: size,
                   fit: BoxFit.fill,
-                  errorBuilder: (context, error, stackTrace) {
-                    return _loadingImageLoop(context);
-                  },
                 ),
               )
             : _defaultImage(context),
-      ),
-    );
-  }
-
-  Widget _loadingImageLoop(BuildContext context) {
-    return Container(
-      height: size,
-      width: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Theme.of(context).primaryColor,
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(size / 5),
-        child: const FittedBox(
-          child: Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          ),
-        ),
       ),
     );
   }
