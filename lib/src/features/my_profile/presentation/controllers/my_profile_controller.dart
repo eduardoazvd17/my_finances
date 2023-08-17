@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -236,13 +236,13 @@ class MyProfileController extends GetxController {
 
   Future<void> changeProfilePicture(ImageSource source) async {
     AppController.instance.pauseAuthOverlay();
-    final File? photoFile = await ImageUtils.pickImage(source);
-    if (photoFile != null) {
+    final Uint8List? fileBytes = await ImageUtils.pickImage(source);
+    if (fileBytes != null) {
       try {
         LoadingWidget.dialog();
 
         final String? photoUrl = await _service.changeUserProfilePicture(
-          file: photoFile,
+          fileBytes: fileBytes,
           userId: AppController.instance.user!.id,
         );
 
@@ -266,7 +266,7 @@ class MyProfileController extends GetxController {
       LoadingWidget.dialog();
 
       await _service.changeUserProfilePicture(
-        file: null,
+        fileBytes: null,
         userId: AppController.instance.user!.id,
       );
 

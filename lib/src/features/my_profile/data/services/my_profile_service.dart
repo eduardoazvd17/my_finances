@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:credentials_manager/credentials_manager.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -31,7 +29,7 @@ class MyProfileService {
   }
 
   Future<String?> changeUserProfilePicture({
-    required File? file,
+    required Uint8List? fileBytes,
     required String userId,
   }) async {
     try {
@@ -39,11 +37,11 @@ class MyProfileService {
           _database.userProfilePictureStorageReference(userId);
 
       final String? url;
-      if (file == null) {
+      if (fileBytes == null) {
         await storageReference.delete();
         url = null;
       } else {
-        await storageReference.putFile(file);
+        storageReference.putData(fileBytes);
         url = await storageReference.getDownloadURL();
       }
 
