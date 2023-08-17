@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -279,16 +280,21 @@ class MyProfilePage extends GetWidget<MyProfileController> {
   }
 
   void _showPictureSourceSelectionModal(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      barrierColor: Colors.black87,
-      useSafeArea: true,
-      isScrollControlled: true,
-      builder: (_) => PictureSourceSelectionBottomSheetModal(
-        onTapCamera: () => controller.changeProfilePicture(ImageSource.camera),
-        onTapGallery: () =>
-            controller.changeProfilePicture(ImageSource.gallery),
-      ),
-    );
+    if (kIsWeb) {
+      controller.changeProfilePicture(ImageSource.gallery);
+    } else {
+      showModalBottomSheet(
+        context: context,
+        barrierColor: Colors.black87,
+        useSafeArea: true,
+        isScrollControlled: true,
+        builder: (_) => PictureSourceSelectionBottomSheetModal(
+          onTapCamera: () =>
+              controller.changeProfilePicture(ImageSource.camera),
+          onTapGallery: () =>
+              controller.changeProfilePicture(ImageSource.gallery),
+        ),
+      );
+    }
   }
 }
