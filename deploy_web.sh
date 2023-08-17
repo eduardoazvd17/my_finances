@@ -1,4 +1,4 @@
 flutter clean;
-flutter build web;
+flutter build web --web-renderer html --release;
 clear;
 firebase deploy;
