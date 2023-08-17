@@ -31,6 +31,7 @@ class MyProfileService {
   Future<String?> changeUserProfilePicture({
     required Uint8List? fileBytes,
     required String userId,
+    required String? currentUserPhotoUrl,
   }) async {
     try {
       final Reference storageReference =
@@ -41,11 +42,13 @@ class MyProfileService {
         await storageReference.delete();
         url = null;
       } else {
-        storageReference.putData(fileBytes);
+        await storageReference.putData(fileBytes);
         url = await storageReference.getDownloadURL();
       }
 
-      await _database.usersCollection.doc(userId).update({'photoUrl': url});
+      if (currentUserPhotoUrl != url) {
+        await _database.usersCollection.doc(userId).update({'photoUrl': url});
+      }
       return url;
     } on AppError catch (_) {
       rethrow;

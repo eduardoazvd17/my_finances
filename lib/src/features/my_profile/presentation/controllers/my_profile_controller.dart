@@ -244,6 +244,7 @@ class MyProfileController extends GetxController {
         final String? photoUrl = await _service.changeUserProfilePicture(
           fileBytes: fileBytes,
           userId: AppController.instance.user!.id,
+          currentUserPhotoUrl: AppController.instance.user!.photoUrl,
         );
 
         final UserModel newUser = AppController.instance.user!.editAndCopy(
@@ -268,6 +269,7 @@ class MyProfileController extends GetxController {
       await _service.changeUserProfilePicture(
         fileBytes: null,
         userId: AppController.instance.user!.id,
+        currentUserPhotoUrl: AppController.instance.user!.photoUrl,
       );
 
       final UserModel newUser = AppController.instance.user!.editAndCopy(
