@@ -143,7 +143,7 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
             '${itemsByGroup.length}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-        DocumentType.pointsAndAirlineMiles => Container(),
+        //DocumentType.pointsAndAirlineMiles => Container(),
       },
     );
   }

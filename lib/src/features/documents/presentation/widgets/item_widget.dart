@@ -28,9 +28,9 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
         DocumentType.annotation => _annotationItemTile(
             context,
           ),
-        DocumentType.pointsAndAirlineMiles => _pointsAndAirlineMilesItemTile(
-            context,
-          ),
+        // DocumentType.pointsAndAirlineMiles => _pointsAndAirlineMilesItemTile(
+        //     context,
+        //   ),
       };
     });
   }
@@ -100,12 +100,12 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
     );
   }
 
-  Widget _pointsAndAirlineMilesItemTile(BuildContext context) {
-    //final PointsAndAirlineMilesItemModel itemModel = this.itemModel as PointsAndAirlineMilesItemModel;
-    return _itemBaseWidget(
-      context: context,
-    );
-  }
+  // Widget _pointsAndAirlineMilesItemTile(BuildContext context) {
+  //   //final PointsAndAirlineMilesItemModel itemModel = this.itemModel as PointsAndAirlineMilesItemModel;
+  //   return _itemBaseWidget(
+  //     context: context,
+  //   );
+  // }
 
   Widget _itemBaseWidget({
     required BuildContext context,

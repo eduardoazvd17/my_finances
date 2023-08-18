@@ -437,7 +437,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
           ],
         ],
-      DocumentType.pointsAndAirlineMiles => [],
+      //DocumentType.pointsAndAirlineMiles => [],
     };
   }
 
@@ -636,7 +636,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 quantity: null,
               ),
           ],
-        DocumentType.pointsAndAirlineMiles => [],
+        //DocumentType.pointsAndAirlineMiles => [],
       },
     );
   }

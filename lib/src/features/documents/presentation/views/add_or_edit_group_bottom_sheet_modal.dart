@@ -123,7 +123,7 @@ class _AddOrEditGroupBottomSheetModalState
             );
           }),
         ],
-      DocumentType.pointsAndAirlineMiles => [],
+      //DocumentType.pointsAndAirlineMiles => [],
     };
   }
 

@@ -84,8 +84,8 @@ class _AddOrEditItemBottomSheetModalState
               '',
         );
         break;
-      case DocumentType.pointsAndAirlineMiles:
-        break;
+      // case DocumentType.pointsAndAirlineMiles:
+      //   break;
     }
     _selectedGrouping = widget.groupingModel;
     super.initState();
@@ -212,7 +212,7 @@ class _AddOrEditItemBottomSheetModalState
             );
           }),
         ],
-      DocumentType.pointsAndAirlineMiles => [],
+      //DocumentType.pointsAndAirlineMiles => [],
     };
   }
 

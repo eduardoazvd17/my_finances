@@ -46,7 +46,7 @@ class DocumentEditorService {
         DocumentType.annotation => query.docs
             .map((doc) => AnnotationItemModel.fromMap(doc.data()))
             .toList(),
-        DocumentType.pointsAndAirlineMiles => [],
+        //DocumentType.pointsAndAirlineMiles => [],
       };
     } on AppError catch (_) {
       rethrow;
