@@ -37,7 +37,7 @@ class DocumentTileWidget extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Icon(documentModel.type.icon, size: 40),
+                Icon(documentModel.type.icon, size: 50),
                 if (documentModel.isFavorite)
                   Positioned(
                     top: 0,
@@ -45,7 +45,7 @@ class DocumentTileWidget extends StatelessWidget {
                     child: Icon(
                       CupertinoIcons.heart_fill,
                       color: Colors.red[300],
-                      size: 15,
+                      size: 18,
                     ),
                   ),
               ],
@@ -56,27 +56,32 @@ class DocumentTileWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(documentModel.name, maxLines: 2),
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      documentModel.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
                   ),
                   Row(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 2),
-                          child: Icon(
-                            CupertinoIcons.calendar,
-                            size: 18,
-                            color: AppThemes.commonColor,
-                          ),
+                        padding: EdgeInsets.only(left: 10, right: 5),
+                        child: Icon(
+                          CupertinoIcons.calendar,
+                          size: 18,
+                          color: AppThemes.commonColor,
                         ),
                       ),
-                      Text(
-                        DateTimeUtils.formatFullDateShorted(
-                          documentModel.creationDate,
+                      Expanded(
+                        child: Text(
+                          DateTimeUtils.formatFullDateShorted(
+                            documentModel.creationDate,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(color: AppThemes.commonColor),
                         ),
-                        style: const TextStyle(color: AppThemes.commonColor),
                       ),
                     ],
                   ),
