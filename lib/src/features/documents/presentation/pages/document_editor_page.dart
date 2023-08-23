@@ -466,7 +466,10 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             const Divider(),
             ItemTotalTile(
               title: 'total-buys-label'.i18n(),
-              price: controller.items.isEmpty
+              price: controller.items
+                      .cast<InvestimentControlItemModel>()
+                      .where((i) => i.operationType == OperationType.buy)
+                      .isEmpty
                   ? 0
                   : controller.items
                       .cast<InvestimentControlItemModel>()
@@ -479,7 +482,10 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
             ItemTotalTile(
               title: 'total-sales-label'.i18n(),
-              price: controller.items.isEmpty
+              price: controller.items
+                      .cast<InvestimentControlItemModel>()
+                      .where((i) => i.operationType == OperationType.sell)
+                      .isEmpty
                   ? 0
                   : controller.items
                       .cast<InvestimentControlItemModel>()
