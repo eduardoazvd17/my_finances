@@ -114,15 +114,12 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
             Obx(() {
               return Text(
                 controller.selectedDocumentType?.description ?? '',
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
                 style: const TextStyle(color: AppThemes.commonColor),
               );
             }),
             Padding(
-              padding: const EdgeInsets.only(
-                top: 16,
-                bottom: 16,
-              ),
+              padding: const EdgeInsets.only(top: 16, bottom: 16),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
