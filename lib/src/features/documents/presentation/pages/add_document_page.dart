@@ -58,7 +58,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                             children: [
                               Text(
                                 'add-document-type-label'.i18n(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppThemes.commonColor,
                                 ),
                               ),
@@ -95,7 +95,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                                       maxLines: 2,
                                       style: documentType.isEnabled
                                           ? null
-                                          : TextStyle(
+                                          : const TextStyle(
                                               color: AppThemes.commonColor,
                                             ),
                                     ),
@@ -115,7 +115,7 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
               return Text(
                 controller.selectedDocumentType?.description ?? '',
                 textAlign: TextAlign.justify,
-                style: TextStyle(color: AppThemes.commonColor),
+                style: const TextStyle(color: AppThemes.commonColor),
               );
             }),
             Padding(

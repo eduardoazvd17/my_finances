@@ -38,7 +38,7 @@ class ItemTotalTile extends StatelessWidget {
           if (quantity != null)
             Text(
               'items-quantity-text'.i18n([quantity.toString()]),
-              style: TextStyle(color: AppThemes.commonColor),
+              style: const TextStyle(color: AppThemes.commonColor),
             ),
         ],
       ),

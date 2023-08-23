@@ -40,9 +40,9 @@ class CustomDialog extends StatelessWidget {
       iconPadding: EdgeInsets.zero,
       buttonPadding: EdgeInsets.zero,
       insetPadding: const EdgeInsets.all(30),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         side: BorderSide(color: AppThemes.commonColor),
-        borderRadius: const BorderRadius.all(
+        borderRadius: BorderRadius.all(
           Radius.circular(20),
         ),
       ),

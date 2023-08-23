@@ -61,10 +61,10 @@ class DocumentTileWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 2),
+                          padding: EdgeInsets.only(top: 2),
                           child: Icon(
                             CupertinoIcons.calendar,
                             size: 18,
@@ -76,7 +76,7 @@ class DocumentTileWidget extends StatelessWidget {
                         DateTimeUtils.formatFullDateShorted(
                           documentModel.creationDate,
                         ),
-                        style: TextStyle(color: AppThemes.commonColor),
+                        style: const TextStyle(color: AppThemes.commonColor),
                       ),
                     ],
                   ),

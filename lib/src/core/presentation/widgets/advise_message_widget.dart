@@ -49,7 +49,7 @@ class AdviseMessageWidget extends StatelessWidget {
             Text(
               description!,
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppThemes.commonColor),
+              style: const TextStyle(color: AppThemes.commonColor),
             ).animate().fade(),
           if (onAction != null && actionButtonText != null)
             Padding(

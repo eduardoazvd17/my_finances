@@ -64,7 +64,7 @@ class WelcomePage extends GetWidget<AuthController> {
           child: Text(
             'slogan-text'.i18n(),
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppThemes.commonColor),
+            style: const TextStyle(color: AppThemes.commonColor),
           ),
         )
       ],

@@ -60,7 +60,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 5.0),
                             child: Text(
                               'selected-label'.i18n(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: AppThemes.commonColor,
                               ),
                             ),
@@ -80,7 +80,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                             child: InkWell(
                               onTap: onRemoveSelected,
                               borderRadius: BorderRadius.circular(15),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.close,
                                 color: AppThemes.commonColor,
                               ),

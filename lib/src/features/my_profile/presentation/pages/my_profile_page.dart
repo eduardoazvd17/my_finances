@@ -160,7 +160,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(color: AppThemes.commonColor)),
+          Text(label, style: const TextStyle(color: AppThemes.commonColor)),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 8.0,

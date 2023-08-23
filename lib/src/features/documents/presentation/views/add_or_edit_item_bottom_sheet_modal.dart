@@ -288,7 +288,7 @@ class _AddOrEditItemBottomSheetModalState
                   value: null,
                   child: Text(
                     'item-group-hint'.i18n(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: AppThemes.commonColor,
                     ),
                   ),
@@ -315,7 +315,7 @@ class _AddOrEditItemBottomSheetModalState
 
   Widget _operationTypeSelectionWidget() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -331,9 +331,7 @@ class _AddOrEditItemBottomSheetModalState
                 value: null,
                 child: Text(
                   'select-text'.i18n(),
-                  style: TextStyle(
-                    color: AppThemes.commonColor,
-                  ),
+                  style: const TextStyle(color: AppThemes.commonColor),
                 ),
               ),
               ...OperationType.values.map(
@@ -376,7 +374,7 @@ class _AddOrEditItemBottomSheetModalState
                 Text('operation-date-picker-label'.i18n()),
                 Text(
                   DateTimeUtils.formatDate(_selectedDateTime ?? DateTime.now()),
-                  style: TextStyle(color: AppThemes.commonColor),
+                  style: const TextStyle(color: AppThemes.commonColor),
                 ),
               ],
             ),

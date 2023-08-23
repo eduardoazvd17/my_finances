@@ -77,7 +77,7 @@ class DocumentDetailsWidget extends StatelessWidget {
           if (description != null)
             Text(
               description,
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppThemes.commonColor,
               ),
             ),
