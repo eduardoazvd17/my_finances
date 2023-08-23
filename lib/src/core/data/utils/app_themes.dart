@@ -4,13 +4,15 @@ import 'package:flutter/services.dart';
 class AppThemes {
   static const Color _primaryColor = Colors.indigo;
 
-  static final Color _lightBackgroundColor = Colors.blueGrey[100]!;
-  static final Color _lightSecondaryBackgroundColor = Colors.grey[100]!;
+  static const Color _lightBackgroundColor = Color.fromARGB(255, 221, 227, 231);
+  static const Color _lightSecondaryBackgroundColor =
+      Color.fromARGB(255, 245, 245, 245);
 
   static const Color _darkBackgroundColor = Colors.black;
-  static final Color _darkSecondaryBackgroundColor = Colors.grey[900]!;
+  static const Color _darkSecondaryBackgroundColor =
+      Color.fromARGB(255, 33, 33, 33);
 
-  static final Color commonColor = Colors.grey[600]!;
+  static const Color commonColor = Color.fromARGB(255, 117, 117, 117);
 
   static ThemeData get light {
     return ThemeData(
@@ -23,16 +25,16 @@ class AppThemes {
       ),
       primaryColor: _primaryColor,
       scaffoldBackgroundColor: _lightBackgroundColor,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: _lightBackgroundColor,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
       ),
       dialogBackgroundColor: _lightSecondaryBackgroundColor,
-      bottomSheetTheme: BottomSheetThemeData(
+      bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
       ),
       dividerColor: commonColor,
@@ -57,10 +59,10 @@ class AppThemes {
         centerTitle: true,
       ),
       dialogBackgroundColor: _darkSecondaryBackgroundColor,
-      bottomSheetTheme: BottomSheetThemeData(
+      bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
       ),
       dividerColor: commonColor,
