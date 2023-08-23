@@ -13,6 +13,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
   final FocusNode? focusNode;
   final bool isExpanded;
   final String? hintText;
+  final double borderRadius;
   const DropDownButtonWidget({
     super.key,
     required this.value,
@@ -23,28 +24,38 @@ class DropDownButtonWidget<T> extends StatelessWidget {
     this.itemHeight,
     this.focusNode,
     this.hintText,
+    this.borderRadius = 10,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<T>(
-      isExpanded: true,
-      iconSize: iconSize,
-      iconEnabledColor: Theme.of(context).primaryColor,
-      iconDisabledColor: AppThemes.commonColor,
-      elevation: 24,
-      underline: Divider(
-        height: 5,
-        color: Theme.of(context).primaryColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Theme.of(context).primaryColor,
+          ),
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: DropdownButton<T>(
+          isExpanded: true,
+          iconSize: iconSize,
+          iconEnabledColor: Theme.of(context).primaryColor,
+          iconDisabledColor: AppThemes.commonColor,
+          elevation: 24,
+          underline: const SizedBox(),
+          icon: const Icon(CupertinoIcons.chevron_down),
+          borderRadius: BorderRadius.circular(borderRadius),
+          itemHeight: itemHeight,
+          focusNode: focusNode,
+          value: value,
+          items: items,
+          onChanged: onChanged,
+          hint: Text(hintText ?? 'select-text'.i18n()),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+        ),
       ),
-      icon: const Icon(CupertinoIcons.chevron_down),
-      borderRadius: BorderRadius.circular(10),
-      itemHeight: itemHeight,
-      focusNode: focusNode,
-      value: value,
-      items: items,
-      onChanged: onChanged,
-      hint: Text(hintText ?? 'select-text'.i18n()),
     );
   }
 }
