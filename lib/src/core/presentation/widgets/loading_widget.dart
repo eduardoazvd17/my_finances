@@ -77,7 +77,9 @@ class _LoadingDotState extends State<_LoadingDot>
     );
 
     Future<void>.delayed(Duration(milliseconds: widget.delay * 333), () {
-      _controller.repeat(reverse: true);
+      try {
+        _controller.repeat(reverse: true);
+      } catch (_) {}
     });
 
     _animation = CurvedAnimation(
