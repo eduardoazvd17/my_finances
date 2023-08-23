@@ -139,6 +139,7 @@ class FloatingBottomMenuItem extends StatelessWidget {
   final bool showTooltip;
   final Color? foregroundColor;
   final Color? backgroundColor;
+  final Color? borderColor;
   const FloatingBottomMenuItem({
     super.key,
     required this.icon,
@@ -147,6 +148,7 @@ class FloatingBottomMenuItem extends StatelessWidget {
     this.showTooltip = false,
     this.foregroundColor,
     this.backgroundColor,
+    this.borderColor,
   });
 
   @override
@@ -158,6 +160,7 @@ class FloatingBottomMenuItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor,
+          border: borderColor != null ? Border.all(color: borderColor!) : null,
           borderRadius: BorderRadius.circular(15),
         ),
         child: InkWell(

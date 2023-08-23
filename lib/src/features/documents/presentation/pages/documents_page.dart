@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/utils/app_themes.dart';
 import 'package:myfinances/src/core/presentation/views/settings_bottom_sheet_modal.dart';
 import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
@@ -159,6 +160,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           tooltip: 'add-document-button'.i18n(),
           foregroundColor: Colors.white,
           backgroundColor: Theme.of(context).primaryColor,
+          borderColor: AppThemes.commonColor,
           showTooltip: true,
         ),
       ),
