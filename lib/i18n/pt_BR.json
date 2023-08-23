@@ -200,5 +200,9 @@
     "image-cropper-toolbar-title": "Defina a área da foto",
     "image-source-camera-text": "Tirar foto usando a câmera",
     "image-source-gallery-text": "Escolher uma foto da galeria",
-    "remove-photo-confirmation-text": "Deseja realmente remover sua foto de perfil?"
+    "remove-photo-confirmation-text": "Deseja realmente remover sua foto de perfil?",
+    "total-buys-label": "Total em compras:",
+    "total-sales-label": "Total em vendas:",
+    "invested-value-label": "Valor investido:",
+    "resume-by-asset-text": "Resumo por ativo"
 }

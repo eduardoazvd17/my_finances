@@ -4,15 +4,17 @@ import 'package:localization/localization.dart';
 import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/data/utils/currency_utils.dart';
 
-class AnnotationItemTotalTile extends StatelessWidget {
+class ItemTotalTile extends StatelessWidget {
   final String title;
   final double price;
   final int? quantity;
-  const AnnotationItemTotalTile({
+  final Color priceColor;
+  const ItemTotalTile({
     super.key,
     required this.title,
     required this.price,
     required this.quantity,
+    this.priceColor = Colors.lightGreen,
   });
 
   @override
@@ -29,7 +31,7 @@ class AnnotationItemTotalTile extends StatelessWidget {
               Expanded(child: Text(title)),
               Text(
                 CurrencyUtils.format(price),
-                style: const TextStyle(color: Colors.lightGreen),
+                style: TextStyle(color: priceColor),
               ),
             ],
           ),

@@ -5,7 +5,7 @@ import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/views/add_or_edit_item_bottom_sheet_modal.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/annotation_item_total_tile.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/item_total_tile.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
@@ -99,7 +99,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           builder: (context) {
             return DocumentDetailsBottomSheetModalWidget(
               documentModel: controller.documentModel,
-              additionalContent: _getInfoAdditionalContentByDocumentType(),
+              additionalContent:
+                  _getInfoAdditionalContentByDocumentType(context),
             );
           },
         );
@@ -441,7 +442,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     };
   }
 
-  Widget _getInfoAdditionalContentByDocumentType() {
+  Widget _getInfoAdditionalContentByDocumentType(BuildContext context) {
     if (controller.items.isEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -465,10 +466,55 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         DocumentType.monthlyExpenseControl => [],
         DocumentType.investmentControl => [
             const Divider(),
+            ItemTotalTile(
+              title: 'total-buys-label'.i18n(),
+              price: controller.items.isEmpty
+                  ? 0
+                  : controller.items
+                      .cast<InvestimentControlItemModel>()
+                      .where((i) => i.operationType == OperationType.buy)
+                      .map((i) => i.quantity * i.price)
+                      .reduce((a, b) => a + b)
+                      .toDouble(),
+              quantity: null,
+              priceColor: Colors.green,
+            ),
+            ItemTotalTile(
+              title: 'total-sales-label'.i18n(),
+              price: controller.items.isEmpty
+                  ? 0
+                  : controller.items
+                      .cast<InvestimentControlItemModel>()
+                      .where((i) => i.operationType == OperationType.sell)
+                      .map((i) => i.quantity * i.price)
+                      .reduce((a, b) => a + b)
+                      .toDouble(),
+              quantity: null,
+              priceColor: Colors.red[300]!,
+            ),
+            ItemTotalTile(
+              title: 'invested-value-label'.i18n(),
+              price: controller.items.isEmpty
+                  ? 0
+                  : controller.items
+                      .cast<InvestimentControlItemModel>()
+                      .map((i) {
+                        if (i.operationType == OperationType.buy) {
+                          return i.quantity * i.price;
+                        } else {
+                          return -(i.quantity * i.price);
+                        }
+                      })
+                      .reduce((a, b) => a + b)
+                      .toDouble(),
+              quantity: null,
+              priceColor: Theme.of(context).primaryColor,
+            ),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: Center(
-                child: Text('resume-text'.i18n(), style: styleLabel),
+                child: Text('resume-by-asset-text'.i18n(), style: styleLabel),
               ),
             ),
             ...controller.groups.map((g) {
@@ -531,7 +577,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           ],
         DocumentType.annotation => [
             const Divider(),
-            AnnotationItemTotalTile(
+            ItemTotalTile(
               title: 'total-label'.i18n(),
               price: controller.items.isEmpty
                   ? 0
@@ -544,7 +590,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       .toDouble(),
               quantity: controller.items.length,
             ),
-            AnnotationItemTotalTile(
+            ItemTotalTile(
               title: 'checked-items'.i18n([
                 controller.items
                     .cast<AnnotationItemModel>()
@@ -567,7 +613,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       .toDouble(),
               quantity: null,
             ),
-            AnnotationItemTotalTile(
+            ItemTotalTile(
               title: 'unchecked-items'.i18n([
                 controller.items
                     .cast<AnnotationItemModel>()
@@ -613,7 +659,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                     return (i.quantity ?? 1) * (i.price ?? 0);
                   });
 
-                  return AnnotationItemTotalTile(
+                  return ItemTotalTile(
                     title: g.name,
                     price: itemsPrice.isEmpty
                         ? 0
@@ -624,7 +670,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               },
             ),
             if (controller.itemsWithoutGroup.isNotEmpty)
-              AnnotationItemTotalTile(
+              ItemTotalTile(
                 title: 'items-without-group'.i18n([
                   controller.itemsWithoutGroup.length.toString(),
                 ]),

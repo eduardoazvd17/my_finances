@@ -200,5 +200,9 @@
     "image-cropper-toolbar-title": "Set photo area",
     "image-source-camera-text": "Take picture using camera",
     "image-source-gallery-text": "Choose a photo from the gallery",
-    "remove-photo-confirmation-text": "Do you really want to remove your profile picture?"
+    "remove-photo-confirmation-text": "Do you really want to remove your profile picture?",
+    "total-buys-label": "Total in purchases:",
+    "total-sales-label": "Total in sales:",
+    "invested-value-label": "Invested value:",
+    "resume-by-asset-text": "Summary by asset"
 }
