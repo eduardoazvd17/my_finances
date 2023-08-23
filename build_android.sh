@@ -1,5 +1,5 @@
 flutter clean;
 flutter pub get;
 flutter build apk --release;
-cd build/app/outputs/flutter_apk;
+cd build/app/outputs/flutter-apk;
 open .;
