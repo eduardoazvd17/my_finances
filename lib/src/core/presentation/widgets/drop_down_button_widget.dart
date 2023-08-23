@@ -39,21 +39,25 @@ class DropDownButtonWidget<T> extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: DropdownButton<T>(
-          isExpanded: true,
+          items: items,
+          value: value,
+          onChanged: onChanged,
+          itemHeight: itemHeight,
           iconSize: iconSize,
+          focusNode: focusNode,
+          elevation: 24,
+          isExpanded: true,
+          underline: const SizedBox(),
           iconEnabledColor: Theme.of(context).primaryColor,
           iconDisabledColor: AppThemes.commonColor,
-          elevation: 24,
-          underline: const SizedBox(),
           icon: const Icon(CupertinoIcons.chevron_down),
           borderRadius: BorderRadius.circular(borderRadius),
-          itemHeight: itemHeight,
-          focusNode: focusNode,
-          value: value,
-          items: items,
-          onChanged: onChanged,
           hint: Text(hintText ?? 'select-text'.i18n()),
           padding: const EdgeInsets.symmetric(horizontal: 5),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(fontWeight: FontWeight.normal),
         ),
       ),
     );
