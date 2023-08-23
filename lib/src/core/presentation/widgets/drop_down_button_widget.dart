@@ -21,7 +21,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
     required this.items,
     this.iconSize = 20,
     this.isExpanded = false,
-    this.itemHeight,
+    this.itemHeight = 55,
     this.focusNode,
     this.hintText,
     this.borderRadius = 10,
