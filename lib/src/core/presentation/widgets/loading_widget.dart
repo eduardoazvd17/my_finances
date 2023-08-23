@@ -1,96 +1,116 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:localization/localization.dart';
 
 class LoadingWidget extends StatelessWidget {
-  final String? text;
-  final bool inline;
-  final bool removeLogo;
+  const LoadingWidget({super.key});
 
-  const LoadingWidget({
-    this.text,
-    this.inline = false,
-    this.removeLogo = false,
-    super.key,
-  });
-
-  static dialog({bool removeLogo = false}) {
+  static dialog() {
     Get.dialog(
-      Center(
-        child: Material(
-          borderRadius: BorderRadius.circular(10),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            child: LoadingWidget(removeLogo: removeLogo),
-          ),
-        ),
-      ),
+      const Center(child: LoadingWidget()),
       barrierDismissible: false,
     );
   }
 
-  Widget _progressWidget(BuildContext context) {
-    const size = 70.0;
-    return Stack(
-      children: [
-        if (!removeLogo)
-          SizedBox(
-            height: size,
-            width: size,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Image.asset("assets/images/logo.png").animate().fade(),
+  @override
+  Widget build(BuildContext context) {
+    return const CircularLoading();
+  }
+}
+
+class CircularLoading extends StatelessWidget {
+  const CircularLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      borderRadius: BorderRadius.circular(100),
+      color: Colors.transparent,
+      elevation: 8,
+      child: Container(
+        width: 80,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          shape: BoxShape.circle,
+        ),
+        child: const Center(
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 14.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _LoadingDot(delay: 0),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: _LoadingDot(delay: 1),
+                ),
+                _LoadingDot(delay: 2),
+              ],
             ),
           ),
-        SizedBox(
-          height: size,
-          width: size,
-          child: CircularProgressIndicator(
-            color: Theme.of(context).primaryColor,
-            strokeWidth: 6,
-          ),
         ),
-      ],
+      ),
+    );
+  }
+}
+
+class _LoadingDot extends StatefulWidget {
+  final int delay;
+  const _LoadingDot({required this.delay});
+
+  @override
+  _LoadingDotState createState() => _LoadingDotState();
+}
+
+class _LoadingDotState extends State<_LoadingDot>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+
+    Future<void>.delayed(Duration(milliseconds: widget.delay * 333), () {
+      _controller.repeat(reverse: true);
+    });
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
     );
   }
 
-  Widget _textWidget(BuildContext context) {
-    return Text(
-      text ?? 'loading-text'.i18n(),
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Theme.of(context).primaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 15,
-      ),
-    ).animate().fade();
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (inline) {
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _progressWidget(context),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0),
-            child: _textWidget(context),
-          ),
-        ],
-      );
-    } else {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _progressWidget(context),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: _textWidget(context),
-          ),
-        ],
-      );
-    }
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        final translateY = 15 * _animation.value;
+        return Transform.translate(
+          offset: Offset(0, translateY),
+          child: child,
+        );
+      },
+      child: Container(
+        width: 12,
+        height: 12,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+      ),
+    );
   }
 }

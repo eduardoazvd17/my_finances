@@ -44,9 +44,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         floatingBottomMenu: _getDocumentFloatingMenu(context),
         body: Obx(() {
           if (controller.isLoading) {
-            return const Center(
-              child: LoadingWidget(removeLogo: true, text: ''),
-            );
+            return const Center(child: LoadingWidget());
           } else if (controller.groups.isEmpty &&
               controller.itemsWithoutGroup.isEmpty) {
             return Center(

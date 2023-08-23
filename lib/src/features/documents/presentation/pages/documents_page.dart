@@ -36,9 +36,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
         action: _orderDocumentsButton(context),
         content: Obx(() {
           if (controller.isLoading) {
-            return const Center(
-              child: LoadingWidget(removeLogo: true, text: ''),
-            );
+            return const Center(child: LoadingWidget());
           } else if (controller.userDocuments.isEmpty) {
             return _emptyDocumentsContent();
           } else {

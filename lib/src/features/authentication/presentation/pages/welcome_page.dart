@@ -35,10 +35,7 @@ class WelcomePage extends GetWidget<AuthController> {
                   if (controller.showBiometricsTryAgainButton) {
                     return _getBiometricsLoginForm(context);
                   } else if (controller.isLoading) {
-                    return const LoadingWidget(
-                      inline: false,
-                      removeLogo: true,
-                    );
+                    return const LoadingWidget();
                   } else {
                     return _getLoginAndRegisterButtons(context);
                   }
