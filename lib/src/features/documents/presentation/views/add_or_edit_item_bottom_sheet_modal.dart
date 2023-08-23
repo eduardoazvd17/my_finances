@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
+import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
 import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/drop_down_button_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/text_field_widget.dart';
@@ -388,6 +389,7 @@ class _AddOrEditItemBottomSheetModalState
                 initialDate: _selectedDateTime ?? now,
                 firstDate: DateTime(2000, 1, 1),
                 lastDate: now,
+                locale: Get.find<I18nController>().selectedLocale,
               );
               setState(() {
                 _selectedDateTime = pickedDate ?? now;
