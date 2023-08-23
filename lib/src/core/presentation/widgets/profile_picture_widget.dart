@@ -26,7 +26,7 @@ class ProfilePictureWidget extends StatelessWidget {
                   url!,
                   height: size,
                   width: size,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.fitWidth,
                 ),
               )
             : _defaultImage(context),
