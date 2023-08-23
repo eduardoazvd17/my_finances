@@ -56,7 +56,6 @@ class AppThemes {
         systemOverlayStyle: SystemUiOverlayStyle.light,
         centerTitle: true,
       ),
-      shadowColor: _darkSecondaryBackgroundColor,
       dialogBackgroundColor: _darkSecondaryBackgroundColor,
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,

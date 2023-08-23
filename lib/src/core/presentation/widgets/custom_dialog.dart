@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/core/data/utils/app_themes.dart';
 
 class CustomDialog extends StatelessWidget {
   final String title;
@@ -39,8 +40,9 @@ class CustomDialog extends StatelessWidget {
       iconPadding: EdgeInsets.zero,
       buttonPadding: EdgeInsets.zero,
       insetPadding: const EdgeInsets.all(30),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: AppThemes.commonColor),
+        borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
       ),
@@ -116,7 +118,7 @@ class CustomDialog extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 2),
+                  const SizedBox(width: 5),
                 ],
                 Expanded(
                   child: InkWell(
