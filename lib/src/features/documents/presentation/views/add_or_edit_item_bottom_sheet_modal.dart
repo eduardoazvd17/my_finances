@@ -183,7 +183,7 @@ class _AddOrEditItemBottomSheetModalState
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   'X',
                   style: TextStyle(
@@ -267,7 +267,7 @@ class _AddOrEditItemBottomSheetModalState
 
   Widget _groupSelectionWidget() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.only(top: 10, bottom: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -315,7 +315,7 @@ class _AddOrEditItemBottomSheetModalState
 
   Widget _operationTypeSelectionWidget() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.only(top: 10, bottom: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -363,7 +363,7 @@ class _AddOrEditItemBottomSheetModalState
 
   Widget _dateTimePickerWidget() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
