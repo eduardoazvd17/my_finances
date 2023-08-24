@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
 import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
@@ -134,6 +135,11 @@ class DocumentEditorController extends GetxController {
       _items.where((item) => item.groupingId == groupingId).toList();
   void sortItems() {
     _items.sort((a, b) {
+      if (documentModel.type == DocumentType.investmentControl) {
+        return (a as InvestimentControlItemModel)
+            .date
+            .compareTo((b as InvestimentControlItemModel).date);
+      }
       return a.creationDate.compareTo(b.creationDate);
     });
   }
