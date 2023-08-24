@@ -46,22 +46,26 @@ class MyFinancesApp extends GetWidget<I18nController> {
     return FlutterWebFrame(
       builder: (context) {
         return Obx(
-          () => GetMaterialApp(
-            builder: (_, child) => LifeCycleHandler(child: child!),
-            debugShowCheckedModeBanner: false,
-            title: controller.appName,
-            onGenerateTitle: (_) => controller.appName,
-            locale: controller.selectedLocale,
-            localizationsDelegates: controller.localizationsDelegates,
-            supportedLocales: controller.supportedLocales,
-            localeResolutionCallback: controller.localeResolutionCallback,
-            theme: AppThemes.light,
-            darkTheme: AppThemes.dark,
-            themeMode: Get.find<ThemeController>().selectedTheme.themeMode,
-            initialBinding: AppBinding(),
-            initialRoute: AppRoutes.initialRoute,
-            getPages: AppRoutes.getGetPages(),
-          ),
+          () {
+            final themeController = Get.find<ThemeController>();
+            return GetMaterialApp(
+              builder: (_, child) => LifeCycleHandler(child: child!),
+              debugShowCheckedModeBanner: false,
+              title: controller.appName,
+              onGenerateTitle: (_) => controller.appName,
+              locale: controller.selectedLocale,
+              localizationsDelegates: controller.localizationsDelegates,
+              supportedLocales: controller.supportedLocales,
+              localeResolutionCallback: controller.localeResolutionCallback,
+              theme: AppThemes.light,
+              darkTheme: AppThemes.dark,
+              color: themeController.materialAppColor,
+              themeMode: themeController.selectedTheme.themeMode,
+              initialBinding: AppBinding(),
+              initialRoute: AppRoutes.initialRoute,
+              getPages: AppRoutes.getGetPages(),
+            );
+          },
         );
       },
       maximumSize: Size(800, Get.height),

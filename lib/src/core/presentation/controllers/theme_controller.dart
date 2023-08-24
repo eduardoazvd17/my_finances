@@ -2,12 +2,13 @@
 import 'dart:js' as js;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/custom_dialog.dart';
+import '../../data/utils/app_themes.dart';
 import '../widgets/loading_widget.dart';
 
 class ThemeController extends GetxController {
@@ -49,20 +50,31 @@ class ThemeController extends GetxController {
     } catch (_) {}
   }
 
+  Color get materialAppColor => switch (selectedTheme) {
+        AppThemeMode.automatic =>
+          (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+                  Brightness.dark)
+              ? AppThemes.darkBackgroundColor
+              : AppThemes.lightBackgroundColor,
+        AppThemeMode.light => AppThemes.lightBackgroundColor,
+        AppThemeMode.dark => AppThemes.darkBackgroundColor,
+      };
+
   void updateWebBackgroundColor() {
-    // try {
-    //   if (kIsWeb) {
-    //     final String hexColor = switch (selectedTheme) {
-    //       AppThemeMode.automatic =>
-    //         (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-    //                 Brightness.dark)
-    //             ? '#000000'
-    //             : '#dde3e7',
-    //       AppThemeMode.light => '#dde3e7',
-    //       AppThemeMode.dark => '#000000',
-    //     };
-    //     js.context.callMethod('setBackgroundColor', [hexColor]);
-    //   }
-    // } catch (_) {}
+    try {
+      if (kIsWeb) {
+        final String hexColor = switch (selectedTheme) {
+          AppThemeMode.automatic =>
+            (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+                    Brightness.dark)
+                ? '#0xFF000000'
+                : '#0xFFDDE3E7',
+          AppThemeMode.light => '#0xFFDDE3E7',
+          AppThemeMode.dark => '#0xFF000000',
+        };
+
+        js.context.callMethod("setMetaThemeColor", [hexColor]);
+      }
+    } catch (_) {}
   }
 }

@@ -25,9 +25,11 @@ class AppThemes {
       ),
       primaryColor: _primaryColor,
       scaffoldBackgroundColor: lightBackgroundColor,
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: lightBackgroundColor,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: lightBackgroundColor,
+        ),
         centerTitle: true,
       ),
       dialogBackgroundColor: _lightSecondaryBackgroundColor,
@@ -53,9 +55,11 @@ class AppThemes {
       ),
       primaryColor: _primaryColor,
       scaffoldBackgroundColor: darkBackgroundColor,
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: darkBackgroundColor,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+          statusBarColor: darkBackgroundColor,
+        ),
         centerTitle: true,
       ),
       dialogBackgroundColor: _darkSecondaryBackgroundColor,
