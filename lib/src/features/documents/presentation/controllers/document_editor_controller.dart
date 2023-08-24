@@ -113,12 +113,13 @@ class DocumentEditorController extends GetxController {
     _isLoading.value = true;
     try {
       await _documentEditorService.deleteGroup(groupingModel);
+      _groups.remove(groupingModel);
+      _items.removeWhere((item) => item.groupingId == groupingModel.id);
+
       _selectedGroup.value = null;
       if (_selectedItem.value?.groupingId == groupingModel.id) {
         _selectedItem.value = null;
       }
-      _groups.remove(groupingModel);
-      _items.removeWhere((item) => item.groupingId == groupingModel.id);
     } on AppError catch (appError) {
       appError.showDialog();
     }
@@ -304,6 +305,7 @@ class DocumentEditorController extends GetxController {
     try {
       await _documentEditorService.deleteItem(itemModel);
       _items.remove(itemModel);
+      selectedItem = null;
     } on AppError catch (appError) {
       appError.showDialog();
     }
