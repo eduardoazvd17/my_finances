@@ -1,15 +1,14 @@
-// ignore_for_file: avoid_web_libraries_in_flutter
-
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
-import 'package:myfinances/src/core/data/utils/app_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:statusbarz/statusbarz.dart';
 
+import '../widgets/custom_dialog.dart';
 import '../widgets/loading_widget.dart';
 
 class ThemeController extends GetxController {
@@ -52,24 +51,20 @@ class ThemeController extends GetxController {
   }
 
   void updateWebBackgroundColor() {
-    try {
-      if (kIsWeb) {
-        String colorToHexString(Color color) {
-          return '#${(color.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
-        }
-
-        final Color color = switch (selectedTheme) {
-          AppThemeMode.automatic =>
-            (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-                    Brightness.dark)
-                ? AppThemes.darkBackgroundColor
-                : AppThemes.lightBackgroundColor,
-          AppThemeMode.light => AppThemes.lightBackgroundColor,
-          AppThemeMode.dark => AppThemes.darkBackgroundColor,
-        };
-
-        js.context.callMethod("setBackgroundColor", [colorToHexString(color)]);
-      }
-    } catch (_) {}
+    Statusbarz.instance.refresh();
+    // try {
+    //   if (kIsWeb) {
+    //     final String hexColor = switch (selectedTheme) {
+    //       AppThemeMode.automatic =>
+    //         (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+    //                 Brightness.dark)
+    //             ? '#000000'
+    //             : '#dde3e7',
+    //       AppThemeMode.light => '#dde3e7',
+    //       AppThemeMode.dark => '#000000',
+    //     };
+    //     js.context.callMethod('setBackgroundColor', [hexColor]);
+    //   }
+    // } catch (_) {}
   }
 }

@@ -10,6 +10,7 @@ import 'package:myfinances/src/core/data/bindings/app_binding.dart';
 import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
 import 'package:myfinances/src/core/data/models/database_model.dart';
 import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
+import 'package:statusbarz/statusbarz.dart';
 
 import 'firebase_options.dart';
 import 'src/core/data/utils/app_routes.dart';
@@ -35,7 +36,7 @@ void main() async {
   );
   Get.lazyPut(() => I18nController(), fenix: true);
   Get.lazyPut(() => ThemeController(), fenix: true);
-  runApp(const MyFinancesApp());
+  runApp(const StatusbarzCapturer(child: MyFinancesApp()));
 }
 
 class MyFinancesApp extends GetWidget<I18nController> {
