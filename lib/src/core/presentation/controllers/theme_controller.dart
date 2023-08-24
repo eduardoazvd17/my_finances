@@ -6,7 +6,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:statusbarz/statusbarz.dart';
 
 import '../widgets/custom_dialog.dart';
 import '../widgets/loading_widget.dart';
@@ -51,7 +50,6 @@ class ThemeController extends GetxController {
   }
 
   void updateWebBackgroundColor() {
-    Statusbarz.instance.refresh();
     // try {
     //   if (kIsWeb) {
     //     final String hexColor = switch (selectedTheme) {
