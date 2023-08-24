@@ -56,7 +56,7 @@ class DocumentTileWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, bottom: 5),
+                    padding: const EdgeInsets.only(left: 10, bottom: 2),
                     child: Text(
                       documentModel.name,
                       overflow: TextOverflow.ellipsis,
