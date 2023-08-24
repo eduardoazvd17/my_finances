@@ -1,6 +1,3 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:js' as js;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -63,17 +60,15 @@ class ThemeController extends GetxController {
   void updateWebBackgroundColor() {
     try {
       if (kIsWeb) {
-        final String hexColor = switch (selectedTheme) {
-          AppThemeMode.automatic =>
-            (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-                    Brightness.dark)
-                ? '#0xFF000000'
-                : '#0xFFDDE3E7',
-          AppThemeMode.light => '#0xFFDDE3E7',
-          AppThemeMode.dark => '#0xFF000000',
-        };
-
-        js.context.callMethod("setMetaThemeColor", [hexColor]);
+        // final String hexColor = switch (selectedTheme) {
+        //   AppThemeMode.automatic =>
+        //     (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+        //             Brightness.dark)
+        //         ? '#0xFF000000'
+        //         : '#0xFFDDE3E7',
+        //   AppThemeMode.light => '#0xFFDDE3E7',
+        //   AppThemeMode.dark => '#0xFF000000',
+        // };
       }
     } catch (_) {}
   }
