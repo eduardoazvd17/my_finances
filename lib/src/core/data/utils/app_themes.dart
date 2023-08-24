@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 class AppThemes {
   static const Color _primaryColor = Colors.indigo;
 
-  static const Color _lightBackgroundColor = Color.fromARGB(255, 221, 227, 231);
+  static const Color lightBackgroundColor = Color.fromARGB(255, 221, 227, 231);
   static const Color _lightSecondaryBackgroundColor =
       Color.fromARGB(255, 245, 245, 245);
 
-  static const Color _darkBackgroundColor = Colors.black;
+  static const Color darkBackgroundColor = Colors.black;
   static const Color _darkSecondaryBackgroundColor =
       Color.fromARGB(255, 33, 33, 33);
 
@@ -20,13 +20,13 @@ class AppThemes {
         seedColor: _primaryColor,
         secondary: _primaryColor,
         tertiary: _primaryColor,
-        surfaceTint: _lightBackgroundColor,
+        surfaceTint: lightBackgroundColor,
         brightness: Brightness.light,
       ),
       primaryColor: _primaryColor,
-      scaffoldBackgroundColor: _lightBackgroundColor,
+      scaffoldBackgroundColor: lightBackgroundColor,
       appBarTheme: const AppBarTheme(
-        backgroundColor: _lightBackgroundColor,
+        backgroundColor: lightBackgroundColor,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
       ),
@@ -48,13 +48,13 @@ class AppThemes {
         seedColor: _primaryColor,
         secondary: _primaryColor,
         tertiary: _primaryColor,
-        surfaceTint: _darkBackgroundColor,
+        surfaceTint: darkBackgroundColor,
         brightness: Brightness.dark,
       ),
       primaryColor: _primaryColor,
-      scaffoldBackgroundColor: _darkBackgroundColor,
+      scaffoldBackgroundColor: darkBackgroundColor,
       appBarTheme: const AppBarTheme(
-        backgroundColor: _darkBackgroundColor,
+        backgroundColor: darkBackgroundColor,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         centerTitle: true,
       ),
