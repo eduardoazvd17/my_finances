@@ -15,6 +15,7 @@ import '../widgets/loading_widget.dart';
 class ThemeController extends GetxController {
   @override
   void onInit() {
+    updateWebBackgroundColor();
     _loadSelectedTheme();
     super.onInit();
   }
@@ -29,11 +30,12 @@ class ThemeController extends GetxController {
     if (!withoutSaving) LoadingWidget.dialog();
     try {
       _selectedTheme.value = value;
+      updateWebBackgroundColor();
+
       if (!withoutSaving) {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setInt('AppTheme', value.index);
       }
-      updateWebBackgroundColor();
     } catch (_) {}
     if (!withoutSaving) Get.close(1);
   }
@@ -50,22 +52,24 @@ class ThemeController extends GetxController {
   }
 
   void updateWebBackgroundColor() {
-    if (kIsWeb) {
-      String colorToHexString(Color color) {
-        return '#${(color.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+    try {
+      if (kIsWeb) {
+        String colorToHexString(Color color) {
+          return '#${(color.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+        }
+
+        final Color color = switch (selectedTheme) {
+          AppThemeMode.automatic =>
+            (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+                    Brightness.dark)
+                ? AppThemes.darkBackgroundColor
+                : AppThemes.lightBackgroundColor,
+          AppThemeMode.light => AppThemes.lightBackgroundColor,
+          AppThemeMode.dark => AppThemes.darkBackgroundColor,
+        };
+
+        js.context.callMethod("setBackgroundColor", [colorToHexString(color)]);
       }
-
-      final Color color = switch (selectedTheme) {
-        AppThemeMode.automatic =>
-          (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-                  Brightness.dark)
-              ? AppThemes.darkBackgroundColor
-              : AppThemes.lightBackgroundColor,
-        AppThemeMode.light => AppThemes.lightBackgroundColor,
-        AppThemeMode.dark => AppThemes.darkBackgroundColor,
-      };
-
-      js.context.callMethod("setBackgroundColor", [colorToHexString(color)]);
-    }
+    } catch (_) {}
   }
 }
