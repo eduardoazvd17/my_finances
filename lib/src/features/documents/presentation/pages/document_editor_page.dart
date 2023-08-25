@@ -72,23 +72,27 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: controller.groups.map((groupingModel) {
-              return GroupingWidget(
-                key: Key(groupingModel.toString()),
-                groupingModel: groupingModel,
-              );
-            }).toList(),
+          Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: controller.groups.map((groupingModel) {
+                return GroupingWidget(
+                  key: Key(groupingModel.toString()),
+                  groupingModel: groupingModel,
+                );
+              }).toList(),
+            ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: controller.itemsWithoutGroup.map((itemModel) {
-              return ItemWidget(
-                key: Key(itemModel.toString()),
-                itemModel: itemModel,
-              );
-            }).toList(),
+          Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: controller.itemsWithoutGroup.map((itemModel) {
+                return ItemWidget(
+                  key: Key(itemModel.toString()),
+                  itemModel: itemModel,
+                );
+              }).toList(),
+            ),
           ),
           const SizedBox(height: 125),
         ],

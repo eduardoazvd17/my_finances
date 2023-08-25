@@ -70,49 +70,51 @@ class DocumentsPage extends GetWidget<DocumentsController> {
     return ScrollViewWidget(
       showBar: true,
       controller: scrollController,
-      child: Column(
-        children: controller.userDocuments.map((documentModel) {
-          final int index = controller.userDocuments.indexOf(documentModel);
+      child: Obx(
+        () => Column(
+          children: controller.userDocuments.map((documentModel) {
+            final int index = controller.userDocuments.indexOf(documentModel);
 
-          final bool showFavoriteHeader =
-              index == 0 && documentModel.isFavorite;
+            final bool showFavoriteHeader =
+                index == 0 && documentModel.isFavorite;
 
-          final bool showAllHeader = index > 0 &&
-              controller.userDocuments[index - 1].isFavorite &&
-              !documentModel.isFavorite;
+            final bool showAllHeader = index > 0 &&
+                controller.userDocuments[index - 1].isFavorite &&
+                !documentModel.isFavorite;
 
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (showFavoriteHeader)
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    'favorites-documents-text'.i18n(),
-                    style: const TextStyle(fontSize: 16),
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (showFavoriteHeader)
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      'favorites-documents-text'.i18n(),
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
-                ),
-              if (showAllHeader)
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    'all-documents-text'.i18n(),
-                    style: const TextStyle(fontSize: 16),
+                if (showAllHeader)
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      'all-documents-text'.i18n(),
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
+                DocumentTileWidget(
+                  key: Key(documentModel.toString()),
+                  documentModel: documentModel,
+                  onTap: controller.openDocument,
+                  onEdit: controller.editDocument,
+                  onDelete: controller.deleteDocument,
                 ),
-              DocumentTileWidget(
-                key: Key(documentModel.toString()),
-                documentModel: documentModel,
-                onTap: controller.openDocument,
-                onEdit: controller.editDocument,
-                onDelete: controller.deleteDocument,
-              ),
-              if (index == controller.userDocuments.length - 1)
-                const SizedBox(height: 65),
-            ],
-          );
-        }).toList(),
+                if (index == controller.userDocuments.length - 1)
+                  const SizedBox(height: 65),
+              ],
+            );
+          }).toList(),
+        ),
       ),
     );
   }
