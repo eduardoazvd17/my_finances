@@ -70,7 +70,7 @@ class MyProfileController extends GetxController {
     oldPasswordController.clear();
     passwordController.clear();
     password2Controller.clear();
-    AppRoutes.goToMyChangePasswordPage();
+    AppRoutes.goToChangePasswordPage();
   }
 
   Future<void> changeName() async {
@@ -282,6 +282,12 @@ class MyProfileController extends GetxController {
     } on AppError catch (appError) {
       Get.close(1);
       appError.showDialog();
+    }
+  }
+
+  void goToProfilePicturePage() {
+    if (photoUrl != null) {
+      AppRoutes.goToProfilePicturePage(url: photoUrl!);
     }
   }
 

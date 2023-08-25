@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/elevation_widget.dart';
 
 class ProfilePictureWidget extends StatelessWidget {
@@ -17,34 +18,37 @@ class ProfilePictureWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevationWidget(
       borderRadius: 100,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(100),
-        child: url != null
-            ? ClipOval(
-                child: Image.network(
-                  url!,
-                  height: size,
-                  width: size,
-                  fit: BoxFit.fitWidth,
-                  errorBuilder: (_, __, ___) {
-                    return SizedBox(
-                      height: size,
-                      width: size,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: FittedBox(
-                          child: Icon(
-                            Icons.image_not_supported_outlined,
-                            color: Colors.red[300],
+      child: Tooltip(
+        message: 'profile-picture-text'.i18n(),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(100),
+          child: url != null
+              ? ClipOval(
+                  child: Image.network(
+                    url!,
+                    height: size,
+                    width: size,
+                    fit: BoxFit.fitWidth,
+                    errorBuilder: (_, __, ___) {
+                      return SizedBox(
+                        height: size,
+                        width: size,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: FittedBox(
+                            child: Icon(
+                              Icons.image_not_supported_outlined,
+                              color: Colors.red[300],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              )
-            : _defaultImage(context),
+                      );
+                    },
+                  ),
+                )
+              : _defaultImage(context),
+        ),
       ),
     );
   }

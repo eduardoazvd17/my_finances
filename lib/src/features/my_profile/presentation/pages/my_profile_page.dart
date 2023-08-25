@@ -37,7 +37,10 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                 () => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ProfilePictureWidget(url: controller.photoUrl),
+                    ProfilePictureWidget(
+                      url: controller.photoUrl,
+                      onTap: controller.goToProfilePicturePage,
+                    ),
                     const SizedBox(width: 16),
                     Column(
                       children: controller.photoUrl == null

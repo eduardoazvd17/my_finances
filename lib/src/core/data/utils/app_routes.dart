@@ -14,6 +14,7 @@ import '../../../features/documents/data/bindings/documents_binding.dart';
 import '../../../features/documents/data/models/document_model.dart';
 import '../../../features/documents/presentation/pages/add_document_page.dart';
 import '../../../features/my_profile/presentation/pages/my_profile_page.dart';
+import '../../../features/my_profile/presentation/pages/my_profile_picture_page.dart';
 import '../middlewares/auth_middleware.dart';
 
 class AppRoutes {
@@ -25,6 +26,7 @@ class AppRoutes {
   static const String _documentEditor = "$_documents/editor";
   static const String _myProfile = "/myProfile";
   static const String _changePassword = "$_myProfile/changePassword";
+  static const String _profilePicture = "$_myProfile/profilePicture";
 
   static String get initialRoute => _welcome;
 
@@ -43,7 +45,11 @@ class AppRoutes {
   }
 
   static void goToMyProfilePage() => _navigate(_myProfile);
-  static void goToMyChangePasswordPage() => _navigate(_changePassword);
+  static void goToChangePasswordPage() => _navigate(_changePassword);
+  static void goToProfilePicturePage({required String url}) => _navigate(
+        _profilePicture,
+        arguments: url,
+      );
 
   static List<GetPage> getGetPages() {
     return [
@@ -100,6 +106,12 @@ class AppRoutes {
         transition: _getTransition(_changePassword),
         middlewares: [AuthMiddleware()],
       ),
+      GetPage(
+        name: _profilePicture,
+        page: () => const MyProfilePicturePage(),
+        transition: _getTransition(_profilePicture),
+        middlewares: [AuthMiddleware()],
+      ),
     ];
   }
 
@@ -125,7 +137,12 @@ class AppRoutes {
   }
 
   static Transition _getTransition(String route) {
-    if (kIsWeb || route == _documentEditor) {
+    final List<String> downToUpRoutes = [
+      _documentEditor,
+      _profilePicture,
+    ];
+
+    if (kIsWeb || downToUpRoutes.contains(route)) {
       return Transition.downToUp;
     } else {
       return Transition.cupertino;
