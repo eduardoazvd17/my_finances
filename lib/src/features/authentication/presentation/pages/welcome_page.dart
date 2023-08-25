@@ -9,6 +9,7 @@ import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
+import '../../../../core/presentation/controllers/app_controller.dart';
 import '../../../../core/presentation/views/settings_bottom_sheet_modal.dart';
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../controllers/auth_controller.dart';
@@ -41,6 +42,7 @@ class WelcomePage extends GetWidget<AuthController> {
                   }
                 },
               ),
+              Obx(() => _appVersionWidget()),
             ],
           ),
         ),
@@ -161,8 +163,20 @@ class WelcomePage extends GetWidget<AuthController> {
               ),
             ],
           ),
-        )
+        ),
       ],
+    );
+  }
+
+  Widget _appVersionWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 80),
+      child: Text(
+        AppController.instance.appVersion,
+        style: const TextStyle(
+          color: AppThemes.commonColor,
+        ),
+      ),
     );
   }
 }

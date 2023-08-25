@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:myfinances/src/core/data/models/user_model.dart';
 import 'package:myfinances/src/core/presentation/views/auth_overlay_view.dart';
 import 'package:myfinances/src/features/authentication/data/services/auth_service.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../data/utils/app_routes.dart';
 
@@ -11,6 +12,12 @@ class AppController extends GetxController {
   AppController({
     required AuthService authService,
   }) : _authService = authService;
+
+  @override
+  void onInit() {
+    _loadAppVersion();
+    super.onInit();
+  }
 
   static AppController get instance => Get.find<AppController>();
 
@@ -25,6 +32,20 @@ class AppController extends GetxController {
       AppRoutes.goToWelcomePage();
     }
     _user.value = null;
+  }
+
+  final RxString _appVersion = RxString('...');
+  String get appVersion => _appVersion.value;
+
+  Future<void> _loadAppVersion() async {
+    try {
+      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      final String version = packageInfo.version;
+      final String buildNumber = packageInfo.buildNumber;
+      _appVersion.value = 'v$version+$buildNumber (Alpha)';
+    } catch (_) {
+      _appVersion.value = '';
+    }
   }
 
   final RxBool _canShowAuthOverlay = RxBool(false);

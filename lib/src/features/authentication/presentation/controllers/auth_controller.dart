@@ -42,7 +42,7 @@ class AuthController extends GetxController {
     password2Controller.clear();
   }
 
-  final Rx<String> _lastUserName = RxString('');
+  final RxString _lastUserName = RxString('');
   String get lastUserName => _lastUserName.value;
 
   Future<void> autoLogin() async {
