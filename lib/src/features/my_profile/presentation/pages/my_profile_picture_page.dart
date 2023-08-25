@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/data/errors/app_error.dart';
@@ -57,6 +58,9 @@ class _MyProfilePicturePageState extends State<MyProfilePicturePage> {
 
   AppBar get _appBar {
     return AppBar(
+      systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.black,
+      ),
       backgroundColor: Colors.black54,
       foregroundColor: Colors.white,
       leading: IconButton(
