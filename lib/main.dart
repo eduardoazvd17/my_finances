@@ -45,28 +45,26 @@ class MyFinancesApp extends GetWidget<I18nController> {
   Widget build(BuildContext context) {
     return FlutterWebFrame(
       builder: (context) {
-        return Obx(
-          () {
-            final themeController = Get.find<ThemeController>();
-            return GetMaterialApp(
-              builder: (_, child) => LifeCycleHandler(child: child!),
-              debugShowCheckedModeBanner: false,
-              title: controller.appName,
-              onGenerateTitle: (_) => controller.appName,
-              locale: controller.selectedLocale,
-              localizationsDelegates: controller.localizationsDelegates,
-              supportedLocales: controller.supportedLocales,
-              localeResolutionCallback: controller.localeResolutionCallback,
-              theme: AppThemes.light,
-              darkTheme: AppThemes.dark,
-              color: themeController.materialAppColor,
-              themeMode: themeController.selectedTheme.themeMode,
-              initialBinding: AppBinding(),
-              initialRoute: AppRoutes.initialRoute,
-              getPages: AppRoutes.getGetPages(),
-            );
-          },
-        );
+        return Obx(() {
+          final themeController = Get.find<ThemeController>();
+          return GetMaterialApp(
+            builder: (_, child) => LifeCycleHandler(child: child!),
+            debugShowCheckedModeBanner: false,
+            title: controller.appName,
+            onGenerateTitle: (_) => controller.appName,
+            locale: controller.selectedLocale,
+            localizationsDelegates: controller.localizationsDelegates,
+            supportedLocales: controller.supportedLocales,
+            localeResolutionCallback: controller.localeResolutionCallback,
+            theme: AppThemes.light,
+            darkTheme: AppThemes.dark,
+            color: themeController.materialAppColor,
+            themeMode: themeController.selectedTheme.themeMode,
+            initialBinding: AppBinding(),
+            initialRoute: AppRoutes.initialRoute,
+            getPages: AppRoutes.getGetPages(),
+          );
+        });
       },
       maximumSize: Size(800, Get.height),
       enabled: kIsWeb,
