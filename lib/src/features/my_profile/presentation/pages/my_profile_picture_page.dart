@@ -37,7 +37,16 @@ class _MyProfilePicturePageState extends State<MyProfilePicturePage> {
                     _disableOptionsUsage = _hideOptions;
                   });
                 },
-                child: _appBar,
+                child: GestureDetector(
+                  onTap: () {
+                    if (_hideOptions) {
+                      setState(() {
+                        _hideOptions = false;
+                      });
+                    }
+                  },
+                  child: _appBar,
+                ),
               ),
             ),
           ],
@@ -46,31 +55,29 @@ class _MyProfilePicturePageState extends State<MyProfilePicturePage> {
     );
   }
 
-  Widget get _appBar {
-    return GestureDetector(
-      onTap: () {
-        if (_hideOptions) {
-          setState(() {
-            _hideOptions = false;
-          });
-        }
-      },
-      child: AppBar(
-        backgroundColor: Colors.black54,
-        foregroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: _disableOptionsUsage ? null : Get.back,
-          icon: const Icon(Icons.close),
-        ),
-        title: Text('profile-picture-text'.i18n()),
+  AppBar get _appBar {
+    return AppBar(
+      backgroundColor: Colors.black54,
+      foregroundColor: Colors.white,
+      leading: IconButton(
+        onPressed: _disableOptionsUsage ? null : Get.back,
+        icon: const Icon(Icons.close),
       ),
+      title: Text('profile-picture-text'.i18n()),
     );
   }
 
   Widget get _interactiveViewerWidget {
+    const double margin = 8.0;
+
     return InteractiveViewer(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.only(
+          top: margin + (_hideOptions ? 0 : _appBar.preferredSize.height),
+          right: margin,
+          left: margin,
+          bottom: margin,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
