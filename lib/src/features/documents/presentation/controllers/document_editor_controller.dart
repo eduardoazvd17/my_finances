@@ -96,10 +96,7 @@ class DocumentEditorController extends GetxController {
       }
 
       _groups.remove(groupingModel);
-      _groups.refresh();
-
       _groups.add(newGroupingModel);
-      _groups.refresh();
 
       if (groupingModel != null) {
         _selectedGroup.value = newGroupingModel;
@@ -118,10 +115,7 @@ class DocumentEditorController extends GetxController {
       await _documentEditorService.deleteGroup(groupingModel);
 
       _groups.remove(groupingModel);
-      _groups.refresh();
-
       _items.removeWhere((item) => item.groupingId == groupingModel.id);
-      _items.refresh();
 
       _selectedGroup.value = null;
       if (_selectedItem.value?.groupingId == groupingModel.id) {
@@ -193,7 +187,6 @@ class DocumentEditorController extends GetxController {
 
       _items.remove(itemModel);
       _items.add(newItemModel);
-      _items.refresh();
 
       if (selectedItem?.id == itemModel?.id && itemModel != null) {
         selectedItem = newItemModel;
@@ -215,7 +208,6 @@ class DocumentEditorController extends GetxController {
 
       _items.remove(itemModel);
       _items.add(newItemModel);
-      _items.refresh();
 
       selectedItem = newItemModel;
       sortItems();
@@ -245,7 +237,6 @@ class DocumentEditorController extends GetxController {
       _items.removeWhere((e) => checkedItemsIds.contains(e.id));
       _items
           .addAll(checkedItems.map((e) => e.toggleIsCheckedAndCopy()).toList());
-      _items.refresh();
 
       sortItems();
     } on AppError catch (appError) {
@@ -298,7 +289,6 @@ class DocumentEditorController extends GetxController {
 
       _items.remove(itemModel);
       _items.add(newItemModel);
-      _items.refresh();
 
       if (selectedItem?.id == itemModel?.id && itemModel != null) {
         selectedItem = newItemModel;
@@ -315,7 +305,6 @@ class DocumentEditorController extends GetxController {
     try {
       await _documentEditorService.deleteItem(itemModel);
       _items.remove(itemModel);
-      _items.refresh();
 
       selectedItem = null;
     } on AppError catch (appError) {
