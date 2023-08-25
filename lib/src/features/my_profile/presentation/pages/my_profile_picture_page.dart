@@ -72,11 +72,9 @@ class _MyProfilePicturePageState extends State<MyProfilePicturePage> {
 
     return InteractiveViewer(
       child: Padding(
-        padding: EdgeInsets.only(
-          top: margin + (_hideOptions ? 0 : _appBar.preferredSize.height),
-          right: margin,
-          left: margin,
-          bottom: margin,
+        padding: EdgeInsets.symmetric(
+          vertical: _appBar.preferredSize.height + margin,
+          horizontal: margin,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
