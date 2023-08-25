@@ -61,6 +61,7 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
 
     return _itemBaseWidget(
       context: context,
+      onLongPress: () => controller.toggleIsCheckedAnnotationItem(itemModel),
       leading: itemModel.quantity != null
           ? Text(
               '${itemModel.quantity}x',
@@ -110,6 +111,7 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
   Widget _itemBaseWidget({
     required BuildContext context,
     void Function()? onLongPress,
+    void Function()? onDoubleTap,
     Widget? leading,
     Widget? middleExpanded,
     Widget? trailing,
@@ -126,6 +128,7 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
             controller.selectedItem = itemModel;
           }
         },
+        onDoubleTap: onDoubleTap,
         borderRadius: BorderRadius.circular(10),
         child: DecoratedBox(
           decoration: BoxDecoration(
