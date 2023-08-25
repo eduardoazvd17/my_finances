@@ -97,9 +97,11 @@ class DocumentEditorController extends GetxController {
 
       _groups.remove(groupingModel);
       _groups.refresh();
+      update(['group-list']);
 
       _groups.add(newGroupingModel);
       _groups.refresh();
+      update(['group-list']);
 
       if (groupingModel != null) {
         _selectedGroup.value = newGroupingModel;
@@ -119,8 +121,12 @@ class DocumentEditorController extends GetxController {
 
       _groups.remove(groupingModel);
       _groups.refresh();
+      update(['group-list']);
+
       _items.removeWhere((item) => item.groupingId == groupingModel.id);
       _items.refresh();
+      update(['items-list']);
+      update(['itemsWithoutGroup-list']);
 
       _selectedGroup.value = null;
       if (_selectedItem.value?.groupingId == groupingModel.id) {
@@ -193,6 +199,8 @@ class DocumentEditorController extends GetxController {
       _items.remove(itemModel);
       _items.add(newItemModel);
       _items.refresh();
+      update(['items-list']);
+      update(['itemsWithoutGroup-list']);
 
       if (selectedItem?.id == itemModel?.id && itemModel != null) {
         selectedItem = newItemModel;
@@ -215,6 +223,8 @@ class DocumentEditorController extends GetxController {
       _items.remove(itemModel);
       _items.add(newItemModel);
       _items.refresh();
+      update(['items-list']);
+      update(['itemsWithoutGroup-list']);
 
       selectedItem = newItemModel;
       sortItems();
@@ -245,6 +255,8 @@ class DocumentEditorController extends GetxController {
       _items
           .addAll(checkedItems.map((e) => e.toggleIsCheckedAndCopy()).toList());
       _items.refresh();
+      update(['items-list']);
+      update(['itemsWithoutGroup-list']);
 
       sortItems();
     } on AppError catch (appError) {
@@ -298,6 +310,8 @@ class DocumentEditorController extends GetxController {
       _items.remove(itemModel);
       _items.add(newItemModel);
       _items.refresh();
+      update(['items-list']);
+      update(['itemsWithoutGroup-list']);
 
       if (selectedItem?.id == itemModel?.id && itemModel != null) {
         selectedItem = newItemModel;
@@ -315,6 +329,8 @@ class DocumentEditorController extends GetxController {
       await _documentEditorService.deleteItem(itemModel);
       _items.remove(itemModel);
       _items.refresh();
+      update(['items-list']);
+      update(['itemsWithoutGroup-list']);
       selectedItem = null;
     } on AppError catch (appError) {
       appError.showDialog();

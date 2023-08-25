@@ -10,30 +10,33 @@ import '../../data/enums/operation_type.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
 
-class GroupingWidget extends GetWidget<DocumentEditorController> {
+class GroupingWidget extends StatelessWidget {
   final GroupingModel groupingModel;
+  final DocumentEditorController documentEditorController;
 
   const GroupingWidget({
     super.key,
     required this.groupingModel,
+    required this.documentEditorController,
   });
 
   GroupingWidgetController get _controller => groupingModel.getController();
 
-  bool get isSelected => controller.selectedGroup == groupingModel;
+  bool get isSelected =>
+      documentEditorController.selectedGroup == groupingModel;
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSize(
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 350),
-      alignment: Alignment.topLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Obx(
-            () => DecoratedBox(
+    return Obx(
+      () => AnimatedSize(
+        curve: Curves.ease,
+        duration: const Duration(milliseconds: 350),
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DecoratedBox(
               decoration: BoxDecoration(
                 border: isSelected
                     ? Border.all(
@@ -52,9 +55,10 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                           borderRadius: BorderRadius.circular(10),
                           onTap: () {
                             _controller.toggleIsExpanded();
-                            if (controller.selectedItem?.groupingId ==
+                            if (documentEditorController
+                                    .selectedItem?.groupingId ==
                                 groupingModel.id) {
-                              controller.selectedItem = null;
+                              documentEditorController.selectedItem = null;
                             }
                           },
                           child: Padding(
@@ -72,9 +76,10 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                           borderRadius: BorderRadius.circular(10),
                           onTap: () {
                             if (isSelected) {
-                              controller.selectedGroup = null;
+                              documentEditorController.selectedGroup = null;
                             } else {
-                              controller.selectedGroup = groupingModel;
+                              documentEditorController.selectedGroup =
+                                  groupingModel;
                             }
                           },
                           child: Row(
@@ -101,16 +106,21 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                         vertical: 8,
                         horizontal: 16,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: controller
-                            .getItemsByGroup(groupingModel.id)
-                            .map((itemModel) {
-                          return ItemWidget(
-                            key: Key(itemModel.toString()),
-                            itemModel: itemModel,
-                          );
-                        }).toList(),
+                      child: GetBuilder<DocumentEditorController>(
+                        id: 'items-list',
+                        init: documentEditorController,
+                        builder: (_) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: documentEditorController
+                              .getItemsByGroup(groupingModel.id)
+                              .map((itemModel) {
+                            return ItemWidget(
+                              itemModel: itemModel,
+                              documentEditorController:
+                                  documentEditorController,
+                            );
+                          }).toList(),
+                        ),
                       ),
                     )
                   else
@@ -118,20 +128,21 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                 ],
               ),
             ),
-          ),
-          const Divider(),
-        ],
+            const Divider(),
+          ],
+        ),
       ),
     );
   }
 
   Widget _trailingWidgetByDocumentType() {
-    final itemsByGroup = controller.getItemsByGroup(groupingModel.id);
+    final itemsByGroup =
+        documentEditorController.getItemsByGroup(groupingModel.id);
 
     //TODO: Gropuping trailing para cada tipo de DocumentType.
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: switch (controller.documentModel.type) {
+      child: switch (documentEditorController.documentModel.type) {
         DocumentType.monthlyExpenseControl => Container(),
         DocumentType.investmentControl => Text(
             '${itemsByGroup.isEmpty ? 0 : itemsByGroup.cast<InvestimentControlItemModel>().map(

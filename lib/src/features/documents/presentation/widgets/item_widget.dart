@@ -9,30 +9,34 @@ import '../../../../core/data/utils/currency_utils.dart';
 import '../../data/models/item_model.dart';
 import '../../data/enums/document_type.dart';
 
-class ItemWidget extends GetWidget<DocumentEditorController> {
+class ItemWidget extends StatelessWidget {
   final ItemModel itemModel;
-  const ItemWidget({super.key, required this.itemModel});
+  final DocumentEditorController documentEditorController;
 
-  bool get isSelected => controller.selectedItem == itemModel;
+  const ItemWidget({
+    super.key,
+    required this.itemModel,
+    required this.documentEditorController,
+  });
+
+  bool get isSelected => documentEditorController.selectedItem == itemModel;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return switch (controller.documentModel.type) {
-        DocumentType.monthlyExpenseControl => _monthlyExpenseControlItemTile(
-            context,
-          ),
-        DocumentType.investmentControl => _investmentControlItemTile(
-            context,
-          ),
-        DocumentType.annotation => _annotationItemTile(
-            context,
-          ),
-        // DocumentType.pointsAndAirlineMiles => _pointsAndAirlineMilesItemTile(
-        //     context,
-        //   ),
-      };
-    });
+    return switch (documentEditorController.documentModel.type) {
+      DocumentType.monthlyExpenseControl => _monthlyExpenseControlItemTile(
+          context,
+        ),
+      DocumentType.investmentControl => _investmentControlItemTile(
+          context,
+        ),
+      DocumentType.annotation => _annotationItemTile(
+          context,
+        ),
+      // DocumentType.pointsAndAirlineMiles => _pointsAndAirlineMilesItemTile(
+      //     context,
+      //   ),
+    };
   }
 
   Widget _monthlyExpenseControlItemTile(BuildContext context) {
@@ -61,7 +65,8 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
 
     return _itemBaseWidget(
       context: context,
-      onLongPress: () => controller.toggleIsCheckedAnnotationItem(itemModel),
+      onLongPress: () =>
+          documentEditorController.toggleIsCheckedAnnotationItem(itemModel),
       leading: itemModel.quantity != null
           ? Text(
               '${itemModel.quantity}x',
@@ -117,58 +122,61 @@ class ItemWidget extends GetWidget<DocumentEditorController> {
     Widget? trailing,
     Widget? bottom,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2.5),
-      child: InkWell(
-        onLongPress: onLongPress,
-        onTap: () {
-          if (isSelected) {
-            controller.selectedItem = null;
-          } else {
-            controller.selectedItem = itemModel;
-          }
-        },
-        onDoubleTap: onDoubleTap,
-        borderRadius: BorderRadius.circular(10),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            border: isSelected
-                ? Border.all(
-                    color: Theme.of(context).primaryColor,
-                  )
-                : null,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 16,
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2.5),
+        child: InkWell(
+          onLongPress: onLongPress,
+          onTap: () {
+            if (isSelected) {
+              documentEditorController.selectedItem = null;
+            } else {
+              documentEditorController.selectedItem = itemModel;
+            }
+          },
+          onDoubleTap: onDoubleTap,
+          borderRadius: BorderRadius.circular(10),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: isSelected
+                  ? Border.all(
+                      color: Theme.of(context).primaryColor,
+                    )
+                  : null,
+              borderRadius: BorderRadius.circular(10),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (leading != null)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 5.0),
-                        child: leading,
-                      ),
-                    if (middleExpanded != null) Expanded(child: middleExpanded),
-                    if (trailing != null)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: trailing,
-                      ),
-                  ],
-                ),
-                if (bottom != null)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2.5),
-                    child: bottom,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (leading != null)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 5.0),
+                          child: leading,
+                        ),
+                      if (middleExpanded != null)
+                        Expanded(child: middleExpanded),
+                      if (trailing != null)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: trailing,
+                        ),
+                    ],
                   ),
-              ],
+                  if (bottom != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2.5),
+                      child: bottom,
+                    ),
+                ],
+              ),
             ),
           ),
         ),
