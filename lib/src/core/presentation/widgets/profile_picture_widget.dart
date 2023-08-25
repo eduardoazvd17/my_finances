@@ -27,6 +27,21 @@ class ProfilePictureWidget extends StatelessWidget {
                   height: size,
                   width: size,
                   fit: BoxFit.fitWidth,
+                  errorBuilder: (_, __, ___) {
+                    return SizedBox(
+                      height: size,
+                      width: size,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: FittedBox(
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            color: Colors.red[300],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               )
             : _defaultImage(context),
