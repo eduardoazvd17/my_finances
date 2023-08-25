@@ -106,7 +106,10 @@ class GroupingWidget extends GetWidget<DocumentEditorController> {
                         children: controller
                             .getItemsByGroup(groupingModel.id)
                             .map((itemModel) {
-                          return ItemWidget(itemModel: itemModel);
+                          return ItemWidget(
+                            key: Key(itemModel.toString()),
+                            itemModel: itemModel,
+                          );
                         }).toList(),
                       ),
                     )

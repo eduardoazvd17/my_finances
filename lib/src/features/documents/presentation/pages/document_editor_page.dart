@@ -67,21 +67,31 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       controller.pageScrollPosition = scrollController.offset;
     });
 
-    return Obx(
-      () => ScrollViewWidget(
-        controller: scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ...controller.groups.map((groupingModel) {
-              return GroupingWidget(groupingModel: groupingModel);
-            }),
-            ...controller.itemsWithoutGroup.map((itemModel) {
-              return ItemWidget(itemModel: itemModel);
-            }),
-            const SizedBox(height: 125),
-          ],
-        ),
+    return ScrollViewWidget(
+      controller: scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: controller.groups.map((groupingModel) {
+              return GroupingWidget(
+                key: Key(groupingModel.toString()),
+                groupingModel: groupingModel,
+              );
+            }).toList(),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: controller.itemsWithoutGroup.map((itemModel) {
+              return ItemWidget(
+                key: Key(itemModel.toString()),
+                itemModel: itemModel,
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 125),
+        ],
       ),
     );
   }

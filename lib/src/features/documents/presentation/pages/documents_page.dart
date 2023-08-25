@@ -102,6 +102,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                   ),
                 ),
               DocumentTileWidget(
+                key: Key(documentModel.toString()),
                 documentModel: documentModel,
                 onTap: controller.openDocument,
                 onEdit: controller.editDocument,

@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:get/get.dart';
 
 import '../../presentation/widgets/grouping_widget.dart';
 
-class GroupingModel {
+class GroupingModel extends Equatable {
   final String id;
   final String name;
   final bool initializeExpanded;
@@ -56,4 +57,7 @@ class GroupingModel {
       creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
     );
   }
+
+  @override
+  List<Object?> get props => [id, name, initializeExpanded, creationDate];
 }

@@ -33,7 +33,7 @@ class DocumentsController extends GetxController {
       _documentsScrollPosition.value = value;
 
   final RxList<DocumentModel> _userDocuments = RxList<DocumentModel>();
-  List<DocumentModel> get userDocuments => _userDocuments.toList();
+  List<DocumentModel> get userDocuments => _userDocuments;
   Future<void> _loadUserDocuments() async {
     _isLoading.value = true;
     try {

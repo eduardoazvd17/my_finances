@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:myfinances/src/core/data/utils/currency_utils.dart';
 import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
 
-class ItemModel {
+class ItemModel extends Equatable {
   final String id;
   final String name;
   final DateTime creationDate;
@@ -25,6 +26,9 @@ class ItemModel {
       'groupingId': groupingId,
     };
   }
+
+  @override
+  List<Object?> get props => [id, name, creationDate, description, groupingId];
 }
 
 class AnnotationItemModel extends ItemModel {
@@ -97,6 +101,18 @@ class AnnotationItemModel extends ItemModel {
       isChecked: map['isChecked'] ?? false,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        creationDate,
+        description,
+        groupingId,
+        quantity,
+        price,
+        isChecked
+      ];
 }
 
 class InvestimentControlItemModel extends ItemModel {
@@ -170,6 +186,19 @@ class InvestimentControlItemModel extends ItemModel {
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        creationDate,
+        description,
+        groupingId,
+        operationType,
+        quantity,
+        price,
+        date,
+      ];
 }
 
 // class PointsAndAirlineMilesItemModel extends ItemModel {

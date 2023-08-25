@@ -5,6 +5,7 @@ import 'package:myfinances/src/features/documents/data/enums/operation_type.dart
 import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
 import 'package:myfinances/src/features/documents/data/models/item_model.dart';
 import 'package:myfinances/src/features/documents/data/services/document_editor_service.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../data/models/document_model.dart';
@@ -54,7 +55,8 @@ class DocumentEditorController extends GetxController {
   bool get isLoading => _isLoading.value;
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
-  List<GroupingModel> get groups => _groups.toList();
+  List<GroupingModel> get groups => _groups;
+
   void sortGroups() {
     _groups.sort((a, b) {
       return a.creationDate.compareTo(b.creationDate);
@@ -75,8 +77,6 @@ class DocumentEditorController extends GetxController {
     required bool newInitializeExpanded,
   }) async {
     try {
-      _isLoading.value = true;
-
       if (newName.isEmpty) {
         throw AppError(message: 'name-validation'.i18n());
       }
@@ -96,41 +96,47 @@ class DocumentEditorController extends GetxController {
       }
 
       _groups.remove(groupingModel);
+      _groups.refresh();
+
       _groups.add(newGroupingModel);
+      _groups.refresh();
+
       if (groupingModel != null) {
         _selectedGroup.value = newGroupingModel;
+        _selectedGroup.refresh();
       }
       sortGroups();
-      _isLoading.value = false;
       return true;
     } on AppError catch (appError) {
-      _isLoading.value = false;
       appError.showDialog();
       return false;
     }
   }
 
   Future<void> deleteGroup(GroupingModel groupingModel) async {
-    _isLoading.value = true;
     try {
       await _documentEditorService.deleteGroup(groupingModel);
+
       _groups.remove(groupingModel);
+      _groups.refresh();
       _items.removeWhere((item) => item.groupingId == groupingModel.id);
+      _items.refresh();
 
       _selectedGroup.value = null;
       if (_selectedItem.value?.groupingId == groupingModel.id) {
         _selectedItem.value = null;
       }
+
+      Get.delete<GroupingWidgetController>(tag: groupingModel.id);
     } on AppError catch (appError) {
       appError.showDialog();
     }
-    _isLoading.value = false;
   }
 
   final RxList<ItemModel> _items = RxList<ItemModel>([]);
-  List<ItemModel> get items => _items.toList();
-  List<ItemModel> get itemsWithoutGroup =>
-      _items.where((item) => item.groupingId == null).toList();
+  List<ItemModel> get items => _items;
+  Iterable<ItemModel> get itemsWithoutGroup =>
+      _items.where((item) => item.groupingId == null);
   List<ItemModel> getItemsByGroup(String groupingId) =>
       _items.where((item) => item.groupingId == groupingId).toList();
   void sortItems() {
@@ -160,8 +166,6 @@ class DocumentEditorController extends GetxController {
     required double? newPrice,
   }) async {
     try {
-      _isLoading.value = true;
-
       if (newName.isEmpty) {
         throw AppError(message: 'name-validation'.i18n());
       }
@@ -188,14 +192,14 @@ class DocumentEditorController extends GetxController {
 
       _items.remove(itemModel);
       _items.add(newItemModel);
+      _items.refresh();
+
       if (selectedItem?.id == itemModel?.id && itemModel != null) {
         selectedItem = newItemModel;
       }
       sortItems();
-      _isLoading.value = false;
       return true;
     } on AppError catch (appError) {
-      _isLoading.value = false;
       appError.showDialog();
       return false;
     }
@@ -204,22 +208,22 @@ class DocumentEditorController extends GetxController {
   Future<void> toggleIsCheckedAnnotationItem(
     AnnotationItemModel itemModel,
   ) async {
-    _isLoading.value = true;
     try {
       final ItemModel newItemModel =
           await _documentEditorService.toggleIsCheckedAnnotationItem(itemModel);
+
       _items.remove(itemModel);
       _items.add(newItemModel);
+      _items.refresh();
+
       selectedItem = newItemModel;
       sortItems();
     } on AppError catch (appError) {
       appError.showDialog();
     }
-    _isLoading.value = false;
   }
 
   Future<void> uncheckAllAnnotationItems([String? groupingId]) async {
-    _isLoading.value = true;
     try {
       final List<AnnotationItemModel> checkedItems;
       if (groupingId == null) {
@@ -236,14 +240,16 @@ class DocumentEditorController extends GetxController {
 
       final Iterable<String> checkedItemsIds = checkedItems.map((e) => e.id);
       await _documentEditorService.uncheckAnnotationItems(checkedItemsIds);
+
       _items.removeWhere((e) => checkedItemsIds.contains(e.id));
       _items
           .addAll(checkedItems.map((e) => e.toggleIsCheckedAndCopy()).toList());
+      _items.refresh();
+
       sortItems();
     } on AppError catch (appError) {
       appError.showDialog();
     }
-    _isLoading.value = false;
   }
 
   Future<bool> addOrEditInvestimentItem({
@@ -256,8 +262,6 @@ class DocumentEditorController extends GetxController {
     required DateTime newDate,
   }) async {
     try {
-      _isLoading.value = true;
-
       if (newOperationType == null) {
         throw AppError(message: 'operation-type-validation'.i18n());
       }
@@ -293,28 +297,27 @@ class DocumentEditorController extends GetxController {
 
       _items.remove(itemModel);
       _items.add(newItemModel);
+      _items.refresh();
+
       if (selectedItem?.id == itemModel?.id && itemModel != null) {
         selectedItem = newItemModel;
       }
       sortItems();
-      _isLoading.value = false;
       return true;
     } on AppError catch (appError) {
-      _isLoading.value = false;
       appError.showDialog();
       return false;
     }
   }
 
   Future<void> deleteItem(ItemModel itemModel) async {
-    _isLoading.value = true;
     try {
       await _documentEditorService.deleteItem(itemModel);
       _items.remove(itemModel);
+      _items.refresh();
       selectedItem = null;
     } on AppError catch (appError) {
       appError.showDialog();
     }
-    _isLoading.value = false;
   }
 }
