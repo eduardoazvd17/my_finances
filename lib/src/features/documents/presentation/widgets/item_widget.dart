@@ -63,46 +63,50 @@ class ItemWidget extends StatelessWidget {
   Widget _annotationItemTile(BuildContext context) {
     final AnnotationItemModel itemModel = this.itemModel as AnnotationItemModel;
 
-    return _itemBaseWidget(
-      context: context,
-      onLongPress: () =>
-          documentEditorController.toggleIsCheckedAnnotationItem(itemModel),
-      leading: itemModel.quantity != null
-          ? Text(
-              '${itemModel.quantity}x',
-              style: TextStyle(
-                color: AppThemes.commonColor,
-                decoration:
-                    itemModel.isChecked ? TextDecoration.lineThrough : null,
-              ),
-            )
-          : null,
-      trailing: itemModel.price != null
-          ? Text(
-              CurrencyUtils.format(itemModel.price!),
-              style: TextStyle(
-                color: Colors.green,
-                decoration:
-                    itemModel.isChecked ? TextDecoration.lineThrough : null,
-              ),
-            )
-          : null,
-      middleExpanded: Text(
-        itemModel.name,
-        style: TextStyle(
-          decoration: itemModel.isChecked ? TextDecoration.lineThrough : null,
+    return AnimatedOpacity(
+      opacity: itemModel.isChecked ? 0.5 : 1,
+      duration: const Duration(milliseconds: 300),
+      child: _itemBaseWidget(
+        context: context,
+        onLongPress: () =>
+            documentEditorController.toggleIsCheckedAnnotationItem(itemModel),
+        leading: itemModel.quantity != null
+            ? Text(
+                '${itemModel.quantity}x',
+                style: TextStyle(
+                  color: AppThemes.commonColor,
+                  decoration:
+                      itemModel.isChecked ? TextDecoration.lineThrough : null,
+                ),
+              )
+            : null,
+        trailing: itemModel.price != null
+            ? Text(
+                CurrencyUtils.format(itemModel.price!),
+                style: TextStyle(
+                  color: Colors.green,
+                  decoration:
+                      itemModel.isChecked ? TextDecoration.lineThrough : null,
+                ),
+              )
+            : null,
+        middleExpanded: Text(
+          itemModel.name,
+          style: TextStyle(
+            decoration: itemModel.isChecked ? TextDecoration.lineThrough : null,
+          ),
         ),
+        bottom: itemModel.description != null
+            ? Text(
+                itemModel.description!,
+                style: TextStyle(
+                  color: AppThemes.commonColor,
+                  decoration:
+                      itemModel.isChecked ? TextDecoration.lineThrough : null,
+                ),
+              )
+            : null,
       ),
-      bottom: itemModel.description != null
-          ? Text(
-              itemModel.description!,
-              style: TextStyle(
-                color: AppThemes.commonColor,
-                decoration:
-                    itemModel.isChecked ? TextDecoration.lineThrough : null,
-              ),
-            )
-          : null,
     );
   }
 
