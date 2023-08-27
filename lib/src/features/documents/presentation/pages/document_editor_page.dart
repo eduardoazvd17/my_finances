@@ -120,6 +120,35 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     );
   }
 
+  Widget _getInfoAdditionalContentByDocumentType(BuildContext context) {
+    if (controller.items.isEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Text('empty-document-total-text'.i18n()),
+          ),
+        ],
+      );
+    }
+
+    //TODO: Totalização de dados para cada tipo de DocumentType.
+    return switch (controller.documentModel.type) {
+      DocumentType.monthlyExpenseControl => Container(),
+      DocumentType.investmentControl => InvestimentControlTotalContent(
+          groups: controller.groups,
+          items: controller.items.cast<InvestimentControlItemModel>(),
+        ),
+      DocumentType.annotation => AnnotationTotalContent(
+          groups: controller.groups,
+          items: controller.items.cast<AnnotationItemModel>(),
+        ),
+      //DocumentType.pointsAndAirlineMiles => Container(),
+    };
+  }
+
   Widget _getDocumentFloatingMenu(BuildContext context) {
     final scrollController = ScrollController(
       initialScrollOffset: controller.menuScrollPosition,
@@ -450,35 +479,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           ],
         ],
       //DocumentType.pointsAndAirlineMiles => [],
-    };
-  }
-
-  Widget _getInfoAdditionalContentByDocumentType(BuildContext context) {
-    if (controller.items.isEmpty) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Text('empty-document-total-text'.i18n()),
-          ),
-        ],
-      );
-    }
-
-    //TODO: Totalização de dados para cada tipo de DocumentType.
-    return switch (controller.documentModel.type) {
-      DocumentType.monthlyExpenseControl => Container(),
-      DocumentType.investmentControl => InvestimentControlTotalContent(
-          groups: controller.groups,
-          items: controller.items.cast<InvestimentControlItemModel>(),
-        ),
-      DocumentType.annotation => AnnotationTotalContent(
-          groups: controller.groups,
-          items: controller.items.cast<AnnotationItemModel>(),
-        ),
-      //DocumentType.pointsAndAirlineMiles => Container(),
     };
   }
 }
