@@ -5,17 +5,16 @@ import 'package:localization/localization.dart';
 import 'package:myfinances/src/core/presentation/widgets/floating_bottom_menu_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/views/add_or_edit_item_bottom_sheet_modal.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/item_total_tile.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/annotation_total_content.dart';
+import 'package:myfinances/src/features/documents/presentation/widgets/investiment_control_total_content.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
 import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
 import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/investiment_item_total_tile.dart';
 import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
 
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 import '../../data/enums/document_type.dart';
-import '../../data/enums/operation_type.dart';
 import '../../data/models/item_model.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 import '../views/add_or_edit_group_bottom_sheet_modal.dart';
@@ -468,240 +467,18 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       );
     }
 
-    const styleLabel = TextStyle(fontWeight: FontWeight.bold);
-
     //TODO: Totalização de dados para cada tipo de DocumentType.
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: switch (controller.documentModel.type) {
-        DocumentType.monthlyExpenseControl => [],
-        DocumentType.investmentControl => [
-            const Divider(),
-            ItemTotalTile(
-              title: 'total-buys-label'.i18n(),
-              price: controller.items
-                      .cast<InvestimentControlItemModel>()
-                      .where((i) => i.operationType == OperationType.buy)
-                      .isEmpty
-                  ? 0
-                  : controller.items
-                      .cast<InvestimentControlItemModel>()
-                      .where((i) => i.operationType == OperationType.buy)
-                      .map((i) => i.quantity * i.price)
-                      .reduce((a, b) => a + b)
-                      .toDouble(),
-              quantity: null,
-              priceColor: Colors.green,
-            ),
-            ItemTotalTile(
-              title: 'total-sales-label'.i18n(),
-              price: controller.items
-                      .cast<InvestimentControlItemModel>()
-                      .where((i) => i.operationType == OperationType.sell)
-                      .isEmpty
-                  ? 0
-                  : controller.items
-                      .cast<InvestimentControlItemModel>()
-                      .where((i) => i.operationType == OperationType.sell)
-                      .map((i) => i.quantity * i.price)
-                      .reduce((a, b) => a + b)
-                      .toDouble(),
-              quantity: null,
-              priceColor: Colors.red[300]!,
-            ),
-            ItemTotalTile(
-              title: 'invested-value-label'.i18n(),
-              price: controller.items.isEmpty
-                  ? 0
-                  : controller.items
-                      .cast<InvestimentControlItemModel>()
-                      .map((i) {
-                        if (i.operationType == OperationType.buy) {
-                          return i.quantity * i.price;
-                        } else {
-                          return -(i.quantity * i.price);
-                        }
-                      })
-                      .reduce((a, b) => a + b)
-                      .toDouble(),
-              quantity: null,
-              priceColor: Theme.of(context).primaryColor,
-            ),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: Center(
-                child: Text('resume-by-asset-text'.i18n(), style: styleLabel),
-              ),
-            ),
-            ...controller.groups.map((g) {
-              final itemsByGroup = controller
-                  .getItemsByGroup(g.id)
-                  .cast<InvestimentControlItemModel>();
-
-              if (itemsByGroup.isEmpty) {
-                return Container();
-              } else {
-                final purchasesItems = itemsByGroup.where((i) {
-                  return i.operationType == OperationType.buy;
-                });
-
-                final salesItems = itemsByGroup.where((i) {
-                  return i.operationType == OperationType.sell;
-                });
-
-                return InvestimentItemTotalTile(
-                  title: g.name,
-                  purchasesValue: purchasesItems.isEmpty
-                      ? 0
-                      : purchasesItems
-                          .map((i) => i.quantity * i.price)
-                          .reduce((a, b) => a + b),
-                  purchasesQuotas: purchasesItems.isEmpty
-                      ? 0
-                      : purchasesItems
-                          .map((i) => i.quantity)
-                          .reduce((a, b) => a + b),
-                  salesValue: salesItems.isEmpty
-                      ? 0
-                      : salesItems
-                          .map((i) => i.quantity * i.price)
-                          .reduce((a, b) => a + b),
-                  salesQuotas: salesItems.isEmpty
-                      ? 0
-                      : salesItems
-                          .map((i) => i.quantity)
-                          .reduce((a, b) => a + b),
-                  quotasValue: purchasesItems.isEmpty && salesItems.isEmpty
-                      ? 0
-                      : itemsByGroup
-                          .map((e) => switch (e.operationType) {
-                                OperationType.buy => e.quantity * e.price,
-                                OperationType.sell => -(e.quantity * e.price),
-                              })
-                          .reduce((a, b) => a + b),
-                  quotas: purchasesItems.isEmpty && salesItems.isEmpty
-                      ? 0
-                      : itemsByGroup
-                          .map((e) => switch (e.operationType) {
-                                OperationType.buy => e.quantity,
-                                OperationType.sell => -e.quantity,
-                              })
-                          .reduce((a, b) => a + b),
-                );
-              }
-            }),
-          ],
-        DocumentType.annotation => [
-            const Divider(),
-            ItemTotalTile(
-              title: 'total-label'.i18n(),
-              price: controller.items.isEmpty
-                  ? 0
-                  : controller.items
-                      .cast<AnnotationItemModel>()
-                      .map((i) {
-                        return (i.quantity ?? 1) * (i.price ?? 0);
-                      })
-                      .reduce((a, b) => a + b)
-                      .toDouble(),
-              quantity: controller.items.length,
-            ),
-            ItemTotalTile(
-              title: 'checked-items'.i18n([
-                controller.items
-                    .cast<AnnotationItemModel>()
-                    .where((i) => i.isChecked)
-                    .length
-                    .toString(),
-              ]),
-              price: controller.items
-                      .cast<AnnotationItemModel>()
-                      .where((i) => i.isChecked)
-                      .isEmpty
-                  ? 0
-                  : controller.items
-                      .cast<AnnotationItemModel>()
-                      .where((i) => i.isChecked)
-                      .map((i) {
-                        return (i.quantity ?? 1) * (i.price ?? 0);
-                      })
-                      .reduce((a, b) => a + b)
-                      .toDouble(),
-              quantity: null,
-            ),
-            ItemTotalTile(
-              title: 'unchecked-items'.i18n([
-                controller.items
-                    .cast<AnnotationItemModel>()
-                    .where((i) => !i.isChecked)
-                    .length
-                    .toString(),
-              ]),
-              price: controller.items
-                      .cast<AnnotationItemModel>()
-                      .where((i) => !i.isChecked)
-                      .isEmpty
-                  ? 0
-                  : controller.items
-                      .cast<AnnotationItemModel>()
-                      .where((i) => !i.isChecked)
-                      .map((i) {
-                        return (i.quantity ?? 1) * (i.price ?? 0);
-                      })
-                      .reduce((a, b) => a + b)
-                      .toDouble(),
-              quantity: null,
-            ),
-            const Divider(),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Text(
-                  'total-by-grouping-text'.i18n(),
-                  style: styleLabel,
-                ),
-              ),
-            ),
-            ...controller.groups.map(
-              (g) {
-                final itemsByGroup = controller
-                    .getItemsByGroup(g.id)
-                    .cast<AnnotationItemModel>();
-
-                if (itemsByGroup.isEmpty) {
-                  return Container();
-                } else {
-                  final Iterable<double> itemsPrice = itemsByGroup.map((i) {
-                    return (i.quantity ?? 1) * (i.price ?? 0);
-                  });
-
-                  return ItemTotalTile(
-                    title: g.name,
-                    price: itemsPrice.isEmpty
-                        ? 0
-                        : itemsPrice.reduce((a, b) => a + b).toDouble(),
-                    quantity: itemsByGroup.length,
-                  );
-                }
-              },
-            ),
-            if (controller.itemsWithoutGroup.isNotEmpty)
-              ItemTotalTile(
-                title: 'items-without-group'.i18n([
-                  controller.itemsWithoutGroup.length.toString(),
-                ]),
-                price: controller.itemsWithoutGroup
-                    .cast<AnnotationItemModel>()
-                    .map((e) => e.price ?? 0)
-                    .reduce((a, b) => a + b)
-                    .toDouble(),
-                quantity: null,
-              ),
-          ],
-        //DocumentType.pointsAndAirlineMiles => [],
-      },
-    );
+    return switch (controller.documentModel.type) {
+      DocumentType.monthlyExpenseControl => Container(),
+      DocumentType.investmentControl => InvestimentControlTotalContent(
+          groups: controller.groups,
+          items: controller.items.cast<InvestimentControlItemModel>(),
+        ),
+      DocumentType.annotation => AnnotationTotalContent(
+          groups: controller.groups,
+          items: controller.items.cast<AnnotationItemModel>(),
+        ),
+      //DocumentType.pointsAndAirlineMiles => Container(),
+    };
   }
 }

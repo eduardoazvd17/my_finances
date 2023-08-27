@@ -47,7 +47,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  '${OperationType.buy.char} $purchasesQuotas ${CurrencyUtils.format(purchasesValue)}',
+                  '${OperationType.purchase.char} $purchasesQuotas ${CurrencyUtils.format(purchasesValue)}',
                   style: const TextStyle(color: Colors.green),
                 ),
               ),

@@ -147,7 +147,7 @@ class GroupingWidget extends StatelessWidget {
         DocumentType.investmentControl => Text(
             '${itemsByGroup.isEmpty ? 0 : itemsByGroup.cast<InvestimentControlItemModel>().map(
                   (e) => switch (e.operationType) {
-                    OperationType.buy => e.quantity,
+                    OperationType.purchase => e.quantity,
                     OperationType.sell => -e.quantity,
                   },
                 ).reduce((a, b) => a + b)} ${'quota-text'.i18n()}',

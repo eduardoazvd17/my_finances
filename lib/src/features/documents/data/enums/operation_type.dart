@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
 enum OperationType {
-  buy,
+  purchase,
   sell,
 }
 
@@ -12,7 +12,8 @@ extension OperationTypeExtension on OperationType {
 
   Icon get icon {
     return switch (this) {
-      OperationType.buy => const Icon(Icons.attach_money, color: Colors.green),
+      OperationType.purchase =>
+        const Icon(Icons.attach_money, color: Colors.green),
       OperationType.sell => Icon(Icons.money_off, color: Colors.red[300]),
     };
   }
