@@ -117,7 +117,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                     child: Row(
                       children: [
                         const Padding(
-                          padding: EdgeInsets.only(left: 1, right: 10),
+                          padding: EdgeInsets.only(right: 10),
                           child: Icon(CupertinoIcons.globe),
                         ),
                         Text('app-language-null'.i18n()),
@@ -242,7 +242,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                     child: Row(
                       children: [
                         const Padding(
-                          padding: EdgeInsets.only(left: 2, right: 10),
+                          padding: EdgeInsets.only(right: 10),
                           child: Icon(Icons.currency_exchange_sharp),
                         ),
                         Text('app-currency-format-null'.i18n()),
