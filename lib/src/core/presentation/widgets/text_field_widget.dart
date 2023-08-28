@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -39,10 +40,12 @@ class TextFieldWidget extends StatefulWidget {
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   bool _hasFocus = false;
   bool _hasText = false;
+  bool _showPassword = false;
 
   void _focusNodeListener() {
     setState(() {
       _hasFocus = widget.focusNode.hasFocus;
+      _showPassword = false;
     });
   }
 
@@ -81,10 +84,36 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             decoration: InputDecoration(
               hintText: widget.hint,
               suffixIcon: _hasFocus && _hasText
-                  ? InkWell(
-                      borderRadius: BorderRadius.circular(50),
-                      child: const Icon(Icons.close),
-                      onTap: () => widget.controller.clear(),
+                  ? Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (widget.obscureText)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Icon(
+                                _showPassword
+                                    ? CupertinoIcons.eye_slash
+                                    : CupertinoIcons.eye,
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  _showPassword = !_showPassword;
+                                });
+                              },
+                            ),
+                          ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(50),
+                            child: const Icon(Icons.close),
+                            onTap: () => widget.controller.clear(),
+                          ),
+                        ),
+                      ],
                     )
                   : (widget.icon != null)
                       ? Icon(widget.icon)
@@ -94,7 +123,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             keyboardType: widget.textInputType,
             onSubmitted: widget.onSubmitted,
             textInputAction: widget.textInputAction,
-            obscureText: widget.obscureText,
+            obscureText: widget.obscureText && !_showPassword,
             textCapitalization: widget.textCapitalization,
             maxLength: widget.maxLength,
           ),
