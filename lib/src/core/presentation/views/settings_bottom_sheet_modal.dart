@@ -261,7 +261,18 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                     .map(
                       (theme) => DropdownMenuItem(
                         value: theme,
-                        child: Text(theme.title),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 5,
+                                right: 10,
+                              ),
+                              child: theme.icon,
+                            ),
+                            Text(theme.title),
+                          ],
+                        ),
                       ),
                     )
                     .toList(),
