@@ -2,7 +2,7 @@ name: myfinances
 description: A finances control app.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 0.0.1+41
+version: 0.0.1+42
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
