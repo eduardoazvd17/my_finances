@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:credentials_manager/credentials_manager.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:myfinances/src/core/data/models/user_model.dart';
+import '../../../../core/data/models/user_model.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/database_model.dart';

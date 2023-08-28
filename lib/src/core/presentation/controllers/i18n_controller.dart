@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/data/enums/app_currency_format.dart';
-import 'package:myfinances/src/core/data/enums/app_language.dart';
-import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
+import '../../data/enums/app_currency_format.dart';
+import '../../data/enums/app_language.dart';
+import '../widgets/loading_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/enums/app_date_format.dart';

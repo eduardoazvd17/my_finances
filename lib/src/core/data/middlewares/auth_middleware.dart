@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
+import '../../presentation/controllers/app_controller.dart';
 
 import '../utils/app_routes.dart';
 

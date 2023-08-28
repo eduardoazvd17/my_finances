@@ -4,9 +4,9 @@ import 'package:credentials_manager/credentials_manager.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/data/errors/app_error.dart';
-import 'package:myfinances/src/core/data/models/database_model.dart';
-import 'package:myfinances/src/core/data/models/user_model.dart';
+import '../../../../core/data/errors/app_error.dart';
+import '../../../../core/data/models/database_model.dart';
+import '../../../../core/data/models/user_model.dart';
 
 import '../../../../core/data/enums/app_language.dart';
 

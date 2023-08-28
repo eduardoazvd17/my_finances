@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/core/data/utils/date_time_utils.dart';
-import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
-import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
+import '../../../../core/data/utils/date_time_utils.dart';
+import '../../data/enums/operation_type.dart';
+import '../controllers/document_editor_controller.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/data/utils/currency_utils.dart';

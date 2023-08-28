@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
+import '../../presentation/controllers/app_controller.dart';
 
 class LifeCycleHandler extends StatefulWidget {
   final Widget child;

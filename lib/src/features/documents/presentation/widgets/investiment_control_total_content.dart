@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
-import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
-import 'package:myfinances/src/features/documents/data/models/item_model.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/investiment_item_total_tile.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/item_total_tile.dart';
+import '../../data/enums/operation_type.dart';
+import '../../data/models/grouping_model.dart';
+import '../../data/models/item_model.dart';
+import 'investiment_item_total_tile.dart';
+import 'item_total_tile.dart';
 
 class InvestimentControlTotalContent extends StatelessWidget {
   final List<GroupingModel> groups;

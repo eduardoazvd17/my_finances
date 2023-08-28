@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/advise_message_widget.dart';
+import '../../../../core/presentation/widgets/advise_message_widget.dart';
 
 enum DocumentType {
   monthlyExpenseControl,

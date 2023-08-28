@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
-import 'package:myfinances/src/features/documents/data/enums/document_order_type.dart';
-import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
-import 'package:myfinances/src/features/documents/data/models/document_model.dart';
-import 'package:myfinances/src/features/documents/data/services/documents_service.dart';
+import '../../../../core/presentation/widgets/loading_widget.dart';
+import '../../data/enums/document_order_type.dart';
+import '../../data/enums/document_type.dart';
+import '../../data/models/document_model.dart';
+import '../../data/services/documents_service.dart';
 
 import '../../../../core/data/enums/list_order.dart';
 import '../../../../core/data/errors/app_error.dart';

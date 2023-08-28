@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:myfinances/src/core/data/models/database_model.dart';
-import 'package:myfinances/src/features/my_profile/presentation/controllers/my_profile_controller.dart';
+import '../../../../core/data/models/database_model.dart';
+import '../../presentation/controllers/my_profile_controller.dart';
 
 import '../services/my_profile_service.dart';
 

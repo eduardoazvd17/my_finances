@@ -6,10 +6,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/core/data/bindings/app_binding.dart';
-import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
-import 'package:myfinances/src/core/data/models/database_model.dart';
-import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
+import 'src/core/data/bindings/app_binding.dart';
+import 'src/core/data/enums/app_theme_mode.dart';
+import 'src/core/data/models/database_model.dart';
+import 'src/core/presentation/controllers/i18n_controller.dart';
 
 import 'firebase_options.dart';
 import 'src/core/data/utils/app_routes.dart';

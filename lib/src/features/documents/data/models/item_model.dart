@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:myfinances/src/core/data/utils/currency_utils.dart';
-import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
+import '../../../../core/data/utils/currency_utils.dart';
+import '../enums/operation_type.dart';
 
 class ItemModel extends Equatable {
   final String id;

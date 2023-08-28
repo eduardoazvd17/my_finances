@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
-import 'package:myfinances/src/features/documents/data/models/item_model.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/item_total_tile.dart';
+import '../../data/models/grouping_model.dart';
+import '../../data/models/item_model.dart';
+import 'item_total_tile.dart';
 
 class AnnotationTotalContent extends StatelessWidget {
   final List<GroupingModel> groups;

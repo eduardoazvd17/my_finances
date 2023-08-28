@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widget.dart';
+import 'bottom_sheet_modal_widget.dart';
 
 class PictureSourceSelectionBottomSheetModal extends StatelessWidget {
   final void Function() onTapCamera;

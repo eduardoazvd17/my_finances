@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/features/documents/data/enums/document_type.dart';
-import 'package:myfinances/src/features/documents/data/enums/operation_type.dart';
-import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
-import 'package:myfinances/src/features/documents/data/models/item_model.dart';
-import 'package:myfinances/src/features/documents/data/services/document_editor_service.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/grouping_widget.dart';
+import '../../data/enums/document_type.dart';
+import '../../data/enums/operation_type.dart';
+import '../../data/models/grouping_model.dart';
+import '../../data/models/item_model.dart';
+import '../../data/services/document_editor_service.dart';
+import '../widgets/grouping_widget.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../data/models/document_model.dart';

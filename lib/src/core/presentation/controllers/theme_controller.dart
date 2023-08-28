@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/core/data/enums/app_theme_mode.dart';
+import '../../data/enums/app_theme_mode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/utils/app_themes.dart';

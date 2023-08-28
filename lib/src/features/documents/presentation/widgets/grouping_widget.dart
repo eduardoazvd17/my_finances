@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/features/documents/presentation/controllers/document_editor_controller.dart';
-import 'package:myfinances/src/features/documents/presentation/widgets/item_widget.dart';
+import '../controllers/document_editor_controller.dart';
+import 'item_widget.dart';
 
 import '../../data/enums/document_type.dart';
 import '../../data/enums/operation_type.dart';

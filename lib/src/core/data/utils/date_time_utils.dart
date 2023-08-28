@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:myfinances/src/core/data/enums/app_date_format.dart';
-import 'package:myfinances/src/core/presentation/controllers/i18n_controller.dart';
+import '../enums/app_date_format.dart';
+import '../../presentation/controllers/i18n_controller.dart';
 
 import '../enums/app_language.dart';
 

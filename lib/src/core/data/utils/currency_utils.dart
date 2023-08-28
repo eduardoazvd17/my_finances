@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:myfinances/src/core/data/enums/app_currency_format.dart';
+import '../enums/app_currency_format.dart';
 import '../enums/app_language.dart';
 import '../../presentation/controllers/i18n_controller.dart';
 

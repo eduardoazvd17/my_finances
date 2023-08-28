@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/features/authentication/presentation/controllers/auth_controller.dart';
+import '../controllers/auth_controller.dart';
 
 import '../../../../core/data/utils/app_routes.dart';
 import '../../../../core/presentation/widgets/app_logo.dart';

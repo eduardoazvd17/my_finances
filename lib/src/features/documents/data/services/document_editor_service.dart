@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:myfinances/src/features/documents/data/models/grouping_model.dart';
-import 'package:myfinances/src/features/documents/data/models/item_model.dart';
+import '../models/grouping_model.dart';
+import '../models/item_model.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/database_model.dart';

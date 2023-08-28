@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/data/utils/app_themes.dart';
+import '../../data/utils/app_themes.dart';
 
 class CustomDialog extends StatelessWidget {
   final String title;

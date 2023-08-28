@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/bottom_sheet_modal_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/drop_down_button_widget.dart';
-import 'package:myfinances/src/features/documents/data/enums/document_order_type.dart';
-import 'package:myfinances/src/features/documents/presentation/controllers/documents_controller.dart';
-import 'package:myfinances/src/core/data/enums/list_order.dart';
+import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
+import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
+import '../../data/enums/document_order_type.dart';
+import '../controllers/documents_controller.dart';
+import '../../../../core/data/enums/list_order.dart';
 
 class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
   const DocumentsOrderBottomSheetModal({super.key});

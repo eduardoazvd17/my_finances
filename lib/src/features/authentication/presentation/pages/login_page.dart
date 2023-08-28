@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/app_logo.dart';
-import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
-import 'package:myfinances/src/features/authentication/presentation/controllers/auth_controller.dart';
+import '../../../../core/presentation/widgets/app_logo.dart';
+import '../../../../core/presentation/widgets/button_widget.dart';
+import '../../../../core/presentation/widgets/scaffold_widget.dart';
+import '../controllers/auth_controller.dart';
 
 import '../../../../core/data/utils/app_routes.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';

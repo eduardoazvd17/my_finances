@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
+import '../../../../core/presentation/widgets/loading_widget.dart';
 
 import '../../../../core/data/errors/app_error.dart';
 import '../../../../core/data/models/user_model.dart';

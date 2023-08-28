@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/features/authentication/presentation/pages/login_page.dart';
-import 'package:myfinances/src/features/authentication/presentation/pages/register_page.dart';
-import 'package:myfinances/src/features/authentication/presentation/pages/welcome_page.dart';
-import 'package:myfinances/src/features/documents/data/bindings/document_editor_binding.dart';
-import 'package:myfinances/src/features/documents/presentation/pages/document_editor_page.dart';
-import 'package:myfinances/src/features/documents/presentation/pages/documents_page.dart';
-import 'package:myfinances/src/features/my_profile/data/bindings/my_profile_binding.dart';
-import 'package:myfinances/src/features/my_profile/presentation/pages/change_password_page.dart';
+import '../../../features/authentication/presentation/pages/login_page.dart';
+import '../../../features/authentication/presentation/pages/register_page.dart';
+import '../../../features/authentication/presentation/pages/welcome_page.dart';
+import '../../../features/documents/data/bindings/document_editor_binding.dart';
+import '../../../features/documents/presentation/pages/document_editor_page.dart';
+import '../../../features/documents/presentation/pages/documents_page.dart';
+import '../../../features/my_profile/data/bindings/my_profile_binding.dart';
+import '../../../features/my_profile/presentation/pages/change_password_page.dart';
 
 import '../../../features/authentication/data/bindings/auth_binding.dart';
 import '../../../features/documents/data/bindings/documents_binding.dart';

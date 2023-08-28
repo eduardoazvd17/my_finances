@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/data/errors/app_error.dart';
+import '../../../../core/data/errors/app_error.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
 

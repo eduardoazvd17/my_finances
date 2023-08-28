@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
-import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
+import '../../../../core/presentation/controllers/app_controller.dart';
+import '../../../../core/presentation/widgets/button_widget.dart';
 
-import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
+import '../../../../core/presentation/widgets/scaffold_widget.dart';
+import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 
-import 'package:myfinances/src/features/my_profile/presentation/controllers/my_profile_controller.dart';
+import '../controllers/my_profile_controller.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/custom_dialog.dart';

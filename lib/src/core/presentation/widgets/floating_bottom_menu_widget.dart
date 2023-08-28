@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
+import 'scroll_view_widget.dart';
 
 import '../../data/utils/app_themes.dart';
 

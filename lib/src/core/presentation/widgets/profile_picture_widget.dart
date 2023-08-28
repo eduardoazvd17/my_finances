@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/elevation_widget.dart';
+import 'elevation_widget.dart';
 
 class ProfilePictureWidget extends StatelessWidget {
   final String? url;

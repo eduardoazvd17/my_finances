@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/presentation/widgets/scaffold_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/scroll_view_widget.dart';
-import 'package:myfinances/src/core/presentation/widgets/text_field_widget.dart';
+import '../../../../core/presentation/widgets/scaffold_widget.dart';
+import '../../../../core/presentation/widgets/scroll_view_widget.dart';
+import '../../../../core/presentation/widgets/text_field_widget.dart';
 
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../controllers/my_profile_controller.dart';

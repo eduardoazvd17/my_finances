@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:myfinances/src/core/presentation/widgets/button_widget.dart';
+import 'button_widget.dart';
 
 import '../../data/utils/app_themes.dart';
 

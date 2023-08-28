@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import 'package:myfinances/src/core/data/errors/app_error.dart';
-import 'package:myfinances/src/core/data/models/user_model.dart';
-import 'package:myfinances/src/core/data/utils/app_routes.dart';
-import 'package:myfinances/src/core/presentation/controllers/app_controller.dart';
-import 'package:myfinances/src/core/presentation/widgets/loading_widget.dart';
-import 'package:myfinances/src/features/authentication/data/services/auth_service.dart';
+import '../../../../core/data/errors/app_error.dart';
+import '../../../../core/data/models/user_model.dart';
+import '../../../../core/data/utils/app_routes.dart';
+import '../../../../core/presentation/controllers/app_controller.dart';
+import '../../../../core/presentation/widgets/loading_widget.dart';
+import '../../data/services/auth_service.dart';
 
 class AuthController extends GetxController {
   final AuthService _authService;

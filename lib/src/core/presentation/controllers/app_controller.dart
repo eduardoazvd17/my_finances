@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:myfinances/src/core/data/models/user_model.dart';
-import 'package:myfinances/src/core/presentation/views/auth_overlay_view.dart';
-import 'package:myfinances/src/features/authentication/data/services/auth_service.dart';
+import '../../data/models/user_model.dart';
+import '../views/auth_overlay_view.dart';
+import '../../../features/authentication/data/services/auth_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../data/utils/app_routes.dart';
