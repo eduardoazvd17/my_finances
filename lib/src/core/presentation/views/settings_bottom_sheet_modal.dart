@@ -114,7 +114,15 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                 items: [
                   DropdownMenuItem(
                     value: null,
-                    child: Text('app-language-null'.i18n()),
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 1, right: 10),
+                          child: Icon(CupertinoIcons.globe),
+                        ),
+                        Text('app-language-null'.i18n()),
+                      ],
+                    ),
                   ),
                   ...AppLanguage.values.map(
                     (language) => DropdownMenuItem(
@@ -223,13 +231,39 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                 items: [
                   DropdownMenuItem(
                     value: null,
-                    child: Text('app-currency-format-null'.i18n()),
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 2, right: 10),
+                          child: Icon(Icons.currency_exchange_sharp),
+                        ),
+                        Text('app-currency-format-null'.i18n()),
+                      ],
+                    ),
                   ),
                   ...AppCurrencyFormat.values.map(
-                    (currency) => DropdownMenuItem(
-                      value: currency,
-                      child: Text(currency.title),
-                    ),
+                    (currency) {
+                      final string1 = currency.title.split(' ')[0];
+                      final string2 = currency.title.split(' ')[1];
+
+                      return DropdownMenuItem(
+                        value: currency,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Text(
+                                string1,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Text(string2),
+                          ],
+                        ),
+                      );
+                    },
                   )
                 ],
               ),
