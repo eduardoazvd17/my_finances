@@ -119,7 +119,15 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                   ...AppLanguage.values.map(
                     (language) => DropdownMenuItem(
                       value: language,
-                      child: Text(language.title),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: language.icon,
+                          ),
+                          Text(language.title),
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -264,10 +272,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(
-                                left: 5,
-                                right: 10,
-                              ),
+                              padding: const EdgeInsets.only(right: 10),
                               child: theme.icon,
                             ),
                             Text(theme.title),
