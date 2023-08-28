@@ -173,7 +173,15 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                 items: [
                   DropdownMenuItem(
                     value: null,
-                    child: Text('app-date-format-null'.i18n()),
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 10),
+                          child: Icon(CupertinoIcons.calendar),
+                        ),
+                        Text('app-date-format-null'.i18n()),
+                      ],
+                    ),
                   ),
                   ...AppDateFormat.values.map(
                     (date) => DropdownMenuItem(
