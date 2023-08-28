@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
   static const Color _primaryColor = Colors.indigo;
-
   static const Color lightBackgroundColor = Color.fromARGB(255, 221, 227, 231);
   static const Color _lightSecondaryBackgroundColor =
       Color.fromARGB(255, 245, 245, 245);
-
   static const Color darkBackgroundColor = Colors.black;
   static const Color _darkSecondaryBackgroundColor =
       Color.fromARGB(255, 33, 33, 33);
-
   static const Color commonColor = Color.fromARGB(255, 117, 117, 117);
+  static final String? fontFamilly = GoogleFonts.lato().fontFamily;
 
   static ThemeData get light {
     return ThemeData(
+      fontFamily: fontFamilly,
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primaryColor,
         secondary: _primaryColor,
@@ -46,6 +46,7 @@ class AppThemes {
 
   static ThemeData get dark {
     return ThemeData(
+      fontFamily: fontFamilly,
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primaryColor,
         secondary: _primaryColor,
