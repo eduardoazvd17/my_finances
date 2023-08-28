@@ -118,7 +118,9 @@ class MyProfileService {
       }
       await batch.commit();
       await _database.usersCollection.doc(userId).delete();
-      await _database.userProfilePictureStorageReference(userId).delete();
+      try {
+        await _database.userProfilePictureStorageReference(userId).delete();
+      } catch (_) {}
       return true;
     } on AppError catch (_) {
       rethrow;
