@@ -243,8 +243,9 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                   ),
                   ...AppCurrencyFormat.values.map(
                     (currency) {
-                      final string1 = currency.title.split(' ')[0];
-                      final string2 = currency.title.split(' ')[1];
+                      final List<String> split = currency.title.split(' ');
+                      final String icon = split[0];
+                      final String title = split[1];
 
                       return DropdownMenuItem(
                         value: currency,
@@ -253,13 +254,13 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                             Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: Text(
-                                string1,
+                                icon,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            Text(string2),
+                            Text(title),
                           ],
                         ),
                       );
