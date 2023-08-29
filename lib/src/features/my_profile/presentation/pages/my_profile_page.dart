@@ -35,7 +35,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Obx(
                 () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ProfilePictureWidget(
                       url: controller.photoUrl,
