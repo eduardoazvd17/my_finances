@@ -169,7 +169,7 @@
     "name-text": "Name",
     "email-text": "Email",
     "password-text": "Password",
-    "hello-text": "Hello, %s.",
+    "hello-text": "Hi, %s.",
     "empty-document-total-text": "Add data to document to view totals here.",
     "change-password-button": "Change password",
     "add-photo-button": "Add photo",
