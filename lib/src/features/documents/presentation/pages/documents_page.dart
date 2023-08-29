@@ -25,7 +25,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
-        toolbarHeight: 96,
+        toolbarHeight: 110,
         title: _myProfileWidget(),
         centerTitle: false,
         actions: [_settingsMenuButton(context)],
