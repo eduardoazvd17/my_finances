@@ -35,7 +35,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: _tableWidget(),
+            child: _tableWidget(context),
           ),
           const Divider(),
         ],
@@ -43,7 +43,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
     );
   }
 
-  Widget _tableWidget() {
+  Widget _tableWidget(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -59,6 +59,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
             ),
           ),
         ),
+        _verticalDivider(context),
         Flexible(
           child: _getTableColumn(
             alignment: CrossAxisAlignment.center,
@@ -74,6 +75,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
             third: Text('$quotas'),
           ),
         ),
+        _verticalDivider(context),
         Flexible(
           child: _getTableColumn(
             alignment: CrossAxisAlignment.end,
@@ -93,6 +95,14 @@ class InvestimentItemTotalTile extends StatelessWidget {
     );
   }
 
+  Widget _verticalDivider(BuildContext context) {
+    return Container(
+      width: 0.5,
+      height: 100,
+      color: Theme.of(context).dividerColor,
+    );
+  }
+
   Widget _getTableColumn({
     required String label,
     required CrossAxisAlignment alignment,
@@ -103,11 +113,15 @@ class InvestimentItemTotalTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: alignment,
         children: [
           Center(child: FittedBox(child: Text(label))),
+          const SizedBox(height: 1),
           FittedBox(child: first),
+          const SizedBox(height: 1),
           FittedBox(child: second),
+          const SizedBox(height: 1),
           FittedBox(child: third),
         ],
       ),
