@@ -206,5 +206,7 @@
     "invested-value-label": "Invested value:",
     "resume-by-asset-text": "Summary by asset",
     "profile-picture-text": "Profile picture",
-    "current-text": "Current"
+    "current-text": "Current",
+    "operation-text": "Operation",
+    "value-text": "Value"
 }

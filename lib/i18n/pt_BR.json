@@ -206,5 +206,7 @@
     "invested-value-label": "Valor investido:",
     "resume-by-asset-text": "Resumo por ativo",
     "profile-picture-text": "Foto de perfil",
-    "current-text": "Atual"
+    "current-text": "Atual",
+    "operation-text": "Operação",
+    "value-text": "Valor"
 }

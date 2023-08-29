@@ -51,7 +51,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
         Flexible(
           child: _getTableColumn(
             alignment: CrossAxisAlignment.center,
-            label: 'Operation',
+            label: 'operation-text'.i18n(),
             first: Text(
               OperationType.purchase.title,
               style: const TextStyle(color: Colors.green),
@@ -67,7 +67,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
         Flexible(
           child: _getTableColumn(
             alignment: CrossAxisAlignment.center,
-            label: 'Quotas',
+            label: 'quota-text'.i18n(),
             first: Text(
               '$purchasesQuotas',
               style: const TextStyle(color: Colors.green),
@@ -83,7 +83,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
         Flexible(
           child: _getTableColumn(
             alignment: CrossAxisAlignment.end,
-            label: 'Value',
+            label: 'value-text'.i18n(),
             first: Text(
               CurrencyUtils.format(purchasesValue),
               style: const TextStyle(color: Colors.green),
