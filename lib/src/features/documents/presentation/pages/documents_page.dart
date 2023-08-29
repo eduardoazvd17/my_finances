@@ -24,12 +24,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      appBar: AppBar(
-        toolbarHeight: 110,
-        title: _myProfileWidget(),
-        centerTitle: false,
-        actions: [_settingsMenuButton(context)],
-      ),
+      appBar: _getAppBar(context),
       floatingBottomMenu: _addDocumentFloatingButton(context),
       body: ListHeaderWidget(
         title: 'my-documents-text'.i18n(),
@@ -119,23 +114,33 @@ class DocumentsPage extends GetWidget<DocumentsController> {
     );
   }
 
-  Widget _myProfileWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ProfilePictureWidget(
-          size: 50,
-          url: AppController.instance.user?.photoUrl,
-          onTap: controller.goToMyProfilePage,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Text(
-            'hello-text'.i18n([AppController.instance.user!.nickname]),
-            maxLines: 1,
+  AppBar _getAppBar(BuildContext context) {
+    return AppBar(
+      toolbarHeight: 110,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ProfilePictureWidget(
+                size: 50,
+                url: AppController.instance.user?.photoUrl,
+                onTap: controller.goToMyProfilePage,
+              ),
+              _settingsMenuButton(context)
+            ],
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              'hello-text'.i18n([AppController.instance.user!.nickname]),
+              maxLines: 1,
+            ),
+          ),
+        ],
+      ),
+      centerTitle: false,
     );
   }
 
