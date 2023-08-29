@@ -21,7 +21,7 @@ class IconButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(borderRadius),
-      color: backgroundColor ?? Theme.of(context).primaryColor,
+      color: backgroundColor ?? Colors.transparent,
       child: Tooltip(
         message: tooltip,
         child: InkWell(

@@ -145,9 +145,10 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   }
 
   Widget _settingsMenuButton(BuildContext context) {
-    return IconButton(
-      icon: const Icon(CupertinoIcons.settings),
-      onPressed: () => showModalBottomSheet(
+    return IconButtonWidget(
+      tooltip: 'settings-text'.i18n(),
+      icon: CupertinoIcons.settings,
+      onTap: () => showModalBottomSheet(
         context: context,
         useSafeArea: true,
         isScrollControlled: true,
