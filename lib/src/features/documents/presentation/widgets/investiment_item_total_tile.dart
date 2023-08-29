@@ -46,17 +46,21 @@ class InvestimentItemTotalTile extends StatelessWidget {
   Widget _tableWidget(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Flexible(
           child: _getTableColumn(
             alignment: CrossAxisAlignment.center,
             label: 'Operation',
-            first: OperationType.purchase.icon,
-            second: OperationType.sell.icon,
-            third: Text(
-              'current-text'.i18n(),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            first: Text(
+              OperationType.purchase.title,
+              style: const TextStyle(color: Colors.green),
             ),
+            second: Text(
+              OperationType.sell.title,
+              style: TextStyle(color: Colors.red[300]),
+            ),
+            third: Text('current-text'.i18n()),
           ),
         ),
         _verticalDivider(context),
@@ -98,7 +102,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
   Widget _verticalDivider(BuildContext context) {
     return Container(
       width: 0.5,
-      height: 100,
+      height: 90 * MediaQuery.of(context).textScaleFactor,
       color: Theme.of(context).dividerColor,
     );
   }
@@ -113,15 +117,13 @@ class InvestimentItemTotalTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: alignment,
         children: [
           Center(child: FittedBox(child: Text(label))),
-          const SizedBox(height: 1),
+          const SizedBox(height: 5),
           FittedBox(child: first),
-          const SizedBox(height: 1),
           FittedBox(child: second),
-          const SizedBox(height: 1),
           FittedBox(child: third),
         ],
       ),
