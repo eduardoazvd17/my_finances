@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
-import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/data/utils/currency_utils.dart';
 import '../../data/enums/operation_type.dart';
 

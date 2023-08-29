@@ -7,11 +7,13 @@ class ProfilePictureWidget extends StatelessWidget {
   final String? url;
   final double size;
   final void Function()? onTap;
+  final String? tooltip;
   const ProfilePictureWidget({
     super.key,
     required this.url,
     this.size = 150,
     this.onTap,
+    this.tooltip,
   });
 
   @override
@@ -19,7 +21,7 @@ class ProfilePictureWidget extends StatelessWidget {
     return ElevationWidget(
       borderRadius: 100,
       child: Tooltip(
-        message: 'profile-picture-text'.i18n(),
+        message: tooltip ?? 'profile-picture-text'.i18n(),
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(100),

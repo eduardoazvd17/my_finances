@@ -127,6 +127,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 size: 50,
                 url: AppController.instance.user?.photoUrl,
                 onTap: controller.goToMyProfilePage,
+                tooltip: 'my-profile-button'.i18n(),
               ),
               _settingsMenuButton(context)
             ],
