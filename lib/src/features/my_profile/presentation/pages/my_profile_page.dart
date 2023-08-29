@@ -41,44 +41,48 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                       url: controller.photoUrl,
                       onTap: controller.goToProfilePicturePage,
                     ),
-                    const SizedBox(width: 16),
-                    Column(
-                      children: controller.photoUrl == null
-                          ? [
-                              TextButton(
-                                onPressed: () {
-                                  _showPictureSourceSelectionModal(context);
-                                },
-                                child: Text('add-photo-button'.i18n()),
-                              ),
-                            ]
-                          : [
-                              TextButton(
-                                onPressed: () {
-                                  _showPictureSourceSelectionModal(context);
-                                },
-                                child: Text('edit-photo-button'.i18n()),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Get.dialog(
-                                    CustomDialog(
-                                      autoClose: false,
-                                      title: 'remove-photo-button'.i18n(),
-                                      content: 'remove-photo-confirmation-text'
-                                          .i18n(),
-                                      onConfirm: () async {
-                                        Get.close(1);
-                                        await controller.removeProfilePicture();
-                                      },
-                                      onClose: Get.back,
-                                      invertButtonColor: true,
-                                    ),
-                                  );
-                                },
-                                child: Text('remove-photo-button'.i18n()),
-                              ),
-                            ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: controller.photoUrl == null
+                            ? [
+                                TextButton(
+                                  onPressed: () {
+                                    _showPictureSourceSelectionModal(context);
+                                  },
+                                  child: Text('add-photo-button'.i18n()),
+                                ),
+                              ]
+                            : [
+                                TextButton(
+                                  onPressed: () {
+                                    _showPictureSourceSelectionModal(context);
+                                  },
+                                  child: Text('edit-photo-button'.i18n()),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Get.dialog(
+                                      CustomDialog(
+                                        autoClose: false,
+                                        title: 'remove-photo-button'.i18n(),
+                                        content:
+                                            'remove-photo-confirmation-text'
+                                                .i18n(),
+                                        onConfirm: () async {
+                                          Get.close(1);
+                                          await controller
+                                              .removeProfilePicture();
+                                        },
+                                        onClose: Get.back,
+                                        invertButtonColor: true,
+                                      ),
+                                    );
+                                  },
+                                  child: Text('remove-photo-button'.i18n()),
+                                ),
+                              ],
+                      ),
                     ),
                   ],
                 ),
