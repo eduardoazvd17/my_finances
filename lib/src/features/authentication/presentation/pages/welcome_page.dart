@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/presentation/widgets/app_logo.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
 import '../../../../core/presentation/widgets/scaffold_widget.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
@@ -121,9 +122,10 @@ class WelcomePage extends GetWidget<AuthController> {
   }
 
   Widget _settingsMenuButton(BuildContext context) {
-    return IconButton(
-      icon: const Icon(CupertinoIcons.settings),
-      onPressed: () => showModalBottomSheet(
+    return IconButtonWidget(
+      icon: CupertinoIcons.settings,
+      tooltip: 'settings-text'.i18n(),
+      onTap: () => showModalBottomSheet(
         context: context,
         useSafeArea: true,
         builder: (_) => const SettingsBottomSheetModal(),
