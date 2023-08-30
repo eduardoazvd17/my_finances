@@ -18,5 +18,15 @@ class DateModel extends Equatable {
   });
 
   @override
+  String toString() => code;
+
+  factory DateModel.fromString(String string) {
+    final List<String> split = string.trim().split('_');
+    final int year = int.parse(split[0]);
+    final int month = int.parse(split[1]);
+    return DateModel(month: month, year: year);
+  }
+
+  @override
   List<Object?> get props => [code];
 }
