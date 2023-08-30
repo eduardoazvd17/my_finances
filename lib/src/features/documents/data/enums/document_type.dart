@@ -22,14 +22,6 @@ extension DocumentTypeExtension on DocumentType {
     };
   }
 
-  //TODO: Remover quanto implementar outros tipos de itens.
-  bool get isEnabled => switch (this) {
-        DocumentType.monthlyExpenseControl => false,
-        DocumentType.investmentControl => true,
-        DocumentType.annotation => true,
-        //DocumentType.pointsAndAirlineMiles => false,
-      };
-
   AdviseMessageWidget get emptyDocumentAdviseWidget => AdviseMessageWidget(
         icon: icon,
         message: 'document-type-empty-title-$index'.i18n(),
