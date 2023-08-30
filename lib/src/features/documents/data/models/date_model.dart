@@ -27,6 +27,21 @@ class DateModel extends Equatable {
     return DateModel(month: month, year: year);
   }
 
+  static List<DateModel> generate({
+    required int startYear,
+    int yearsCount = 1,
+  }) {
+    final List<DateModel> dates = [];
+    int currentYear = startYear;
+    while (currentYear <= startYear + yearsCount) {
+      for (int i = 1; i <= 12; i++) {
+        dates.add(DateModel(month: i, year: currentYear));
+      }
+      currentYear++;
+    }
+    return dates;
+  }
+
   @override
   List<Object?> get props => [code];
 }
