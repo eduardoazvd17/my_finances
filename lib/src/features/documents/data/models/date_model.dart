@@ -32,6 +32,7 @@ class DateModel extends Equatable {
     int yearsCount = 1,
   }) {
     final List<DateModel> dates = [];
+
     int currentYear = startYear;
     while (currentYear <= startYear + yearsCount) {
       for (int i = 1; i <= 12; i++) {
@@ -39,6 +40,7 @@ class DateModel extends Equatable {
       }
       currentYear++;
     }
+
     return dates;
   }
 
