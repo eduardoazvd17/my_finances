@@ -54,6 +54,14 @@ class DateTimeUtils {
     return '${split[0]}/${split[1]}\n${split[2]}';
   }
 
+  static formatMonth(DateTime date) {
+    final String dateString = DateFormat.yMMMM(_localeString).format(date);
+    return dateString.replaceFirst(
+      dateString[0],
+      dateString[0].toUpperCase(),
+    );
+  }
+
   static String _time(DateTime date) {
     final i18n = Get.find<I18nController>();
     if (!i18n.dateUse24hFormat) {
