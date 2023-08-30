@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import '../../data/utils/app_themes.dart';
+import 'icon_button_widget.dart';
 import 'scroll_view_widget.dart';
 
 class BottomSheetModalWidget extends StatelessWidget {
@@ -39,11 +41,11 @@ class BottomSheetModalWidget extends StatelessWidget {
                     child: _closeButton,
                   ),
                   Container(
-                    height: 8,
-                    width: 50,
+                    height: 5,
+                    width: 70,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Theme.of(context).scaffoldBackgroundColor,
+                      color: AppThemes.commonColor,
                     ),
                   ),
                   _closeButton,
@@ -83,9 +85,13 @@ class BottomSheetModalWidget extends StatelessWidget {
     );
   }
 
-  Widget get _closeButton => IconButton(
-        onPressed: Get.back,
-        tooltip: 'close-button'.i18n(),
-        icon: const Icon(Icons.close, color: Colors.red),
+  Widget get _closeButton => Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: IconButtonWidget(
+          icon: Icons.close,
+          iconColor: Colors.red,
+          tooltip: 'close-button'.i18n(),
+          onTap: Get.back,
+        ),
       );
 }
