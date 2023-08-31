@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'bottom_sheet_modal_widget.dart';
 
-class BottomSheetModalPicker<T> extends StatelessWidget {
+class BottomSheetModalPicker extends StatelessWidget {
   final Iterable<Widget> itemsWidget;
   final int selectedIndex;
   final void Function(int) onChange;
@@ -24,7 +24,7 @@ class BottomSheetModalPicker<T> extends StatelessWidget {
             height: 200,
             child: CupertinoPicker(
               squeeze: 1,
-              itemExtent: 40,
+              itemExtent: 30 * MediaQuery.of(context).textScaleFactor,
               useMagnifier: true,
               magnification: 1.22,
               selectionOverlay: Stack(
@@ -47,7 +47,18 @@ class BottomSheetModalPicker<T> extends StatelessWidget {
                 initialItem: selectedIndex,
               ),
               onSelectedItemChanged: onChange,
-              children: itemsWidget.map((e) => Center(child: e)).toList(),
+              children: itemsWidget
+                  .map((e) => Padding(
+                        padding: EdgeInsets.all(
+                          4 * MediaQuery.of(context).textScaleFactor,
+                        ),
+                        child: FittedBox(
+                          child: Center(
+                            child: e,
+                          ),
+                        ),
+                      ))
+                  .toList(),
             ),
           ),
           const Divider(),
