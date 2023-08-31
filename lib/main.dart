@@ -48,7 +48,20 @@ class MyFinancesApp extends GetWidget<I18nController> {
         return Obx(() {
           final themeController = Get.find<ThemeController>();
           return GetMaterialApp(
-            builder: (_, child) => LifeCycleHandler(child: child!),
+            builder: (context, child) {
+              final MediaQueryData mediaQueryData = MediaQuery.of(context);
+              double textScaleFactor = mediaQueryData.textScaleFactor;
+
+              const double min = 0.5;
+              if (textScaleFactor < min) textScaleFactor = min;
+              const double max = 1.5;
+              if (textScaleFactor > max) textScaleFactor = max;
+
+              return MediaQuery(
+                data: mediaQueryData.copyWith(textScaleFactor: textScaleFactor),
+                child: LifeCycleHandler(child: child!),
+              );
+            },
             debugShowCheckedModeBanner: false,
             title: controller.appName,
             onGenerateTitle: (_) => controller.appName,
