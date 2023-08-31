@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import '../../../../core/data/utils/currency_utils.dart';
 import '../enums/operation_type.dart';
+import 'date_model.dart';
 
 class ItemModel extends Equatable {
   final String id;
@@ -201,6 +202,55 @@ class InvestimentControlItemModel extends ItemModel {
       ];
 }
 
+class MonthlyExpenseControlItemModel extends ItemModel {
+  final double price;
+  final List<String> _recurringDates;
+  final Map<String, double> _customDatesPrices;
+
+  bool get isRecurring => _recurringDates.isNotEmpty;
+
+  double priceByDateModel(DateModel dateModel) {
+    return _customDatesPrices.containsKey(dateModel.code)
+        ? (_customDatesPrices[dateModel.code] ?? price)
+        : price;
+  }
+
+  const MonthlyExpenseControlItemModel({
+    required super.id,
+    required super.name,
+    required super.creationDate,
+    super.groupingId,
+    super.description,
+    required this.price,
+    required List<String> recurringDates,
+    required Map<String, double> customDatesPrices,
+  })  : _recurringDates = recurringDates,
+        _customDatesPrices = customDatesPrices;
+
+  @override
+  Map<String, dynamic> toMap() {
+    return super.toMap()
+      ..addAll({
+        'price': price.toStringAsFixed(2),
+        'recurringDates': _recurringDates,
+        'customDatesPrices': _customDatesPrices,
+      });
+  }
+
+  factory MonthlyExpenseControlItemModel.fromMap(Map<String, dynamic> map) {
+    return MonthlyExpenseControlItemModel(
+      id: map['id'],
+      name: map['name'],
+      creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
+      description: map['description'],
+      groupingId: map['groupingId'],
+      price: double.parse(map['price']),
+      recurringDates: List<String>.from(map['recurringDates']),
+      customDatesPrices: Map<String, double>.from(map['customDatesPrices']),
+    );
+  }
+}
+
 // class PointsAndAirlineMilesItemModel extends ItemModel {
 //   const PointsAndAirlineMilesItemModel({
 //     required super.name,
@@ -209,10 +259,3 @@ class InvestimentControlItemModel extends ItemModel {
 //   });
 // }
 
-// class MonthlyExpenseControlItemModel extends ItemModel {
-//   const MonthlyExpenseControlItemModel({
-//     required super.name,
-//     super.groupingId,
-//     super.description,
-//   });
-// }
