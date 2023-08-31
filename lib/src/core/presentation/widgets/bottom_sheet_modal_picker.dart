@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'bottom_sheet_modal_widget.dart';
 
 class BottomSheetModalPicker<T> extends StatelessWidget {
-  final List<Widget> itemsWidget;
+  final Iterable<Widget> itemsWidget;
   final int selectedIndex;
   final void Function(int) onChange;
   const BottomSheetModalPicker({
@@ -27,11 +27,27 @@ class BottomSheetModalPicker<T> extends StatelessWidget {
               itemExtent: 40,
               useMagnifier: true,
               magnification: 1.22,
+              selectionOverlay: Stack(
+                children: [
+                  const CupertinoPickerDefaultSelectionOverlay(),
+                  Positioned(
+                    left: 16,
+                    top: 0,
+                    bottom: 0,
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               scrollController: FixedExtentScrollController(
                 initialItem: selectedIndex,
               ),
               onSelectedItemChanged: onChange,
-              children: itemsWidget,
+              children: itemsWidget.map((e) => Center(child: e)).toList(),
             ),
           ),
           const Divider(),
