@@ -204,7 +204,7 @@ class InvestimentControlItemModel extends ItemModel {
 
 class MonthlyExpenseControlItemModel extends ItemModel {
   final double defaultPrice;
-  final List<String> _recurringDates;
+  final Set<String> _recurringDates;
   final Map<String, double> _customDatesPrices;
 
   bool get isRecurring => _recurringDates.isNotEmpty;
@@ -213,10 +213,34 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     return _recurringDates.contains(dateModel.code);
   }
 
+  void addRecurringDate(DateModel dateModel) {
+    _recurringDates.add(dateModel.code);
+  }
+
   double price(DateModel dateModel) {
     return _customDatesPrices.containsKey(dateModel.code)
         ? (_customDatesPrices[dateModel.code] ?? defaultPrice)
         : defaultPrice;
+  }
+
+  void changeCustomPrice(DateModel dateModel, double price) {
+    _customDatesPrices[dateModel.code] = price;
+  }
+
+  MonthlyExpenseControlItemModel editAndCopy({
+    String? name,
+    double? defaultPrice,
+  }) {
+    return MonthlyExpenseControlItemModel(
+      id: id,
+      name: name ?? this.name,
+      description: description,
+      creationDate: creationDate,
+      groupingId: groupingId,
+      defaultPrice: defaultPrice ?? this.defaultPrice,
+      recurringDates: _recurringDates,
+      customDatesPrices: _customDatesPrices,
+    );
   }
 
   const MonthlyExpenseControlItemModel({
@@ -226,7 +250,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     super.groupingId,
     super.description,
     required this.defaultPrice,
-    required List<String> recurringDates,
+    required Set<String> recurringDates,
     required Map<String, double> customDatesPrices,
   })  : _recurringDates = recurringDates,
         _customDatesPrices = customDatesPrices;
@@ -249,7 +273,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       description: map['description'],
       groupingId: map['groupingId'],
       defaultPrice: double.parse(map['defaultPrice']),
-      recurringDates: List<String>.from(map['recurringDates']),
+      recurringDates: Set<String>.from(map['recurringDates']),
       customDatesPrices: Map<String, double>.from(map['customDatesPrices']),
     );
   }
