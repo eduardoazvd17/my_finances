@@ -203,16 +203,20 @@ class InvestimentControlItemModel extends ItemModel {
 }
 
 class MonthlyExpenseControlItemModel extends ItemModel {
-  final double price;
+  final double defaultPrice;
   final List<String> _recurringDates;
   final Map<String, double> _customDatesPrices;
 
   bool get isRecurring => _recurringDates.isNotEmpty;
 
-  double priceByDateModel(DateModel dateModel) {
+  bool didShow(DateModel dateModel) {
+    return _recurringDates.contains(dateModel.code);
+  }
+
+  double price(DateModel dateModel) {
     return _customDatesPrices.containsKey(dateModel.code)
-        ? (_customDatesPrices[dateModel.code] ?? price)
-        : price;
+        ? (_customDatesPrices[dateModel.code] ?? defaultPrice)
+        : defaultPrice;
   }
 
   const MonthlyExpenseControlItemModel({
@@ -221,7 +225,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     required super.creationDate,
     super.groupingId,
     super.description,
-    required this.price,
+    required this.defaultPrice,
     required List<String> recurringDates,
     required Map<String, double> customDatesPrices,
   })  : _recurringDates = recurringDates,
@@ -231,7 +235,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
   Map<String, dynamic> toMap() {
     return super.toMap()
       ..addAll({
-        'price': price.toStringAsFixed(2),
+        'defaultPrice': defaultPrice.toStringAsFixed(2),
         'recurringDates': _recurringDates,
         'customDatesPrices': _customDatesPrices,
       });
@@ -244,11 +248,23 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       creationDate: DateTime.fromMillisecondsSinceEpoch(map['creationDate']),
       description: map['description'],
       groupingId: map['groupingId'],
-      price: double.parse(map['price']),
+      defaultPrice: double.parse(map['defaultPrice']),
       recurringDates: List<String>.from(map['recurringDates']),
       customDatesPrices: Map<String, double>.from(map['customDatesPrices']),
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        creationDate,
+        description,
+        groupingId,
+        defaultPrice,
+        _recurringDates,
+        _customDatesPrices,
+      ];
 }
 
 // class PointsAndAirlineMilesItemModel extends ItemModel {
