@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import '../../../../core/presentation/widgets/bottom_sheet_modal_picker.dart';
 import '../../../../core/presentation/widgets/floating_bottom_menu_widget.dart';
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
+import '../../../../core/presentation/widgets/list_header_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
 import '../widgets/annotation_total_content.dart';
@@ -41,23 +44,33 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           ],
         ),
         floatingBottomMenu: _getDocumentFloatingMenu(context),
-        body: Obx(() {
-          if (controller.isLoading) {
-            return const Center(child: LoadingWidget());
-          } else if (controller.groups.isEmpty &&
-              controller.itemsWithoutGroup.isEmpty) {
-            return Center(
-              child: controller.documentModel.type.emptyDocumentAdviseWidget,
-            );
-          } else {
-            return _getDocumentContent();
-          }
-        }),
+        body: Column(
+          children: [
+            if (controller.documentModel.type ==
+                DocumentType.monthlyExpenseControl)
+              Obx(() => _monthSelectorHeaderWidget(context)),
+            Expanded(
+              child: Obx(() {
+                if (controller.isLoading) {
+                  return const Center(child: LoadingWidget());
+                } else if (controller.groups.isEmpty &&
+                    controller.itemsWithoutGroup.isEmpty) {
+                  return Center(
+                    child:
+                        controller.documentModel.type.emptyDocumentAdviseWidget,
+                  );
+                } else {
+                  return _getDocumentContent(context);
+                }
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _getDocumentContent() {
+  Widget _getDocumentContent(BuildContext context) {
     final ScrollController scrollController = ScrollController(
       initialScrollOffset: controller.pageScrollPosition,
     );
@@ -147,6 +160,31 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         ),
       //DocumentType.pointsAndAirlineMiles => Container(),
     };
+  }
+
+  Widget _monthSelectorHeaderWidget(BuildContext context) {
+    return ListHeaderWidget(
+      title: controller.selectedDate.title,
+      action: IconButtonWidget(
+        icon: CupertinoIcons.calendar_today,
+        tooltip: 'change-button'.i18n(),
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (_) {
+              return BottomSheetModalPicker(
+                itemsWidget: controller.timeline.map((e) => Text(e.title)),
+                selectedIndex:
+                    controller.timeline.indexOf(controller.selectedDate),
+                onChange: (int index) {
+                  controller.selectedDate = controller.timeline[index];
+                },
+              );
+            },
+          );
+        },
+      ),
+    );
   }
 
   Widget _getDocumentFloatingMenu(BuildContext context) {
