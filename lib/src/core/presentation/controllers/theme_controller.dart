@@ -11,7 +11,6 @@ import '../widgets/loading_widget.dart';
 class ThemeController extends GetxController {
   @override
   void onInit() {
-    updateWebBackgroundColor();
     _loadSelectedTheme();
     super.onInit();
   }
@@ -26,8 +25,6 @@ class ThemeController extends GetxController {
     if (!withoutSaving) LoadingWidget.dialog();
     try {
       _selectedTheme.value = value;
-      updateWebBackgroundColor();
-
       if (!withoutSaving) {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setInt('AppTheme', value.index);
@@ -42,7 +39,6 @@ class ThemeController extends GetxController {
       final int? index = prefs.getInt('AppTheme');
       if (index != null) {
         _selectedTheme.value = AppThemeMode.values[index];
-        updateWebBackgroundColor();
       }
     } catch (_) {}
   }
@@ -56,20 +52,4 @@ class ThemeController extends GetxController {
         AppThemeMode.light => AppThemes.lightBackgroundColor,
         AppThemeMode.dark => AppThemes.darkBackgroundColor,
       };
-
-  void updateWebBackgroundColor() {
-    try {
-      if (kIsWeb) {
-        // final String hexColor = switch (selectedTheme) {
-        //   AppThemeMode.automatic =>
-        //     (SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-        //             Brightness.dark)
-        //         ? '#0xFF000000'
-        //         : '#0xFFDDE3E7',
-        //   AppThemeMode.light => '#0xFFDDE3E7',
-        //   AppThemeMode.dark => '#0xFF000000',
-        // };
-      }
-    } catch (_) {}
-  }
 }
