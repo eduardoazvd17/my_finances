@@ -36,10 +36,10 @@ class DocumentEditorService {
     try {
       final query =
           await _database.documentItemsCollection(documentModel.id).get();
-
-      //TODO: Criação de ItemModel para cada tipo de DocumentType.
       return switch (documentModel.type) {
-        DocumentType.monthlyExpenseControl => [],
+        DocumentType.monthlyExpenseControl => query.docs
+            .map((doc) => MonthlyExpenseControlItemModel.fromMap(doc.data()))
+            .toList(),
         DocumentType.investmentControl => query.docs
             .map((doc) => InvestimentControlItemModel.fromMap(doc.data()))
             .toList(),
