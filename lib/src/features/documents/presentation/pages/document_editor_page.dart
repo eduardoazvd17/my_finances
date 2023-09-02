@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -169,19 +171,38 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         icon: CupertinoIcons.calendar_today,
         tooltip: 'change-button'.i18n(),
         onTap: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (_) {
-              return BottomSheetModalPicker(
-                itemsWidget: controller.timeline.map((e) => Text(e.title)),
-                selectedIndex:
-                    controller.timeline.indexOf(controller.selectedDate),
-                onChange: (int index) {
-                  controller.selectedDate = controller.timeline[index];
+          if (Platform.isAndroid || Platform.isIOS) {
+            showModalBottomSheet(
+              context: context,
+              builder: (_) {
+                return BottomSheetModalPicker(
+                  itemsWidget: controller.timeline.map((e) => Text(e.title)),
+                  selectedIndex:
+                      controller.timeline.indexOf(controller.selectedDate),
+                  onChange: (int index) {
+                    controller.selectedDate = controller.timeline[index];
+                  },
+                );
+              },
+            );
+          } else {
+            showMenu(
+              context: context,
+              position: RelativeRect.fill,
+              items: controller.timeline.map(
+                (e) {
+                  final int index = controller.timeline.indexOf(e);
+                  return PopupMenuItem(
+                    value: index,
+                    child: Text(e.title),
+                    onTap: () {
+                      controller.selectedDate = controller.timeline[index];
+                    },
+                  );
                 },
-              );
-            },
-          );
+              ).toList(),
+            );
+          }
         },
       ),
     );
