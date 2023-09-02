@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -171,7 +170,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         icon: CupertinoIcons.calendar_today,
         tooltip: 'change-button'.i18n(),
         onTap: () {
-          if (Platform.isAndroid || Platform.isIOS) {
+          if (!kIsWeb) {
             showModalBottomSheet(
               context: context,
               builder: (_) {
