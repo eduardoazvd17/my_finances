@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:credentials_manager/credentials_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:get/get.dart';
 import 'src/core/data/bindings/app_binding.dart';
 import 'src/core/data/enums/app_theme_mode.dart';
@@ -43,45 +41,38 @@ class MyFinancesApp extends GetWidget<I18nController> {
 
   @override
   Widget build(BuildContext context) {
-    return FlutterWebFrame(
-      builder: (context) {
-        return Obx(() {
-          final themeController = Get.find<ThemeController>();
-          return GetMaterialApp(
-            builder: (context, child) {
-              final MediaQueryData mediaQueryData = MediaQuery.of(context);
-              double textScaleFactor = mediaQueryData.textScaleFactor;
+    return Obx(() {
+      final themeController = Get.find<ThemeController>();
+      return GetMaterialApp(
+        builder: (context, child) {
+          final MediaQueryData mediaQueryData = MediaQuery.of(context);
+          double textScaleFactor = mediaQueryData.textScaleFactor;
 
-              const double min = 0.5;
-              if (textScaleFactor < min) textScaleFactor = min;
-              const double max = 1.5;
-              if (textScaleFactor > max) textScaleFactor = max;
+          const double min = 0.5;
+          if (textScaleFactor < min) textScaleFactor = min;
+          const double max = 1.5;
+          if (textScaleFactor > max) textScaleFactor = max;
 
-              return MediaQuery(
-                data: mediaQueryData.copyWith(textScaleFactor: textScaleFactor),
-                child: LifeCycleHandler(child: child!),
-              );
-            },
-            debugShowCheckedModeBanner: false,
-            title: controller.appName,
-            onGenerateTitle: (_) => controller.appName,
-            locale: controller.selectedLocale,
-            localizationsDelegates: controller.localizationsDelegates,
-            supportedLocales: controller.supportedLocales,
-            localeResolutionCallback: controller.localeResolutionCallback,
-            theme: AppThemes.light,
-            darkTheme: AppThemes.dark,
-            color: themeController.materialAppColor,
-            themeMode: themeController.selectedTheme.themeMode,
-            initialBinding: AppBinding(),
-            initialRoute: AppRoutes.initialRoute,
-            getPages: AppRoutes.getGetPages(),
+          return MediaQuery(
+            data: mediaQueryData.copyWith(textScaleFactor: textScaleFactor),
+            child: LifeCycleHandler(child: child!),
           );
-        });
-      },
-      maximumSize: Size(800, Get.height),
-      enabled: kIsWeb,
-      backgroundColor: AppThemes.commonColor,
-    );
+        },
+        debugShowCheckedModeBanner: false,
+        title: controller.appName,
+        onGenerateTitle: (_) => controller.appName,
+        locale: controller.selectedLocale,
+        localizationsDelegates: controller.localizationsDelegates,
+        supportedLocales: controller.supportedLocales,
+        localeResolutionCallback: controller.localeResolutionCallback,
+        theme: AppThemes.light,
+        darkTheme: AppThemes.dark,
+        color: themeController.materialAppColor,
+        themeMode: themeController.selectedTheme.themeMode,
+        initialBinding: AppBinding(),
+        initialRoute: AppRoutes.initialRoute,
+        getPages: AppRoutes.getGetPages(),
+      );
+    });
   }
 }
