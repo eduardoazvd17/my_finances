@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
-import '../../../../core/presentation/controllers/i18n_controller.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
@@ -382,16 +382,25 @@ class _AddOrEditItemBottomSheetModalState
           IconButton(
             onPressed: () async {
               final DateTime now = DateTime.now();
-              final DateTime? pickedDate = await showDatePicker(
+
+              final List<DateTime?>? pickedDates =
+                  await showCalendarDatePicker2Dialog(
                 context: context,
-                initialDate: _selectedDateTime ?? now,
-                firstDate: DateTime(2000, 1, 1),
-                lastDate: now,
-                locale: Get.find<I18nController>().selectedLocale,
+                config: CalendarDatePicker2WithActionButtonsConfig(
+                  firstDate: DateTime(2000, 1, 1),
+                  lastDate: now,
+                  currentDate: _selectedDateTime ?? now,
+                ),
+                dialogSize: const Size(325, 400),
+                value: [_selectedDateTime ?? now],
+                borderRadius: BorderRadius.circular(15),
               );
-              setState(() {
-                _selectedDateTime = pickedDate ?? now;
-              });
+
+              if (pickedDates != null && pickedDates.isNotEmpty) {
+                setState(() {
+                  _selectedDateTime = pickedDates.first ?? now;
+                });
+              }
             },
             icon: const Icon(
               CupertinoIcons.calendar_badge_plus,
