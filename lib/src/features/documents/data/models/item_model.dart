@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import '../../../../core/data/utils/currency_utils.dart';
 import '../enums/operation_type.dart';
-import 'date_model.dart';
+import '../enums/month_enum.dart';
 
 class ItemModel extends Equatable {
   final String id;
@@ -204,27 +204,27 @@ class InvestimentControlItemModel extends ItemModel {
 
 class MonthlyExpenseControlItemModel extends ItemModel {
   final double defaultPrice;
-  final Set<String> _recurringDates;
-  final Map<String, double> _customDatesPrices;
+  final Set<MonthEnum> _recurringMonths;
+  final Map<MonthEnum, double> _customPrices;
 
-  bool get isRecurring => _recurringDates.isNotEmpty;
+  bool get isRecurring => _recurringMonths.isNotEmpty;
 
-  bool didShow(DateModel dateModel) {
-    return _recurringDates.contains(dateModel.code);
+  bool didShow(MonthEnum month) {
+    return _recurringMonths.contains(month);
   }
 
-  void addRecurringDate(DateModel dateModel) {
-    _recurringDates.add(dateModel.code);
+  void addRecurringMonths(List<MonthEnum> months) {
+    _recurringMonths.addAll(months);
   }
 
-  double price(DateModel dateModel) {
-    return _customDatesPrices.containsKey(dateModel.code)
-        ? (_customDatesPrices[dateModel.code] ?? defaultPrice)
+  double price(MonthEnum month) {
+    return _customPrices.containsKey(month)
+        ? (_customPrices[month] ?? defaultPrice)
         : defaultPrice;
   }
 
-  void changeCustomPrice(DateModel dateModel, double price) {
-    _customDatesPrices[dateModel.code] = price;
+  void changeCustomPrice(MonthEnum month, double price) {
+    _customPrices[month] = price;
   }
 
   MonthlyExpenseControlItemModel editAndCopy({
@@ -238,8 +238,8 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       creationDate: creationDate,
       groupingId: groupingId,
       defaultPrice: defaultPrice ?? this.defaultPrice,
-      recurringDates: _recurringDates,
-      customDatesPrices: _customDatesPrices,
+      recurringMonths: _recurringMonths,
+      customPrices: _customPrices,
     );
   }
 
@@ -250,22 +250,39 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     super.groupingId,
     super.description,
     required this.defaultPrice,
-    required Set<String> recurringDates,
-    required Map<String, double> customDatesPrices,
-  })  : _recurringDates = recurringDates,
-        _customDatesPrices = customDatesPrices;
+    required Set<MonthEnum> recurringMonths,
+    required Map<MonthEnum, double> customPrices,
+  })  : _recurringMonths = recurringMonths,
+        _customPrices = customPrices;
 
   @override
   Map<String, dynamic> toMap() {
+    final Map<int, double> customPrices = {};
+    for (final MonthEnum month in _customPrices.keys) {
+      customPrices[month.index] = _customPrices[month] ?? defaultPrice;
+    }
+
     return super.toMap()
       ..addAll({
         'defaultPrice': defaultPrice.toStringAsFixed(2),
-        'recurringDates': _recurringDates,
-        'customDatesPrices': _customDatesPrices,
+        'recurringMonths': _recurringMonths.map((e) => e.index),
+        'customPrices': customPrices,
       });
   }
 
   factory MonthlyExpenseControlItemModel.fromMap(Map<String, dynamic> map) {
+    final Set<MonthEnum> recurringMonths = Set<int>.from(map['recurringMonths'])
+        .map((e) => MonthEnum.values[e])
+        .toSet();
+
+    final rawCustomPrices = Map<int, double>.from(map['customPrices']);
+    final Map<MonthEnum, double> customPrices = {};
+    for (final int index in rawCustomPrices.keys) {
+      final monthEnum = MonthEnum.values[index];
+      customPrices[monthEnum] =
+          rawCustomPrices[index] ?? double.parse(map['defaultPrice']);
+    }
+
     return MonthlyExpenseControlItemModel(
       id: map['id'],
       name: map['name'],
@@ -273,8 +290,8 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       description: map['description'],
       groupingId: map['groupingId'],
       defaultPrice: double.parse(map['defaultPrice']),
-      recurringDates: Set<String>.from(map['recurringDates']),
-      customDatesPrices: Map<String, double>.from(map['customDatesPrices']),
+      recurringMonths: recurringMonths,
+      customPrices: customPrices,
     );
   }
 
@@ -286,8 +303,8 @@ class MonthlyExpenseControlItemModel extends ItemModel {
         description,
         groupingId,
         defaultPrice,
-        _recurringDates,
-        _customDatesPrices,
+        _recurringMonths,
+        _customPrices,
       ];
 }
 

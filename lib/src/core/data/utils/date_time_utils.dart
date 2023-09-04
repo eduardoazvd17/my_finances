@@ -55,7 +55,7 @@ class DateTimeUtils {
   }
 
   static formatMonth(DateTime date) {
-    final String dateString = DateFormat.yMMMM(_localeString).format(date);
+    final String dateString = DateFormat.MMMM(_localeString).format(date);
     return dateString.replaceFirst(
       dateString[0],
       dateString[0].toUpperCase(),

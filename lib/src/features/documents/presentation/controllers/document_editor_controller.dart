@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../data/enums/document_type.dart';
 import '../../data/enums/operation_type.dart';
-import '../../data/models/date_model.dart';
+import '../../data/enums/month_enum.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
 import '../../data/services/document_editor_service.dart';
@@ -28,10 +28,6 @@ class DocumentEditorController extends GetxController {
   Future<void> _initializeData() async {
     _isLoading.value = true;
     try {
-      if (documentModel.type == DocumentType.monthlyExpenseControl) {
-        _buildTimeline();
-      }
-
       final List<GroupingModel> tempGroups =
           await _documentEditorService.loadGroups();
       final List<ItemModel> tempItems =
@@ -59,30 +55,10 @@ class DocumentEditorController extends GetxController {
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
 
-  final RxList<DateModel> _timeline = RxList<DateModel>([]);
-  List<DateModel> get timeline => _timeline;
-  void _buildTimeline() {
-    final List<DateModel> timeline = [];
-    final int startYear = documentModel.creationDate.year;
-    final int actualYear = DateTime.now().year;
-    final int totalYearsCount = (actualYear - startYear) + 1;
-
-    int currentYear = startYear;
-    while (currentYear <= (startYear + totalYearsCount)) {
-      for (int i = 1; i <= 12; i++) {
-        timeline.add(DateModel(month: i, year: currentYear));
-      }
-      currentYear++;
-    }
-
-    _timeline.value = timeline;
-  }
-
-  final Rx<DateModel> _selectedDate = Rx<DateModel>(
-    DateModel(month: DateTime.now().month, year: DateTime.now().year),
-  );
-  DateModel get selectedDate => _selectedDate.value;
-  set selectedDate(DateModel value) => _selectedDate.value = value;
+  final Rx<MonthEnum> _selectedMonth =
+      Rx<MonthEnum>(MonthEnum.values[DateTime.now().month - 1]);
+  MonthEnum get selectedMonth => _selectedMonth.value;
+  set selectedMonth(MonthEnum value) => _selectedMonth.value = value;
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
   List<GroupingModel> get groups => _groups;

@@ -8,6 +8,7 @@ import '../../../../core/presentation/widgets/floating_bottom_menu_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/list_header_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
+import '../../data/enums/month_enum.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
 import '../widgets/annotation_total_content.dart';
 import '../widgets/investiment_control_total_content.dart';
@@ -165,7 +166,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
   Widget _monthSelectorHeaderWidget(BuildContext context) {
     return ListHeaderWidget(
-      title: controller.selectedDate.title,
+      title: controller.selectedMonth.title,
       action: IconButtonWidget(
         icon: CupertinoIcons.calendar_today,
         tooltip: 'change-button'.i18n(),
@@ -175,11 +176,10 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               context: context,
               builder: (_) {
                 return BottomSheetModalPicker(
-                  itemsWidget: controller.timeline.map((e) => Text(e.title)),
-                  selectedIndex:
-                      controller.timeline.indexOf(controller.selectedDate),
+                  itemsWidget: MonthEnum.values.map((e) => Text(e.title)),
+                  selectedIndex: controller.selectedMonth.index,
                   onChange: (int index) {
-                    controller.selectedDate = controller.timeline[index];
+                    controller.selectedMonth = MonthEnum.values[index];
                   },
                 );
               },
@@ -188,14 +188,13 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             showMenu(
               context: context,
               position: RelativeRect.fill,
-              items: controller.timeline.map(
+              items: MonthEnum.values.map(
                 (e) {
-                  final int index = controller.timeline.indexOf(e);
-                  return PopupMenuItem(
-                    value: index,
+                  return PopupMenuItem<MonthEnum>(
+                    value: e,
                     child: Text(e.title),
                     onTap: () {
-                      controller.selectedDate = controller.timeline[index];
+                      controller.selectedMonth = e;
                     },
                   );
                 },
