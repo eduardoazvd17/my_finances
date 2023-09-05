@@ -209,5 +209,5 @@
     "profit-text": "Profit",
     "operation-text": "Operation",
     "value-text": "Value",
-    "sell-quantity-validation": "Sell quantity cannot be greater than purchases quantity.\n\nQuantity available for sale: %s."
+    "sell-quantity-validation": "The number of sales operations cannot be greater than the number of purchase operations\n\nAvailable for sale: %s"
 }
