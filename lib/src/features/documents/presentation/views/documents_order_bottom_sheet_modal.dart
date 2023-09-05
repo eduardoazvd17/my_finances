@@ -59,7 +59,15 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
             items: DocumentOrderType.values.map((documentOrderType) {
               return DropdownMenuItem(
                 value: documentOrderType,
-                child: Text(documentOrderType.title),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: documentOrderType.icon,
+                    ),
+                    Text(documentOrderType.title),
+                  ],
+                ),
               );
             }).toList(),
           ),
@@ -93,7 +101,15 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
             items: ListOrder.values.map((order) {
               return DropdownMenuItem(
                 value: order,
-                child: Text(order.title),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: order.icon,
+                    ),
+                    Text(order.title),
+                  ],
+                ),
               );
             }).toList(),
           ),
