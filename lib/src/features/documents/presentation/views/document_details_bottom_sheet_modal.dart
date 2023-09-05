@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/presentation/widgets/custom_dialog.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
+import '../../data/enums/document_type.dart';
 import '../../data/models/document_model.dart';
 
 import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
@@ -40,6 +41,8 @@ class _DocumentDetailsBottomSheetModalWidgetState
   @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
+      icon: widget.documentModel.type.icon,
+      title: widget.documentModel.name,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(

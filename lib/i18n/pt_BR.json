@@ -209,5 +209,6 @@
     "profit-text": "Lucro",
     "operation-text": "Operação",
     "value-text": "Valor",
-    "sell-quantity-validation": "A quantidade de operações de venda não pode ser maior que a quantidade de operações de compra.\n\nDisponível para venda: %s"
+    "sell-quantity-validation": "A quantidade de operações de venda não pode ser maior que a quantidade de operações de compra.\n\nDisponível para venda: %s",
+    "change-month-button": "Alterar mês selecionado"
 }

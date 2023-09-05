@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'bottom_sheet_modal_widget.dart';
 
 class BottomSheetModalPicker extends StatelessWidget {
+  final IconData icon;
+  final String title;
   final Iterable<Widget> itemsWidget;
   final int selectedIndex;
   final void Function(int) onChange;
   const BottomSheetModalPicker({
     super.key,
+    required this.icon,
+    required this.title,
     required this.itemsWidget,
     required this.selectedIndex,
     required this.onChange,
@@ -17,9 +21,10 @@ class BottomSheetModalPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
+      icon: icon,
+      title: title,
       child: Column(
         children: [
-          const Divider(),
           SizedBox(
             height: 200,
             child: CupertinoPicker(
@@ -61,7 +66,6 @@ class BottomSheetModalPicker extends StatelessWidget {
                   .toList(),
             ),
           ),
-          const Divider(),
         ],
       ),
     );

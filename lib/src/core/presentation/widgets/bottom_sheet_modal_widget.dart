@@ -53,25 +53,41 @@ class BottomSheetModalWidget extends StatelessWidget {
               ),
               if (title != null)
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.only(
+                    bottom: 16,
+                    left: 16,
+                    right: 16,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      if (icon != null)
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Icon(icon),
-                        ),
-                      Text(
-                        title!,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                      if (icon != null) _headerIcon,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            title!,
+                            maxLines: 3,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
+                      if (icon != null)
+                        Visibility(
+                          visible: false,
+                          maintainAnimation: true,
+                          maintainSize: true,
+                          maintainState: true,
+                          child: _headerIcon,
+                        ),
                     ],
                   ),
                 ),
+              if (title != null) const Divider(),
               Flexible(
                 child: ScrollViewWidget(
                   showBar: true,
@@ -85,8 +101,10 @@ class BottomSheetModalWidget extends StatelessWidget {
     );
   }
 
+  Widget get _headerIcon => Icon(icon, size: 30);
+
   Widget get _closeButton => Padding(
-        padding: const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.only(right: 5, top: 5),
         child: IconButtonWidget(
           icon: Icons.close,
           iconColor: Colors.red,

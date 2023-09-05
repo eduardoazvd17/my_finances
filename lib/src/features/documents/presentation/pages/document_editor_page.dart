@@ -169,13 +169,15 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       title: controller.selectedMonth.title,
       action: IconButtonWidget(
         icon: CupertinoIcons.calendar_today,
-        tooltip: 'change-button'.i18n(),
+        tooltip: 'change-month-button'.i18n(),
         onTap: () {
           if (!kIsWeb) {
             showModalBottomSheet(
               context: context,
               builder: (_) {
                 return BottomSheetModalPicker(
+                  icon: CupertinoIcons.calendar_today,
+                  title: 'change-month-button'.i18n(),
                   itemsWidget: MonthEnum.values.map((e) => Text(e.title)),
                   selectedIndex: controller.selectedMonth.index,
                   onChange: (int index) {

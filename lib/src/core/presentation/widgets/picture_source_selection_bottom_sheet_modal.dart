@@ -17,6 +17,7 @@ class PictureSourceSelectionBottomSheetModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
+      title: 'select-text'.i18n(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

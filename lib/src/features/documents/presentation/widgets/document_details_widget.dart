@@ -8,11 +8,9 @@ import '../../data/models/document_model.dart';
 
 class DocumentDetailsWidget extends StatelessWidget {
   final DocumentModel documentModel;
-  final bool showHeader;
   const DocumentDetailsWidget({
     super.key,
     required this.documentModel,
-    this.showHeader = true,
   });
 
   @override
@@ -20,23 +18,23 @@ class DocumentDetailsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (showHeader)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Row(
-              children: [
-                Icon(documentModel.type.icon, size: 40),
-                const SizedBox(width: 5),
-                Expanded(
-                    child: Text(
-                  documentModel.name,
-                  style: const TextStyle(fontSize: 16),
-                  textAlign: TextAlign.left,
-                )),
-              ],
-            ),
-          ),
-        if (showHeader) const Divider(),
+        // if (showHeader)
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(vertical: 5.0),
+        //     child: Row(
+        //       children: [
+        //         Icon(documentModel.type.icon, size: 40),
+        //         const SizedBox(width: 5),
+        //         Expanded(
+        //             child: Text(
+        //           documentModel.name,
+        //           style: const TextStyle(fontSize: 16),
+        //           textAlign: TextAlign.left,
+        //         )),
+        //       ],
+        //     ),
+        //   ),
+        // if (showHeader) const Divider(),
         _textTile(
           label: 'document-type-label'.i18n(),
           data: documentModel.type.title,
