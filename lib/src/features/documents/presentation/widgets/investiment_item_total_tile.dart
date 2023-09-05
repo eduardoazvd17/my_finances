@@ -60,7 +60,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
               OperationType.sell.title,
               style: TextStyle(color: Colors.red[300]),
             ),
-            third: Text('current-text'.i18n()),
+            third: Text('profit-text'.i18n()),
           ),
         ),
         _verticalDivider(context),

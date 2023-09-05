@@ -203,11 +203,11 @@
     "remove-photo-confirmation-text": "Do you really want to remove your profile picture?",
     "total-buys-label": "Total in purchases:",
     "total-sales-label": "Total in sales:",
-    "invested-value-label": "Invested value:",
+    "profit-label": "Total profit:",
     "resume-by-asset-text": "Summary by asset",
     "profile-picture-text": "Profile picture",
     "current-text": "Current",
     "operation-text": "Operation",
-    "value-text": "Value",
+    "profit-text": "Profit",
     "sell-quantity-validation": "Sell quantity cannot be greater than purchases quantity.\n\nQuantity available for sale: %s."
 }

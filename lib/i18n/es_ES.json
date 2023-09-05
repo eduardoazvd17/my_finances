@@ -203,11 +203,11 @@
     "remove-photo-confirmation-text": "¿De verdad quieres eliminar tu foto de perfil?",
     "total-buys-label": "Total en compras:",
     "total-sales-label": "Total en ventas:",
-    "invested-value-label": "Valor invertido:",
+    "profit-label": "Beneficio total:",
     "resume-by-asset-text": "Resumen por activo",
     "profile-picture-text": "Imagen de perfil",
     "current-text": "Actual",
     "operation-text": "Operación",
-    "value-text": "Valor",
+    "profit-text": "Beneficio",
     "sell-quantity-validation": "La cantidad de venta no puede ser mayor que la cantidad de compra.\n\nCantidad disponible para la venta: %s."
 }

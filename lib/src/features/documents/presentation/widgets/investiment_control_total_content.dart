@@ -70,15 +70,15 @@ class InvestimentControlTotalContent extends StatelessWidget {
           priceColor: Colors.red[300]!,
         ),
         ItemTotalTile(
-          title: 'invested-value-label'.i18n(),
+          title: 'profit-label'.i18n(),
           price: items.isEmpty
               ? 0
               : items
                   .map((i) {
                     if (i.operationType == OperationType.purchase) {
-                      return i.quantity * i.price;
-                    } else {
                       return -(i.quantity * i.price);
+                    } else {
+                      return (i.quantity * i.price);
                     }
                   })
                   .reduce((a, b) => a + b)
@@ -127,8 +127,8 @@ class InvestimentControlTotalContent extends StatelessWidget {
                   ? 0
                   : itemsByGroup(g.id)
                       .map((e) => switch (e.operationType) {
-                            OperationType.purchase => e.quantity * e.price,
-                            OperationType.sell => -(e.quantity * e.price),
+                            OperationType.purchase => -(e.quantity * e.price),
+                            OperationType.sell => e.quantity * e.price,
                           })
                       .reduce((a, b) => a + b),
               quotas: purchaseItemsByGroup(g.id).isEmpty &&
