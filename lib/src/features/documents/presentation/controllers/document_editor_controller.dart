@@ -268,6 +268,27 @@ class DocumentEditorController extends GetxController {
         throw AppError(message: 'quantity-validation'.i18n());
       }
 
+      if (newOperationType == OperationType.sell) {
+        final currentItems =
+            getItemsByGroup(itemModel?.groupingId ?? newGroupingId)
+                .cast<InvestimentControlItemModel>();
+        if (currentItems.isNotEmpty) {
+          final int maxSellQuantity = currentItems.map((e) {
+            return switch (e.operationType) {
+              OperationType.purchase => e.quantity,
+              OperationType.sell => -e.quantity,
+            };
+          }).reduce((a, b) => a + b);
+          if (newQuantity > maxSellQuantity) {
+            throw AppError(
+              message: 'sell-quantity-validation'.i18n(
+                [maxSellQuantity.toString()],
+              ),
+            );
+          }
+        }
+      }
+
       if (newPrice == null) {
         throw AppError(message: 'price-validation'.i18n());
       }

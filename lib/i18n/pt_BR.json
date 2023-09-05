@@ -208,5 +208,6 @@
     "profile-picture-text": "Foto de perfil",
     "current-text": "Atual",
     "operation-text": "Operação",
-    "value-text": "Valor"
+    "value-text": "Valor",
+    "sell-quantity-validation": "A quantidade de venda não pode ser maior que a quantidade de compras.\n\nQuantidade disponível para venda: %s"
 }
