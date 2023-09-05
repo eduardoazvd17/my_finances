@@ -104,7 +104,7 @@ class BottomSheetModalWidget extends StatelessWidget {
   Widget get _headerIcon => Icon(icon, size: 30);
 
   Widget get _closeButton => Padding(
-        padding: const EdgeInsets.only(right: 5, top: 5),
+        padding: const EdgeInsets.only(right: 2.5, top: 2.5),
         child: IconButtonWidget(
           icon: Icons.close,
           iconColor: Colors.red,

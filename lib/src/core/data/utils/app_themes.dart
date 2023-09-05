@@ -33,8 +33,11 @@ class AppThemes {
         centerTitle: true,
       ),
       dialogBackgroundColor: _lightSecondaryBackgroundColor,
-      bottomSheetTheme: const BottomSheetThemeData(
+      bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
@@ -64,8 +67,11 @@ class AppThemes {
         centerTitle: true,
       ),
       dialogBackgroundColor: _darkSecondaryBackgroundColor,
-      bottomSheetTheme: const BottomSheetThemeData(
+      bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
