@@ -206,8 +206,8 @@
     "profit-label": "Lucro total:",
     "resume-by-asset-text": "Resumo por ativo",
     "profile-picture-text": "Foto de perfil",
-    "current-text": "Atual",
-    "operation-text": "Operação",
     "profit-text": "Lucro",
+    "operation-text": "Operação",
+    "value-text": "Valor",
     "sell-quantity-validation": "A quantidade de venda não pode ser maior que a quantidade de compras.\n\nQuantidade disponível para venda: %s"
 }

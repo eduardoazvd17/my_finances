@@ -206,8 +206,8 @@
     "profit-label": "Beneficio total:",
     "resume-by-asset-text": "Resumen por activo",
     "profile-picture-text": "Imagen de perfil",
-    "current-text": "Actual",
-    "operation-text": "Operación",
     "profit-text": "Beneficio",
+    "operation-text": "Operación",
+    "value-text": "Valor",
     "sell-quantity-validation": "La cantidad de venta no puede ser mayor que la cantidad de compra.\n\nCantidad disponible para la venta: %s."
 }

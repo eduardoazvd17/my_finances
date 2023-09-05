@@ -206,8 +206,8 @@
     "profit-label": "Total profit:",
     "resume-by-asset-text": "Summary by asset",
     "profile-picture-text": "Profile picture",
-    "current-text": "Current",
-    "operation-text": "Operation",
     "profit-text": "Profit",
+    "operation-text": "Operation",
+    "value-text": "Value",
     "sell-quantity-validation": "Sell quantity cannot be greater than purchases quantity.\n\nQuantity available for sale: %s."
 }
