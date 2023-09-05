@@ -71,7 +71,7 @@ class InvestimentControlTotalContent extends StatelessWidget {
         ),
         ItemTotalTile(
           title: 'profit-label'.i18n(),
-          price: items.isEmpty
+          price: items.isEmpty || sellItems.isEmpty
               ? 0
               : items
                   .map((i) {

@@ -92,7 +92,9 @@ class InvestimentItemTotalTile extends StatelessWidget {
               CurrencyUtils.format(salesValue),
               style: TextStyle(color: Colors.red[300]),
             ),
-            third: Text(CurrencyUtils.format(quotasValue)),
+            third: Text(
+              CurrencyUtils.format(salesValue == 0 ? 0 : quotasValue),
+            ),
           ),
         ),
       ],
