@@ -210,5 +210,6 @@
     "operation-text": "Operação",
     "value-text": "Valor",
     "sell-quantity-validation": "A quantidade de operações de venda não pode ser maior que a quantidade de operações de compra.\n\nDisponível para venda: %s",
-    "change-month-button": "Alterar mês selecionado"
+    "change-month-button": "Alterar mês selecionado",
+    "choose-option-below-text": "Escolha uma opção abaixo"
 }

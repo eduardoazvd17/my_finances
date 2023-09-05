@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:localization/localization.dart';
 
 enum ListOrder {
@@ -9,7 +9,7 @@ enum ListOrder {
 extension OrderExtension on ListOrder {
   String get title => 'list-order-$index'.i18n();
   Icon get icon => switch (this) {
-        ListOrder.ascending => const Icon(Icons.arrow_upward),
-        ListOrder.descending => const Icon(Icons.arrow_downward),
+        ListOrder.ascending => const Icon(CupertinoIcons.sort_up),
+        ListOrder.descending => const Icon(CupertinoIcons.sort_down),
       };
 }
