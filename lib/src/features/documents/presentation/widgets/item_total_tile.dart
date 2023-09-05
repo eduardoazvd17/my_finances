@@ -14,7 +14,7 @@ class ItemTotalTile extends StatelessWidget {
     required this.title,
     required this.price,
     required this.quantity,
-    this.priceColor = Colors.lightGreen,
+    this.priceColor = Colors.green,
   });
 
   @override
