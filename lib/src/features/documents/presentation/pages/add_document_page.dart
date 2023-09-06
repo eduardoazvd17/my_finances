@@ -58,6 +58,8 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                             children: [
                               Text(
                                 'add-document-type-label'.i18n(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   color: AppThemes.commonColor,
                                 ),
@@ -83,8 +85,10 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
                                     child: Icon(documentType.icon, size: 40),
                                   ),
                                   Expanded(
-                                    child:
-                                        Text(documentType.title, maxLines: 2),
+                                    child: Text(
+                                      documentType.title,
+                                      maxLines: 2,
+                                    ),
                                   ),
                                 ],
                               ),

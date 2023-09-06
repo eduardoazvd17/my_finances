@@ -65,7 +65,13 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
                       padding: const EdgeInsets.only(right: 10),
                       child: documentOrderType.icon,
                     ),
-                    Text(documentOrderType.title),
+                    Expanded(
+                      child: Text(
+                        documentOrderType.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -107,7 +113,13 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
                       padding: const EdgeInsets.only(right: 10),
                       child: order.icon,
                     ),
-                    Text(order.title),
+                    Expanded(
+                      child: Text(
+                        order.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
               );

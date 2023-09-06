@@ -120,7 +120,13 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                           padding: EdgeInsets.only(right: 10),
                           child: Icon(CupertinoIcons.globe),
                         ),
-                        Text('app-language-null'.i18n()),
+                        Expanded(
+                          child: Text(
+                            'app-language-null'.i18n(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -133,7 +139,13 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                             padding: const EdgeInsets.only(right: 10),
                             child: language.icon,
                           ),
-                          Text(language.title),
+                          Expanded(
+                            child: Text(
+                              language.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -179,14 +191,24 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                           padding: EdgeInsets.only(right: 10),
                           child: Icon(CupertinoIcons.calendar),
                         ),
-                        Text('app-date-format-null'.i18n()),
+                        Expanded(
+                          child: Text(
+                            'app-date-format-null'.i18n(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   ...AppDateFormat.values.map(
                     (date) => DropdownMenuItem(
                       value: date,
-                      child: Text(date.title),
+                      child: Text(
+                        date.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   )
                 ],
@@ -245,7 +267,13 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                           padding: EdgeInsets.only(right: 10),
                           child: Icon(Icons.currency_exchange_sharp),
                         ),
-                        Text('app-currency-format-null'.i18n()),
+                        Expanded(
+                          child: Text(
+                            'app-currency-format-null'.i18n(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -268,7 +296,13 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                                 ),
                               ),
                             ),
-                            Text(title),
+                            Expanded(
+                              child: Text(
+                                title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ],
                         ),
                       );
@@ -318,7 +352,13 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
                               padding: const EdgeInsets.only(right: 10),
                               child: theme.icon,
                             ),
-                            Text(theme.title),
+                            Expanded(
+                              child: Text(
+                                theme.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ],
                         ),
                       ),
