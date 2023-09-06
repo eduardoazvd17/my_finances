@@ -12,7 +12,7 @@ import 'src/core/presentation/controllers/i18n_controller.dart';
 import 'firebase_options.dart';
 import 'src/core/data/utils/app_routes.dart';
 import 'src/core/data/utils/app_themes.dart';
-import 'src/core/data/utils/life_cycle_handler.dart';
+import 'src/core/data/utils/lifecycle_handler.dart';
 import 'src/core/presentation/controllers/theme_controller.dart';
 
 void main() async {
@@ -55,7 +55,7 @@ class MyFinancesApp extends GetWidget<I18nController> {
 
           return MediaQuery(
             data: mediaQueryData.copyWith(textScaleFactor: textScaleFactor),
-            child: LifeCycleHandler(child: child!),
+            child: LifecycleHandler(child: child!),
           );
         },
         debugShowCheckedModeBanner: false,

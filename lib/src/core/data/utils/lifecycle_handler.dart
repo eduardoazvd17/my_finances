@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../presentation/controllers/app_controller.dart';
 
-class LifeCycleHandler extends StatefulWidget {
+class LifecycleHandler extends StatefulWidget {
   final Widget child;
-  const LifeCycleHandler({required this.child, super.key});
+  const LifecycleHandler({required this.child, super.key});
 
   @override
-  State<LifeCycleHandler> createState() => _LifeCycleHandlerState();
+  State<LifecycleHandler> createState() => _LifecycleHandlerState();
 }
 
-class _LifeCycleHandlerState extends State<LifeCycleHandler>
+class _LifecycleHandlerState extends State<LifecycleHandler>
     with WidgetsBindingObserver {
   @override
   void initState() {
@@ -25,11 +25,11 @@ class _LifeCycleHandlerState extends State<LifeCycleHandler>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    _requestAuth(state);
+    _auth(state);
     super.didChangeAppLifecycleState(state);
   }
 
-  void _requestAuth(AppLifecycleState state) {
+  void _auth(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
       AppController.instance.showAuthOverlay();
     }

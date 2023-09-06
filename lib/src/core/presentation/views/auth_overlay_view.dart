@@ -15,10 +15,24 @@ class AuthOverlayView extends StatefulWidget {
 }
 
 class _AuthOverlayViewState extends State<AuthOverlayView> {
+  bool _autoClose = true;
+
   @override
   void initState() {
-    AppController.instance.closeAuthOverlay();
     super.initState();
+    WidgetsBinding.instance.addObserver(
+      OnResumeEventHandler(
+        onResume: () {
+          if (_autoClose) {
+            AppController.instance.closeAuthOverlay();
+            setState(() => _autoClose = false);
+          }
+        },
+        onPause: () {
+          setState(() => _autoClose = true);
+        },
+      ),
+    );
   }
 
   @override
@@ -41,7 +55,10 @@ class _AuthOverlayViewState extends State<AuthOverlayView> {
                         child: Text(
                           'auth-required-text'.i18n(),
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -76,7 +93,8 @@ class _AuthOverlayViewState extends State<AuthOverlayView> {
                             child: ButtonWidget(
                               icon: Icons.exit_to_app,
                               text: 'logout-button'.i18n(),
-                              borderColor: Colors.transparent,
+                              foregroundColor: Colors.red[300],
+                              borderColor: Colors.red[300],
                               onTap: () {
                                 Get.dialog(
                                   CustomDialog(
@@ -100,5 +118,25 @@ class _AuthOverlayViewState extends State<AuthOverlayView> {
         ),
       ),
     );
+  }
+}
+
+class OnResumeEventHandler extends WidgetsBindingObserver {
+  final void Function() onResume;
+  final void Function() onPause;
+
+  OnResumeEventHandler({
+    required this.onResume,
+    required this.onPause,
+  });
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      onResume.call();
+    }
+    if (state == AppLifecycleState.paused) {
+      onPause.call();
+    }
   }
 }

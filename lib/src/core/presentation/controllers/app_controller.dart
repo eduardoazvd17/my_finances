@@ -48,11 +48,22 @@ class AppController extends GetxController {
     }
   }
 
-  final RxBool _canShowAuthOverlay = RxBool(false);
   final RxBool _canEnableBiometrics = RxBool(false);
   bool get canEnableBiometrics => _canEnableBiometrics.value;
   final RxBool _isBiometricsEnabled = RxBool(false);
   bool get isBiometricsEnabled => _isBiometricsEnabled.value;
+
+  bool get canShowAuthOverlay =>
+      !kIsWeb &&
+      !_pauseAuthOverlay.value &&
+      isBiometricsEnabled &&
+      canEnableBiometrics &&
+      user != null &&
+      !Get.currentRoute.contains(AppRoutes.initialRoute);
+
+  final RxBool _pauseAuthOverlay = RxBool(false);
+  void pauseAuthOverlay() => _pauseAuthOverlay.value = true;
+  void resumeAuthOverlay() => _pauseAuthOverlay.value = false;
 
   Future<void> checkBiometricsSettings() async {
     final bool canEnable = await _authService.checkIfCanEnableBiometrics();
@@ -67,11 +78,11 @@ class AppController extends GetxController {
     bool value, {
     bool disableAuthCheck = false,
   }) async {
-    _canShowAuthOverlay.value = false;
+    pauseAuthOverlay();
     if (value && canEnableBiometrics) {
       final result = await _authService.enableBiometrics();
       _isBiometricsEnabled.value = result;
-      _canShowAuthOverlay.value = result;
+      if (result) resumeAuthOverlay();
     } else {
       final bool authResult = isBiometricsEnabled && !disableAuthCheck
           ? (await _authService.requestAuth())
@@ -87,32 +98,20 @@ class AppController extends GetxController {
 
   Future<bool> requestAuth() async {
     if (kIsWeb) return true;
-
-    _canShowAuthOverlay.value = false;
-
+    pauseAuthOverlay();
     final bool result;
     if (isBiometricsEnabled && canEnableBiometrics) {
       final authResult = await _authService.requestAuth();
       result = authResult;
-      if (authResult) {
-        _canShowAuthOverlay.value = true;
-      }
+      if (authResult) resumeAuthOverlay();
     } else {
       result = true;
     }
-
     return result;
   }
 
   Future<void> showAuthOverlay() async {
-    if (_pauseAuthOverlay.value) return;
-    if (!Get.currentRoute.contains(AppRoutes.initialRoute) &&
-        user != null &&
-        isBiometricsEnabled &&
-        canEnableBiometrics &&
-        _canShowAuthOverlay.value &&
-        !kIsWeb) {
-      _canShowAuthOverlay.value = false;
+    if (canShowAuthOverlay) {
       Get.dialog(
         const AuthOverlayView(),
         barrierDismissible: false,
@@ -120,10 +119,6 @@ class AppController extends GetxController {
       );
     }
   }
-
-  final RxBool _pauseAuthOverlay = RxBool(false);
-  void pauseAuthOverlay() => _pauseAuthOverlay.value = true;
-  void resumeAuthOverlay() => _pauseAuthOverlay.value = false;
 
   Future<void> closeAuthOverlay() async {
     final result = await requestAuth();
