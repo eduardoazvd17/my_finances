@@ -12,6 +12,8 @@ import '../controllers/i18n_controller.dart';
 import '../controllers/theme_controller.dart';
 
 import '../widgets/bottom_sheet_modal_widget.dart';
+import '../widgets/button_widget.dart';
+import '../widgets/custom_dialog.dart';
 import '../widgets/drop_down_button_widget.dart';
 
 class SettingsBottomSheetModal extends GetWidget<AppController> {
@@ -60,6 +62,8 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         _currencyFormatTile(context),
         const Divider(),
         _themeTile(context),
+        const Divider(),
+        _logoutButton(context),
       ],
     );
   }
@@ -369,6 +373,30 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _logoutButton(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: ButtonWidget(
+            borderColor: Colors.transparent,
+            foregroundColor: Colors.red[300],
+            text: 'logout-button'.i18n(),
+            onTap: () {
+              Get.dialog(
+                CustomDialog(
+                  title: 'logout-button'.i18n(),
+                  content: 'logout-confirmation-text'.i18n(),
+                  onConfirm: AppController.instance.logout,
+                  invertButtonColor: true,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
