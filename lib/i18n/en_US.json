@@ -211,5 +211,7 @@
     "value-text": "Value",
     "sell-quantity-validation": "The number of sales operations cannot be greater than the number of purchase operations\n\nAvailable for sale: %s",
     "change-month-button": "Change selected month",
-    "choose-option-below-text": "Choose an option below"
+    "choose-option-below-text": "Choose an option below",
+    "balance-text": "Balance: %s",
+    "spending-text": "Spending: %s"
 }

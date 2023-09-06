@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ListHeaderWidget extends StatelessWidget {
   final String title;
+  final Widget? subtitleContent;
   final Widget? action;
   final Widget? content;
   final bool expandedContent;
@@ -9,6 +10,7 @@ class ListHeaderWidget extends StatelessWidget {
   const ListHeaderWidget({
     super.key,
     required this.title,
+    this.subtitleContent,
     this.action,
     this.content,
     this.expandedContent = false,
@@ -38,6 +40,7 @@ class ListHeaderWidget extends StatelessWidget {
             ],
           ),
         ),
+        if (subtitleContent != null) subtitleContent!,
         const Divider(),
         if (content != null)
           expandedContent ? Expanded(child: content!) : content!,
