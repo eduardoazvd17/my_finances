@@ -122,13 +122,16 @@ class WelcomePage extends GetWidget<AuthController> {
   }
 
   Widget _settingsMenuButton(BuildContext context) {
-    return IconButtonWidget(
-      icon: CupertinoIcons.settings,
-      tooltip: 'settings-text'.i18n(),
-      onTap: () => showModalBottomSheet(
-        context: context,
-        useSafeArea: true,
-        builder: (_) => const SettingsBottomSheetModal(),
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: IconButtonWidget(
+        icon: CupertinoIcons.settings,
+        tooltip: 'settings-text'.i18n(),
+        onTap: () => showModalBottomSheet(
+          context: context,
+          useSafeArea: true,
+          builder: (_) => const SettingsBottomSheetModal(),
+        ),
       ),
     );
   }
