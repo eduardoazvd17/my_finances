@@ -170,6 +170,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       action: IconButtonWidget(
         icon: CupertinoIcons.calendar_today,
         tooltip: 'change-month-button'.i18n(),
+        compactMode: true,
         onTap: () {
           if (!kIsWeb) {
             showModalBottomSheet(
