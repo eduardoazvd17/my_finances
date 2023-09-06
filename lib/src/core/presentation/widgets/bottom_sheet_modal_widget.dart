@@ -61,7 +61,7 @@ class BottomSheetModalWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      if (icon != null) _headerIcon,
+                      if (icon != null) _headerIcon(context),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -82,7 +82,7 @@ class BottomSheetModalWidget extends StatelessWidget {
                           maintainAnimation: true,
                           maintainSize: true,
                           maintainState: true,
-                          child: _headerIcon,
+                          child: _headerIcon(context),
                         ),
                     ],
                   ),
@@ -101,7 +101,12 @@ class BottomSheetModalWidget extends StatelessWidget {
     );
   }
 
-  Widget get _headerIcon => Icon(icon, size: 30);
+  Widget _headerIcon(BuildContext context) {
+    return Icon(
+      icon,
+      size: 25 * MediaQuery.of(context).textScaleFactor,
+    );
+  }
 
   Widget get _closeButton => Padding(
         padding: const EdgeInsets.only(right: 2.5, top: 2.5),

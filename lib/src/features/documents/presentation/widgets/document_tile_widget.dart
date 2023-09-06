@@ -37,7 +37,10 @@ class DocumentTileWidget extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Icon(documentModel.type.icon, size: 50),
+                Icon(
+                  documentModel.type.icon,
+                  size: 40 * MediaQuery.of(context).textScaleFactor,
+                ),
                 if (documentModel.isFavorite)
                   Positioned(
                     top: 0,
