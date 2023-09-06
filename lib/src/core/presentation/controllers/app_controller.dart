@@ -113,7 +113,6 @@ class AppController extends GetxController {
         _canShowAuthOverlay.value &&
         !kIsWeb) {
       _canShowAuthOverlay.value = false;
-      closeAuthOverlay();
       Get.dialog(
         const AuthOverlayView(),
         barrierDismissible: false,

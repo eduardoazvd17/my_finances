@@ -7,8 +7,19 @@ import '../controllers/app_controller.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/custom_dialog.dart';
 
-class AuthOverlayView extends StatelessWidget {
+class AuthOverlayView extends StatefulWidget {
   const AuthOverlayView({super.key});
+
+  @override
+  State<AuthOverlayView> createState() => _AuthOverlayViewState();
+}
+
+class _AuthOverlayViewState extends State<AuthOverlayView> {
+  @override
+  void initState() {
+    AppController.instance.closeAuthOverlay();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
