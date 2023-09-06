@@ -47,8 +47,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         floatingBottomMenu: _getDocumentFloatingMenu(context),
         body: Column(
           children: [
-            if (controller.documentModel.type ==
-                DocumentType.monthlyExpenseControl)
+            if (controller.isMonthlyExpensesControl)
               Obx(() => _monthlyExpenseControlHeaderWidget(context)),
             Expanded(
               child: Obx(() {
@@ -167,9 +166,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _monthlyExpenseControlHeaderWidget(BuildContext context) {
-    if (controller.documentModel.type != DocumentType.monthlyExpenseControl) {
-      return Container();
-    }
+    if (!controller.isMonthlyExpensesControl) return Container();
 
     return ListHeaderWidget(
       title: controller.selectedMonth.title,

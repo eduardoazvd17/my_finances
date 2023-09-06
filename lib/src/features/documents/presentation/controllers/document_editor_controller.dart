@@ -55,21 +55,28 @@ class DocumentEditorController extends GetxController {
   final RxBool _isLoading = RxBool(false);
   bool get isLoading => _isLoading.value;
 
+  bool get isMonthlyExpensesControl {
+    return documentModel.type == DocumentType.monthlyExpenseControl;
+  }
+
   final Rx<MonthEnum> _selectedMonth =
       Rx<MonthEnum>(MonthEnum.values[DateTime.now().month - 1]);
   MonthEnum get selectedMonth => _selectedMonth.value;
   set selectedMonth(MonthEnum value) => _selectedMonth.value = value;
 
   double get selectedMonthEarnings {
-    return 1000;
+    if (!isMonthlyExpensesControl) return 0;
+    return 1000; //! MOCK
   }
 
   double get selectedMonthExpenses {
-    return 534.9;
+    if (!isMonthlyExpensesControl) return 0;
+    return 534.9; //! MOCK
   }
 
   double get selectedMonthBalance {
-    return selectedMonthEarnings - selectedMonthExpenses;
+    if (!isMonthlyExpensesControl) return 0;
+    return selectedMonthEarnings - selectedMonthExpenses; //! MOCK
   }
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
