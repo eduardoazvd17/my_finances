@@ -32,6 +32,8 @@ class BalanceWidget extends StatelessWidget {
           Expanded(
             child: Text(
               CurrencyUtils.format(balance),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: balance == 0
                     ? AppThemes.commonColor
