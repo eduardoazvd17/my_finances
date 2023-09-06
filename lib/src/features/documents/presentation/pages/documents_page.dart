@@ -149,6 +149,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
     return IconButtonWidget(
       tooltip: 'settings-text'.i18n(),
       icon: CupertinoIcons.settings,
+      compactMode: true,
       onTap: () => showModalBottomSheet(
         context: context,
         useSafeArea: true,
@@ -189,6 +190,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       },
       icon: Icons.filter_list,
       backgroundColor: Colors.transparent,
+      compactMode: true,
     );
   }
 }

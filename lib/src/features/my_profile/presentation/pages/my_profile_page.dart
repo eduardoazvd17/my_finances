@@ -107,6 +107,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                   },
                   tooltip: 'edit-text'.i18n(),
                   icon: CupertinoIcons.pen,
+                  compactMode: true,
                 ),
               ),
             ),
@@ -128,6 +129,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                   },
                   tooltip: 'edit-text'.i18n(),
                   icon: CupertinoIcons.pen,
+                  compactMode: true,
                 ),
               ),
             ),
@@ -172,7 +174,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 8.0,
-              vertical: trailing != null ? 0 : 10,
+              vertical: trailing != null ? 0 : 8,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

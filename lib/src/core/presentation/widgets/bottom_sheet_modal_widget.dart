@@ -115,6 +115,7 @@ class BottomSheetModalWidget extends StatelessWidget {
           iconColor: Colors.red,
           tooltip: 'close-button'.i18n(),
           onTap: Get.back,
+          compactMode: true,
         ),
       );
 }
