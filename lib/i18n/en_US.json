@@ -213,5 +213,6 @@
     "change-month-button": "Change selected month",
     "choose-option-below-text": "Choose an option below",
     "balance-text": "Balance: %s",
-    "spending-text": "Spending: %s"
+    "expenses-text": "Expenses: %s",
+    "earnings-text": "Earnings: %s"
 }

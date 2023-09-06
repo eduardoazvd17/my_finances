@@ -213,5 +213,6 @@
     "change-month-button": "Alterar mês selecionado",
     "choose-option-below-text": "Escolha uma opção abaixo",
     "balance-text": "Saldo: %s",
-    "spending-text": "Gastos: %s"
+    "expenses-text": "Despesas: %s",
+    "earnings-text": "Ganhos: %s"
 }

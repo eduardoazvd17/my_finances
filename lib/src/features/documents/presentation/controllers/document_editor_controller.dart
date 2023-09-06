@@ -60,12 +60,16 @@ class DocumentEditorController extends GetxController {
   MonthEnum get selectedMonth => _selectedMonth.value;
   set selectedMonth(MonthEnum value) => _selectedMonth.value = value;
 
-  double get selectedMonthBalance {
-    return 999999999;
+  double get selectedMonthEarnings {
+    return 1000;
   }
 
-  double get selectedMonthSpending {
-    return 999999999;
+  double get selectedMonthExpenses {
+    return 534.9;
+  }
+
+  double get selectedMonthBalance {
+    return selectedMonthEarnings - selectedMonthExpenses;
   }
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);

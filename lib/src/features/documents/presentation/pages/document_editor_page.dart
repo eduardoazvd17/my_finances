@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
-import '../../../../core/data/utils/currency_utils.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_picker.dart';
 import '../../../../core/presentation/widgets/floating_bottom_menu_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
@@ -12,6 +11,7 @@ import '../../../../core/presentation/widgets/loading_widget.dart';
 import '../../data/enums/month_enum.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
 import '../widgets/annotation_total_content.dart';
+import '../widgets/balance_widget.dart';
 import '../widgets/investiment_control_total_content.dart';
 import '../widgets/grouping_widget.dart';
 import '../../../../core/presentation/widgets/scaffold_widget.dart';
@@ -173,7 +173,11 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
     return ListHeaderWidget(
       title: controller.selectedMonth.title,
-      subtitleContent: _balanceAndSpendingInfo(),
+      subtitleContent: BalanceWidget(
+        earnings: controller.selectedMonthEarnings,
+        expenses: controller.selectedMonthExpenses,
+        balance: controller.selectedMonthBalance,
+      ),
       action: IconButtonWidget(
         icon: CupertinoIcons.calendar_today,
         tooltip: 'change-month-button'.i18n(),
@@ -212,68 +216,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             );
           }
         },
-      ),
-    );
-  }
-
-  Widget _balanceAndSpendingInfo() {
-    return Obx(
-      () => Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Tooltip(
-                  message: 'balance-text'.i18n([
-                    CurrencyUtils.format(controller.selectedMonthBalance),
-                  ]),
-                  child: Text('balance-text'.i18n([''])),
-                ),
-              ),
-              const SizedBox(width: 5),
-              Expanded(
-                child: Tooltip(
-                  message: 'spending-text'.i18n([
-                    CurrencyUtils.format(controller.selectedMonthSpending),
-                  ]),
-                  child: Text('spending-text'.i18n([''])),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Tooltip(
-                  message: 'balance-text'.i18n([
-                    CurrencyUtils.format(controller.selectedMonthBalance),
-                  ]),
-                  child: Text(
-                    CurrencyUtils.format(controller.selectedMonthBalance),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.green),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 5),
-              Expanded(
-                child: Tooltip(
-                  message: 'spending-text'.i18n([
-                    CurrencyUtils.format(controller.selectedMonthSpending),
-                  ]),
-                  child: Text(
-                    CurrencyUtils.format(controller.selectedMonthSpending),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.red[300]),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
