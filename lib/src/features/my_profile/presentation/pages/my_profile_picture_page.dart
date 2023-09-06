@@ -5,6 +5,7 @@ import 'package:localization/localization.dart';
 import '../../../../core/data/errors/app_error.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
 
 class MyProfilePicturePage extends StatefulWidget {
   const MyProfilePicturePage({super.key});
@@ -63,9 +64,9 @@ class _MyProfilePicturePageState extends State<MyProfilePicturePage> {
       ),
       backgroundColor: Colors.black54,
       foregroundColor: Colors.white,
-      leading: IconButton(
-        onPressed: _disableOptionsUsage ? null : Get.back,
-        icon: const Icon(Icons.close),
+      leading: IconButtonWidget(
+        onTap: _disableOptionsUsage ? null : Get.back,
+        icon: Icons.close,
       ),
       title: Text('profile-picture-text'.i18n()),
     );

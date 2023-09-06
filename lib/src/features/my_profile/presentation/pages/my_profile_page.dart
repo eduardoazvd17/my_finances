@@ -7,6 +7,7 @@ import 'package:localization/localization.dart';
 import '../../../../core/presentation/controllers/app_controller.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/scaffold_widget.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 
@@ -92,8 +93,8 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               () => itemTile(
                 label: 'name-text'.i18n(),
                 content: controller.name,
-                trailing: IconButton(
-                  onPressed: () {
+                trailing: IconButtonWidget(
+                  onTap: () {
                     controller.nameController.text = controller.name;
                     _showChangeDialog(
                       title: 'change-name-dialog-title'.i18n(),
@@ -105,7 +106,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                     );
                   },
                   tooltip: 'edit-text'.i18n(),
-                  icon: const Icon(CupertinoIcons.pen),
+                  icon: CupertinoIcons.pen,
                 ),
               ),
             ),
@@ -113,8 +114,8 @@ class MyProfilePage extends GetWidget<MyProfileController> {
               () => itemTile(
                 label: 'nickname-text'.i18n(),
                 content: controller.nickname,
-                trailing: IconButton(
-                  onPressed: () {
+                trailing: IconButtonWidget(
+                  onTap: () {
                     controller.nicknameController.text = controller.nickname;
                     _showChangeDialog(
                       title: 'change-nickname-dialog-title'.i18n(),
@@ -126,7 +127,7 @@ class MyProfilePage extends GetWidget<MyProfileController> {
                     );
                   },
                   tooltip: 'edit-text'.i18n(),
-                  icon: const Icon(CupertinoIcons.pen),
+                  icon: CupertinoIcons.pen,
                 ),
               ),
             ),
@@ -204,10 +205,11 @@ class MyProfilePage extends GetWidget<MyProfileController> {
     }
 
     if (onlyIcon) {
-      return IconButton(
-        onPressed: logout,
+      return IconButtonWidget(
         tooltip: 'logout-button'.i18n(),
-        icon: Icon(Icons.exit_to_app, color: Colors.red[300]),
+        onTap: logout,
+        icon: Icons.exit_to_app,
+        iconColor: Colors.red[300],
       );
     } else {
       return ButtonWidget(

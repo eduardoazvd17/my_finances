@@ -35,12 +35,10 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       child: ScaffoldWidget(
         appBar: AppBar(
           title: Text(controller.documentModel.name),
-          leading: IconButton(
+          leading: IconButtonWidget(
             tooltip: 'close-button'.i18n(),
-            onPressed: () {
-              Get.close(1);
-            },
-            icon: const Icon(Icons.close),
+            onTap: Get.back,
+            icon: Icons.close,
           ),
           actions: [
             _getDocumentInfoMenuButton(context),
@@ -116,26 +114,23 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _getDocumentInfoMenuButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: IconButton(
-        tooltip: 'document-info-button'.i18n(),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            useSafeArea: true,
-            builder: (context) {
-              return DocumentDetailsBottomSheetModalWidget(
-                documentModel: controller.documentModel,
-                additionalContent:
-                    _getInfoAdditionalContentByDocumentType(context),
-              );
-            },
-          );
-        },
-        icon: const Icon(Icons.info_outline),
-      ),
+    return IconButtonWidget(
+      tooltip: 'document-info-button'.i18n(),
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          useSafeArea: true,
+          builder: (context) {
+            return DocumentDetailsBottomSheetModalWidget(
+              documentModel: controller.documentModel,
+              additionalContent:
+                  _getInfoAdditionalContentByDocumentType(context),
+            );
+          },
+        );
+      },
+      icon: Icons.info_outline,
     );
   }
 

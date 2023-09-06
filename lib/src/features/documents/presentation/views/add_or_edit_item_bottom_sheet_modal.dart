@@ -6,6 +6,7 @@ import 'package:localization/localization.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../../data/enums/operation_type.dart';
 import '../../data/models/grouping_model.dart';
@@ -379,8 +380,8 @@ class _AddOrEditItemBottomSheetModalState
               ],
             ),
           ),
-          IconButton(
-            onPressed: () async {
+          IconButtonWidget(
+            onTap: () async {
               final DateTime now = DateTime.now();
 
               final List<DateTime?>? pickedDates =
@@ -402,10 +403,8 @@ class _AddOrEditItemBottomSheetModalState
                 });
               }
             },
-            icon: const Icon(
-              CupertinoIcons.calendar_badge_plus,
-              size: 30,
-            ),
+            icon: CupertinoIcons.calendar_badge_plus,
+            compactMode: true,
           ),
         ],
       ),

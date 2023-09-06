@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../data/enums/document_type.dart';
 import '../../data/models/document_model.dart';
 
@@ -91,9 +92,9 @@ class DocumentTileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () => _openMenu(context),
+            IconButtonWidget(
+              icon: Icons.more_vert,
+              onTap: () => _openMenu(context),
             )
           ],
         ),

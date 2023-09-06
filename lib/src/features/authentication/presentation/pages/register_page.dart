@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../controllers/auth_controller.dart';
 
 import '../../../../core/data/utils/app_routes.dart';
@@ -20,9 +21,9 @@ class RegisterPage extends GetWidget<AuthController> {
     return ScaffoldWidget(
       appBar: AppBar(
         leading: Get.previousRoute != AppRoutes.initialRoute
-            ? IconButton(
-                onPressed: () => AppRoutes.goToWelcomePage(),
-                icon: const Icon(Icons.arrow_back),
+            ? IconButtonWidget(
+                onTap: () => AppRoutes.goToWelcomePage(),
+                icon: Icons.arrow_back,
               )
             : null,
         title: Text('register-button'.i18n()),
