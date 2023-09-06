@@ -22,7 +22,7 @@ class ListHeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -40,11 +40,7 @@ class ListHeaderWidget extends StatelessWidget {
             ],
           ),
         ),
-        if (subtitleContent != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: subtitleContent!,
-          ),
+        if (subtitleContent != null) subtitleContent!,
         const Divider(),
         if (content != null)
           expandedContent ? Expanded(child: content!) : content!,

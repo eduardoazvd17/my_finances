@@ -49,7 +49,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           children: [
             if (controller.documentModel.type ==
                 DocumentType.monthlyExpenseControl)
-              Obx(() => _monthSelectorHeaderWidget(context)),
+              Obx(() => _monthlyExpenseControlHeaderWidget(context)),
             Expanded(
               child: Obx(() {
                 if (controller.isLoading) {
@@ -114,23 +114,26 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _getDocumentInfoMenuButton(BuildContext context) {
-    return IconButtonWidget(
-      tooltip: 'document-info-button'.i18n(),
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          useSafeArea: true,
-          builder: (context) {
-            return DocumentDetailsBottomSheetModalWidget(
-              documentModel: controller.documentModel,
-              additionalContent:
-                  _getInfoAdditionalContentByDocumentType(context),
-            );
-          },
-        );
-      },
-      icon: Icons.info_outline,
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: IconButtonWidget(
+        tooltip: 'document-info-button'.i18n(),
+        icon: Icons.info_outline,
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            useSafeArea: true,
+            builder: (context) {
+              return DocumentDetailsBottomSheetModalWidget(
+                documentModel: controller.documentModel,
+                additionalContent:
+                    _getInfoAdditionalContentByDocumentType(context),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -163,7 +166,11 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     };
   }
 
-  Widget _monthSelectorHeaderWidget(BuildContext context) {
+  Widget _monthlyExpenseControlHeaderWidget(BuildContext context) {
+    if (controller.documentModel.type != DocumentType.monthlyExpenseControl) {
+      return Container();
+    }
+
     return ListHeaderWidget(
       title: controller.selectedMonth.title,
       subtitleContent: _balanceAndSpendingInfo(),
