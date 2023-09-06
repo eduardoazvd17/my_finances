@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
 class IconButtonWidget extends StatelessWidget {
-  final IconData icon;
   final String tooltip;
   final void Function()? onTap;
-  final Color? iconColor;
-  final Color? backgroundColor;
-  final double borderRadius;
+  final IconData icon;
   final double iconSize;
-  final bool useScaleFactor;
+  final Color? iconColor;
+  final Color? borderColor;
+  final double borderRadius;
+  final Color? backgroundColor;
   final bool compactMode;
   const IconButtonWidget({
     super.key,
-    required this.icon,
     this.tooltip = '',
-    this.iconSize = 26,
     this.onTap,
+    required this.icon,
+    this.iconSize = 26,
     this.iconColor,
-    this.backgroundColor,
+    this.borderColor,
     this.borderRadius = 10,
-    this.useScaleFactor = false,
+    this.backgroundColor,
     this.compactMode = false,
   });
 
@@ -39,9 +39,7 @@ class IconButtonWidget extends StatelessWidget {
               padding: const EdgeInsets.all(5.0),
               child: Icon(
                 icon,
-                size: useScaleFactor
-                    ? (iconSize * MediaQuery.of(context).textScaleFactor)
-                    : iconSize,
+                size: iconSize,
                 color: iconColor,
               ),
             ),
