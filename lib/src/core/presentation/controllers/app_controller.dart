@@ -71,14 +71,7 @@ class AppController extends GetxController {
     if (value && canEnableBiometrics) {
       final result = await _authService.enableBiometrics();
       _isBiometricsEnabled.value = result;
-
-      if (result) {
-        Future.delayed(const Duration(seconds: 5)).then(
-          (value) => _canShowAuthOverlay.value = true,
-        );
-      } else {
-        _canShowAuthOverlay.value = false;
-      }
+      _canShowAuthOverlay.value = result;
     } else {
       final bool authResult = isBiometricsEnabled && !disableAuthCheck
           ? (await _authService.requestAuth())
@@ -102,9 +95,7 @@ class AppController extends GetxController {
       final authResult = await _authService.requestAuth();
       result = authResult;
       if (authResult) {
-        Future.delayed(const Duration(seconds: 5)).then(
-          (value) => _canShowAuthOverlay.value = true,
-        );
+        _canShowAuthOverlay.value = true;
       }
     } else {
       result = true;

@@ -30,7 +30,7 @@ class _LifeCycleHandlerState extends State<LifeCycleHandler>
   }
 
   void _requestAuth(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
+    if (state == AppLifecycleState.paused) {
       AppController.instance.showAuthOverlay();
     }
   }
