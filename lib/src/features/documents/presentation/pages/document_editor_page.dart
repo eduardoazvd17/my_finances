@@ -116,23 +116,26 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   }
 
   Widget _getDocumentInfoMenuButton(BuildContext context) {
-    return IconButton(
-      tooltip: 'document-info-button'.i18n(),
-      onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          useSafeArea: true,
-          builder: (context) {
-            return DocumentDetailsBottomSheetModalWidget(
-              documentModel: controller.documentModel,
-              additionalContent:
-                  _getInfoAdditionalContentByDocumentType(context),
-            );
-          },
-        );
-      },
-      icon: const Icon(Icons.info_outline),
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: IconButton(
+        tooltip: 'document-info-button'.i18n(),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            useSafeArea: true,
+            builder: (context) {
+              return DocumentDetailsBottomSheetModalWidget(
+                documentModel: controller.documentModel,
+                additionalContent:
+                    _getInfoAdditionalContentByDocumentType(context),
+              );
+            },
+          );
+        },
+        icon: const Icon(Icons.info_outline),
+      ),
     );
   }
 

@@ -40,7 +40,11 @@ class ListHeaderWidget extends StatelessWidget {
             ],
           ),
         ),
-        if (subtitleContent != null) subtitleContent!,
+        if (subtitleContent != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 5.0),
+            child: subtitleContent!,
+          ),
         const Divider(),
         if (content != null)
           expandedContent ? Expanded(child: content!) : content!,
