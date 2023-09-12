@@ -7,8 +7,10 @@ import '../../../../core/presentation/views/settings_bottom_sheet_modal.dart';
 import '../../../../core/presentation/widgets/advise_message_widget.dart';
 import '../../../../core/presentation/widgets/floating_bottom_menu_widget.dart';
 import '../../../../core/presentation/widgets/list_header_widget.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../../../core/presentation/widgets/scaffold_widget.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
+import '../../data/models/document_model.dart';
 import '../widgets/document_tile_widget.dart';
 
 import '../../../../core/presentation/controllers/app_controller.dart';
@@ -62,26 +64,45 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       controller.documentsScrollPosition = scrollController.offset;
     });
 
-    return ScrollViewWidget(
-      showBar: true,
-      controller: scrollController,
-      child: Obx(
-        () => Column(
-          children: controller.userDocuments.map((documentModel) {
-            final int index = controller.userDocuments.indexOf(documentModel);
+    return ResponsiveBuilder(
+      desktopWidget: Obx(
+        () {
+          final Iterable<DocumentModel> nonFavoritesDocs =
+              controller.userDocuments.where((e) => !e.isFavorite);
+          final Iterable<DocumentModel> favoritesDocs =
+              controller.userDocuments.where((e) => e.isFavorite);
 
-            final bool showFavoriteHeader =
-                index == 0 && documentModel.isFavorite;
+          if (favoritesDocs.isEmpty) {
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0,
+                mainAxisExtent: 160,
+              ),
+              itemCount: nonFavoritesDocs.length,
+              itemBuilder: (BuildContext context, int index) {
+                final DocumentModel documentModel =
+                    nonFavoritesDocs.elementAt(index);
+                return DocumentTileWidget(
+                  key: Key(documentModel.toString()),
+                  documentModel: documentModel,
+                  onTap: controller.openDocument,
+                  onEdit: controller.editDocument,
+                  onDelete: controller.deleteDocument,
+                );
+              },
+            );
+          }
 
-            final bool showAllHeader = index > 0 &&
-                controller.userDocuments[index - 1].isFavorite &&
-                !documentModel.isFavorite;
-
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (showFavoriteHeader)
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ScrollViewWidget(
+                  child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
@@ -89,7 +110,21 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                if (showAllHeader)
+                  ...favoritesDocs.map((documentModel) {
+                    return DocumentTileWidget(
+                      key: Key(documentModel.toString()),
+                      documentModel: documentModel,
+                      onTap: controller.openDocument,
+                      onEdit: controller.editDocument,
+                      onDelete: controller.deleteDocument,
+                    );
+                  }),
+                ],
+              )),
+              ScrollViewWidget(
+                  child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
@@ -97,18 +132,71 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                DocumentTileWidget(
-                  key: Key(documentModel.toString()),
-                  documentModel: documentModel,
-                  onTap: controller.openDocument,
-                  onEdit: controller.editDocument,
-                  onDelete: controller.deleteDocument,
-                ),
-                if (index == controller.userDocuments.length - 1)
-                  const SizedBox(height: 65),
-              ],
-            );
-          }).toList(),
+                  ...controller.userDocuments
+                      .where((e) => !e.isFavorite)
+                      .map((documentModel) {
+                    return DocumentTileWidget(
+                      key: Key(documentModel.toString()),
+                      documentModel: documentModel,
+                      onTap: controller.openDocument,
+                      onEdit: controller.editDocument,
+                      onDelete: controller.deleteDocument,
+                    );
+                  }),
+                ],
+              )),
+            ],
+          );
+        },
+      ),
+      mobileWidget: ScrollViewWidget(
+        showBar: true,
+        controller: scrollController,
+        child: Obx(
+          () => Column(
+            children: controller.userDocuments.map((documentModel) {
+              final int index = controller.userDocuments.indexOf(documentModel);
+
+              final bool showFavoriteHeader =
+                  index == 0 && documentModel.isFavorite;
+
+              final bool showAllHeader = index > 0 &&
+                  controller.userDocuments[index - 1].isFavorite &&
+                  !documentModel.isFavorite;
+
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (showFavoriteHeader)
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        'favorites-documents-text'.i18n(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  if (showAllHeader)
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        'all-documents-text'.i18n(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  DocumentTileWidget(
+                    key: Key(documentModel.toString()),
+                    documentModel: documentModel,
+                    onTap: controller.openDocument,
+                    onEdit: controller.editDocument,
+                    onDelete: controller.deleteDocument,
+                  ),
+                  if (index == controller.userDocuments.length - 1)
+                    const SizedBox(height: 65),
+                ],
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
