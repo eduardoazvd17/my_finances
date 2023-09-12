@@ -6,6 +6,7 @@ import '../../../../core/presentation/widgets/app_logo.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../../../core/presentation/widgets/scaffold_widget.dart';
 import '../../../../core/presentation/widgets/scroll_view_widget.dart';
 
@@ -28,23 +29,51 @@ class WelcomePage extends GetWidget<AuthController> {
       ),
       body: Center(
         child: ScrollViewWidget(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _welcomeWidget(),
-              Obx(
-                () {
-                  if (controller.showBiometricsTryAgainButton) {
-                    return _getBiometricsLoginForm(context);
-                  } else if (controller.isLoading) {
-                    return const LoadingWidget();
-                  } else {
-                    return _getLoginAndRegisterButtons(context);
-                  }
-                },
-              ),
-              Obx(() => _appVersionWidget()),
-            ],
+          child: ResponsiveBuilder(
+            desktopWidget: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _welcomeWidget(),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 400),
+                      child: Obx(
+                        () {
+                          if (controller.showBiometricsTryAgainButton) {
+                            return _getBiometricsLoginForm(context);
+                          } else if (controller.isLoading) {
+                            return const LoadingWidget();
+                          } else {
+                            return _getLoginAndRegisterButtons(context);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                Obx(() => _appVersionWidget()),
+              ],
+            ),
+            mobileWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _welcomeWidget(),
+                const SizedBox(height: 60),
+                Obx(
+                  () {
+                    if (controller.showBiometricsTryAgainButton) {
+                      return _getBiometricsLoginForm(context);
+                    } else if (controller.isLoading) {
+                      return const LoadingWidget();
+                    } else {
+                      return _getLoginAndRegisterButtons(context);
+                    }
+                  },
+                ),
+                Obx(() => _appVersionWidget()),
+              ],
+            ),
           ),
         ),
       ),
@@ -63,13 +92,13 @@ class WelcomePage extends GetWidget<AuthController> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 80),
+          padding: const EdgeInsets.only(bottom: 20.0),
           child: Text(
             'slogan-text'.i18n(),
             textAlign: TextAlign.center,
             style: const TextStyle(color: AppThemes.commonColor),
           ),
-        )
+        ),
       ],
     );
   }
