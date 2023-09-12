@@ -13,6 +13,13 @@ class AppThemes {
   static final String? _fontFamilly = GoogleFonts.lato().fontFamily;
   static const Color commonColor = Color.fromARGB(255, 117, 117, 117);
 
+  static const _bottomSheetShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(15.0),
+      topRight: Radius.circular(15.0),
+    ),
+  );
+
   static ThemeData get light {
     return ThemeData(
       fontFamily: _fontFamilly,
@@ -33,11 +40,9 @@ class AppThemes {
         centerTitle: true,
       ),
       dialogBackgroundColor: _lightSecondaryBackgroundColor,
-      bottomSheetTheme: BottomSheetThemeData(
+      bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
+        shape: _bottomSheetShape,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
@@ -67,11 +72,9 @@ class AppThemes {
         centerTitle: true,
       ),
       dialogBackgroundColor: _darkSecondaryBackgroundColor,
-      bottomSheetTheme: BottomSheetThemeData(
+      bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
+        shape: _bottomSheetShape,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
