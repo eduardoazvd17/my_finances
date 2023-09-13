@@ -39,7 +39,7 @@ class ScaffoldWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 25.0, bottom: 5),
                       child: AppLogo(
                         size: 45,
-                        opacity: 0.7,
+                        opacity: 0.5,
                         hideText: true,
                       ),
                     ),
