@@ -38,7 +38,14 @@ class ScaffoldWidget extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: body,
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: ResponsiveBuilder.contentMaxWidth,
+                      ),
+                      child: body,
+                    ),
+                  ),
                 ),
               ),
             ),

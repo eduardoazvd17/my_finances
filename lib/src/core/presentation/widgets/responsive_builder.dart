@@ -5,7 +5,8 @@ class ResponsiveBuilder extends StatelessWidget {
   final Widget? mobileWidget;
   final Widget? desktopWidget;
 
-  static const double maxDesktopWidth = 900;
+  static const double maxDesktopWidth = 1000;
+  static const double contentMaxWidth = maxDesktopWidth - 100;
 
   const ResponsiveBuilder({
     super.key,
