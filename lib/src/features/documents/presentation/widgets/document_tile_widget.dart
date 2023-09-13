@@ -44,7 +44,9 @@ class DocumentTileWidget extends StatelessWidget {
 
   Widget _desktopWidget(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 350),
+      constraints: const BoxConstraints(
+        maxWidth: ResponsiveBuilder.maxDesktopWidth / 2,
+      ),
       child: Stack(
         children: [
           Column(

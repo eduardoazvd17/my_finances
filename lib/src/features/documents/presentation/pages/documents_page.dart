@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/data/utils/app_themes.dart';
@@ -75,7 +76,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           if (favoritesDocs.isEmpty) {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 mainAxisSpacing: 0,
                 crossAxisSpacing: 0,
                 mainAxisExtent: 160,
@@ -92,61 +93,66 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                   onDelete: controller.deleteDocument,
                 );
               },
-            );
+            ).animate().fade();
           }
 
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ScrollViewWidget(
-                  child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      'favorites-documents-text'.i18n(),
-                      style: const TextStyle(fontSize: 16),
+              Expanded(
+                child: ScrollViewWidget(
+                    child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        'favorites-documents-text'.i18n(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ),
-                  ),
-                  ...favoritesDocs.map((documentModel) {
-                    return DocumentTileWidget(
-                      key: Key(documentModel.toString()),
-                      documentModel: documentModel,
-                      onTap: controller.openDocument,
-                      onEdit: controller.editDocument,
-                      onDelete: controller.deleteDocument,
-                    );
-                  }),
-                ],
-              )),
-              ScrollViewWidget(
+                    ...favoritesDocs.map((documentModel) {
+                      return DocumentTileWidget(
+                        key: Key(documentModel.toString()),
+                        documentModel: documentModel,
+                        onTap: controller.openDocument,
+                        onEdit: controller.editDocument,
+                        onDelete: controller.deleteDocument,
+                      );
+                    }),
+                  ],
+                )),
+              ),
+              Expanded(
+                child: ScrollViewWidget(
                   child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      'all-documents-text'.i18n(),
-                      style: const TextStyle(fontSize: 16),
-                    ),
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          'all-documents-text'.i18n(),
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      ...controller.userDocuments
+                          .where((e) => !e.isFavorite)
+                          .map((documentModel) {
+                        return DocumentTileWidget(
+                          key: Key(documentModel.toString()),
+                          documentModel: documentModel,
+                          onTap: controller.openDocument,
+                          onEdit: controller.editDocument,
+                          onDelete: controller.deleteDocument,
+                        );
+                      }),
+                    ],
                   ),
-                  ...controller.userDocuments
-                      .where((e) => !e.isFavorite)
-                      .map((documentModel) {
-                    return DocumentTileWidget(
-                      key: Key(documentModel.toString()),
-                      documentModel: documentModel,
-                      onTap: controller.openDocument,
-                      onEdit: controller.editDocument,
-                      onDelete: controller.deleteDocument,
-                    );
-                  }),
-                ],
-              )),
+                ),
+              ),
             ],
-          );
+          ).animate().fade();
         },
       ),
       mobileWidget: ScrollViewWidget(
@@ -196,7 +202,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 ],
               );
             }).toList(),
-          ),
+          ).animate().fade(),
         ),
       ),
     );

@@ -29,132 +29,134 @@ class MyProfilePage extends GetWidget<MyProfileController> {
         title: Text('my-profile-button'.i18n()),
         actions: [_logoutButton(onlyIcon: true)],
       ),
-      body: ScrollViewWidget(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ProfilePictureWidget(
-                      url: controller.photoUrl,
-                      onTap: controller.goToProfilePicturePage,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: controller.photoUrl == null
-                            ? [
-                                TextButton(
-                                  onPressed: () {
-                                    _showPictureSourceSelectionModal(context);
-                                  },
-                                  child: Text('add-photo-button'.i18n()),
-                                ),
-                              ]
-                            : [
-                                TextButton(
-                                  onPressed: () {
-                                    _showPictureSourceSelectionModal(context);
-                                  },
-                                  child: Text('edit-photo-button'.i18n()),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Get.dialog(
-                                      CustomDialog(
-                                        autoClose: false,
-                                        title: 'remove-photo-button'.i18n(),
-                                        content:
-                                            'remove-photo-confirmation-text'
-                                                .i18n(),
-                                        onConfirm: () async {
-                                          Get.close(1);
-                                          await controller
-                                              .removeProfilePicture();
-                                        },
-                                        onClose: Get.back,
-                                        invertButtonColor: true,
-                                      ),
-                                    );
-                                  },
-                                  child: Text('remove-photo-button'.i18n()),
-                                ),
-                              ],
+      body: Center(
+        child: ScrollViewWidget(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ProfilePictureWidget(
+                        url: controller.photoUrl,
+                        onTap: controller.goToProfilePicturePage,
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          children: controller.photoUrl == null
+                              ? [
+                                  TextButton(
+                                    onPressed: () {
+                                      _showPictureSourceSelectionModal(context);
+                                    },
+                                    child: Text('add-photo-button'.i18n()),
+                                  ),
+                                ]
+                              : [
+                                  TextButton(
+                                    onPressed: () {
+                                      _showPictureSourceSelectionModal(context);
+                                    },
+                                    child: Text('edit-photo-button'.i18n()),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Get.dialog(
+                                        CustomDialog(
+                                          autoClose: false,
+                                          title: 'remove-photo-button'.i18n(),
+                                          content:
+                                              'remove-photo-confirmation-text'
+                                                  .i18n(),
+                                          onConfirm: () async {
+                                            Get.close(1);
+                                            await controller
+                                                .removeProfilePicture();
+                                          },
+                                          onClose: Get.back,
+                                          invertButtonColor: true,
+                                        ),
+                                      );
+                                    },
+                                    child: Text('remove-photo-button'.i18n()),
+                                  ),
+                                ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Obx(
-              () => itemTile(
-                label: 'name-text'.i18n(),
-                content: controller.name,
-                trailing: IconButtonWidget(
-                  onTap: () {
-                    controller.nameController.text = controller.name;
-                    _showChangeDialog(
-                      title: 'change-name-dialog-title'.i18n(),
-                      onConfirm: controller.changeName,
-                      textFieldLabel: 'change-name-label'.i18n(),
-                      textFieldHint: 'change-name-hint'.i18n(),
-                      textFieldController: controller.nameController,
-                      textFieldFocusNode: controller.nameFocus,
-                    );
-                  },
-                  tooltip: 'edit-text'.i18n(),
-                  icon: CupertinoIcons.pen,
-                  compactMode: true,
+              Obx(
+                () => itemTile(
+                  label: 'name-text'.i18n(),
+                  content: controller.name,
+                  trailing: IconButtonWidget(
+                    onTap: () {
+                      controller.nameController.text = controller.name;
+                      _showChangeDialog(
+                        title: 'change-name-dialog-title'.i18n(),
+                        onConfirm: controller.changeName,
+                        textFieldLabel: 'change-name-label'.i18n(),
+                        textFieldHint: 'change-name-hint'.i18n(),
+                        textFieldController: controller.nameController,
+                        textFieldFocusNode: controller.nameFocus,
+                      );
+                    },
+                    tooltip: 'edit-text'.i18n(),
+                    icon: CupertinoIcons.pen,
+                    compactMode: true,
+                  ),
                 ),
               ),
-            ),
-            Obx(
-              () => itemTile(
-                label: 'nickname-text'.i18n(),
-                content: controller.nickname,
-                trailing: IconButtonWidget(
-                  onTap: () {
-                    controller.nicknameController.text = controller.nickname;
-                    _showChangeDialog(
-                      title: 'change-nickname-dialog-title'.i18n(),
-                      onConfirm: controller.changeNickname,
-                      textFieldLabel: 'change-nickname-label'.i18n(),
-                      textFieldHint: 'change-nickname-hint'.i18n(),
-                      textFieldController: controller.nicknameController,
-                      textFieldFocusNode: controller.nicknameFocus,
-                    );
-                  },
-                  tooltip: 'edit-text'.i18n(),
-                  icon: CupertinoIcons.pen,
-                  compactMode: true,
+              Obx(
+                () => itemTile(
+                  label: 'nickname-text'.i18n(),
+                  content: controller.nickname,
+                  trailing: IconButtonWidget(
+                    onTap: () {
+                      controller.nicknameController.text = controller.nickname;
+                      _showChangeDialog(
+                        title: 'change-nickname-dialog-title'.i18n(),
+                        onConfirm: controller.changeNickname,
+                        textFieldLabel: 'change-nickname-label'.i18n(),
+                        textFieldHint: 'change-nickname-hint'.i18n(),
+                        textFieldController: controller.nicknameController,
+                        textFieldFocusNode: controller.nicknameFocus,
+                      );
+                    },
+                    tooltip: 'edit-text'.i18n(),
+                    icon: CupertinoIcons.pen,
+                    compactMode: true,
+                  ),
                 ),
               ),
-            ),
-            itemTile(
-              label: 'email-text'.i18n(),
-              content: controller.email,
-            ),
-            itemTile(
-              label: 'password-text'.i18n(),
-              content: '••••••••',
-              trailing: TextButton(
-                onPressed: controller.goToChangePasswordPage,
-                child: Text('change-password-button'.i18n()),
+              itemTile(
+                label: 'email-text'.i18n(),
+                content: controller.email,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Center(child: _logoutButton()),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Center(child: _deleteAccountButton()),
-            ),
-            const SizedBox(height: 20),
-          ],
+              itemTile(
+                label: 'password-text'.i18n(),
+                content: '••••••••',
+                trailing: TextButton(
+                  onPressed: controller.goToChangePasswordPage,
+                  child: Text('change-password-button'.i18n()),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Center(child: _logoutButton()),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Center(child: _deleteAccountButton()),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

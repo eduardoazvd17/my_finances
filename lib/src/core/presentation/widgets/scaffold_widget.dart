@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'responsive_builder.dart';
+
 class ScaffoldWidget extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
@@ -19,18 +21,26 @@ class ScaffoldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: GestureDetector(
-        onTap: _hideKeyboard,
-        child: Scaffold(
-          appBar: appBar,
-          floatingActionButton: floatingBottomMenu,
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          bottomNavigationBar: bottomNavigationMenu,
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: body,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: ResponsiveBuilder.maxDesktopWidth,
+          ),
+          child: GestureDetector(
+            onTap: _hideKeyboard,
+            child: Scaffold(
+              appBar: appBar,
+              floatingActionButton: floatingBottomMenu,
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat,
+              bottomNavigationBar: bottomNavigationMenu,
+              body: SafeArea(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: body,
+                ),
+              ),
             ),
           ),
         ),

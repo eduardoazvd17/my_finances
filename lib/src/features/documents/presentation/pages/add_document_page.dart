@@ -22,116 +22,112 @@ class AddDocumentPage extends GetWidget<DocumentsController> {
         title: Text('add-document-button'.i18n()),
       ),
       body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: ScrollViewWidget(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextFieldWidget(
-                  label: 'add-document-name-label'.i18n(),
-                  hint: 'add-document-name-hint'.i18n(),
-                  controller: controller.nameController,
-                  focusNode: controller.nameFocus,
-                  textCapitalization: TextCapitalization.sentences,
-                  textInputType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  onSubmitted: (_) => controller.typeFocus.requestFocus(),
-                ),
-                const SizedBox(height: 5),
-                Text('add-document-type-label'.i18n()),
-                Obx(
-                  () => Row(
-                    children: [
-                      Expanded(
-                        child: DropDownButtonWidget<DocumentType?>(
-                          itemHeight: 70,
-                          isExpanded: true,
-                          focusNode: controller.typeFocus,
-                          value: controller.selectedDocumentType,
-                          onChanged: (value) {
-                            controller.selectedDocumentType = value;
-                          },
-                          items: [
-                            DropdownMenuItem(
-                              value: null,
-                              enabled: false,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'add-document-type-label'.i18n(),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      color: AppThemes.commonColor,
-                                    ),
-                                  ),
-                                  const Divider(),
-                                ],
-                              ),
-                            ),
-                            ...DocumentType.values.map((documentType) {
-                              return DropdownMenuItem(
-                                value: documentType,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 5.0,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          left: 2.5,
-                                          right: 5.0,
-                                        ),
-                                        child:
-                                            Icon(documentType.icon, size: 40),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          documentType.title,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
+        child: ScrollViewWidget(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFieldWidget(
+                label: 'add-document-name-label'.i18n(),
+                hint: 'add-document-name-hint'.i18n(),
+                controller: controller.nameController,
+                focusNode: controller.nameFocus,
+                textCapitalization: TextCapitalization.sentences,
+                textInputType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                onSubmitted: (_) => controller.typeFocus.requestFocus(),
+              ),
+              const SizedBox(height: 5),
+              Text('add-document-type-label'.i18n()),
+              Obx(
+                () => Row(
+                  children: [
+                    Expanded(
+                      child: DropDownButtonWidget<DocumentType?>(
+                        itemHeight: 70,
+                        isExpanded: true,
+                        focusNode: controller.typeFocus,
+                        value: controller.selectedDocumentType,
+                        onChanged: (value) {
+                          controller.selectedDocumentType = value;
+                        },
+                        items: [
+                          DropdownMenuItem(
+                            value: null,
+                            enabled: false,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'add-document-type-label'.i18n(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: AppThemes.commonColor,
                                   ),
                                 ),
-                              );
-                            }),
-                          ],
-                        ),
+                                const Divider(),
+                              ],
+                            ),
+                          ),
+                          ...DocumentType.values.map((documentType) {
+                            return DropdownMenuItem(
+                              value: documentType,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5.0,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 2.5,
+                                        right: 5.0,
+                                      ),
+                                      child: Icon(documentType.icon, size: 40),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        documentType.title,
+                                        maxLines: 2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Obx(() {
-                  return Text(
-                    controller.selectedDocumentType?.description ?? '',
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(color: AppThemes.commonColor),
-                  );
-                }),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 16),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          icon: CupertinoIcons.add,
-                          text: 'add-button'.i18n(),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white,
-                          onTap: controller.createNewDocument,
-                        ),
+              ),
+              Obx(() {
+                return Text(
+                  controller.selectedDocumentType?.description ?? '',
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(color: AppThemes.commonColor),
+                );
+              }),
+              Padding(
+                padding: const EdgeInsets.only(top: 16, bottom: 16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ButtonWidget(
+                        icon: CupertinoIcons.add,
+                        text: 'add-button'.i18n(),
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        onTap: controller.createNewDocument,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

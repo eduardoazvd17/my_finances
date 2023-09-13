@@ -28,67 +28,64 @@ class LoginPage extends GetWidget<AuthController> {
         title: Text('login-button'.i18n()),
       ),
       body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: ScrollViewWidget(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50.0, top: 16),
-                  child: AppLogo(),
+        child: ScrollViewWidget(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 50.0, top: 16),
+                child: AppLogo(),
+              ),
+              AutofillGroup(
+                child: Column(
+                  children: [
+                    TextFieldWidget(
+                      autofillHints: const [AutofillHints.email],
+                      icon: CupertinoIcons.mail,
+                      label: 'login-email-label'.i18n(),
+                      hint: 'login-email-hint'.i18n(),
+                      controller: controller.emailController,
+                      textInputType: TextInputType.emailAddress,
+                      focusNode: controller.emailFocus,
+                      textInputAction: TextInputAction.next,
+                      onSubmitted: (_) {
+                        controller.passwordFocus.requestFocus();
+                      },
+                    ),
+                    TextFieldWidget(
+                      autofillHints: const [AutofillHints.password],
+                      icon: CupertinoIcons.lock,
+                      label: 'login-password-label'.i18n(),
+                      hint: 'login-password-hint'.i18n(),
+                      controller: controller.passwordController,
+                      textInputType: TextInputType.text,
+                      obscureText: true,
+                      focusNode: controller.passwordFocus,
+                      textInputAction: TextInputAction.done,
+                      onSubmitted: (_) => controller.makeLogin(),
+                    ),
+                  ],
                 ),
-                AutofillGroup(
-                  child: Column(
-                    children: [
-                      TextFieldWidget(
-                        autofillHints: const [AutofillHints.email],
-                        icon: CupertinoIcons.mail,
-                        label: 'login-email-label'.i18n(),
-                        hint: 'login-email-hint'.i18n(),
-                        controller: controller.emailController,
-                        textInputType: TextInputType.emailAddress,
-                        focusNode: controller.emailFocus,
-                        textInputAction: TextInputAction.next,
-                        onSubmitted: (_) {
-                          controller.passwordFocus.requestFocus();
-                        },
-                      ),
-                      TextFieldWidget(
-                        autofillHints: const [AutofillHints.password],
-                        icon: CupertinoIcons.lock,
-                        label: 'login-password-label'.i18n(),
-                        hint: 'login-password-hint'.i18n(),
-                        controller: controller.passwordController,
-                        textInputType: TextInputType.text,
-                        obscureText: true,
-                        focusNode: controller.passwordFocus,
-                        textInputAction: TextInputAction.done,
-                        onSubmitted: (_) => controller.makeLogin(),
-                      ),
-                    ],
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  bottom: 16,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 16,
-                    bottom: 16,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          icon: CupertinoIcons.person,
-                          text: 'make-login-button'.i18n(),
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white,
-                          onTap: controller.makeLogin,
-                        ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ButtonWidget(
+                        icon: CupertinoIcons.person,
+                        text: 'make-login-button'.i18n(),
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        onTap: controller.makeLogin,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

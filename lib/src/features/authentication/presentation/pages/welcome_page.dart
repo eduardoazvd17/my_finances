@@ -37,7 +37,7 @@ class WelcomePage extends GetWidget<AuthController> {
                   children: [
                     _welcomeWidget(),
                     ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 400),
+                      constraints: const BoxConstraints(maxWidth: 368),
                       child: Obx(
                         () {
                           if (controller.showBiometricsTryAgainButton) {

@@ -6,6 +6,7 @@ import '../../../../core/data/errors/app_error.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 
 class MyProfilePicturePage extends StatefulWidget {
   const MyProfilePicturePage({super.key});
@@ -58,17 +59,32 @@ class _MyProfilePicturePageState extends State<MyProfilePicturePage> {
   }
 
   AppBar get _appBar {
-    return AppBar(
-      systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
-        statusBarColor: Colors.black,
-      ),
-      backgroundColor: Colors.black54,
+    final appBar = AppBar(
+      backgroundColor: Colors.transparent,
       foregroundColor: Colors.white,
       leading: IconButtonWidget(
         onTap: _disableOptionsUsage ? null : Get.back,
         icon: Icons.close,
       ),
       title: Text('profile-picture-text'.i18n()),
+    );
+
+    return AppBar(
+      backgroundColor: Colors.black54,
+      foregroundColor: Colors.white,
+      systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.black,
+      ),
+      leading: const SizedBox(),
+      flexibleSpace: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: ResponsiveBuilder.maxDesktopWidth,
+          ),
+          child: appBar,
+        ),
+      ),
+      toolbarHeight: appBar.preferredSize.height,
     );
   }
 

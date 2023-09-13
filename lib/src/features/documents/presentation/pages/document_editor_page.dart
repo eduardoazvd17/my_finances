@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_picker.dart';
@@ -109,7 +110,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           const SizedBox(height: 125),
         ],
       ),
-    );
+    ).animate().fade();
   }
 
   Widget _getDocumentInfoMenuButton(BuildContext context) {

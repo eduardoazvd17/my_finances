@@ -89,6 +89,7 @@ class _DocumentDetailsBottomSheetModalWidgetState
                 documentModel: widget.documentModel,
                 newIsFavorite: _isFavorite,
               );
+              Get.back();
             },
           ),
         ),
