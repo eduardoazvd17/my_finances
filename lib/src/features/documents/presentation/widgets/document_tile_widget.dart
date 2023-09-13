@@ -105,29 +105,31 @@ class DocumentTileWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 5),
-                    Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 5),
-                          child: Icon(
-                            CupertinoIcons.calendar,
-                            size: 18,
-                            color: AppThemes.commonColor,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            DateTimeUtils.formatFullDateShorted(
-                              documentModel.creationDate,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(right: 5),
+                            child: Icon(
+                              CupertinoIcons.calendar,
+                              size: 18,
+                              color: AppThemes.commonColor,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                const TextStyle(color: AppThemes.commonColor),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Text(
+                              DateTimeUtils.formatFullDateShorted(
+                                documentModel.creationDate,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  const TextStyle(color: AppThemes.commonColor),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

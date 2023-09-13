@@ -27,6 +27,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+      hideDesktopLogo: true,
       appBar: _getAppBar(context),
       floatingBottomMenu: _addDocumentFloatingButton(context),
       body: ListHeaderWidget(
@@ -73,7 +74,10 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           final Iterable<DocumentModel> favoritesDocs =
               controller.userDocuments.where((e) => e.isFavorite);
 
-          if (favoritesDocs.isEmpty) {
+          if (favoritesDocs.isEmpty || nonFavoritesDocs.isEmpty) {
+            final Iterable<DocumentModel> nonEmptyDocs =
+                favoritesDocs.isEmpty ? nonFavoritesDocs : favoritesDocs;
+
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -81,10 +85,10 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 crossAxisSpacing: 0,
                 mainAxisExtent: 160,
               ),
-              itemCount: nonFavoritesDocs.length,
+              itemCount: nonEmptyDocs.length,
               itemBuilder: (BuildContext context, int index) {
                 final DocumentModel documentModel =
-                    nonFavoritesDocs.elementAt(index);
+                    nonEmptyDocs.elementAt(index);
                 return DocumentTileWidget(
                   key: Key(documentModel.toString()),
                   documentModel: documentModel,
@@ -211,29 +215,56 @@ class DocumentsPage extends GetWidget<DocumentsController> {
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
       toolbarHeight: 110,
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ProfilePictureWidget(
-                size: 50,
-                url: AppController.instance.user?.photoUrl,
-                onTap: controller.goToMyProfilePage,
-                tooltip: 'my-profile-button'.i18n(),
-              ),
-              _settingsMenuButton(context)
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text(
-              'hello-text'.i18n([AppController.instance.user!.nickname]),
-              maxLines: 1,
+      title: ResponsiveBuilder(
+        desktopWidget: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                ProfilePictureWidget(
+                  size: 80,
+                  url: AppController.instance.user?.photoUrl,
+                  onTap: controller.goToMyProfilePage,
+                  tooltip: 'my-profile-button'.i18n(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    'hello-text'.i18n(
+                      [AppController.instance.user!.nickname],
+                    ),
+                    maxLines: 1,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            _settingsMenuButton(context)
+          ],
+        ),
+        mobileWidget: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ProfilePictureWidget(
+                  size: 50,
+                  url: AppController.instance.user?.photoUrl,
+                  onTap: controller.goToMyProfilePage,
+                  tooltip: 'my-profile-button'.i18n(),
+                ),
+                _settingsMenuButton(context)
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                'hello-text'.i18n([AppController.instance.user!.nickname]),
+                maxLines: 1,
+              ),
+            ),
+          ],
+        ),
       ),
       centerTitle: false,
     );

@@ -22,6 +22,7 @@ class WelcomePage extends GetWidget<AuthController> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+      hideDesktopLogo: true,
       appBar: AppBar(
         actions: [
           _settingsMenuButton(context),

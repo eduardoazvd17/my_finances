@@ -18,6 +18,7 @@ class LoginPage extends GetWidget<AuthController> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+      hideDesktopLogo: true,
       appBar: AppBar(
         leading: Get.previousRoute != AppRoutes.initialRoute
             ? IconButtonWidget(
