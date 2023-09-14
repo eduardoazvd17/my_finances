@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'app_logo.dart';
@@ -33,7 +34,7 @@ class ScaffoldWidget extends StatelessWidget {
             onTap: _hideKeyboard,
             child: Column(
               children: [
-                if (!hideDesktopLogo)
+                if (!hideDesktopLogo && kIsWeb)
                   ResponsiveBuilder(
                     desktopWidget: Padding(
                       padding: const EdgeInsets.only(top: 25.0, bottom: 5),
