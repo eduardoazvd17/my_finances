@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:localization/localization.dart';
 import '../../data/utils/app_themes.dart';
-import 'icon_button_widget.dart';
 import 'scroll_view_widget.dart';
 
 class BottomSheetModalWidget extends StatelessWidget {
@@ -29,34 +26,22 @@ class BottomSheetModalWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Visibility(
-                    visible: false,
-                    maintainAnimation: true,
-                    maintainSize: true,
-                    maintainState: true,
-                    child: _closeButton,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Container(
+                  height: 5,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: AppThemes.commonColor,
                   ),
-                  Container(
-                    height: 5,
-                    width: 70,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: AppThemes.commonColor,
-                    ),
-                  ),
-                  _closeButton,
-                ],
+                ),
               ),
               if (title != null)
                 Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 16,
-                    left: 16,
-                    right: 16,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 16,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -107,15 +92,4 @@ class BottomSheetModalWidget extends StatelessWidget {
       size: 25 * MediaQuery.of(context).textScaleFactor,
     );
   }
-
-  Widget get _closeButton => Padding(
-        padding: const EdgeInsets.only(right: 2.5, top: 2.5),
-        child: IconButtonWidget(
-          icon: Icons.close,
-          iconColor: Colors.red,
-          tooltip: 'close-button'.i18n(),
-          onTap: Get.back,
-          compactMode: true,
-        ),
-      );
 }
