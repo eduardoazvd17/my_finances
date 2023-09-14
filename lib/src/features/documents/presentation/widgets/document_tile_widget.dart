@@ -29,7 +29,7 @@ class DocumentTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5, top: 10, bottom: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: InkWell(
         onTap: () => onTap(documentModel),
         onLongPress: () => _openMenu(context),
@@ -150,70 +150,74 @@ class DocumentTileWidget extends StatelessWidget {
   }
 
   Widget _mobileWidget(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Stack(
-          children: [
-            Icon(
-              documentModel.type.icon,
-              size: 40 * MediaQuery.of(context).textScaleFactor,
-            ),
-            if (documentModel.isFavorite)
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Icon(
-                  CupertinoIcons.heart_fill,
-                  color: Colors.red[300],
-                  size: 18,
-                ),
-              ),
-          ],
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10, bottom: 2),
-                child: Text(
-                  documentModel.name,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+              Icon(
+                documentModel.type.icon,
+                size: 40 * MediaQuery.of(context).textScaleFactor,
+              ),
+              if (documentModel.isFavorite)
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Icon(
+                    CupertinoIcons.heart_fill,
+                    color: Colors.red[300],
+                    size: 18,
+                  ),
                 ),
-              ),
-              Row(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 10, right: 5),
-                    child: Icon(
-                      CupertinoIcons.calendar,
-                      size: 18,
-                      color: AppThemes.commonColor,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      DateTimeUtils.formatFullDateShorted(
-                        documentModel.creationDate,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: AppThemes.commonColor),
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
-        ),
-        IconButtonWidget(
-          icon: Icons.more_vert,
-          onTap: () => _openMenu(context),
-        )
-      ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, bottom: 2),
+                  child: Text(
+                    documentModel.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ),
+                Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10, right: 5),
+                      child: Icon(
+                        CupertinoIcons.calendar,
+                        size: 18,
+                        color: AppThemes.commonColor,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        DateTimeUtils.formatFullDateShorted(
+                          documentModel.creationDate,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: AppThemes.commonColor),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          IconButtonWidget(
+            icon: Icons.more_vert,
+            compactMode: true,
+            onTap: () => _openMenu(context),
+          ),
+        ],
+      ),
     );
   }
 

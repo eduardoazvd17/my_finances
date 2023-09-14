@@ -82,8 +82,8 @@ class DocumentsPage extends GetWidget<DocumentsController> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 0,
-                crossAxisSpacing: 0,
-                mainAxisExtent: 160,
+                crossAxisSpacing: 5,
+                mainAxisExtent: 140,
               ),
               itemCount: nonEmptyDocs.length,
               itemBuilder: (BuildContext context, int index) {
