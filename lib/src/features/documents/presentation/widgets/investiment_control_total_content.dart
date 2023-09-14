@@ -69,26 +69,9 @@ class InvestimentControlTotalContent extends StatelessWidget {
           quantity: null,
           priceColor: Colors.red[300]!,
         ),
-        ItemTotalTile(
-          title: 'profit-label'.i18n(),
-          price: items.isEmpty || sellItems.isEmpty
-              ? 0
-              : items
-                  .map((i) {
-                    if (i.operationType == OperationType.purchase) {
-                      return -(i.quantity * i.price);
-                    } else {
-                      return (i.quantity * i.price);
-                    }
-                  })
-                  .reduce((a, b) => a + b)
-                  .toDouble(),
-          quantity: null,
-          priceColor: Theme.of(context).primaryColor,
-        ),
         const Divider(),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Center(
             child: Text(
               'resume-by-asset-text'.i18n(),

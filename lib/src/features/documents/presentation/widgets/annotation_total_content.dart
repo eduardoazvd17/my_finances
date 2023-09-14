@@ -79,7 +79,7 @@ class AnnotationTotalContent extends StatelessWidget {
         const Divider(),
         Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               'total-by-grouping-text'.i18n(),
               style: const TextStyle(fontWeight: FontWeight.bold),

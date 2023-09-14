@@ -29,10 +29,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
+          Text('$title ($quotas)'),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: _tableWidget(context),
@@ -60,7 +57,6 @@ class InvestimentItemTotalTile extends StatelessWidget {
               OperationType.sell.title,
               style: TextStyle(color: Colors.red[300]),
             ),
-            third: Text('profit-text'.i18n()),
           ),
         ),
         _verticalDivider(context),
@@ -76,7 +72,6 @@ class InvestimentItemTotalTile extends StatelessWidget {
               '$salesQuotas',
               style: TextStyle(color: Colors.red[300]),
             ),
-            third: Text('$quotas'),
           ),
         ),
         _verticalDivider(context),
@@ -92,9 +87,6 @@ class InvestimentItemTotalTile extends StatelessWidget {
               CurrencyUtils.format(salesValue),
               style: TextStyle(color: Colors.red[300]),
             ),
-            third: Text(
-              CurrencyUtils.format(salesValue == 0 ? 0 : quotasValue),
-            ),
           ),
         ),
       ],
@@ -104,7 +96,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
   Widget _verticalDivider(BuildContext context) {
     return Container(
       width: 0.5,
-      height: 90 * MediaQuery.of(context).textScaleFactor,
+      height: 70 * MediaQuery.of(context).textScaleFactor,
       color: Theme.of(context).dividerColor,
     );
   }
@@ -114,7 +106,6 @@ class InvestimentItemTotalTile extends StatelessWidget {
     required CrossAxisAlignment alignment,
     required Widget first,
     required Widget second,
-    required Widget third,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -126,7 +117,6 @@ class InvestimentItemTotalTile extends StatelessWidget {
           const SizedBox(height: 5),
           FittedBox(child: first),
           FittedBox(child: second),
-          FittedBox(child: third),
         ],
       ),
     );
