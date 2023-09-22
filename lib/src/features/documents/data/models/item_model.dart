@@ -127,8 +127,12 @@ class InvestimentControlItemModel extends ItemModel {
     return '${operationType.char} ${CurrencyUtils.format(quantity * price)} (${quantity}x${price.toStringAsFixed(2)})';
   }
 
-  String get shortName {
-    return '${CurrencyUtils.format(quantity * price)}\n${quantity}x ${price.toStringAsFixed(2)}';
+  String get desktopName {
+    return '${CurrencyUtils.format(quantity * price)}  (${quantity}x ${CurrencyUtils.format(price)})';
+  }
+
+  String get mobileName {
+    return '${CurrencyUtils.format(quantity * price)}\n${quantity}x ${CurrencyUtils.format(price)}';
   }
 
   const InvestimentControlItemModel({

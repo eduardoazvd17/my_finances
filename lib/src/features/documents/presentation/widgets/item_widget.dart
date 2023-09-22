@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../data/enums/operation_type.dart';
 import '../controllers/document_editor_controller.dart';
 
@@ -49,13 +50,24 @@ class ItemWidget extends StatelessWidget {
   Widget _investmentControlItemTile(BuildContext context) {
     final InvestimentControlItemModel itemModel =
         this.itemModel as InvestimentControlItemModel;
-    return _itemBaseWidget(
-      context: context,
-      leading: itemModel.operationType.icon,
-      middleExpanded: Text(itemModel.shortName),
-      trailing: Text(
-        DateTimeUtils.format2LinesDate(itemModel.date),
-        textAlign: TextAlign.center,
+    return ResponsiveBuilder(
+      mobileWidget: _itemBaseWidget(
+        context: context,
+        leading: itemModel.operationType.icon,
+        middleExpanded: Text(itemModel.mobileName),
+        trailing: Text(
+          DateTimeUtils.format2LinesDate(itemModel.date),
+          textAlign: TextAlign.center,
+        ),
+      ),
+      desktopWidget: _itemBaseWidget(
+        context: context,
+        leading: itemModel.operationType.icon,
+        middleExpanded: Text(itemModel.desktopName),
+        trailing: Text(
+          DateTimeUtils.formatDate(itemModel.date),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
@@ -158,7 +170,7 @@ class ItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       if (leading != null)
                         Padding(
