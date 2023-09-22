@@ -40,7 +40,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
           } else if (controller.userDocuments.isEmpty) {
             return _emptyDocumentsContent();
           } else {
-            return _documentsListWidget();
+            return _documentsListWidget(context);
           }
         }),
       ),
@@ -57,7 +57,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
     );
   }
 
-  Widget _documentsListWidget() {
+  Widget _documentsListWidget(BuildContext context) {
     final scrollController = ScrollController(
       initialScrollOffset: controller.documentsScrollPosition,
     );
@@ -79,11 +79,11 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 favoritesDocs.isEmpty ? nonFavoritesDocs : favoritesDocs;
 
             return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 0,
                 crossAxisSpacing: 5,
-                mainAxisExtent: 140,
+                mainAxisExtent: 145 * MediaQuery.of(context).textScaleFactor,
               ),
               itemCount: nonEmptyDocs.length,
               itemBuilder: (BuildContext context, int index) {
