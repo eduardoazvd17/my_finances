@@ -53,7 +53,11 @@ class ItemWidget extends StatelessWidget {
     return ResponsiveBuilder(
       mobileWidget: _itemBaseWidget(
         context: context,
-        leading: itemModel.operationType.icon,
+        leading: Icon(
+          itemModel.operationType.icon,
+          size: 40 * MediaQuery.of(context).textScaleFactor,
+          color: itemModel.operationType.color,
+        ),
         middleExpanded: Text(itemModel.mobileName),
         trailing: Text(
           DateTimeUtils.format2LinesDate(itemModel.date),
@@ -62,7 +66,11 @@ class ItemWidget extends StatelessWidget {
       ),
       desktopWidget: _itemBaseWidget(
         context: context,
-        leading: itemModel.operationType.icon,
+        leading: Icon(
+          itemModel.operationType.icon,
+          size: 40 * MediaQuery.of(context).textScaleFactor,
+          color: itemModel.operationType.color,
+        ),
         middleExpanded: Text(itemModel.desktopName),
         trailing: Text(
           DateTimeUtils.formatDate(itemModel.date),

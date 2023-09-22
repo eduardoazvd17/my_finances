@@ -17,11 +17,10 @@ extension OperationTypeExtension on OperationType {
     };
   }
 
-  Icon get icon {
+  IconData get icon {
     return switch (this) {
-      OperationType.purchase =>
-        Icon(Icons.attach_money, color: color, size: 40),
-      OperationType.sell => Icon(Icons.money_off, color: color, size: 40),
+      OperationType.purchase => Icons.attach_money,
+      OperationType.sell => Icons.money_off,
     };
   }
 }
