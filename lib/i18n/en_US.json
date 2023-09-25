@@ -58,7 +58,7 @@
     "item-description-label": "Description:",
     "item-quantity-label": "Quantity:",
     "item-price-label": "Value:",
-    "start-expanded-button": "Start expanded grouping",
+    "start-expanded": "Start expanded",
     "make-login-button": "Login",
     "make-register-button": "Register",
     "login-button": "Login with your account",

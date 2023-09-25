@@ -154,7 +154,7 @@ class FloatingBottomMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: tooltip,
+      message: showTooltip ? '' : tooltip,
       preferBelow: false,
       verticalOffset: 35,
       child: Container(

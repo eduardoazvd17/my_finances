@@ -32,7 +32,7 @@ class AddOrEditGroupBottomSheetModal extends StatefulWidget {
 class _AddOrEditGroupBottomSheetModalState
     extends State<AddOrEditGroupBottomSheetModal> {
   late final TextEditingController _nameController;
-  late bool _initializeExpanded;
+  late bool _startExpanded;
 
   bool get isEditing => widget.groupingModel != null;
 
@@ -41,7 +41,7 @@ class _AddOrEditGroupBottomSheetModalState
     _nameController = TextEditingController(
       text: widget.groupingModel?.name ?? '',
     );
-    _initializeExpanded = widget.groupingModel?.initializeExpanded ?? false;
+    _startExpanded = widget.groupingModel?.initializeExpanded ?? false;
     super.initState();
   }
 
@@ -67,9 +67,13 @@ class _AddOrEditGroupBottomSheetModalState
   List<Widget> _buildLayoutByDocumentType(BuildContext context) {
     //TODO: Layout para cada tipo de DocumentType.
     return switch (widget.controller.documentModel.type) {
-      DocumentType.monthlyExpenseControl => [],
+      DocumentType.monthlyExpenseControl => [
+          _categoryTextFieldWidget(),
+          _startExpandedWidget(),
+        ],
       DocumentType.investmentControl => [
           _assetTextFieldWidget(),
+          _startExpandedWidget(),
           _buttonsWidget(() async {
             final RegExp tickerRegex = RegExp(
               r'[a-zA-Z]{4}(([1-9]{1}[0-1]{1})|[1-9]{1})',
@@ -90,7 +94,9 @@ class _AddOrEditGroupBottomSheetModalState
                 widget.controller.groups.firstWhereOrNull(
               (e) => e.name.toLowerCase() == newName.toLowerCase(),
             );
-            if (existingGrouping != null) {
+            if (existingGrouping != null &&
+                (widget.groupingModel == null ||
+                    widget.groupingModel?.id != existingGrouping.id)) {
               await Get.dialog(
                 CustomDialog(
                   title: 'existing-asset-dialog-title'.i18n(),
@@ -108,23 +114,33 @@ class _AddOrEditGroupBottomSheetModalState
             return await widget.controller.addOrEditGrouping(
               groupingModel: widget.groupingModel,
               newName: newName,
-              newInitializeExpanded: _initializeExpanded,
+              newInitializeExpanded: _startExpanded,
             );
           }),
         ],
       DocumentType.annotation => [
           _nameTextFieldWidget(),
-          _initializeExpandedWidget(),
+          _startExpandedWidget(),
           _buttonsWidget(() async {
             return await widget.controller.addOrEditGrouping(
               groupingModel: widget.groupingModel,
               newName: _nameController.text.trim(),
-              newInitializeExpanded: _initializeExpanded,
+              newInitializeExpanded: _startExpanded,
             );
           }),
         ],
       //DocumentType.pointsAndAirlineMiles => [],
     };
+  }
+
+  TextFieldWidget _categoryTextFieldWidget() {
+    return TextFieldWidget(
+      label: 'category-label'.i18n(),
+      hint: 'category-hint'.i18n(),
+      controller: _nameController,
+      textCapitalization: TextCapitalization.sentences,
+      focusNode: FocusNode(),
+    );
   }
 
   TextFieldWidget _assetTextFieldWidget() {
@@ -148,16 +164,14 @@ class _AddOrEditGroupBottomSheetModalState
     );
   }
 
-  SwitchListTile _initializeExpandedWidget() {
+  SwitchListTile _startExpandedWidget() {
     return SwitchListTile(
-      value: _initializeExpanded,
+      value: _startExpanded,
       contentPadding: EdgeInsets.zero,
       onChanged: (value) {
-        setState(() {
-          _initializeExpanded = value;
-        });
+        setState(() => _startExpanded = value);
       },
-      title: Text('start-expanded-button'.i18n()),
+      title: Text('start-expanded'.i18n()),
     );
   }
 
