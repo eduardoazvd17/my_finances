@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 
@@ -72,7 +71,7 @@ class ManageCategoriesBottomSheetModal extends StatelessWidget {
 
   Widget _createdCategoriesListWidget(BuildContext context) {
     return SizedBox(
-      height: 120,
+      height: 150,
       child: Obx(
         () {
           if (controller.groups.isEmpty) {
