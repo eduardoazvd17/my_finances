@@ -86,28 +86,36 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Obx(
-            () => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: controller.groups.map((groupingModel) {
-                return GroupingWidget(
-                  groupingModel: groupingModel,
-                  documentEditorController: controller,
-                );
-              }).toList(),
+          if (controller.documentModel.type ==
+              DocumentType.monthlyExpenseControl) ...[
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Center(child: Text('Coming soon...')),
             ),
-          ),
-          Obx(
-            () => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: controller.itemsWithoutGroup.map((itemModel) {
-                return ItemWidget(
-                  itemModel: itemModel,
-                  documentEditorController: controller,
-                );
-              }).toList(),
+          ] else ...[
+            Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: controller.groups.map((groupingModel) {
+                  return GroupingWidget(
+                    groupingModel: groupingModel,
+                    documentEditorController: controller,
+                  );
+                }).toList(),
+              ),
             ),
-          ),
+            Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: controller.itemsWithoutGroup.map((itemModel) {
+                  return ItemWidget(
+                    itemModel: itemModel,
+                    documentEditorController: controller,
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
           const SizedBox(height: 125),
         ],
       ),
