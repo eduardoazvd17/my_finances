@@ -123,7 +123,8 @@ class DocumentEditorController extends GetxController {
       _groups.remove(groupingModel);
       _groups.add(newGroupingModel);
 
-      if (groupingModel != null) {
+      if (groupingModel != null &&
+          documentModel.type != DocumentType.monthlyExpenseControl) {
         _selectedGroup.value = newGroupingModel;
         _selectedGroup.refresh();
       }

@@ -131,7 +131,7 @@
     "name-validation": "Ingrese un nombre válido.",
     "add-asset-button": "Agregar activo",
     "asset-label": "Ticker o nombre del activo:",
-    "asset-hint": "Ejemplo MYFC3...",
+    "asset-hint": "Ejemplo: MYFC3...",
     "existing-asset-dialog-title": "Activo ya agregado",
     "existing-asset-dialog-content": "El activo \"%s\" ya existe en su documento.",
     "edit-asset-button": "Editar activo",
@@ -214,5 +214,15 @@
     "choose-option-below-text": "Elija una opción a continuación",
     "balance-text": "Saldo: %s",
     "expenses-text": "Gastos: %s",
-    "earnings-text": "Ganancias: %s"
+    "earnings-text": "Ganancias: %s",
+    "manage-categories-button": "Gestión de categorías",
+    "add-category-button": "Crear nueva categoría",
+    "edit-category-button": "Editar categoría",
+    "delete-category-button": "Eliminar categoría",
+    "created-categories-label": "Categorías creadas:",
+    "empty-categories-title": "No hay categorías",
+    "empty-categories-description": "Aún no has creado categorías de gastos, usa el botón a continuación para crear una nueva.",
+    "category-label": "Nombre de categoría",
+    "category-hint": "Ejemplo: Gastos del hogar...",
+    "delete-category-confirmation-text": "¿Realmente desea eliminar esta categoría?\n\nTodos los gastos ingresados ​​en ella también se eliminarán."
 }

@@ -11,6 +11,7 @@ import '../../../../core/presentation/widgets/list_header_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
 import '../../data/enums/month_enum.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
+import '../views/manage_categories_bottom_sheet_modal.dart';
 import '../widgets/annotation_total_content.dart';
 import '../widgets/balance_widget.dart';
 import '../widgets/investiment_control_total_content.dart';
@@ -246,7 +247,27 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   ) {
     //TODO: Menu para cada tipo de ItemModel.
     return switch (controller.documentModel.type) {
-      DocumentType.monthlyExpenseControl => [],
+      DocumentType.monthlyExpenseControl => [
+          FloatingBottomMenuItem(
+            icon: Icons.list_alt_rounded,
+            tooltip: 'manage-categories-button'.i18n(),
+            showTooltip: true,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (context) {
+                  return ManageCategoriesBottomSheetModal(
+                    icon: Icons.list_alt_rounded,
+                    title: 'manage-categories-button'.i18n(),
+                    controller: controller,
+                  );
+                },
+              );
+            },
+          ),
+        ],
       DocumentType.investmentControl => [
           if (controller.selectedGroup == null &&
               controller.selectedItem == null) ...[

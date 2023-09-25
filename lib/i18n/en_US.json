@@ -131,7 +131,7 @@
     "name-validation": "Please enter a valid name.",
     "add-asset-button": "Add asset",
     "asset-label": "Ticker or asset name:",
-    "asset-hint": "Example MYFC3...",
+    "asset-hint": "Example: MYFC3...",
     "existing-asset-dialog-title": "Asset already added",
     "existing-asset-dialog-content": "The asset \"%s\" already exists in your document.",
     "edit-asset-button": "Edit asset",
@@ -214,5 +214,15 @@
     "choose-option-below-text": "Choose an option below",
     "balance-text": "Balance: %s",
     "expenses-text": "Expenses: %s",
-    "earnings-text": "Earnings: %s"
+    "earnings-text": "Earnings: %s",
+    "manage-categories-button": "Category management",
+    "add-category-button": "Create new category",
+    "edit-category-button": "Edit category",
+    "delete-category-button": "Delete category",
+    "created-categories-label": "Categories created:",
+    "empty-categories-title": "There are no categories",
+    "empty-categories-description": "You haven't created spending categories yet, use the button below to create a new one.",
+    "category-label": "Category name",
+    "category-hint": "Example: Household expenses...",
+    "delete-category-confirmation-text": "Do you really want to delete this category?\n\nAll expenses entered into it will also be deleted."
 }

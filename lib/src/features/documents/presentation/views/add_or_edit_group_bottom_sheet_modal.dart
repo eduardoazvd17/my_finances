@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
@@ -70,6 +71,13 @@ class _AddOrEditGroupBottomSheetModalState
       DocumentType.monthlyExpenseControl => [
           _categoryTextFieldWidget(),
           _startExpandedWidget(),
+          _buttonsWidget(() async {
+            return await widget.controller.addOrEditGrouping(
+              groupingModel: widget.groupingModel,
+              newName: _nameController.text.trim(),
+              newInitializeExpanded: _startExpanded,
+            );
+          }),
         ],
       DocumentType.investmentControl => [
           _assetTextFieldWidget(),
@@ -171,7 +179,16 @@ class _AddOrEditGroupBottomSheetModalState
       onChanged: (value) {
         setState(() => _startExpanded = value);
       },
-      title: Text('start-expanded'.i18n()),
+      title: Row(
+        children: [
+          const Icon(CupertinoIcons.rectangle_expand_vertical),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Text('start-expanded'.i18n()),
+          )),
+        ],
+      ),
     );
   }
 
