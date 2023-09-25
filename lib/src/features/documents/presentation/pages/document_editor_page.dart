@@ -193,6 +193,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           if (!kIsWeb) {
             showModalBottomSheet(
               context: context,
+              isScrollControlled: true,
+              useSafeArea: true,
               builder: (_) {
                 return BottomSheetModalPicker(
                   icon: CupertinoIcons.calendar_today,

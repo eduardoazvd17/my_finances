@@ -277,8 +277,8 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       compactMode: true,
       onTap: () => showModalBottomSheet(
         context: context,
-        useSafeArea: true,
         isScrollControlled: true,
+        useSafeArea: true,
         builder: (_) => const SettingsBottomSheetModal(),
       ),
     );
@@ -309,6 +309,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       onTap: () {
         showModalBottomSheet(
           context: context,
+          isScrollControlled: true,
           useSafeArea: true,
           builder: (_) => const DocumentsOrderBottomSheetModal(),
         );

@@ -159,6 +159,7 @@ class WelcomePage extends GetWidget<AuthController> {
         tooltip: 'settings-text'.i18n(),
         onTap: () => showModalBottomSheet(
           context: context,
+          isScrollControlled: true,
           useSafeArea: true,
           builder: (_) => const SettingsBottomSheetModal(),
         ),
