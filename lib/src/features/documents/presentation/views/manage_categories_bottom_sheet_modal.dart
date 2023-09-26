@@ -70,8 +70,8 @@ class ManageCategoriesBottomSheetModal extends StatelessWidget {
   }
 
   Widget _createdCategoriesListWidget(BuildContext context) {
-    return SizedBox(
-      height: 150,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxHeight: 164),
       child: Obx(
         () {
           if (controller.groups.isEmpty) {
