@@ -7,6 +7,7 @@ import '../../data/enums/app_currency_format.dart';
 import '../../data/enums/app_date_format.dart';
 import '../../data/enums/app_language.dart';
 import '../../data/enums/app_theme_mode.dart';
+import '../../data/utils/app_themes.dart';
 import '../controllers/app_controller.dart';
 import '../controllers/i18n_controller.dart';
 import '../controllers/theme_controller.dart';
@@ -43,6 +44,8 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         _languageTile(context),
         const Divider(),
         _themeTile(context),
+        const Divider(),
+        _appVersionWidget,
       ],
     );
   }
@@ -64,6 +67,8 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         _themeTile(context),
         const Divider(),
         _logoutButton(context),
+        const Divider(),
+        _appVersionWidget,
       ],
     );
   }
@@ -399,4 +404,12 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       ],
     );
   }
+
+  Widget get _appVersionWidget => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          AppController.instance.appVersion,
+          style: const TextStyle(color: AppThemes.commonColor),
+        ),
+      );
 }
