@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ResponsiveBuilder extends StatelessWidget {
-  final int maxMobileWidth;
   final Widget? mobileWidget;
   final Widget? desktopWidget;
 
+  static const double maxMobileWidth = 768;
   static const double maxDesktopWidth = 1000;
   static const double contentMaxWidth = maxDesktopWidth - 100;
 
   const ResponsiveBuilder({
     super.key,
-    this.maxMobileWidth = 768,
     this.mobileWidget,
     this.desktopWidget,
   });

@@ -213,10 +213,11 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             const double maxDesktopWidth = ResponsiveBuilder.maxDesktopWidth;
             final double screenWidth = Get.width;
             final double diff = screenWidth - maxDesktopWidth;
-            final bool reducePadding = screenWidth < 768;
+            final bool reducePaddingTop =
+                screenWidth < ResponsiveBuilder.maxMobileWidth;
             final RelativeRect position = RelativeRect.fromLTRB(
               ResponsiveBuilder.maxDesktopWidth,
-              reducePadding ? 110 : 185.0,
+              reducePaddingTop ? 110 : 185.0,
               (diff / 2) + 14,
               0,
             );
