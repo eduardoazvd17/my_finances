@@ -40,6 +40,12 @@ class AppThemes {
         centerTitle: true,
       ),
       dialogBackgroundColor: _lightSecondaryBackgroundColor,
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: darkBackgroundColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
         shape: _bottomSheetShape,
@@ -72,6 +78,12 @@ class AppThemes {
         centerTitle: true,
       ),
       dialogBackgroundColor: _darkSecondaryBackgroundColor,
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: lightBackgroundColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
         shape: _bottomSheetShape,
