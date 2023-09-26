@@ -9,6 +9,7 @@ import '../../../../core/presentation/widgets/floating_bottom_menu_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/list_header_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../data/enums/month_enum.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
 import '../views/manage_categories_bottom_sheet_modal.dart';
@@ -186,6 +187,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         balance: controller.selectedMonthBalance,
       ),
       action: IconButtonWidget(
+        key: key,
         icon: CupertinoIcons.calendar_today,
         tooltip: 'change-month-button'.i18n(),
         compactMode: true,
@@ -208,9 +210,20 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               },
             );
           } else {
+            const double maxDesktopWidth = ResponsiveBuilder.maxDesktopWidth;
+            final double screenWidth = Get.width;
+            final double diff = screenWidth - maxDesktopWidth;
+            final bool reducePadding = screenWidth < 768;
+            final RelativeRect position = RelativeRect.fromLTRB(
+              ResponsiveBuilder.maxDesktopWidth,
+              reducePadding ? 110 : 185.0,
+              (diff / 2) + 14,
+              0,
+            );
+
             showMenu(
               context: context,
-              position: RelativeRect.fill,
+              position: position,
               items: MonthEnum.values.map(
                 (e) {
                   return PopupMenuItem<MonthEnum>(
@@ -580,5 +593,18 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         ],
       //DocumentType.pointsAndAirlineMiles => [],
     };
+  }
+}
+
+extension GlobalPaintBounds on BuildContext {
+  Rect? get globalPaintBounds {
+    final renderObject = findRenderObject();
+    final translation = renderObject?.getTransformTo(null).getTranslation();
+    if (translation != null && renderObject?.paintBounds != null) {
+      final offset = Offset(translation.x, translation.y);
+      return renderObject!.paintBounds.shift(offset);
+    } else {
+      return null;
+    }
   }
 }
