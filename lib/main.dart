@@ -46,8 +46,8 @@ class MyFinancesApp extends GetWidget<I18nController> {
       return GetMaterialApp(
         builder: (context, child) {
           final MediaQueryData mediaQueryData = MediaQuery.of(context);
-          double textScaleFactor = mediaQueryData.textScaleFactor;
 
+          double textScaleFactor = mediaQueryData.textScaleFactor;
           const double min = 0.5;
           if (textScaleFactor < min) textScaleFactor = min;
           const double max = 1.5;
