@@ -87,7 +87,7 @@ class AppRoutes {
       ),
       GetPage(
         name: _documentEditor,
-        page: () => DocumentEditorPage(),
+        page: () => const DocumentEditorPage(),
         binding: DocumentEditorBinding(),
         transition: _getTransition(_documentEditor),
         middlewares: [AuthMiddleware()],
