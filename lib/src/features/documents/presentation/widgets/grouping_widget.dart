@@ -43,7 +43,7 @@ class GroupingWidget extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                       )
                     : null,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class GroupingWidget extends StatelessWidget {
                     children: [
                       Obx(
                         () => InkWell(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(12),
                           onTap: () {
                             _controller.toggleIsExpanded();
                             if (documentEditorController
@@ -73,7 +73,7 @@ class GroupingWidget extends StatelessWidget {
                       ),
                       Expanded(
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(12),
                           onTap: () {
                             if (isSelected) {
                               documentEditorController.selectedGroup = null;

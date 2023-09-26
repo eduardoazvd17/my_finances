@@ -42,7 +42,7 @@ class CustomDialog extends StatelessWidget {
       insetPadding: const EdgeInsets.all(30),
       shape: const RoundedRectangleBorder(
         side: BorderSide(color: AppThemes.commonColor),
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -86,7 +86,7 @@ class CustomDialog extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(12),
                       ),
                       highlightColor: Colors.transparent,
                       onTap: () {
@@ -100,7 +100,7 @@ class CustomDialog extends StatelessWidget {
                               ? Colors.red[300]
                               : Theme.of(context).primaryColor.withAlpha(180),
                           borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
+                            bottomLeft: Radius.circular(12),
                           ),
                         ),
                         child: Center(
@@ -122,9 +122,9 @@ class CustomDialog extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.only(
                       bottomLeft: onConfirm == null
-                          ? const Radius.circular(15)
+                          ? const Radius.circular(12)
                           : Radius.zero,
-                      bottomRight: const Radius.circular(15),
+                      bottomRight: const Radius.circular(12),
                     ),
                     highlightColor: Colors.transparent,
                     onTap: () {
@@ -141,9 +141,9 @@ class CustomDialog extends StatelessWidget {
                                 : Colors.red[300],
                         borderRadius: BorderRadius.only(
                           bottomLeft: onConfirm == null
-                              ? const Radius.circular(15)
+                              ? const Radius.circular(12)
                               : Radius.zero,
-                          bottomRight: const Radius.circular(15),
+                          bottomRight: const Radius.circular(12),
                         ),
                       ),
                       child: Center(

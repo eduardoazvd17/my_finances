@@ -159,7 +159,7 @@ class ItemWidget extends StatelessWidget {
             }
           },
           onDoubleTap: onDoubleTap,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
           child: DecoratedBox(
             decoration: BoxDecoration(
               border: isSelected
@@ -167,7 +167,7 @@ class ItemWidget extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     )
                   : null,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(

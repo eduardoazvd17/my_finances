@@ -289,7 +289,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Material(
         elevation: 8,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(12),
         child: FloatingBottomMenuItem(
           icon: Icons.add,
           onTap: controller.goToAddDocumentPage,

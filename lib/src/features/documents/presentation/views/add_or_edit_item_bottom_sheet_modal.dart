@@ -397,7 +397,7 @@ class _AddOrEditItemBottomSheetModalState
                 ),
                 dialogSize: const Size(325, 400),
                 value: [_selectedDateTime ?? now],
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(12),
               );
 
               if (pickedDates != null && pickedDates.isNotEmpty) {

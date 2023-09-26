@@ -33,7 +33,7 @@ class DocumentTileWidget extends StatelessWidget {
       child: InkWell(
         onTap: () => onTap(documentModel),
         onLongPress: () => _openMenu(context),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
         child: ResponsiveBuilder(
           desktopWidget: _desktopWidget(context),
           mobileWidget: _mobileWidget(context),

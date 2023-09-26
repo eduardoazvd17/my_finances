@@ -91,7 +91,7 @@ class ManageCategoriesBottomSheetModal extends StatelessWidget {
                   children: [
                     Expanded(
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                         onTap: () {
                           showModalBottomSheet(
                             context: context,

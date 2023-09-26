@@ -28,10 +28,10 @@ class FloatingBottomMenuWidget extends StatelessWidget {
             width: 1,
             color: AppThemes.commonColor,
           ),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Material(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(12),
           elevation: 8,
           color: Theme.of(context).dialogBackgroundColor,
           child: AnimatedSize(
@@ -79,7 +79,7 @@ class FloatingBottomMenuWidget extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 5),
                             child: InkWell(
                               onTap: onRemoveSelected,
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(12),
                               child: const Icon(
                                 Icons.close,
                                 color: AppThemes.commonColor,
@@ -161,11 +161,11 @@ class FloatingBottomMenuItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           border: borderColor != null ? Border.all(color: borderColor!) : null,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(12),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
