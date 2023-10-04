@@ -235,5 +235,6 @@
     "value-type-title-0": "Gain",
     "value-type-title-1": "Expense",
     "recurring-text": "Recurring value",
-    "recurring-description": "Enable value display in multiple months."
+    "recurring-description": "Enable value display in multiple months.",
+    "value-category-label": "Select target category:"
 }

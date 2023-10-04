@@ -130,6 +130,7 @@ class _AddOrEditItemBottomSheetModalState
           _valueDescriptionTextFieldWidget(),
           _valueTypeSelectionWidget(),
           _toggleRecurringWidget(),
+          _categorySelectionWidget(),
         ],
       DocumentType.investmentControl => [
           Padding(
@@ -505,6 +506,50 @@ class _AddOrEditItemBottomSheetModalState
       onChanged: (_) {
         setState(() => _isRecurring = !_isRecurring);
       },
+    );
+  }
+
+  Widget _categorySelectionWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('value-category-label'.i18n()),
+          Obx(
+            () => DropDownButtonWidget<GroupingModel?>(
+              hintText: 'select-text'.i18n(),
+              value: _selectedGrouping,
+              onChanged: (group) {
+                setState(() => _selectedGrouping = group);
+              },
+              items: [
+                DropdownMenuItem(
+                  value: null,
+                  child: Text(
+                    'select-text'.i18n(),
+                    style: const TextStyle(
+                      color: AppThemes.commonColor,
+                    ),
+                  ),
+                ),
+                ...widget.controller.groups.map(
+                  (group) {
+                    return DropdownMenuItem(
+                      value: group,
+                      child: Text(
+                        group.name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

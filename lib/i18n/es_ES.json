@@ -235,5 +235,6 @@
     "value-type-title-0": "Ganancia",
     "value-type-title-1": "Gasto",
     "recurring-text": "Valor recurrente",
-    "recurring-description": "Habilitar visualización de valores en varios meses."
+    "recurring-description": "Habilitar visualización de valores en varios meses.",
+    "value-category-label": "Seleccione categoría de destino:"
 }
