@@ -66,12 +66,12 @@ class DocumentEditorController extends GetxController {
 
   double get selectedMonthEarnings {
     if (!isMonthlyExpensesControl) return 0;
-    return 1000; //! MOCK
+    return 0;
   }
 
   double get selectedMonthExpenses {
     if (!isMonthlyExpensesControl) return 0;
-    return 534.9; //! MOCK
+    return 0;
   }
 
   double get selectedMonthBalance {

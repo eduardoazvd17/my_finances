@@ -85,7 +85,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         'enable-biometrics-button'.i18n(),
         style: Theme.of(context)
             .textTheme
-            .titleMedium
+            .titleSmall
             ?.copyWith(fontWeight: FontWeight.normal),
       ),
       subtitle: controller.canEnableBiometrics
@@ -103,13 +103,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          Text(
-            '${'app-language-label'.i18n()}:',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.normal),
-          ),
+          Text('${'app-language-label'.i18n()}:'),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),
@@ -174,13 +168,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          Text(
-            '${'app-date-format-label'.i18n()}:',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.normal),
-          ),
+          Text('${'app-date-format-label'.i18n()}:'),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),
@@ -238,7 +226,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
         'use-24h-format-button'.i18n(),
         style: Theme.of(context)
             .textTheme
-            .titleMedium
+            .titleSmall
             ?.copyWith(fontWeight: FontWeight.normal),
       ),
     );
@@ -250,13 +238,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          Text(
-            '${'app-currency-format-label'.i18n()}:',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.normal),
-          ),
+          Text('${'app-currency-format-label'.i18n()}:'),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),
@@ -332,13 +314,7 @@ class SettingsBottomSheetModal extends GetWidget<AppController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          Text(
-            '${'app-theme-label'.i18n()}:',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.normal),
-          ),
+          Text('${'app-theme-label'.i18n()}:'),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),

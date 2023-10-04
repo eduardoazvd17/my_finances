@@ -39,13 +39,7 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: Text(
-            'by-label'.i18n(),
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.normal),
-          ),
+          child: Text('by-label'.i18n()),
         ),
         Expanded(
           child: DropDownButtonWidget<DocumentOrderType>(
@@ -87,13 +81,7 @@ class DocumentsOrderBottomSheetModal extends GetWidget<DocumentsController> {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: Text(
-            'list-order-label'.i18n(),
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.normal),
-          ),
+          child: Text('list-order-label'.i18n()),
         ),
         Expanded(
           child: DropDownButtonWidget<ListOrder>(

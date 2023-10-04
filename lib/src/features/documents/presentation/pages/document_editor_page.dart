@@ -82,6 +82,13 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       controller.pageScrollPosition = scrollController.offset;
     });
 
+    if (controller.documentModel.type == DocumentType.monthlyExpenseControl &&
+        controller.items.isEmpty) {
+      return Center(
+        child: controller.documentModel.type.emptyDocumentAdviseWidget,
+      );
+    }
+
     return ScrollViewWidget(
       controller: scrollController,
       child: Column(
@@ -89,10 +96,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         children: [
           if (controller.documentModel.type ==
               DocumentType.monthlyExpenseControl) ...[
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Center(child: Text('Coming soon...')),
-            ),
+            Text('Mostrar gastos aqui.'),
           ] else ...[
             Obx(
               () => Column(
@@ -272,6 +276,26 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     //TODO: Menu para cada tipo de ItemModel.
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
+          if (controller.groups.isNotEmpty)
+            FloatingBottomMenuItem(
+              icon: Icons.post_add_rounded,
+              tooltip: 'insert-new-value-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      icon: Icons.post_add_rounded,
+                      title: 'insert-new-value-button'.i18n(),
+                      controller: controller,
+                    );
+                  },
+                );
+              },
+            ),
           FloatingBottomMenuItem(
             icon: Icons.list_alt_rounded,
             tooltip: 'manage-categories-button'.i18n(),

@@ -224,5 +224,16 @@
     "empty-categories-description": "Você ainda não criou categorias de gastos, utilize o botão abaixo para criar uma nova.",
     "category-label": "Nome da categoria",
     "category-hint": "Exemplo: Gastos com a casa...",
-    "delete-category-confirmation-text": "Deseja realmente deletar esta categoria?\n\nTodos os gastos inseridos à ela também serão deletados."
+    "delete-category-confirmation-text": "Deseja realmente deletar esta categoria?\n\nTodos os gastos inseridos à ela também serão deletados.",
+    "insert-new-value-button": "Inserir novo valor",
+    "edit-value-button": "Editar valor",
+    "delete-value-button": "Deletar valor",
+    "delete-value-confirmation-text": "Deseja realmente deletar este valor?\n\nCaso ele tenha sido marcado como recorrente, ele será removido de todos os meses.",
+    "value-name-label": "Nome:",
+    "value-name-hint": "Digite um nome para o valor...",
+    "value-type-label": "Tipo de valor:",
+    "value-type-title-0": "Ganho",
+    "value-type-title-1": "Despesa",
+    "recurring-text": "Valor recorrente",
+    "recurring-description": "Habilitar exibição de valor em múltiplos meses."
 }

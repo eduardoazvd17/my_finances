@@ -56,7 +56,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12.5),
           style: Theme.of(context)
               .textTheme
-              .titleMedium
+              .titleSmall
               ?.copyWith(fontWeight: FontWeight.normal),
         ),
       ),

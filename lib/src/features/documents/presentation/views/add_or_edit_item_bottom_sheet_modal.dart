@@ -9,6 +9,7 @@ import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../../data/enums/operation_type.dart';
+import '../../data/enums/value_type.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
 
@@ -47,6 +48,8 @@ class _AddOrEditItemBottomSheetModalState
   GroupingModel? _selectedGrouping;
   OperationType? _selectedOperationType;
   DateTime? _selectedDateTime;
+  bool _isRecurring = false;
+  ValueType? _selectedValueType;
 
   bool get isEditing => widget.itemModel != null;
 
@@ -58,6 +61,14 @@ class _AddOrEditItemBottomSheetModalState
 
     switch (widget.controller.documentModel.type) {
       case DocumentType.monthlyExpenseControl:
+        // final expenseControl =
+        //     widget.itemModel as MonthlyExpenseControlItemModel?;
+        // _priceController = TextEditingController(
+        //   text: expenseControl?.defaultPrice
+        //       .toStringAsFixed(2)
+        //       .replaceAll('.00', '')
+        //       .replaceAll(',00', ''),
+        // );
         break;
       case DocumentType.investmentControl:
         final investiment = widget.itemModel as InvestimentControlItemModel?;
@@ -115,7 +126,11 @@ class _AddOrEditItemBottomSheetModalState
   List<Widget> _buildLayoutByDocumentType() {
     //TODO: Layout para cada tipo de DocumentType.
     return switch (widget.controller.documentModel.type) {
-      DocumentType.monthlyExpenseControl => [],
+      DocumentType.monthlyExpenseControl => [
+          _valueDescriptionTextFieldWidget(),
+          _valueTypeSelectionWidget(),
+          _toggleRecurringWidget(),
+        ],
       DocumentType.investmentControl => [
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
@@ -411,6 +426,85 @@ class _AddOrEditItemBottomSheetModalState
           ),
         ],
       ),
+    );
+  }
+
+  Widget _valueDescriptionTextFieldWidget() {
+    return TextFieldWidget(
+      label: 'value-name-label'.i18n(),
+      hint: 'value-name-hint'.i18n(),
+      controller: _nameController,
+      textCapitalization: TextCapitalization.sentences,
+      focusNode: FocusNode(),
+    );
+  }
+
+  Widget _valueTypeSelectionWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('value-type-label'.i18n()),
+          DropDownButtonWidget<ValueType?>(
+            hintText: 'select-text'.i18n(),
+            value: _selectedValueType,
+            onChanged: (value) {
+              setState(() => _selectedValueType = value);
+            },
+            items: [
+              DropdownMenuItem(
+                value: null,
+                child: Text(
+                  'select-text'.i18n(),
+                  style: const TextStyle(color: AppThemes.commonColor),
+                ),
+              ),
+              ...ValueType.values.map(
+                (value) {
+                  return DropdownMenuItem(
+                    value: value,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Icon(value.icon, color: value.color),
+                        ),
+                        Expanded(
+                          child: Text(
+                            value.title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: value.color),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _toggleRecurringWidget() {
+    return SwitchListTile(
+      title: Text(
+        'recurring-text'.i18n(),
+        style: Theme.of(context)
+            .textTheme
+            .titleSmall
+            ?.copyWith(fontWeight: FontWeight.normal),
+      ),
+      subtitle: Text('recurring-description'.i18n()),
+      contentPadding: EdgeInsets.zero,
+      value: _isRecurring,
+      onChanged: (_) {
+        setState(() => _isRecurring = !_isRecurring);
+      },
     );
   }
 

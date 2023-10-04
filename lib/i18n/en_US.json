@@ -224,5 +224,16 @@
     "empty-categories-description": "You haven't created spending categories yet, use the button below to create a new one.",
     "category-label": "Category name",
     "category-hint": "Example: Household expenses...",
-    "delete-category-confirmation-text": "Do you really want to delete this category?\n\nAll expenses entered into it will also be deleted."
+    "delete-category-confirmation-text": "Do you really want to delete this category?\n\nAll expenses entered into it will also be deleted.",
+    "insert-new-value-button": "Insert new value",
+    "edit-value-button": "Edit value",
+    "delete-value-button": "Delete value",
+    "delete-value-confirmation-text": "Do you really want to delete this value?\n\nIf it has been marked as recurring, it will be removed from all months.",
+    "value-name-label": "Name:",
+    "value-name-hint": "Enter a name for the value...",
+    "value-type-label": "Value type:",
+    "value-type-title-0": "Gain",
+    "value-type-title-1": "Expense",
+    "recurring-text": "Recurring value",
+    "recurring-description": "Enable value display in multiple months."
 }
