@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
@@ -130,6 +131,7 @@ class _AddOrEditItemBottomSheetModalState
           _valueDescriptionTextFieldWidget(),
           _valueTypeSelectionWidget(),
           _toggleRecurringWidget(),
+          _monthlyValuesWidget(),
           _categorySelectionWidget(),
         ],
       DocumentType.investmentControl => [
@@ -506,6 +508,20 @@ class _AddOrEditItemBottomSheetModalState
       onChanged: (_) {
         setState(() => _isRecurring = !_isRecurring);
       },
+    );
+  }
+
+  Widget _monthlyValuesWidget() {
+    //TODO: FINISH VALUES INSERT FORM.
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Center(
+        child: Text(
+          _isRecurring
+              ? '<MULTIPLE MONTHS FORM HERE>'
+              : '<SINGLE MONTH FORM HERE>',
+        ).animate().fade(),
+      ),
     );
   }
 
