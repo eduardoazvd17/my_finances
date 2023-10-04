@@ -133,6 +133,7 @@ class _AddOrEditItemBottomSheetModalState
           _toggleRecurringWidget(),
           _monthlyValuesWidget(),
           _categorySelectionWidget(),
+          _buttonsWidget(() async => true),
         ],
       DocumentType.investmentControl => [
           Padding(
@@ -512,7 +513,6 @@ class _AddOrEditItemBottomSheetModalState
   }
 
   Widget _monthlyValuesWidget() {
-    //TODO: FINISH VALUES INSERT FORM.
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Center(
