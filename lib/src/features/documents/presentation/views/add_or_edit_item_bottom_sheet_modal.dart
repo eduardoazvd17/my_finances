@@ -9,8 +9,8 @@ import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
+import '../../data/enums/month_enum.dart';
 import '../../data/enums/operation_type.dart';
-import '../../data/enums/value_type.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
 
@@ -50,7 +50,6 @@ class _AddOrEditItemBottomSheetModalState
   OperationType? _selectedOperationType;
   DateTime? _selectedDateTime;
   bool _isRecurring = false;
-  ValueType? _selectedValueType;
 
   bool get isEditing => widget.itemModel != null;
 
@@ -129,10 +128,9 @@ class _AddOrEditItemBottomSheetModalState
     return switch (widget.controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
           _valueNameTextFieldWidget(),
-          _valueTypeSelectionWidget(),
+          _categorySelectionWidget(),
           _toggleRecurringValueWidget(),
           _valuesWidget(),
-          _categorySelectionWidget(),
           _buttonsWidget(() async => true),
         ],
       DocumentType.investmentControl => [
@@ -443,57 +441,6 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _valueTypeSelectionWidget() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10, bottom: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('value-type-label'.i18n()),
-          DropDownButtonWidget<ValueType?>(
-            hintText: 'select-text'.i18n(),
-            value: _selectedValueType,
-            onChanged: (value) {
-              setState(() => _selectedValueType = value);
-            },
-            items: [
-              DropdownMenuItem(
-                value: null,
-                child: Text(
-                  'select-text'.i18n(),
-                  style: const TextStyle(color: AppThemes.commonColor),
-                ),
-              ),
-              ...ValueType.values.map(
-                (value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: Icon(value.icon, color: value.color),
-                        ),
-                        Expanded(
-                          child: Text(
-                            value.title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: value.color),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _toggleRecurringValueWidget() {
     return SwitchListTile(
       title: Text(
@@ -514,13 +461,19 @@ class _AddOrEditItemBottomSheetModalState
 
   Widget _valuesWidget() {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Center(
-        child: Text(
-          _isRecurring
-              ? '<MULTIPLE MONTHS FORM HERE>'
-              : '<SINGLE MONTH FORM HERE>',
-        ).animate().fade(),
+      padding: const EdgeInsets.only(top: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _isRecurring
+                ? 'multiple-months-value-description'
+                    .i18n([widget.controller.selectedMonth.title])
+                : 'single-month-value-description'
+                    .i18n([widget.controller.selectedMonth.title]),
+            style: const TextStyle(color: AppThemes.commonColor),
+          ),
+        ],
       ),
     );
   }

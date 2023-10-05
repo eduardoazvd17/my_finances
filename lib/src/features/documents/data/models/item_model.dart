@@ -211,6 +211,8 @@ class InvestimentControlItemModel extends ItemModel {
 class MonthlyExpenseControlItemModel extends ItemModel {
   final ValueType valueType;
   final Map<MonthEnum, double> _values;
+  //shared value
+  //isSingleMonth
 
   double value(MonthEnum month) => _values[month] ?? 0;
   void changeValue(Map<MonthEnum, double> customPrices) {
@@ -220,7 +222,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
 
   MonthlyExpenseControlItemModel editAndCopy({
     String? name,
-    String? groupingId,
+    required String? groupingId,
     ValueType? valueType,
     Map<MonthEnum, double>? values,
   }) {
@@ -229,7 +231,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       name: name ?? this.name,
       description: description,
       creationDate: creationDate,
-      groupingId: groupingId ?? this.groupingId,
+      groupingId: groupingId,
       valueType: valueType ?? this.valueType,
       values: values ?? _values,
     );
@@ -239,7 +241,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     required super.id,
     required super.name,
     required super.creationDate,
-    required super.groupingId,
+    super.groupingId,
     super.description,
     required this.valueType,
     required Map<MonthEnum, double> values,

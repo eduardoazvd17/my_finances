@@ -279,7 +279,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
           if (controller.groups.isNotEmpty)
             FloatingBottomMenuItem(
               icon: Icons.post_add_rounded,
-              tooltip: 'new-value-button'.i18n(),
+              tooltip: 'new-expense-button'.i18n(),
               showTooltip: true,
               onTap: () {
                 showModalBottomSheet(
@@ -289,7 +289,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   builder: (context) {
                     return AddOrEditItemBottomSheetModal(
                       icon: Icons.post_add_rounded,
-                      title: 'new-value-button'.i18n(),
+                      title: 'new-expense-button'.i18n(),
                       controller: controller,
                     );
                   },

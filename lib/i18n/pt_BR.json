@@ -142,7 +142,7 @@
     "operation-type-char-1": "[V]",
     "operation-type-title-0": "Compra",
     "operation-type-title-1": "Venda",
-    "operation-type-label": "Tipo de operação:",
+    "operation-type-label": "Selecione o tipo de operação:",
     "asset-quantity-label": "Quantidade:",
     "asset-unit-price-label": "Valor unitário:",
     "operation-date-picker-label": "Data da operação:",
@@ -225,10 +225,10 @@
     "category-label": "Nome da categoria",
     "category-hint": "Exemplo: Gastos com a casa...",
     "delete-category-confirmation-text": "Deseja realmente deletar esta categoria?\n\nTodos os gastos inseridos à ela também serão deletados.",
-    "new-value-button": "Novo valor",
-    "edit-value-button": "Editar valor",
-    "delete-value-button": "Deletar valor",
-    "delete-value-confirmation-text": "Deseja realmente deletar este valor?\n\nCaso ele tenha sido marcado como recorrente, ele será removido de todos os meses.",
+    "new-expense-button": "Nova despesa",
+    "edit-expense-button": "Editar despesa",
+    "delete-expense-button": "Deletar despesa",
+    "delete-expense-confirmation-text": "Deseja realmente deletar esta despesa?\n\nCaso ela tenha sido marcada como recorrente, ela será removida de todos os meses.",
     "value-name-label": "Nome:",
     "value-name-hint": "Digite um nome para o valor...",
     "value-type-label": "Tipo de valor:",
@@ -236,5 +236,7 @@
     "value-type-title-1": "Despesa",
     "recurring-text": "Valor recorrente",
     "recurring-description": "Habilitar exibição de valor em múltiplos meses.",
-    "value-category-label": "Selecione a categoria de destino:"
+    "value-category-label": "Selecione a categoria de destino:",
+    "single-month-value-description": "Esta despesa será inserida apenas para o mês de %s, caso deseja exibir este valor em mútiplos meses, habilite a opção anterior.",
+    "multiple-months-value-description": "Esta despesa será inserida para todos os meses que possuir valor. Você também pode configurar um valor padrão para todos os meses."
 }
