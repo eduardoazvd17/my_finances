@@ -128,10 +128,10 @@ class _AddOrEditItemBottomSheetModalState
     //TODO: Layout para cada tipo de DocumentType.
     return switch (widget.controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
-          _valueDescriptionTextFieldWidget(),
+          _valueNameTextFieldWidget(),
           _valueTypeSelectionWidget(),
-          _toggleRecurringWidget(),
-          _monthlyValuesWidget(),
+          _toggleRecurringValueWidget(),
+          _valuesWidget(),
           _categorySelectionWidget(),
           _buttonsWidget(() async => true),
         ],
@@ -433,7 +433,7 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _valueDescriptionTextFieldWidget() {
+  Widget _valueNameTextFieldWidget() {
     return TextFieldWidget(
       label: 'value-name-label'.i18n(),
       hint: 'value-name-hint'.i18n(),
@@ -494,7 +494,7 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _toggleRecurringWidget() {
+  Widget _toggleRecurringValueWidget() {
     return SwitchListTile(
       title: Text(
         'recurring-text'.i18n(),
@@ -512,7 +512,7 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _monthlyValuesWidget() {
+  Widget _valuesWidget() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Center(
