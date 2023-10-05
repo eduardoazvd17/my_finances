@@ -235,5 +235,16 @@
     "value-type-title-1": "Gasto",
     "recurring-text": "Valor recurrente",
     "recurring-description": "Habilitar visualización de valores en varios meses.",
-    "value-category-label": "Seleccione categoría de destino:"
+    "value-category-label": "Seleccione categoría de destino:",
+    "single-month-value-description": "Este gasto solo se insertará para el mes de %s, si desea mostrar este valor en varios meses, habilite la opción anterior.",
+    "multiple-months-value-description": "Este gasto se insertará para los meses seleccionados anteriormente. Puedes editar los valores de cada mes por separado accediendo a él en cada mes, a través del menú flotante.",
+    "expense-value-label": "Valor:",
+    "expense-value-hint": "Cantidad que se mostrará sólo en el mes actual...",
+    "expense-default-value-label": "Valor recurrente:",
+    "expense-default-value-hint": "Cantidad que se mostrará en los meses seleccionados...",
+    "selected-months-label": "Meses seleccionados:",
+    "empty-selected-months-text": "No hay meses seleccionados. Utilice el botón de arriba para seleccionar.",
+    "select-months-text": "Seleccionar meses",
+    "add-all-text": "Agregar todo",
+    "remove-all-text": "Eliminar todo"
 }

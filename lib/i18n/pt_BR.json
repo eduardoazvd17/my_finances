@@ -237,5 +237,14 @@
     "recurring-description": "Habilitar exibição de valor em múltiplos meses.",
     "value-category-label": "Selecione a categoria de destino:",
     "single-month-value-description": "Esta despesa será inserida apenas para o mês de %s, caso deseja exibir este valor em mútiplos meses, habilite a opção anterior.",
-    "multiple-months-value-description": "Esta despesa será inserida para todos os meses que possuir valor. Você também pode configurar um valor padrão para todos os meses."
+    "multiple-months-value-description": "Esta despesa será inserida para os meses selecionados acima. Você poderá editar os valores de cada mês separadamente acessando-o em cada mês, pelo menu flutuante.",
+    "expense-value-label": "Valor:",
+    "expense-value-hint": "Valor que será exibido apenas no mês atual...",
+    "expense-default-value-label": "Valor recorrente:",
+    "expense-default-value-hint": "Valor que será exibido nos meses selecionados...",
+    "selected-months-label": "Meses selecionados:",
+    "empty-selected-months-text": "Nenhum mês selecionado. Utilize o botão acima para selecionar.",
+    "select-months-text": "Selecionar meses",
+    "add-all-text": "Adicionar todos",
+    "remove-all-text": "Remover todos"
 }

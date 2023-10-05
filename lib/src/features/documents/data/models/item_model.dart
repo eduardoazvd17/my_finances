@@ -211,7 +211,7 @@ class InvestimentControlItemModel extends ItemModel {
 class MonthlyExpenseControlItemModel extends ItemModel {
   final ValueType valueType;
   final MonthEnum? singleMonth;
-  final double? singleValue;
+  final double singleValue;
   final MultipleMonthsValues _multipleMonthsValues;
 
   double? value(MonthEnum month) {
@@ -219,12 +219,15 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     return _multipleMonthsValues.value(month);
   }
 
+  Set<MonthEnum> get recurringMonths =>
+      _multipleMonthsValues.values.keys.toSet();
+
   MonthlyExpenseControlItemModel editAndCopy({
     String? name,
     required String? groupingId,
     ValueType? valueType,
     required MonthEnum? singleMonth,
-    required double? singleValue,
+    double? singleValue,
     MultipleMonthsValues? multipleMonthsValues,
   }) {
     return MonthlyExpenseControlItemModel(
@@ -235,7 +238,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       groupingId: groupingId,
       valueType: valueType ?? this.valueType,
       singleMonth: singleMonth,
-      singleValue: singleValue,
+      singleValue: singleValue ?? this.singleValue,
       multipleMonthsValues: multipleMonthsValues ?? _multipleMonthsValues,
     );
   }
@@ -258,7 +261,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       ..addAll({
         'valueType': valueType.index,
         'singleMonth': singleMonth?.index,
-        'singleValue': singleValue?.toStringAsFixed(2),
+        'singleValue': singleValue.toStringAsFixed(2),
         'multipleMonthsValues': _multipleMonthsValues.toMap(),
       });
   }
@@ -272,7 +275,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       groupingId: map['groupingId'],
       valueType: ValueType.values[map['valueType']],
       singleMonth: MonthEnum.values[map['singleMonth']],
-      singleValue: double.tryParse(map['singleValue'] ?? ''),
+      singleValue: double.tryParse(map['singleValue'] ?? '') ?? 0.0,
       multipleMonthsValues: MultipleMonthsValues.fromMap(
         Map<int, String>.from(map['multipleMonthsValues']),
       ),

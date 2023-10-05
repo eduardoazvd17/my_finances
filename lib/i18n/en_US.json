@@ -235,5 +235,16 @@
     "value-type-title-1": "Expense",
     "recurring-text": "Recurring value",
     "recurring-description": "Enable value display in multiple months.",
-    "value-category-label": "Select target category:"
+    "value-category-label": "Select target category:",
+    "single-month-value-description": "This expense will only be inserted for the month of %s, if you want to display this value in multiple months, enable the previous option.",
+    "multiple-months-value-description": "This expense will be inserted for the months selected above. You can edit the values for each month separately by accessing it in each month, through the floating menu.",
+    "expense-value-label": "Value:",
+    "expense-value-hint": "Amount that will be displayed only in the current month...",
+    "expense-default-value-label": "Recurring value:",
+    "expense-default-value-hint": "Amount that will be displayed in the selected months...",
+    "selected-months-label": "Selected months:",
+    "empty-selected-months-text": "No months selected. Use the button above to select.",
+    "select-months-text": "Select months",
+    "add-all-text": "Add all",
+    "remove-all-text": "Remove all"
 }

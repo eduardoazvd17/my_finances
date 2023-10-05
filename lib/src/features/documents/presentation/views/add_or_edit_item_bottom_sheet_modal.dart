@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +51,7 @@ class _AddOrEditItemBottomSheetModalState
   OperationType? _selectedOperationType;
   DateTime? _selectedDateTime;
   bool _isRecurring = false;
+  late final Set<MonthEnum> _recurringMonths;
 
   bool get isEditing => widget.itemModel != null;
 
@@ -64,10 +67,11 @@ class _AddOrEditItemBottomSheetModalState
             widget.itemModel as MonthlyExpenseControlItemModel?;
         _priceController = TextEditingController(
           text: expenseControl?.singleValue
-              ?.toStringAsFixed(2)
+              .toStringAsFixed(2)
               .replaceAll('.00', '')
               .replaceAll(',00', ''),
         );
+        _recurringMonths = expenseControl?.recurringMonths ?? {};
         break;
       case DocumentType.investmentControl:
         final investiment = widget.itemModel as InvestimentControlItemModel?;
@@ -459,32 +463,137 @@ class _AddOrEditItemBottomSheetModalState
   }
 
   Widget _valuesWidget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (_isRecurring) ...[
+          _monthSelectionWidget(),
+          TextFieldWidget(
+            label: 'expense-default-value-label'.i18n(),
+            hint: 'expense-default-value-hint'.i18n(),
+            controller: _priceController,
+            textCapitalization: TextCapitalization.none,
+            textInputType: const TextInputType.numberWithOptions(decimal: true),
+            focusNode: FocusNode(),
+          ),
+        ] else ...[
+          TextFieldWidget(
+            label: 'expense-value-label'.i18n(),
+            hint: 'expense-value-hint'.i18n(),
+            controller: _priceController,
+            textCapitalization: TextCapitalization.none,
+            textInputType: const TextInputType.numberWithOptions(decimal: true),
+            focusNode: FocusNode(),
+          ),
+        ],
+        Text(
+          _isRecurring
+              ? 'multiple-months-value-description'.i18n()
+              : 'single-month-value-description'
+                  .i18n([widget.controller.selectedMonth.title]),
+          style: const TextStyle(color: AppThemes.commonColor),
+        ),
+      ],
+    );
+  }
+
+  Widget _monthSelectionWidget() {
     return Padding(
-      padding: const EdgeInsets.only(top: 0),
+      padding: const EdgeInsets.only(top: 5.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            _isRecurring
-                ? 'multiple-months-value-description'
-                    .i18n([widget.controller.selectedMonth.title])
-                : 'single-month-value-description'
-                    .i18n([widget.controller.selectedMonth.title]),
-            style: const TextStyle(color: AppThemes.commonColor),
+          Row(
+            children: [
+              Expanded(child: Text('selected-months-label'.i18n())),
+              IconButtonWidget(
+                tooltip: 'add-all-text'.i18n(),
+                icon: CupertinoIcons.add_circled,
+                onTap: () {
+                  setState(() => _recurringMonths.addAll(MonthEnum.values));
+                },
+              ),
+              IconButtonWidget(
+                tooltip: 'select-months-text'.i18n(),
+                icon: CupertinoIcons.calendar,
+                onTap: () {
+                  final List<MonthEnum> availableMonths = MonthEnum.values
+                      .where((e) => !_recurringMonths.contains(e))
+                      .toList();
+
+                  showMenu<MonthEnum>(
+                    context: context,
+                    position: RelativeRect.fill,
+                    items: availableMonths.map((e) {
+                      return PopupMenuItem(
+                        value: e,
+                        child: Text(e.title),
+                        onTap: () {
+                          setState(() {
+                            _recurringMonths.add(e);
+                          });
+                        },
+                      );
+                    }).toList(),
+                  );
+                },
+              ),
+              IconButtonWidget(
+                tooltip: 'remove-all-text'.i18n(),
+                icon: CupertinoIcons.minus_circle,
+                onTap: () {
+                  setState(() => _recurringMonths.clear());
+                },
+              ),
+            ],
           ),
-          if (_isRecurring)
-            ...[]
-          else ...[
-            TextFieldWidget(
-              label: 'value-label',
-              hint: 'value-hint'.i18n(),
-              controller: _priceController,
-              textCapitalization: TextCapitalization.none,
-              textInputType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              focusNode: FocusNode(),
+          if (_recurringMonths.isEmpty)
+            Text(
+              'empty-selected-months-text'.i18n(),
+              style: const TextStyle(color: AppThemes.commonColor),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Wrap(
+                spacing: 5,
+                runSpacing: 5,
+                children: [
+                  ...SplayTreeSet<MonthEnum>.from(_recurringMonths,
+                      (a, b) => a.index.compareTo(b.index)).map(
+                    (e) => Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                              left: 5,
+                            ),
+                            child: Text(e.title),
+                          ),
+                          IconButtonWidget(
+                            icon: Icons.close,
+                            iconSize: 20,
+                            iconColor: Colors.red,
+                            tooltip: 'remove-text'.i18n(),
+                            compactMode: true,
+                            onTap: () {
+                              setState(() => _recurringMonths.remove(e));
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
         ],
       ),
     );
