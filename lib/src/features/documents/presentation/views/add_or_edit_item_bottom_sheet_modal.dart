@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
@@ -61,14 +60,14 @@ class _AddOrEditItemBottomSheetModalState
 
     switch (widget.controller.documentModel.type) {
       case DocumentType.monthlyExpenseControl:
-        // final expenseControl =
-        //     widget.itemModel as MonthlyExpenseControlItemModel?;
-        // _priceController = TextEditingController(
-        //   text: expenseControl?.defaultPrice
-        //       .toStringAsFixed(2)
-        //       .replaceAll('.00', '')
-        //       .replaceAll(',00', ''),
-        // );
+        final expenseControl =
+            widget.itemModel as MonthlyExpenseControlItemModel?;
+        _priceController = TextEditingController(
+          text: expenseControl?.singleValue
+              ?.toStringAsFixed(2)
+              .replaceAll('.00', '')
+              .replaceAll(',00', ''),
+        );
         break;
       case DocumentType.investmentControl:
         final investiment = widget.itemModel as InvestimentControlItemModel?;
@@ -473,6 +472,19 @@ class _AddOrEditItemBottomSheetModalState
                     .i18n([widget.controller.selectedMonth.title]),
             style: const TextStyle(color: AppThemes.commonColor),
           ),
+          if (_isRecurring)
+            ...[]
+          else ...[
+            TextFieldWidget(
+              label: 'value-label',
+              hint: 'value-hint'.i18n(),
+              controller: _priceController,
+              textCapitalization: TextCapitalization.none,
+              textInputType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              focusNode: FocusNode(),
+            ),
+          ],
         ],
       ),
     );

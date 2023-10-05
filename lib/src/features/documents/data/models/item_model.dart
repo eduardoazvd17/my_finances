@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:get/get.dart';
 import '../../../../core/data/utils/currency_utils.dart';
 import '../enums/operation_type.dart';
 import '../enums/month_enum.dart';
 import '../enums/value_type.dart';
+import 'multiple_months_values.dart';
 
 class ItemModel extends Equatable {
   final String id;
@@ -210,21 +210,22 @@ class InvestimentControlItemModel extends ItemModel {
 
 class MonthlyExpenseControlItemModel extends ItemModel {
   final ValueType valueType;
-  final Map<MonthEnum, double> _values;
-  //shared value
-  //isSingleMonth
+  final MonthEnum? singleMonth;
+  final double? singleValue;
+  final MultipleMonthsValues _multipleMonthsValues;
 
-  double value(MonthEnum month) => _values[month] ?? 0;
-  void changeValue(Map<MonthEnum, double> customPrices) {
-    _values.clear();
-    _values.assignAll(customPrices);
+  double? value(MonthEnum month) {
+    if (singleMonth != null) return singleValue;
+    return _multipleMonthsValues.value(month);
   }
 
   MonthlyExpenseControlItemModel editAndCopy({
     String? name,
     required String? groupingId,
     ValueType? valueType,
-    Map<MonthEnum, double>? values,
+    required MonthEnum? singleMonth,
+    required double? singleValue,
+    MultipleMonthsValues? multipleMonthsValues,
   }) {
     return MonthlyExpenseControlItemModel(
       id: id,
@@ -233,7 +234,9 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       creationDate: creationDate,
       groupingId: groupingId,
       valueType: valueType ?? this.valueType,
-      values: values ?? _values,
+      singleMonth: singleMonth,
+      singleValue: singleValue,
+      multipleMonthsValues: multipleMonthsValues ?? _multipleMonthsValues,
     );
   }
 
@@ -244,32 +247,23 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     super.groupingId,
     super.description,
     required this.valueType,
-    required Map<MonthEnum, double> values,
-  }) : _values = values;
+    required this.singleMonth,
+    required this.singleValue,
+    required MultipleMonthsValues multipleMonthsValues,
+  }) : _multipleMonthsValues = multipleMonthsValues;
 
   @override
   Map<String, dynamic> toMap() {
-    final Map<int, double> values = {};
-    for (final MonthEnum month in _values.keys) {
-      values[month.index] = _values[month] ?? 0;
-    }
-
     return super.toMap()
       ..addAll({
         'valueType': valueType.index,
-        'values': values,
+        'singleMonth': singleMonth?.index,
+        'singleValue': singleValue?.toStringAsFixed(2),
+        'multipleMonthsValues': _multipleMonthsValues.toMap(),
       });
   }
 
   factory MonthlyExpenseControlItemModel.fromMap(Map<String, dynamic> map) {
-    final rawCustomPrices = Map<int, double>.from(map['customPrices']);
-    final Map<MonthEnum, double> values = {};
-    for (final int index in rawCustomPrices.keys) {
-      final monthEnum = MonthEnum.values[index];
-      values[monthEnum] =
-          rawCustomPrices[index] ?? double.parse(map['defaultPrice']);
-    }
-
     return MonthlyExpenseControlItemModel(
       id: map['id'],
       name: map['name'],
@@ -277,7 +271,11 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       description: map['description'],
       groupingId: map['groupingId'],
       valueType: ValueType.values[map['valueType']],
-      values: values,
+      singleMonth: MonthEnum.values[map['singleMonth']],
+      singleValue: double.tryParse(map['singleValue'] ?? ''),
+      multipleMonthsValues: MultipleMonthsValues.fromMap(
+        Map<int, String>.from(map['multipleMonthsValues']),
+      ),
     );
   }
 
@@ -289,7 +287,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
         description,
         groupingId,
         valueType,
-        _values,
+        _multipleMonthsValues,
       ];
 }
 
