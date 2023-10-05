@@ -150,7 +150,7 @@ class GroupingWidget extends StatelessWidget {
                     OperationType.purchase => e.quantity,
                     OperationType.sell => -e.quantity,
                   },
-                ).reduce((a, b) => a + b)} ${'quota-text'.i18n()}',
+                ).reduce((a, b) => a + b)} ${'qtd-text'.i18n()}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         DocumentType.annotation => Text(

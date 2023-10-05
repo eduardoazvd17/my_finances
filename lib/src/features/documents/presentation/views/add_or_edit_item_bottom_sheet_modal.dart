@@ -154,7 +154,7 @@ class _AddOrEditItemBottomSheetModalState
             children: [
               Expanded(
                 child: _quantityTextFieldWidget(
-                  label: 'asset-quota-quantity-label'.i18n(),
+                  label: 'asset-quantity-label'.i18n(),
                   optional: false,
                 ),
               ),
@@ -170,7 +170,7 @@ class _AddOrEditItemBottomSheetModalState
               ),
               Expanded(
                 child: _priceTextFieldWidget(
-                  label: 'asset-quota-price-label'.i18n(),
+                  label: 'asset-unit-price-label'.i18n(),
                   optional: false,
                 ),
               ),

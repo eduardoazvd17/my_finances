@@ -63,7 +63,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
         Flexible(
           child: _getTableColumn(
             alignment: CrossAxisAlignment.center,
-            label: 'quota-text'.i18n(),
+            label: 'qtd-text'.i18n(),
             first: Text(
               '$purchasesQuotas',
               style: const TextStyle(color: Colors.green),
