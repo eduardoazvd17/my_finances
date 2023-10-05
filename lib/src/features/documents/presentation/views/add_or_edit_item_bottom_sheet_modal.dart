@@ -498,104 +498,104 @@ class _AddOrEditItemBottomSheetModalState
   }
 
   Widget _monthSelectionWidget() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(child: Text('selected-months-label'.i18n())),
-              IconButtonWidget(
-                tooltip: 'add-all-text'.i18n(),
-                icon: CupertinoIcons.add_circled,
-                onTap: () {
-                  setState(() => _recurringMonths.addAll(MonthEnum.values));
-                },
-              ),
-              IconButtonWidget(
-                tooltip: 'select-months-text'.i18n(),
-                icon: CupertinoIcons.calendar,
-                onTap: () {
-                  final List<MonthEnum> availableMonths = MonthEnum.values
-                      .where((e) => !_recurringMonths.contains(e))
-                      .toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(child: Text('selected-months-label'.i18n())),
+            IconButtonWidget(
+              tooltip: 'add-all-text'.i18n(),
+              icon: CupertinoIcons.add_circled,
+              onTap: () {
+                setState(() => _recurringMonths.addAll(MonthEnum.values));
+              },
+            ),
+            IconButtonWidget(
+              tooltip: 'select-months-text'.i18n(),
+              icon: CupertinoIcons.calendar,
+              onTap: () {
+                final List<MonthEnum> availableMonths = MonthEnum.values
+                    .where((e) => !_recurringMonths.contains(e))
+                    .toList();
 
-                  showMenu<MonthEnum>(
-                    context: context,
-                    position: RelativeRect.fill,
-                    items: availableMonths.map((e) {
-                      return PopupMenuItem(
-                        value: e,
-                        child: Text(e.title),
-                        onTap: () {
-                          setState(() {
-                            _recurringMonths.add(e);
-                          });
-                        },
-                      );
-                    }).toList(),
-                  );
-                },
-              ),
-              IconButtonWidget(
-                tooltip: 'remove-all-text'.i18n(),
-                icon: CupertinoIcons.minus_circle,
-                onTap: () {
-                  setState(() => _recurringMonths.clear());
-                },
-              ),
-            ],
-          ),
-          if (_recurringMonths.isEmpty)
-            Text(
+                showMenu<MonthEnum>(
+                  context: context,
+                  position: RelativeRect.fill,
+                  items: availableMonths.map((e) {
+                    return PopupMenuItem(
+                      value: e,
+                      child: Text(e.title),
+                      onTap: () {
+                        setState(() {
+                          _recurringMonths.add(e);
+                        });
+                      },
+                    );
+                  }).toList(),
+                );
+              },
+            ),
+            IconButtonWidget(
+              tooltip: 'remove-all-text'.i18n(),
+              icon: CupertinoIcons.minus_circle,
+              onTap: () {
+                setState(() => _recurringMonths.clear());
+              },
+            ),
+          ],
+        ),
+        if (_recurringMonths.isEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Text(
               'empty-selected-months-text'.i18n(),
               style: const TextStyle(color: AppThemes.commonColor),
-            )
-          else
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: Wrap(
-                spacing: 5,
-                runSpacing: 5,
-                children: [
-                  ...SplayTreeSet<MonthEnum>.from(_recurringMonths,
-                      (a, b) => a.index.compareTo(b.index)).map(
-                    (e) => Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 5,
-                              bottom: 5,
-                              left: 5,
-                            ),
-                            child: Text(e.title),
+            ),
+          )
+        else
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Wrap(
+              spacing: 5,
+              runSpacing: 5,
+              children: [
+                ...SplayTreeSet<MonthEnum>.from(
+                    _recurringMonths, (a, b) => a.index.compareTo(b.index)).map(
+                  (e) => Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 5,
+                            bottom: 5,
+                            left: 5,
                           ),
-                          IconButtonWidget(
-                            icon: Icons.close,
-                            iconSize: 20,
-                            iconColor: Colors.red,
-                            tooltip: 'remove-text'.i18n(),
-                            compactMode: true,
-                            onTap: () {
-                              setState(() => _recurringMonths.remove(e));
-                            },
-                          )
-                        ],
-                      ),
+                          child: Text(e.title),
+                        ),
+                        IconButtonWidget(
+                          icon: Icons.close,
+                          iconSize: 20,
+                          iconColor: Colors.red,
+                          tooltip: 'remove-text'.i18n(),
+                          compactMode: true,
+                          onTap: () {
+                            setState(() => _recurringMonths.remove(e));
+                          },
+                        )
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 
