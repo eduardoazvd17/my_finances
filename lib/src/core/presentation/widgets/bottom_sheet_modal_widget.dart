@@ -13,73 +13,79 @@ class BottomSheetModalWidget extends StatelessWidget {
     this.icon,
   });
 
+  void _hideKeyboard() => FocusManager.instance.primaryFocus?.unfocus();
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
+    return GestureDetector(
+      onTap: _hideKeyboard,
+      child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Container(
-                  height: 5,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppThemes.commonColor,
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Container(
+                    height: 5,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppThemes.commonColor,
+                    ),
                   ),
                 ),
-              ),
-              if (title != null)
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (icon != null) _headerIcon(context),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
-                            title!,
-                            maxLines: 3,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                if (title != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 16,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (icon != null) _headerIcon(context),
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Text(
+                              title!,
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      if (icon != null)
-                        Visibility(
-                          visible: false,
-                          maintainAnimation: true,
-                          maintainSize: true,
-                          maintainState: true,
-                          child: _headerIcon(context),
-                        ),
-                    ],
+                        if (icon != null)
+                          Visibility(
+                            visible: false,
+                            maintainAnimation: true,
+                            maintainSize: true,
+                            maintainState: true,
+                            child: _headerIcon(context),
+                          ),
+                      ],
+                    ),
+                  ),
+                if (title != null) const Divider(),
+                Flexible(
+                  child: ScrollViewWidget(
+                    showBar: true,
+                    child: child,
                   ),
                 ),
-              if (title != null) const Divider(),
-              Flexible(
-                child: ScrollViewWidget(
-                  showBar: true,
-                  child: child,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
