@@ -225,7 +225,7 @@
     "category-label": "Nombre de categoría",
     "category-hint": "Ejemplo: Gastos del hogar...",
     "delete-category-confirmation-text": "¿Realmente desea eliminar esta categoría?\n\nTodos los gastos ingresados ​​en ella también se eliminarán.",
-    "insert-new-value-button": "Agregar nuevo valor",
+    "new-value-button": "Nuevo valor",
     "edit-value-button": "Editar valor",
     "delete-value-button": "Eliminar valor",
     "delete-value-confirmation-text": "¿Realmente deseas eliminar este valor?\n\nSi se ha marcado como recurrente, se eliminará de todos los meses.",

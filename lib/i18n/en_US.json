@@ -225,7 +225,7 @@
     "category-label": "Category name",
     "category-hint": "Example: Household expenses...",
     "delete-category-confirmation-text": "Do you really want to delete this category?\n\nAll expenses entered into it will also be deleted.",
-    "insert-new-value-button": "Add new value",
+    "new-value-button": "New value",
     "edit-value-button": "Edit value",
     "delete-value-button": "Delete value",
     "delete-value-confirmation-text": "Do you really want to delete this value?\n\nIf it has been marked as recurring, it will be removed from all months.",
