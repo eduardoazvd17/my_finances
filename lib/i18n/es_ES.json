@@ -255,5 +255,6 @@
     "expense-category-validation": "Seleccione una categoría para el gasto.",
     "expense-single-value-validation": "Ingrese un valor válido para el gasto.",
     "expense-recurring-value-validation": "Ingrese un valor válido para el gasto recurrente",
-    "expense-recurring-month-validation": "Seleccione más de 1 mes para usar el gasto recurrente, o deshabilite la función para insertar solo en el mes actual."
+    "expense-recurring-month-validation": "Seleccione más de 1 mes para usar el gasto recurrente, o deshabilite la función para insertar solo en el mes actual.",
+    "organize-expenses-text": "Organizar gastos"
 }

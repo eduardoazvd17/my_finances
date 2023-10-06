@@ -14,7 +14,7 @@ import '../../data/models/item_model.dart';
 import '../controllers/document_editor_controller.dart';
 import 'add_or_edit_item_bottom_sheet_modal.dart';
 
-class ManageExpensesBottomSheetModal extends StatelessWidget {
+class ManageExpensesBottomSheetModal extends StatefulWidget {
   final IconData icon;
   final String title;
   final DocumentEditorController controller;
@@ -26,10 +26,19 @@ class ManageExpensesBottomSheetModal extends StatelessWidget {
   });
 
   @override
+  State<ManageExpensesBottomSheetModal> createState() =>
+      _ManageExpensesBottomSheetModalState();
+}
+
+class _ManageExpensesBottomSheetModalState
+    extends State<ManageExpensesBottomSheetModal> {
+  bool _organizeByGroup = true;
+
+  @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
-      icon: icon,
-      title: title,
+      icon: widget.icon,
+      title: widget.title,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
@@ -37,7 +46,24 @@ class ManageExpensesBottomSheetModal extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text('added-expenses-label'.i18n()),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('added-expenses-label'.i18n()),
+                  IconButtonWidget(
+                    tooltip: 'organize-expenses-text'.i18n(),
+                    icon: _organizeByGroup
+                        ? Icons.format_align_justify_rounded
+                        : Icons.format_align_left_rounded,
+                    compactMode: true,
+                    onTap: () {
+                      setState(() {
+                        _organizeByGroup = !_organizeByGroup;
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
@@ -58,7 +84,7 @@ class ManageExpensesBottomSheetModal extends StatelessWidget {
                       return AddOrEditItemBottomSheetModal(
                         icon: Icons.post_add_rounded,
                         title: 'new-expense-button'.i18n(),
-                        controller: controller,
+                        controller: widget.controller,
                       );
                     },
                   );
@@ -76,10 +102,13 @@ class ManageExpensesBottomSheetModal extends StatelessWidget {
       constraints: const BoxConstraints(maxHeight: 164),
       child: Obx(
         () {
-          if (controller.items.isEmpty) {
+          if (widget.controller.items
+              .cast<MonthlyExpenseControlItemModel>()
+              .where((e) => e.valueType == ValueType.expense)
+              .isEmpty) {
             return Center(
               child: AdviseMessageWidget(
-                icon: icon,
+                icon: widget.icon,
                 message: 'empty-expenses-title'.i18n(),
                 description: 'empty-expenses-description'.i18n(),
               ),
@@ -87,115 +116,121 @@ class ManageExpensesBottomSheetModal extends StatelessWidget {
           }
 
           return ListView(
-            children: controller.groups.map(
-              (group) {
-                final currentGroupItems = controller
-                    .getItemsByGroup(group.id)
-                    .cast<MonthlyExpenseControlItemModel>()
-                    .where((e) => e.valueType == ValueType.expense);
+            children: _organizeByGroup
+                ? widget.controller.groups.map(
+                    (group) {
+                      final currentGroupItems = widget.controller
+                          .getItemsByGroup(group.id)
+                          .cast<MonthlyExpenseControlItemModel>()
+                          .where((e) => e.valueType == ValueType.expense);
 
-                if (currentGroupItems.isEmpty) {
-                  return const SizedBox();
-                }
+                      if (currentGroupItems.isEmpty) {
+                        return const SizedBox();
+                      }
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${group.name}:',
-                      style: const TextStyle(color: AppThemes.commonColor),
-                    ),
-                    ...currentGroupItems.map((item) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(12),
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    useSafeArea: true,
-                                    builder: (context) {
-                                      return AddOrEditItemBottomSheetModal(
-                                        icon: Icons.post_add_rounded,
-                                        title: 'edit-expense-button'.i18n(),
-                                        controller: controller,
-                                        itemModel: item,
-                                        groupingModel: controller.groups
-                                            .where(
-                                                (e) => e.id == item.groupingId)
-                                            .first,
-                                      );
-                                    },
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 5,
-                                    vertical: 8,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(item.name),
-                                      Row(
-                                        children: [
-                                          const SizedBox(width: 5),
-                                          if (item.singleMonth == null) ...[
-                                            IconButtonWidget(
-                                              iconSize: 21,
-                                              tooltip: 'recurring-expense-text'
-                                                  .i18n(),
-                                              icon: CupertinoIcons
-                                                  .calendar_circle,
-                                              iconColor: AppThemes.commonColor,
-                                              compactMode: true,
-                                            ),
-                                            const SizedBox(width: 5),
-                                          ],
-                                          const Icon(CupertinoIcons.pencil),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            IconButtonWidget(
-                              tooltip: 'delete-expense-button'.i18n(),
-                              icon: Icons.close,
-                              iconColor: Colors.red,
-                              compactMode: true,
-                              onTap: () {
-                                Get.dialog(
-                                  CustomDialog(
-                                    title: 'delete-expense-button'.i18n(),
-                                    content: 'delete-expense-confirmation-text'
-                                        .i18n(),
-                                    invertButtonColor: true,
-                                    onConfirm: () {
-                                      controller.deleteItem(item);
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${group.name}:',
+                            style:
+                                const TextStyle(color: AppThemes.commonColor),
+                          ),
+                          ...currentGroupItems.map((item) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: _getItemWidget(item),
+                            );
+                          }),
+                          const SizedBox(height: 16),
+                        ],
                       );
-                    }),
-                    const SizedBox(height: 16),
-                  ],
-                );
-              },
-            ).toList(),
+                    },
+                  ).toList()
+                : widget.controller.items
+                    .cast<MonthlyExpenseControlItemModel>()
+                    .where((e) => e.valueType == ValueType.expense)
+                    .map((e) => _getItemWidget(e))
+                    .toList(),
           );
         },
       ),
+    );
+  }
+
+  Widget _getItemWidget(MonthlyExpenseControlItemModel item) {
+    return Row(
+      children: [
+        Expanded(
+          child: InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (context) {
+                  return AddOrEditItemBottomSheetModal(
+                    icon: Icons.post_add_rounded,
+                    title: 'edit-expense-button'.i18n(),
+                    controller: widget.controller,
+                    itemModel: item,
+                    groupingModel: widget.controller.groups
+                        .where((e) => e.id == item.groupingId)
+                        .first,
+                  );
+                },
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 5,
+                vertical: 8,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(item.name),
+                  Row(
+                    children: [
+                      const SizedBox(width: 5),
+                      if (item.singleMonth == null) ...[
+                        IconButtonWidget(
+                          iconSize: 21,
+                          tooltip: 'recurring-expense-text'.i18n(),
+                          icon: CupertinoIcons.calendar_circle,
+                          iconColor: AppThemes.commonColor,
+                          compactMode: true,
+                        ),
+                        const SizedBox(width: 5),
+                      ],
+                      const Icon(CupertinoIcons.pencil),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        IconButtonWidget(
+          tooltip: 'delete-expense-button'.i18n(),
+          icon: Icons.close,
+          iconColor: Colors.red,
+          compactMode: true,
+          onTap: () {
+            Get.dialog(
+              CustomDialog(
+                title: 'delete-expense-button'.i18n(),
+                content: 'delete-expense-confirmation-text'.i18n(),
+                invertButtonColor: true,
+                onConfirm: () {
+                  widget.controller.deleteItem(item);
+                },
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

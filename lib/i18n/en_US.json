@@ -255,5 +255,6 @@
     "expense-category-validation": "Select a category for the expense.",
     "expense-single-value-validation": "Enter a valid value for the expense.",
     "expense-recurring-value-validation": "Enter a valid value for the recurring expense",
-    "expense-recurring-month-validation": "Select more than 1 month to use the recurring expense, or disable the function to only insert in the current month."
+    "expense-recurring-month-validation": "Select more than 1 month to use the recurring expense, or disable the function to only insert in the current month.",
+    "organize-expenses-text": "Organize expenses"
 }
