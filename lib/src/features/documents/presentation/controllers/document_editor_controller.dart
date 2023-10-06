@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../data/enums/document_type.dart';

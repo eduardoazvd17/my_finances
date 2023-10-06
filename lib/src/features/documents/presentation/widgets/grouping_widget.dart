@@ -139,7 +139,6 @@ class GroupingWidget extends StatelessWidget {
     final itemsByGroup =
         documentEditorController.getItemsByGroup(groupingModel.id);
 
-    //TODO: Gropuping trailing para cada tipo de DocumentType.
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: switch (documentEditorController.documentModel.type) {

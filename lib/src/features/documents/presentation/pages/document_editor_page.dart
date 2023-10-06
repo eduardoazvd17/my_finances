@@ -13,7 +13,7 @@ import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../data/enums/month_enum.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
 import '../views/manage_categories_bottom_sheet_modal.dart';
-import '../views/manage_expenses_bottom_sheet_modal copy.dart';
+import '../views/manage_expenses_bottom_sheet_modal.dart';
 import '../widgets/annotation_total_content.dart';
 import '../widgets/balance_widget.dart';
 import '../widgets/investiment_control_total_content.dart';
@@ -176,7 +176,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       );
     }
 
-    //TODO: Totalização de dados para cada tipo de DocumentType.
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => Container(),
       DocumentType.investmentControl => InvestimentControlTotalContent(
@@ -285,7 +284,6 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   List<FloatingBottomMenuItem> _getDocumentFloatingMenuItems(
     BuildContext context,
   ) {
-    //TODO: Menu para cada tipo de ItemModel.
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
           if (controller.groups.isNotEmpty)
