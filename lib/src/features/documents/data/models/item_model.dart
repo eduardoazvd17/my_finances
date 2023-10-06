@@ -212,15 +212,10 @@ class MonthlyExpenseControlItemModel extends ItemModel {
   final ValueType valueType;
   final MonthEnum? singleMonth;
   final double singleValue;
-  final MultipleMonthsValues _multipleMonthsValues;
-
-  double? value(MonthEnum month) {
-    if (singleMonth != null) return singleValue;
-    return _multipleMonthsValues.value(month);
-  }
+  final MultipleMonthsValues multipleMonthsValues;
 
   Set<MonthEnum> get recurringMonths =>
-      _multipleMonthsValues.values.keys.toSet();
+      multipleMonthsValues.values.keys.toSet();
 
   MonthlyExpenseControlItemModel editAndCopy({
     String? name,
@@ -239,7 +234,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       valueType: valueType ?? this.valueType,
       singleMonth: singleMonth,
       singleValue: singleValue ?? this.singleValue,
-      multipleMonthsValues: multipleMonthsValues ?? _multipleMonthsValues,
+      multipleMonthsValues: multipleMonthsValues ?? this.multipleMonthsValues,
     );
   }
 
@@ -252,8 +247,8 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     required this.valueType,
     required this.singleMonth,
     required this.singleValue,
-    required MultipleMonthsValues multipleMonthsValues,
-  }) : _multipleMonthsValues = multipleMonthsValues;
+    required this.multipleMonthsValues,
+  });
 
   @override
   Map<String, dynamic> toMap() {
@@ -262,7 +257,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
         'valueType': valueType.index,
         'singleMonth': singleMonth?.index,
         'singleValue': singleValue.toStringAsFixed(2),
-        'multipleMonthsValues': _multipleMonthsValues.toMap(),
+        'multipleMonthsValues': multipleMonthsValues.toMap(),
       });
   }
 
@@ -274,10 +269,12 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       description: map['description'],
       groupingId: map['groupingId'],
       valueType: ValueType.values[map['valueType']],
-      singleMonth: MonthEnum.values[map['singleMonth']],
+      singleMonth: map['singleMonth'] != null
+          ? MonthEnum.values[map['singleMonth']]
+          : null,
       singleValue: double.tryParse(map['singleValue'] ?? '') ?? 0.0,
       multipleMonthsValues: MultipleMonthsValues.fromMap(
-        Map<int, String>.from(map['multipleMonthsValues']),
+        Map<String, String>.from(map['multipleMonthsValues']),
       ),
     );
   }
@@ -290,7 +287,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
         description,
         groupingId,
         valueType,
-        _multipleMonthsValues,
+        multipleMonthsValues,
       ];
 }
 

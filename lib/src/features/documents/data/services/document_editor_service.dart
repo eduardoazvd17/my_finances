@@ -349,7 +349,8 @@ class DocumentEditorService {
   }) async {
     bool hasChangedValues = false;
     for (final month in newMultipleMonthsValues.values.keys) {
-      if (itemModel.value(month) != newMultipleMonthsValues.values[month]) {
+      if (itemModel.multipleMonthsValues.values[month] !=
+          newMultipleMonthsValues.values[month]) {
         hasChangedValues = true;
         break;
       }

@@ -13,12 +13,14 @@ import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../../data/enums/month_enum.dart';
 import '../../data/enums/operation_type.dart';
+import '../../data/enums/value_type.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../data/enums/document_type.dart';
+import '../../data/models/multiple_months_values.dart';
 import '../controllers/document_editor_controller.dart';
 
 class AddOrEditItemBottomSheetModal extends StatefulWidget {
@@ -72,7 +74,13 @@ class _AddOrEditItemBottomSheetModalState
               .replaceAll('.00', '')
               .replaceAll(',00', ''),
         );
-        _recurringMonths = expenseControl?.recurringMonths ?? {};
+        setState(() {
+          _isRecurring = expenseControl == null
+              ? false
+              : expenseControl.singleMonth == null;
+          _recurringMonths = expenseControl?.recurringMonths ?? {};
+        });
+
         break;
       case DocumentType.investmentControl:
         final investiment = widget.itemModel as InvestimentControlItemModel?;
@@ -135,7 +143,27 @@ class _AddOrEditItemBottomSheetModalState
           _categorySelectionWidget(),
           _toggleRecurringExpenseWidget(),
           _valuesWidget(),
-          _buttonsWidget(() async => true),
+          _buttonsWidget(() async {
+            return await widget.controller.addOrEditMonthlyControlItem(
+              itemModel: widget.itemModel as MonthlyExpenseControlItemModel?,
+              newName: _nameController.text.trim(),
+              newGroupingId: _selectedGrouping?.id,
+              newValueType: ValueType.expense,
+              newSingleMonth:
+                  _isRecurring ? null : widget.controller.selectedMonth,
+              newSingleValue: double.tryParse(
+                _priceController.text.trim().replaceAll(',', '.'),
+              ),
+              newMultipleMonthsValues: _isRecurring
+                  ? MultipleMonthsValues.withDefaultValue(
+                      _recurringMonths,
+                      double.tryParse(
+                        _priceController.text.trim().replaceAll(',', '.'),
+                      ),
+                    )
+                  : MultipleMonthsValues.empty(),
+            );
+          }),
         ],
       DocumentType.investmentControl => [
           Padding(

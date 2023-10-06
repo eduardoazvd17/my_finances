@@ -246,5 +246,14 @@
     "empty-selected-months-text": "No hay meses seleccionados. Utilice el botón de arriba para seleccionar.",
     "select-months-text": "Seleccionar meses",
     "select-all-text": "Seleccionar todo",
-    "remove-all-text": "Eliminar todo"
+    "remove-all-text": "Eliminar todo",
+    "manage-expenses-button": "Administrar gastos",
+    "added-expenses-label": "Gastos añadidos:",
+    "empty-expenses-title": "Sin gastos",
+    "empty-expenses-description": "Aún no has agregado gastos, usa el botón a continuación para agregarlos.",
+    "expense-name-validation": "Ingrese un nombre válido para el gasto.",
+    "expense-category-validation": "Seleccione una categoría para el gasto.",
+    "expense-single-value-validation": "Ingrese un valor válido para el gasto.",
+    "expense-recurring-value-validation": "Ingrese un valor válido para el gasto recurrente",
+    "expense-recurring-month-validation": "Seleccione más de 1 mes para usar el gasto recurrente, o deshabilite la función para insertar solo en el mes actual."
 }

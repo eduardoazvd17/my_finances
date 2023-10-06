@@ -13,6 +13,7 @@ import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../data/enums/month_enum.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
 import '../views/manage_categories_bottom_sheet_modal.dart';
+import '../views/manage_expenses_bottom_sheet_modal copy.dart';
 import '../widgets/annotation_total_content.dart';
 import '../widgets/balance_widget.dart';
 import '../widgets/investiment_control_total_content.dart';
@@ -278,8 +279,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       DocumentType.monthlyExpenseControl => [
           if (controller.groups.isNotEmpty)
             FloatingBottomMenuItem(
-              icon: Icons.post_add_rounded,
-              tooltip: 'new-expense-button'.i18n(),
+              icon: CupertinoIcons.arrow_down_right,
+              tooltip: 'manage-expenses-button'.i18n(),
               showTooltip: true,
               onTap: () {
                 showModalBottomSheet(
@@ -287,9 +288,9 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
-                    return AddOrEditItemBottomSheetModal(
-                      icon: Icons.post_add_rounded,
-                      title: 'new-expense-button'.i18n(),
+                    return ManageExpensesBottomSheetModal(
+                      icon: CupertinoIcons.arrow_down_right,
+                      title: 'manage-expenses-button'.i18n(),
                       controller: controller,
                     );
                   },

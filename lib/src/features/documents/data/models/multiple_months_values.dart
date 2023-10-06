@@ -6,21 +6,34 @@ class MultipleMonthsValues {
 
   double? value(MonthEnum month) => values[month];
 
-  factory MultipleMonthsValues.fromMap(Map<int, String> map) {
+  factory MultipleMonthsValues.fromMap(Map<String, String> map) {
     final Map<MonthEnum, double?> values = {};
-    for (final int key in map.keys) {
-      final MonthEnum month = MonthEnum.values[key];
+    for (final String key in map.keys) {
+      final MonthEnum month = MonthEnum.values[int.parse(key)];
       final double? value = double.tryParse(map[key] ?? '');
       values[month] = value;
     }
     return MultipleMonthsValues(values);
   }
 
-  Map<int, String> toMap() {
-    final Map<int, String> map = {};
+  factory MultipleMonthsValues.withDefaultValue(
+      Set<MonthEnum> months, double? value) {
+    final Map<MonthEnum, double?> values = {};
+    for (final MonthEnum month in months) {
+      values[month] = value;
+    }
+    return MultipleMonthsValues(values);
+  }
+
+  factory MultipleMonthsValues.empty() {
+    return const MultipleMonthsValues({});
+  }
+
+  Map<String, String> toMap() {
+    final Map<String, String> map = {};
     for (final MonthEnum month in values.keys) {
       final String value = values[month]?.toStringAsFixed(2) ?? '';
-      map[month.index] = value;
+      map[month.index.toString()] = value;
     }
     return map;
   }

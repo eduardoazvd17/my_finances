@@ -3,8 +3,10 @@ import 'package:localization/localization.dart';
 import '../../data/enums/document_type.dart';
 import '../../data/enums/operation_type.dart';
 import '../../data/enums/month_enum.dart';
+import '../../data/enums/value_type.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
+import '../../data/models/multiple_months_values.dart';
 import '../../data/services/document_editor_service.dart';
 import '../widgets/grouping_widget.dart';
 
@@ -356,6 +358,74 @@ class DocumentEditorController extends GetxController {
       selectedItem = null;
     } on AppError catch (appError) {
       appError.showDialog();
+    }
+  }
+
+  Future<bool> addOrEditMonthlyControlItem({
+    required MonthlyExpenseControlItemModel? itemModel,
+    required String newName,
+    required String? newGroupingId,
+    required ValueType newValueType,
+    required MonthEnum? newSingleMonth,
+    required double? newSingleValue,
+    required MultipleMonthsValues newMultipleMonthsValues,
+  }) async {
+    try {
+      final bool isRecurring = newSingleMonth == null;
+
+      if (newName.isEmpty) {
+        throw AppError(message: 'expense-name-validation'.i18n());
+      }
+
+      if (newGroupingId == null) {
+        throw AppError(message: 'expense-category-validation'.i18n());
+      }
+
+      if (isRecurring && newMultipleMonthsValues.values.length <= 1) {
+        throw AppError(message: 'expense-recurring-month-validation'.i18n());
+      }
+
+      if (newSingleValue == null) {
+        if (isRecurring) {
+          throw AppError(message: 'expense-recurring-value-validation'.i18n());
+        } else {
+          throw AppError(message: 'expense-single-value-validation'.i18n());
+        }
+      }
+
+      final MonthlyExpenseControlItemModel newItemModel;
+      if (itemModel == null) {
+        newItemModel = await _documentEditorService.addMonthlyControlItem(
+          name: newName,
+          groupingId: newGroupingId,
+          valueType: newValueType,
+          singleMonth: newSingleMonth,
+          singleValue: newSingleValue,
+          multipleMonthsValues: newMultipleMonthsValues,
+        );
+      } else {
+        newItemModel = await _documentEditorService.editMonthlyControlItem(
+          itemModel: itemModel,
+          newName: newName,
+          newGroupingId: newGroupingId,
+          newValueType: newValueType,
+          newSingleMonth: newSingleMonth,
+          newSingleValue: newSingleValue,
+          newMultipleMonthsValues: newMultipleMonthsValues,
+        );
+      }
+
+      _items.remove(itemModel);
+      _items.add(newItemModel);
+
+      if (selectedItem?.id == itemModel?.id && itemModel != null) {
+        selectedItem = newItemModel;
+      }
+      sortItems();
+      return true;
+    } on AppError catch (appError) {
+      appError.showDialog();
+      return false;
     }
   }
 }

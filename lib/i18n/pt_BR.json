@@ -221,10 +221,10 @@
     "delete-category-button": "Deletar categoria",
     "created-categories-label": "Categorias criadas:",
     "empty-categories-title": "Não há categorias",
-    "empty-categories-description": "Você ainda não criou categorias de gastos, utilize o botão abaixo para criar uma nova.",
+    "empty-categories-description": "Você ainda não criou categorias de despesas, utilize o botão abaixo para criar uma nova.",
     "category-label": "Nome da categoria",
     "category-hint": "Exemplo: Gastos com a casa...",
-    "delete-category-confirmation-text": "Deseja realmente deletar esta categoria?\n\nTodos os gastos inseridos à ela também serão deletados.",
+    "delete-category-confirmation-text": "Deseja realmente deletar esta categoria?\n\nTodos as despesas inseridas à ela também serão deletadas.",
     "new-expense-button": "Nova despesa",
     "edit-expense-button": "Editar despesa",
     "delete-expense-button": "Deletar despesa",
@@ -246,5 +246,14 @@
     "empty-selected-months-text": "Nenhum mês selecionado. Utilize o botão acima para selecionar.",
     "select-months-text": "Selecionar meses",
     "select-all-text": "Selecionar todos",
-    "remove-all-text": "Remover todos"
+    "remove-all-text": "Remover todos",
+    "manage-expenses-button": "Gerenciar despesas",
+    "added-expenses-label": "Despesas adicionadas:",
+    "empty-expenses-title": "Não há despesas",
+    "empty-expenses-description": "Você ainda não adicionou despesas, utilize o botão abaixo para adicionar.",
+    "expense-name-validation": "Insira um nome válido para a despesa.",
+    "expense-category-validation": "Selecione uma categoria para a despesa.",
+    "expense-single-value-validation": "Insira um valor válido para a despesa.",
+    "expense-recurring-value-validation": "Insira um valor válido para a despesa recorrente",
+    "expense-recurring-month-validation": "Selecione mais de 1 mês para utilizar a despesa recorrente, ou desative a função para inserir apenas no mês atual."
 }
