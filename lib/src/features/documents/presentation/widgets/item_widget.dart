@@ -41,9 +41,16 @@ class ItemWidget extends StatelessWidget {
   }
 
   Widget _monthlyExpenseControlItemTile(BuildContext context) {
-    //final MonthlyExpenseControlItemModel itemModel = this.itemModel as MonthlyExpenseControlItemModel;
+    final MonthlyExpenseControlItemModel itemModel =
+        this.itemModel as MonthlyExpenseControlItemModel;
+
     return _itemBaseWidget(
       context: context,
+      trailing: Text(
+        CurrencyUtils.format(itemModel.singleValue),
+        style: TextStyle(color: Colors.red[300]),
+      ),
+      middleExpanded: Text(itemModel.name),
     );
   }
 
