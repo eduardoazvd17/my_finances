@@ -1,32 +1,34 @@
+import 'package:equatable/equatable.dart';
+
 import '../enums/month_enum.dart';
 
-class MonthValuesDTO {
+class ValuesByMonthDTO extends Equatable {
   final Map<MonthEnum, double?> values;
-  const MonthValuesDTO(this.values);
+  const ValuesByMonthDTO(this.values);
 
   double? get(MonthEnum month) => values[month];
 
-  factory MonthValuesDTO.fromMap(Map<String, String> map) {
+  factory ValuesByMonthDTO.fromMap(Map<String, String> map) {
     final Map<MonthEnum, double?> values = {};
     for (final String key in map.keys) {
       final MonthEnum month = MonthEnum.values[int.parse(key)];
       final double? value = double.tryParse(map[key] ?? '');
       values[month] = value;
     }
-    return MonthValuesDTO(values);
+    return ValuesByMonthDTO(values);
   }
 
-  factory MonthValuesDTO.withDefaultValue(
+  factory ValuesByMonthDTO.withDefaultValue(
       Set<MonthEnum> months, double? value) {
     final Map<MonthEnum, double?> values = {};
     for (final MonthEnum month in months) {
       values[month] = value;
     }
-    return MonthValuesDTO(values);
+    return ValuesByMonthDTO(values);
   }
 
-  factory MonthValuesDTO.empty() {
-    return const MonthValuesDTO({});
+  factory ValuesByMonthDTO.empty() {
+    return const ValuesByMonthDTO({});
   }
 
   Map<String, String> toMap() {
@@ -37,4 +39,7 @@ class MonthValuesDTO {
     }
     return map;
   }
+
+  @override
+  List<Object?> get props => [values, values.keys, values.values];
 }

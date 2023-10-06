@@ -20,7 +20,7 @@ import '../../data/models/item_model.dart';
 import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../data/enums/document_type.dart';
-import '../../data/models/months_values_dto.dart';
+import '../../data/models/values_by_month_dto.dart';
 import '../controllers/document_editor_controller.dart';
 
 class AddOrEditItemBottomSheetModal extends StatefulWidget {
@@ -154,13 +154,13 @@ class _AddOrEditItemBottomSheetModalState
                 _priceController.text.trim().replaceAll(',', '.'),
               ),
               newMultipleMonthsValues: _isRecurring
-                  ? MonthValuesDTO.withDefaultValue(
+                  ? ValuesByMonthDTO.withDefaultValue(
                       _recurringMonths,
                       double.tryParse(
                         _priceController.text.trim().replaceAll(',', '.'),
                       ),
                     )
-                  : MonthValuesDTO.empty(),
+                  : ValuesByMonthDTO.empty(),
             );
           }),
         ],

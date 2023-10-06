@@ -3,7 +3,7 @@ import '../../../../core/data/utils/currency_utils.dart';
 import '../enums/operation_type.dart';
 import '../enums/month_enum.dart';
 import '../enums/value_type.dart';
-import 'months_values_dto.dart';
+import 'values_by_month_dto.dart';
 
 class ItemModel extends Equatable {
   final String id;
@@ -212,7 +212,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
   final ValueType valueType;
   final MonthEnum? singleMonth;
   final double defaultValue;
-  final MonthValuesDTO valuesByMonth;
+  final ValuesByMonthDTO valuesByMonth;
 
   bool get isRecurring => singleMonth == null;
   Set<MonthEnum> get recurringMonths => valuesByMonth.values.keys.toSet();
@@ -227,7 +227,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     ValueType? valueType,
     required MonthEnum? singleMonth,
     double? defaultValue,
-    MonthValuesDTO? valuesByMonth,
+    ValuesByMonthDTO? valuesByMonth,
   }) {
     return MonthlyExpenseControlItemModel(
       id: id,
@@ -277,7 +277,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
           ? MonthEnum.values[map['singleMonth']]
           : null,
       defaultValue: double.tryParse(map['defaultValue'] ?? '') ?? 0.0,
-      valuesByMonth: MonthValuesDTO.fromMap(
+      valuesByMonth: ValuesByMonthDTO.fromMap(
         Map<String, String>.from(map['valuesByMonth']),
       ),
     );

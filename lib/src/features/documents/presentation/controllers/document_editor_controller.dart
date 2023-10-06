@@ -6,7 +6,7 @@ import '../../data/enums/month_enum.dart';
 import '../../data/enums/value_type.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
-import '../../data/models/months_values_dto.dart';
+import '../../data/models/values_by_month_dto.dart';
 import '../../data/services/document_editor_service.dart';
 import '../widgets/grouping_widget.dart';
 
@@ -390,7 +390,7 @@ class DocumentEditorController extends GetxController {
     required ValueType newValueType,
     required MonthEnum? newSingleMonth,
     required double? newSingleValue,
-    required MonthValuesDTO newMultipleMonthsValues,
+    required ValuesByMonthDTO newMultipleMonthsValues,
   }) async {
     try {
       final bool isRecurring = newSingleMonth == null;
