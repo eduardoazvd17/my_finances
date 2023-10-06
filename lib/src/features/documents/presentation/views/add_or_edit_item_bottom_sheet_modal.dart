@@ -20,7 +20,7 @@ import '../../data/models/item_model.dart';
 import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/button_widget.dart';
 import '../../data/enums/document_type.dart';
-import '../../data/models/multiple_months_values.dart';
+import '../../data/models/months_values_dto.dart';
 import '../controllers/document_editor_controller.dart';
 
 class AddOrEditItemBottomSheetModal extends StatefulWidget {
@@ -69,7 +69,7 @@ class _AddOrEditItemBottomSheetModalState
         final expenseControl =
             widget.itemModel as MonthlyExpenseControlItemModel?;
         _priceController = TextEditingController(
-          text: expenseControl?.singleValue
+          text: expenseControl?.defaultValue
               .toStringAsFixed(2)
               .replaceAll('.00', '')
               .replaceAll(',00', ''),
@@ -154,13 +154,13 @@ class _AddOrEditItemBottomSheetModalState
                 _priceController.text.trim().replaceAll(',', '.'),
               ),
               newMultipleMonthsValues: _isRecurring
-                  ? MultipleMonthsValues.withDefaultValue(
+                  ? MonthValuesDTO.withDefaultValue(
                       _recurringMonths,
                       double.tryParse(
                         _priceController.text.trim().replaceAll(',', '.'),
                       ),
                     )
-                  : MultipleMonthsValues.empty(),
+                  : MonthValuesDTO.empty(),
             );
           }),
         ],

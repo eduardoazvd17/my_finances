@@ -3,7 +3,7 @@ import '../../../../core/data/utils/currency_utils.dart';
 import '../enums/operation_type.dart';
 import '../enums/month_enum.dart';
 import '../enums/value_type.dart';
-import 'multiple_months_values.dart';
+import 'months_values_dto.dart';
 
 class ItemModel extends Equatable {
   final String id;
@@ -211,30 +211,34 @@ class InvestimentControlItemModel extends ItemModel {
 class MonthlyExpenseControlItemModel extends ItemModel {
   final ValueType valueType;
   final MonthEnum? singleMonth;
-  final double singleValue;
-  final MultipleMonthsValues multipleMonthsValues;
+  final double defaultValue;
+  final MonthValuesDTO valuesByMonth;
 
-  Set<MonthEnum> get recurringMonths =>
-      multipleMonthsValues.values.keys.toSet();
+  bool get isRecurring => singleMonth == null;
+  Set<MonthEnum> get recurringMonths => valuesByMonth.values.keys.toSet();
+
+  double value(MonthEnum month) => valuesByMonth.get(month) ?? defaultValue;
+  bool existsIn(MonthEnum month) =>
+      singleMonth == month || valuesByMonth.get(month) != null;
 
   MonthlyExpenseControlItemModel editAndCopy({
     String? name,
-    required String? groupingId,
+    String? groupingId,
     ValueType? valueType,
     required MonthEnum? singleMonth,
-    double? singleValue,
-    MultipleMonthsValues? multipleMonthsValues,
+    double? defaultValue,
+    MonthValuesDTO? valuesByMonth,
   }) {
     return MonthlyExpenseControlItemModel(
       id: id,
-      name: name ?? this.name,
       description: description,
       creationDate: creationDate,
-      groupingId: groupingId,
+      name: name ?? this.name,
+      groupingId: groupingId ?? this.groupingId,
       valueType: valueType ?? this.valueType,
       singleMonth: singleMonth,
-      singleValue: singleValue ?? this.singleValue,
-      multipleMonthsValues: multipleMonthsValues ?? this.multipleMonthsValues,
+      defaultValue: defaultValue ?? this.defaultValue,
+      valuesByMonth: valuesByMonth ?? this.valuesByMonth,
     );
   }
 
@@ -246,8 +250,8 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     super.description,
     required this.valueType,
     required this.singleMonth,
-    required this.singleValue,
-    required this.multipleMonthsValues,
+    required this.defaultValue,
+    required this.valuesByMonth,
   });
 
   @override
@@ -256,8 +260,8 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       ..addAll({
         'valueType': valueType.index,
         'singleMonth': singleMonth?.index,
-        'singleValue': singleValue.toStringAsFixed(2),
-        'multipleMonthsValues': multipleMonthsValues.toMap(),
+        'defaultValue': defaultValue.toStringAsFixed(2),
+        'valuesByMonth': valuesByMonth.toMap(),
       });
   }
 
@@ -272,9 +276,9 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       singleMonth: map['singleMonth'] != null
           ? MonthEnum.values[map['singleMonth']]
           : null,
-      singleValue: double.tryParse(map['singleValue'] ?? '') ?? 0.0,
-      multipleMonthsValues: MultipleMonthsValues.fromMap(
-        Map<String, String>.from(map['multipleMonthsValues']),
+      defaultValue: double.tryParse(map['defaultValue'] ?? '') ?? 0.0,
+      valuesByMonth: MonthValuesDTO.fromMap(
+        Map<String, String>.from(map['valuesByMonth']),
       ),
     );
   }
@@ -287,7 +291,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
         description,
         groupingId,
         valueType,
-        multipleMonthsValues,
+        valuesByMonth,
       ];
 }
 

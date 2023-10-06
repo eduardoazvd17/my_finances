@@ -9,7 +9,7 @@ import '../../../../core/data/models/database_model.dart';
 import '../enums/document_type.dart';
 import '../enums/operation_type.dart';
 import '../models/document_model.dart';
-import '../models/multiple_months_values.dart';
+import '../models/months_values_dto.dart';
 
 class DocumentEditorService {
   final DocumentModel documentModel;
@@ -313,8 +313,8 @@ class DocumentEditorService {
     required String groupingId,
     required ValueType valueType,
     required MonthEnum? singleMonth,
-    required double singleValue,
-    required MultipleMonthsValues multipleMonthsValues,
+    required double defaultValue,
+    required MonthValuesDTO valuesByMonth,
   }) async {
     try {
       final docRef = _database.documentItemsCollection(documentModel.id).doc();
@@ -326,8 +326,8 @@ class DocumentEditorService {
         groupingId: groupingId,
         valueType: valueType,
         singleMonth: singleMonth,
-        singleValue: singleValue,
-        multipleMonthsValues: multipleMonthsValues,
+        defaultValue: defaultValue,
+        valuesByMonth: valuesByMonth,
       );
       await docRef.set(itemModel.toMap());
       return itemModel;
@@ -344,13 +344,13 @@ class DocumentEditorService {
     required String newGroupingId,
     required ValueType newValueType,
     required MonthEnum? newSingleMonth,
-    required double newSingleValue,
-    required MultipleMonthsValues newMultipleMonthsValues,
+    required double newDefaultValue,
+    required MonthValuesDTO newValuesByMonth,
   }) async {
     bool hasChangedValues = false;
-    for (final month in newMultipleMonthsValues.values.keys) {
-      if (itemModel.multipleMonthsValues.values[month] !=
-          newMultipleMonthsValues.values[month]) {
+    for (final month in newValuesByMonth.values.keys) {
+      if (itemModel.valuesByMonth.values[month] !=
+          newValuesByMonth.values[month]) {
         hasChangedValues = true;
         break;
       }
@@ -360,7 +360,7 @@ class DocumentEditorService {
         itemModel.groupingId == newGroupingId &&
         itemModel.valueType == newValueType &&
         itemModel.singleMonth == newSingleMonth &&
-        itemModel.singleValue == newSingleValue &&
+        itemModel.defaultValue == newDefaultValue &&
         !hasChangedValues) {
       return itemModel;
     }
@@ -371,8 +371,8 @@ class DocumentEditorService {
         groupingId: newGroupingId,
         valueType: newValueType,
         singleMonth: newSingleMonth,
-        singleValue: newSingleValue,
-        multipleMonthsValues: newMultipleMonthsValues,
+        defaultValue: newDefaultValue,
+        valuesByMonth: newValuesByMonth,
       );
 
       await _database

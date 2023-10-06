@@ -47,7 +47,7 @@ class ItemWidget extends StatelessWidget {
     return _itemBaseWidget(
       context: context,
       trailing: Text(
-        CurrencyUtils.format(itemModel.singleValue),
+        CurrencyUtils.format(itemModel.defaultValue),
         style: TextStyle(color: Colors.red[300]),
       ),
       middleExpanded: Text(itemModel.name),

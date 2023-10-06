@@ -6,7 +6,7 @@ import '../../data/enums/month_enum.dart';
 import '../../data/enums/value_type.dart';
 import '../../data/models/grouping_model.dart';
 import '../../data/models/item_model.dart';
-import '../../data/models/multiple_months_values.dart';
+import '../../data/models/months_values_dto.dart';
 import '../../data/services/document_editor_service.dart';
 import '../widgets/grouping_widget.dart';
 
@@ -68,9 +68,9 @@ class DocumentEditorController extends GetxController {
 
   Iterable<MonthlyExpenseControlItemModel> get selectedMonthItems =>
       documentModel.type == DocumentType.monthlyExpenseControl
-          ? items.cast<MonthlyExpenseControlItemModel>().where((e) =>
-              e.singleMonth == selectedMonth ||
-              e.multipleMonthsValues.values.keys.contains(selectedMonth))
+          ? items
+              .cast<MonthlyExpenseControlItemModel>()
+              .where((e) => e.existsIn(selectedMonth))
           : [];
 
   double get selectedMonthEarnings {
@@ -82,11 +82,8 @@ class DocumentEditorController extends GetxController {
     return selectedMonthItems.isEmpty
         ? 0.0
         : selectedMonthItems.map((e) {
-              return e.singleMonth == null
-                  ? e.singleValue
-                  : e.multipleMonthsValues.value(selectedMonth);
-            }).reduce((a, b) => (a ?? 0) + (b ?? 0)) ??
-            0.0;
+            return e.value(selectedMonth);
+          }).reduce((a, b) => a + b);
   }
 
   double get selectedMonthBalance {
@@ -103,7 +100,7 @@ class DocumentEditorController extends GetxController {
           getItemsByGroup(e.id).cast<MonthlyExpenseControlItemModel>().where(
                 (e) =>
                     e.singleMonth == selectedMonth ||
-                    e.multipleMonthsValues.values.keys.contains(selectedMonth),
+                    e.valuesByMonth.values.keys.contains(selectedMonth),
               );
       return items.isNotEmpty;
     }).toList();
@@ -393,7 +390,7 @@ class DocumentEditorController extends GetxController {
     required ValueType newValueType,
     required MonthEnum? newSingleMonth,
     required double? newSingleValue,
-    required MultipleMonthsValues newMultipleMonthsValues,
+    required MonthValuesDTO newMultipleMonthsValues,
   }) async {
     try {
       final bool isRecurring = newSingleMonth == null;
@@ -425,8 +422,8 @@ class DocumentEditorController extends GetxController {
           groupingId: newGroupingId,
           valueType: newValueType,
           singleMonth: newSingleMonth,
-          singleValue: newSingleValue,
-          multipleMonthsValues: newMultipleMonthsValues,
+          defaultValue: newSingleValue,
+          valuesByMonth: newMultipleMonthsValues,
         );
       } else {
         newItemModel = await _documentEditorService.editMonthlyControlItem(
@@ -435,8 +432,8 @@ class DocumentEditorController extends GetxController {
           newGroupingId: newGroupingId,
           newValueType: newValueType,
           newSingleMonth: newSingleMonth,
-          newSingleValue: newSingleValue,
-          newMultipleMonthsValues: newMultipleMonthsValues,
+          newDefaultValue: newSingleValue,
+          newValuesByMonth: newMultipleMonthsValues,
         );
       }
 
