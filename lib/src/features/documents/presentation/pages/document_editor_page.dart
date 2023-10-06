@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import '../../../../core/presentation/widgets/advise_message_widget.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_picker.dart';
 import '../../../../core/presentation/widgets/floating_bottom_menu_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
@@ -87,6 +88,19 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         controller.items.isEmpty) {
       return Center(
         child: controller.documentModel.type.emptyDocumentAdviseWidget,
+      );
+    }
+
+    if (controller.documentModel.type == DocumentType.monthlyExpenseControl &&
+        controller.currentMonthGroups.isEmpty) {
+      return Center(
+        child: AdviseMessageWidget(
+          icon: CupertinoIcons.calendar,
+          message: 'empty-current-month-expenses-title'.i18n(),
+          description: 'empty-current-month-expenses-description'.i18n(
+            [controller.selectedMonth.title],
+          ),
+        ),
       );
     }
 
