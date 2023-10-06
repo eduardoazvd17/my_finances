@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../data/enums/document_type.dart';
@@ -66,19 +68,32 @@ class DocumentEditorController extends GetxController {
   MonthEnum get selectedMonth => _selectedMonth.value;
   set selectedMonth(MonthEnum value) => _selectedMonth.value = value;
 
+  Iterable<MonthlyExpenseControlItemModel> get selectedMonthItems =>
+      documentModel.type == DocumentType.monthlyExpenseControl
+          ? items.cast<MonthlyExpenseControlItemModel>().where((e) =>
+              e.singleMonth == selectedMonth ||
+              e.multipleMonthsValues.values.keys.contains(selectedMonth))
+          : [];
+
   double get selectedMonthEarnings {
     if (!isMonthlyExpensesControl) return 0;
     return 0;
   }
 
   double get selectedMonthExpenses {
-    if (!isMonthlyExpensesControl) return 0;
-    return 0;
+    return selectedMonthItems.isEmpty
+        ? 0.0
+        : selectedMonthItems.map((e) {
+              return e.singleMonth == null
+                  ? e.singleValue
+                  : e.multipleMonthsValues.value(selectedMonth);
+            }).reduce((a, b) => (a ?? 0) + (b ?? 0)) ??
+            0.0;
   }
 
   double get selectedMonthBalance {
     if (!isMonthlyExpensesControl) return 0;
-    return selectedMonthEarnings - selectedMonthExpenses; //! MOCK
+    return selectedMonthEarnings - selectedMonthExpenses;
   }
 
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
