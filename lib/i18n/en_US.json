@@ -253,9 +253,8 @@
     "empty-expenses-description": "You haven't added expenses yet, use the button below to add.",
     "expense-name-validation": "Enter a valid name for the expense.",
     "expense-category-validation": "Select a category for the expense.",
-    "expense-single-value-validation": "Enter a valid value for the expense.",
-    "expense-recurring-value-validation": "Enter a valid value for the recurring expense",
-    "expense-recurring-month-validation": "Select more than 1 month to use the recurring expense, or disable the function to only insert in the current month.",
+    "expense-default-value-validation": "Enter a valid value for the expense.",
+    "expense-months-validation": "Select the months in which the expense will be entered.",
     "organize-expenses-text": "Organize expenses",
     "empty-current-month-expenses-title": "There are no expenses this month",
     "empty-current-month-expenses-description": "You have not yet added expenses in this month of %s, add them using the flyout menu or change the selected month to view other months."

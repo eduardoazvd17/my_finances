@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../enums/month_enum.dart';
 import '../enums/value_type.dart';
 import '../models/grouping_model.dart';
 import '../models/item_model.dart';
@@ -312,7 +311,6 @@ class DocumentEditorService {
     required String name,
     required String groupingId,
     required ValueType valueType,
-    required MonthEnum? singleMonth,
     required double defaultValue,
     required ValuesByMonthDTO valuesByMonth,
   }) async {
@@ -325,7 +323,6 @@ class DocumentEditorService {
         creationDate: DateTime.now(),
         groupingId: groupingId,
         valueType: valueType,
-        singleMonth: singleMonth,
         defaultValue: defaultValue,
         valuesByMonth: valuesByMonth,
       );
@@ -343,14 +340,12 @@ class DocumentEditorService {
     required String newName,
     required String newGroupingId,
     required ValueType newValueType,
-    required MonthEnum? newSingleMonth,
     required double newDefaultValue,
     required ValuesByMonthDTO newValuesByMonth,
   }) async {
     if (itemModel.name == newName &&
         itemModel.groupingId == newGroupingId &&
         itemModel.valueType == newValueType &&
-        itemModel.singleMonth == newSingleMonth &&
         itemModel.defaultValue == newDefaultValue &&
         itemModel.valuesByMonth == newValuesByMonth) {
       return itemModel;
@@ -361,7 +356,6 @@ class DocumentEditorService {
         name: newName,
         groupingId: newGroupingId,
         valueType: newValueType,
-        singleMonth: newSingleMonth,
         defaultValue: newDefaultValue,
         valuesByMonth: newValuesByMonth,
       );

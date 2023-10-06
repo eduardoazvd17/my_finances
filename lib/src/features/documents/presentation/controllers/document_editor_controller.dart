@@ -96,12 +96,9 @@ class DocumentEditorController extends GetxController {
 
   List<GroupingModel> get currentMonthGroups {
     return groups.where((e) {
-      final items =
-          getItemsByGroup(e.id).cast<MonthlyExpenseControlItemModel>().where(
-                (e) =>
-                    e.singleMonth == selectedMonth ||
-                    e.valuesByMonth.values.keys.contains(selectedMonth),
-              );
+      final items = getItemsByGroup(e.id)
+          .cast<MonthlyExpenseControlItemModel>()
+          .where((e) => e.existsIn(selectedMonth));
       return items.isNotEmpty;
     }).toList();
   }
@@ -388,13 +385,10 @@ class DocumentEditorController extends GetxController {
     required String newName,
     required String? newGroupingId,
     required ValueType newValueType,
-    required MonthEnum? newSingleMonth,
-    required double? newSingleValue,
-    required ValuesByMonthDTO newMultipleMonthsValues,
+    required double? newDefaultValue,
+    required ValuesByMonthDTO newValuesByMonth,
   }) async {
     try {
-      final bool isRecurring = newSingleMonth == null;
-
       if (newName.isEmpty) {
         throw AppError(message: 'expense-name-validation'.i18n());
       }
@@ -403,16 +397,12 @@ class DocumentEditorController extends GetxController {
         throw AppError(message: 'expense-category-validation'.i18n());
       }
 
-      if (isRecurring && newMultipleMonthsValues.values.length <= 1) {
-        throw AppError(message: 'expense-recurring-month-validation'.i18n());
+      if (newValuesByMonth.values.isEmpty) {
+        throw AppError(message: 'expense-months-validation'.i18n());
       }
 
-      if (newSingleValue == null) {
-        if (isRecurring) {
-          throw AppError(message: 'expense-recurring-value-validation'.i18n());
-        } else {
-          throw AppError(message: 'expense-single-value-validation'.i18n());
-        }
+      if (newDefaultValue == null) {
+        throw AppError(message: 'expense-default-value-validation'.i18n());
       }
 
       final MonthlyExpenseControlItemModel newItemModel;
@@ -421,9 +411,8 @@ class DocumentEditorController extends GetxController {
           name: newName,
           groupingId: newGroupingId,
           valueType: newValueType,
-          singleMonth: newSingleMonth,
-          defaultValue: newSingleValue,
-          valuesByMonth: newMultipleMonthsValues,
+          defaultValue: newDefaultValue,
+          valuesByMonth: newValuesByMonth,
         );
       } else {
         newItemModel = await _documentEditorService.editMonthlyControlItem(
@@ -431,9 +420,8 @@ class DocumentEditorController extends GetxController {
           newName: newName,
           newGroupingId: newGroupingId,
           newValueType: newValueType,
-          newSingleMonth: newSingleMonth,
-          newDefaultValue: newSingleValue,
-          newValuesByMonth: newMultipleMonthsValues,
+          newDefaultValue: newDefaultValue,
+          newValuesByMonth: newValuesByMonth,
         );
       }
 

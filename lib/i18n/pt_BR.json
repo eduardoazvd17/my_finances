@@ -253,9 +253,8 @@
     "empty-expenses-description": "Você ainda não adicionou despesas, utilize o botão abaixo para adicionar.",
     "expense-name-validation": "Insira um nome válido para a despesa.",
     "expense-category-validation": "Selecione uma categoria para a despesa.",
-    "expense-single-value-validation": "Insira um valor válido para a despesa.",
-    "expense-recurring-value-validation": "Insira um valor válido para a despesa recorrente",
-    "expense-recurring-month-validation": "Selecione mais de 1 mês para utilizar a despesa recorrente, ou desative a função para inserir apenas no mês atual.",
+    "expense-default-value-validation": "Insira um valor válido para a despesa.",
+    "expense-months-validation": "Selecione os meses em que a despesa será inserida.",
     "organize-expenses-text": "Organizar despesas",
     "empty-current-month-expenses-title": "Não há despesas neste mês",
     "empty-current-month-expenses-description": "Você ainda não adicionou despesas neste mês de %s, adicione utilizando o menu flutuante ou altere o mês selecionado para visualizar outros meses."

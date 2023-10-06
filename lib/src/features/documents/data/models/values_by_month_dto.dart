@@ -18,17 +18,22 @@ class ValuesByMonthDTO extends Equatable {
     return ValuesByMonthDTO(values);
   }
 
-  factory ValuesByMonthDTO.withDefaultValue(
-      Set<MonthEnum> months, double? value) {
+  factory ValuesByMonthDTO.fromMonths(Set<MonthEnum> months) {
     final Map<MonthEnum, double?> values = {};
     for (final MonthEnum month in months) {
-      values[month] = value;
+      values.putIfAbsent(month, () => null);
     }
     return ValuesByMonthDTO(values);
   }
 
-  factory ValuesByMonthDTO.empty() {
-    return const ValuesByMonthDTO({});
+  ValuesByMonthDTO editAndCopy(ValuesByMonthDTO? newValuesByMonth) {
+    if (newValuesByMonth == null) return this;
+    for (final MonthEnum month in newValuesByMonth.values.keys) {
+      if (newValuesByMonth.get(month) == null) {
+        newValuesByMonth.values[month] = get(month);
+      }
+    }
+    return newValuesByMonth;
   }
 
   Map<String, String> toMap() {

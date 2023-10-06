@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
@@ -53,10 +54,10 @@ class _AddOrEditItemBottomSheetModalState
   GroupingModel? _selectedGrouping;
   OperationType? _selectedOperationType;
   DateTime? _selectedDateTime;
-  bool _isRecurring = false;
-  late final Set<MonthEnum> _recurringMonths;
+  late final Set<MonthEnum> _selectedMonths;
 
   bool get isEditing => widget.itemModel != null;
+  bool get isRecurring => _selectedMonths.length > 1;
 
   @override
   void initState() {
@@ -75,10 +76,8 @@ class _AddOrEditItemBottomSheetModalState
               .replaceAll(',00', ''),
         );
         setState(() {
-          _isRecurring = expenseControl == null
-              ? false
-              : expenseControl.singleMonth == null;
-          _recurringMonths = expenseControl?.recurringMonths ?? {};
+          _selectedMonths =
+              expenseControl?.months ?? {widget.controller.selectedMonth};
         });
 
         break;
@@ -140,7 +139,6 @@ class _AddOrEditItemBottomSheetModalState
       DocumentType.monthlyExpenseControl => [
           _valueNameTextFieldWidget(),
           _categorySelectionWidget(),
-          _toggleRecurringExpenseWidget(),
           _valuesWidget(),
           _buttonsWidget(() async {
             return await widget.controller.addOrEditMonthlyControlItem(
@@ -148,19 +146,10 @@ class _AddOrEditItemBottomSheetModalState
               newName: _nameController.text.trim(),
               newGroupingId: _selectedGrouping?.id,
               newValueType: ValueType.expense,
-              newSingleMonth:
-                  _isRecurring ? null : widget.controller.selectedMonth,
-              newSingleValue: double.tryParse(
+              newDefaultValue: double.tryParse(
                 _priceController.text.trim().replaceAll(',', '.'),
               ),
-              newMultipleMonthsValues: _isRecurring
-                  ? ValuesByMonthDTO.withDefaultValue(
-                      _recurringMonths,
-                      double.tryParse(
-                        _priceController.text.trim().replaceAll(',', '.'),
-                      ),
-                    )
-                  : ValuesByMonthDTO.empty(),
+              newValuesByMonth: ValuesByMonthDTO.fromMonths(_selectedMonths),
             );
           }),
         ],
@@ -472,30 +461,12 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _toggleRecurringExpenseWidget() {
-    return SwitchListTile(
-      title: Text(
-        'recurring-expense-text'.i18n(),
-        style: Theme.of(context)
-            .textTheme
-            .titleSmall
-            ?.copyWith(fontWeight: FontWeight.normal),
-      ),
-      subtitle: Text('recurring-description'.i18n()),
-      contentPadding: EdgeInsets.zero,
-      value: _isRecurring,
-      onChanged: (_) {
-        setState(() => _isRecurring = !_isRecurring);
-      },
-    );
-  }
-
   Widget _valuesWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (_isRecurring) ...[
-          _monthSelectionWidget(),
+        _monthSelectionWidget(),
+        if (isRecurring) ...[
           TextFieldWidget(
             label: 'expense-default-value-label'.i18n(),
             hint: 'expense-default-value-hint'.i18n(),
@@ -515,7 +486,7 @@ class _AddOrEditItemBottomSheetModalState
           ),
         ],
         Text(
-          _isRecurring
+          isRecurring
               ? 'multiple-months-value-description'.i18n()
               : 'single-month-value-description'
                   .i18n([widget.controller.selectedMonth.title]),
@@ -554,20 +525,20 @@ class _AddOrEditItemBottomSheetModalState
                     PopupMenuItem(
                       child: Text('select-all-text'.i18n()),
                       onTap: () => setState(
-                          () => _recurringMonths.addAll(MonthEnum.values)),
+                          () => _selectedMonths.addAll(MonthEnum.values)),
                     ),
                     PopupMenuItem(
                       child: Text('remove-all-text'.i18n()),
-                      onTap: () => setState(() => _recurringMonths.clear()),
+                      onTap: () => setState(() => _selectedMonths.clear()),
                     ),
                     const PopupMenuDivider(),
                     ...MonthEnum.values.map((e) {
                       return PopupMenuItem(
                         value: e,
-                        enabled: !_recurringMonths.contains(e),
+                        enabled: !_selectedMonths.contains(e),
                         onTap: () {
                           setState(() {
-                            _recurringMonths.add(e);
+                            _selectedMonths.add(e);
                           });
                         },
                         child: Text(e.title),
@@ -579,7 +550,7 @@ class _AddOrEditItemBottomSheetModalState
             ),
           ],
         ),
-        if (_recurringMonths.isEmpty)
+        if (_selectedMonths.isEmpty)
           Padding(
             padding: const EdgeInsets.only(bottom: 5),
             child: Text(
@@ -595,7 +566,7 @@ class _AddOrEditItemBottomSheetModalState
               runSpacing: 5,
               children: [
                 ...SplayTreeSet<MonthEnum>.from(
-                    _recurringMonths, (a, b) => a.index.compareTo(b.index)).map(
+                    _selectedMonths, (a, b) => a.index.compareTo(b.index)).map(
                   (e) => Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).scaffoldBackgroundColor,
@@ -619,12 +590,12 @@ class _AddOrEditItemBottomSheetModalState
                           tooltip: 'remove-text'.i18n(),
                           compactMode: true,
                           onTap: () {
-                            setState(() => _recurringMonths.remove(e));
+                            setState(() => _selectedMonths.remove(e));
                           },
                         )
                       ],
                     ),
-                  ),
+                  ).animate().fade(),
                 ),
               ],
             ),

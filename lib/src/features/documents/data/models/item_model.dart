@@ -210,22 +210,35 @@ class InvestimentControlItemModel extends ItemModel {
 
 class MonthlyExpenseControlItemModel extends ItemModel {
   final ValueType valueType;
-  final MonthEnum? singleMonth;
   final double defaultValue;
   final ValuesByMonthDTO valuesByMonth;
 
-  bool get isRecurring => singleMonth == null;
-  Set<MonthEnum> get recurringMonths => valuesByMonth.values.keys.toSet();
+  bool get isRecurring => months.length > 1;
+  Set<MonthEnum> get months => valuesByMonth.values.keys.toSet();
 
   double value(MonthEnum month) => valuesByMonth.get(month) ?? defaultValue;
-  bool existsIn(MonthEnum month) =>
-      singleMonth == month || valuesByMonth.get(month) != null;
+  bool existsIn(MonthEnum month) => valuesByMonth.get(month) != null;
+
+  MonthlyExpenseControlItemModel changeMonthValue({
+    required MonthEnum month,
+    required double? value,
+  }) {
+    return MonthlyExpenseControlItemModel(
+      id: id,
+      description: description,
+      creationDate: creationDate,
+      name: name,
+      groupingId: groupingId,
+      valueType: valueType,
+      defaultValue: defaultValue,
+      valuesByMonth: valuesByMonth..values[month] = value,
+    );
+  }
 
   MonthlyExpenseControlItemModel editAndCopy({
     String? name,
     String? groupingId,
     ValueType? valueType,
-    required MonthEnum? singleMonth,
     double? defaultValue,
     ValuesByMonthDTO? valuesByMonth,
   }) {
@@ -236,9 +249,8 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       name: name ?? this.name,
       groupingId: groupingId ?? this.groupingId,
       valueType: valueType ?? this.valueType,
-      singleMonth: singleMonth,
       defaultValue: defaultValue ?? this.defaultValue,
-      valuesByMonth: valuesByMonth ?? this.valuesByMonth,
+      valuesByMonth: this.valuesByMonth.editAndCopy(valuesByMonth),
     );
   }
 
@@ -249,7 +261,6 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     super.groupingId,
     super.description,
     required this.valueType,
-    required this.singleMonth,
     required this.defaultValue,
     required this.valuesByMonth,
   });
@@ -259,7 +270,6 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     return super.toMap()
       ..addAll({
         'valueType': valueType.index,
-        'singleMonth': singleMonth?.index,
         'defaultValue': defaultValue.toStringAsFixed(2),
         'valuesByMonth': valuesByMonth.toMap(),
       });
@@ -273,9 +283,6 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       description: map['description'],
       groupingId: map['groupingId'],
       valueType: ValueType.values[map['valueType']],
-      singleMonth: map['singleMonth'] != null
-          ? MonthEnum.values[map['singleMonth']]
-          : null,
       defaultValue: double.tryParse(map['defaultValue'] ?? '') ?? 0.0,
       valuesByMonth: ValuesByMonthDTO.fromMap(
         Map<String, String>.from(map['valuesByMonth']),

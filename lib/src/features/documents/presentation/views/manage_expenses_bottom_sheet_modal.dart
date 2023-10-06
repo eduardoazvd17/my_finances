@@ -194,7 +194,7 @@ class _ManageExpensesBottomSheetModalState
                   Row(
                     children: [
                       const SizedBox(width: 5),
-                      if (item.singleMonth == null) ...[
+                      if (item.isRecurring) ...[
                         IconButtonWidget(
                           iconSize: 21,
                           tooltip: 'recurring-expense-text'.i18n(),

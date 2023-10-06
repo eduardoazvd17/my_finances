@@ -253,9 +253,8 @@
     "empty-expenses-description": "Aún no has agregado gastos, usa el botón a continuación para agregarlos.",
     "expense-name-validation": "Ingrese un nombre válido para el gasto.",
     "expense-category-validation": "Seleccione una categoría para el gasto.",
-    "expense-single-value-validation": "Ingrese un valor válido para el gasto.",
-    "expense-recurring-value-validation": "Ingrese un valor válido para el gasto recurrente",
-    "expense-recurring-month-validation": "Seleccione más de 1 mes para usar el gasto recurrente, o deshabilite la función para insertar solo en el mes actual.",
+    "expense-default-value-validation": "Ingrese un valor válido para el gasto.",
+    "expense-months-validation": "Seleccione los meses en los que se ingresará el gasto.",
     "organize-expenses-text": "Organizar gastos",
     "empty-current-month-expenses-title": "No hay gastos este mes",
     "empty-current-month-expenses-description": "Aún no has agregado gastos en este mes de %s, agrégalos usando el menú desplegable o cambia el mes seleccionado para ver otros meses."
