@@ -97,7 +97,17 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         children: [
           if (controller.documentModel.type ==
               DocumentType.monthlyExpenseControl) ...[
-            Text('Mostrar gastos aqui.'),
+            Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: controller.currentMonthGroups.map((groupingModel) {
+                  return GroupingWidget(
+                    groupingModel: groupingModel,
+                    documentEditorController: controller,
+                  );
+                }).toList(),
+              ),
+            ),
           ] else ...[
             Obx(
               () => Column(

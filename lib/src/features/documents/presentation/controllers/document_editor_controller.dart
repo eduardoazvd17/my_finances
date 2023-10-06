@@ -84,6 +84,18 @@ class DocumentEditorController extends GetxController {
   final RxList<GroupingModel> _groups = RxList<GroupingModel>([]);
   List<GroupingModel> get groups => _groups;
 
+  List<GroupingModel> get currentMonthGroups {
+    return groups.where((e) {
+      final items =
+          getItemsByGroup(e.id).cast<MonthlyExpenseControlItemModel>().where(
+                (e) =>
+                    e.singleMonth == selectedMonth ||
+                    e.multipleMonthsValues.values.keys.contains(selectedMonth),
+              );
+      return items.isNotEmpty;
+    }).toList();
+  }
+
   void sortGroups() {
     _groups.sort((a, b) {
       return a.creationDate.compareTo(b.creationDate);
