@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../enums/month_enum.dart';
+import '../enums/value_type.dart';
 import '../models/grouping_model.dart';
 import '../models/item_model.dart';
 
@@ -7,6 +9,7 @@ import '../../../../core/data/models/database_model.dart';
 import '../enums/document_type.dart';
 import '../enums/operation_type.dart';
 import '../models/document_model.dart';
+import '../models/multiple_months_values.dart';
 
 class DocumentEditorService {
   final DocumentModel documentModel;
@@ -290,6 +293,85 @@ class DocumentEditorService {
         quantity: newQuantity,
         price: newPrice,
         date: newDate,
+      );
+
+      await _database
+          .documentItemsCollection(documentModel.id)
+          .doc(newItemModel.id)
+          .set(newItemModel.toMap());
+
+      return newItemModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<MonthlyExpenseControlItemModel> addMonthlyControlItem({
+    required String name,
+    required String groupingId,
+    required ValueType valueType,
+    required MonthEnum? singleMonth,
+    required double singleValue,
+    required MultipleMonthsValues multipleMonthsValues,
+  }) async {
+    try {
+      final docRef = _database.documentItemsCollection(documentModel.id).doc();
+      final MonthlyExpenseControlItemModel itemModel =
+          MonthlyExpenseControlItemModel(
+        id: docRef.id,
+        name: name,
+        creationDate: DateTime.now(),
+        groupingId: groupingId,
+        valueType: valueType,
+        singleMonth: singleMonth,
+        singleValue: singleValue,
+        multipleMonthsValues: multipleMonthsValues,
+      );
+      await docRef.set(itemModel.toMap());
+      return itemModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
+  }
+
+  Future<MonthlyExpenseControlItemModel> editMonthlyControlItem({
+    required MonthlyExpenseControlItemModel itemModel,
+    required String newName,
+    required String newGroupingId,
+    required ValueType newValueType,
+    required MonthEnum? newSingleMonth,
+    required double newSingleValue,
+    required MultipleMonthsValues newMultipleMonthsValues,
+  }) async {
+    bool hasChangedValues = false;
+    for (final month in newMultipleMonthsValues.values.keys) {
+      if (itemModel.value(month) != newMultipleMonthsValues.values[month]) {
+        hasChangedValues = true;
+        break;
+      }
+    }
+
+    if (itemModel.name == newName &&
+        itemModel.groupingId == newGroupingId &&
+        itemModel.valueType == newValueType &&
+        itemModel.singleMonth == newSingleMonth &&
+        itemModel.singleValue == newSingleValue &&
+        !hasChangedValues) {
+      return itemModel;
+    }
+
+    try {
+      final MonthlyExpenseControlItemModel newItemModel = itemModel.editAndCopy(
+        name: newName,
+        groupingId: newGroupingId,
+        valueType: newValueType,
+        singleMonth: newSingleMonth,
+        singleValue: newSingleValue,
+        multipleMonthsValues: newMultipleMonthsValues,
       );
 
       await _database
