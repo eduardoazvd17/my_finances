@@ -214,10 +214,13 @@ class MonthlyExpenseControlItemModel extends ItemModel {
   final ValuesByMonthDTO valuesByMonth;
 
   bool get isRecurring => months.length > 1;
-  Set<MonthEnum> get months => valuesByMonth.values.keys.toSet();
+  Set<MonthEnum> get months => valuesByMonth.data.keys.toSet();
 
-  double value(MonthEnum month) => valuesByMonth.get(month) ?? defaultValue;
-  bool existsIn(MonthEnum month) => valuesByMonth.get(month) != null;
+  double value(MonthEnum month) => valuesByMonth.value(month) ?? defaultValue;
+
+  bool checkMonth(MonthEnum month) {
+    return valuesByMonth.data.keys.contains(month);
+  }
 
   MonthlyExpenseControlItemModel changeMonthValue({
     required MonthEnum month,
@@ -231,7 +234,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       groupingId: groupingId,
       valueType: valueType,
       defaultValue: defaultValue,
-      valuesByMonth: valuesByMonth..values[month] = value,
+      valuesByMonth: valuesByMonth..data[month] = value,
     );
   }
 
@@ -250,7 +253,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
       groupingId: groupingId ?? this.groupingId,
       valueType: valueType ?? this.valueType,
       defaultValue: defaultValue ?? this.defaultValue,
-      valuesByMonth: this.valuesByMonth.editAndCopy(valuesByMonth),
+      valuesByMonth: this.valuesByMonth.changeOnlyMonths(valuesByMonth),
     );
   }
 

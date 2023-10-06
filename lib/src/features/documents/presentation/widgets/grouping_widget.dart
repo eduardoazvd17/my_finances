@@ -106,21 +106,17 @@ class GroupingWidget extends StatelessWidget {
                         vertical: 8,
                         horizontal: 16,
                       ),
-                      child: GetBuilder<DocumentEditorController>(
-                        id: 'items-list',
-                        init: documentEditorController,
-                        builder: (_) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: documentEditorController
-                              .getItemsByGroup(groupingModel.id)
-                              .map((itemModel) {
-                            return ItemWidget(
-                              itemModel: itemModel,
-                              documentEditorController:
-                                  documentEditorController,
-                            );
-                          }).toList(),
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: documentEditorController
+                            .getItemsByGroup(groupingModel.id,
+                                month: documentEditorController.selectedMonth)
+                            .map((itemModel) {
+                          return ItemWidget(
+                            itemModel: itemModel,
+                            documentEditorController: documentEditorController,
+                          );
+                        }).toList(),
                       ),
                     )
                   else

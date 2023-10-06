@@ -3,10 +3,10 @@ import 'package:equatable/equatable.dart';
 import '../enums/month_enum.dart';
 
 class ValuesByMonthDTO extends Equatable {
-  final Map<MonthEnum, double?> values;
-  const ValuesByMonthDTO(this.values);
+  final Map<MonthEnum, double?> data;
+  const ValuesByMonthDTO(this.data);
 
-  double? get(MonthEnum month) => values[month];
+  double? value(MonthEnum month) => data[month];
 
   factory ValuesByMonthDTO.fromMap(Map<String, String> map) {
     final Map<MonthEnum, double?> values = {};
@@ -26,25 +26,26 @@ class ValuesByMonthDTO extends Equatable {
     return ValuesByMonthDTO(values);
   }
 
-  ValuesByMonthDTO editAndCopy(ValuesByMonthDTO? newValuesByMonth) {
+  ValuesByMonthDTO changeOnlyMonths(
+    ValuesByMonthDTO? newValuesByMonth,
+  ) {
     if (newValuesByMonth == null) return this;
-    for (final MonthEnum month in newValuesByMonth.values.keys) {
-      if (newValuesByMonth.get(month) == null) {
-        newValuesByMonth.values[month] = get(month);
-      }
+    final Map<MonthEnum, double?> newValues = {};
+    for (final MonthEnum month in newValuesByMonth.data.keys) {
+      newValues[month] = value(month);
     }
-    return newValuesByMonth;
+    return ValuesByMonthDTO(newValues);
   }
 
   Map<String, String> toMap() {
     final Map<String, String> map = {};
-    for (final MonthEnum month in values.keys) {
-      final String value = values[month]?.toStringAsFixed(2) ?? '';
+    for (final MonthEnum month in data.keys) {
+      final String value = data[month]?.toStringAsFixed(2) ?? '';
       map[month.index.toString()] = value;
     }
     return map;
   }
 
   @override
-  List<Object?> get props => [values, values.keys, values.values];
+  List<Object?> get props => [data, data.keys, data.values];
 }

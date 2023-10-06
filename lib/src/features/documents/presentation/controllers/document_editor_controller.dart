@@ -70,7 +70,7 @@ class DocumentEditorController extends GetxController {
       documentModel.type == DocumentType.monthlyExpenseControl
           ? items
               .cast<MonthlyExpenseControlItemModel>()
-              .where((e) => e.existsIn(selectedMonth))
+              .where((e) => e.checkMonth(selectedMonth))
           : [];
 
   double get selectedMonthEarnings {
@@ -98,7 +98,7 @@ class DocumentEditorController extends GetxController {
     return groups.where((e) {
       final items = getItemsByGroup(e.id)
           .cast<MonthlyExpenseControlItemModel>()
-          .where((e) => e.existsIn(selectedMonth));
+          .where((e) => e.checkMonth(selectedMonth));
       return items.isNotEmpty;
     }).toList();
   }
@@ -179,8 +179,17 @@ class DocumentEditorController extends GetxController {
   List<ItemModel> get items => _items;
   Iterable<ItemModel> get itemsWithoutGroup =>
       _items.where((item) => item.groupingId == null);
-  List<ItemModel> getItemsByGroup(String groupingId) =>
-      _items.where((item) => item.groupingId == groupingId).toList();
+  List<ItemModel> getItemsByGroup(String groupingId, {MonthEnum? month}) {
+    if (month != null &&
+        documentModel.type == DocumentType.monthlyExpenseControl) {
+      return _items.cast<MonthlyExpenseControlItemModel>().where((item) {
+        return item.checkMonth(month) && item.groupingId == groupingId;
+      }).toList();
+    } else {
+      return _items.where((item) => item.groupingId == groupingId).toList();
+    }
+  }
+
   void sortItems() {
     _items.sort((a, b) {
       if (documentModel.type == DocumentType.investmentControl) {
@@ -397,7 +406,7 @@ class DocumentEditorController extends GetxController {
         throw AppError(message: 'expense-category-validation'.i18n());
       }
 
-      if (newValuesByMonth.values.isEmpty) {
+      if (newValuesByMonth.data.isEmpty) {
         throw AppError(message: 'expense-months-validation'.i18n());
       }
 
