@@ -245,6 +245,6 @@
     "selected-months-label": "Selected months:",
     "empty-selected-months-text": "No months selected. Use the button above to select.",
     "select-months-text": "Select months",
-    "add-all-text": "Add all",
+    "select-all-text": "Select all",
     "remove-all-text": "Remove all"
 }

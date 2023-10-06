@@ -15,9 +15,13 @@ class AppThemes {
 
   static const _bottomSheetShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(15.0),
-      topRight: Radius.circular(15.0),
+      topLeft: Radius.circular(12),
+      topRight: Radius.circular(12),
     ),
+  );
+
+  static final _popupMenuShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(12),
   );
 
   static ThemeData get light {
@@ -50,6 +54,7 @@ class AppThemes {
         backgroundColor: _lightSecondaryBackgroundColor,
         shape: _bottomSheetShape,
       ),
+      popupMenuTheme: PopupMenuThemeData(shape: _popupMenuShape),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _lightSecondaryBackgroundColor,
       ),
@@ -88,6 +93,7 @@ class AppThemes {
         backgroundColor: _darkSecondaryBackgroundColor,
         shape: _bottomSheetShape,
       ),
+      popupMenuTheme: PopupMenuThemeData(shape: _popupMenuShape),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _darkSecondaryBackgroundColor,
       ),

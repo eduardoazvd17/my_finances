@@ -9,6 +9,7 @@ import '../../../../core/data/utils/date_time_utils.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
 import '../../../../core/presentation/widgets/icon_button_widget.dart';
+import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../../../core/presentation/widgets/text_field_widget.dart';
 import '../../data/enums/month_enum.dart';
 import '../../data/enums/operation_type.dart';
@@ -505,42 +506,48 @@ class _AddOrEditItemBottomSheetModalState
           children: [
             Expanded(child: Text('selected-months-label'.i18n())),
             IconButtonWidget(
-              tooltip: 'add-all-text'.i18n(),
-              icon: CupertinoIcons.add_circled,
-              onTap: () {
-                setState(() => _recurringMonths.addAll(MonthEnum.values));
-              },
-            ),
-            IconButtonWidget(
               tooltip: 'select-months-text'.i18n(),
               icon: CupertinoIcons.calendar,
               onTap: () {
-                final List<MonthEnum> availableMonths = MonthEnum.values
-                    .where((e) => !_recurringMonths.contains(e))
-                    .toList();
+                const double maxDesktopWidth =
+                    ResponsiveBuilder.maxDesktopWidth;
+                final double screenWidth = Get.width;
+                final double diff = screenWidth - maxDesktopWidth;
+                final RelativeRect position = RelativeRect.fromLTRB(
+                  ResponsiveBuilder.maxDesktopWidth,
+                  Get.height / 2,
+                  (diff / 2) + 170,
+                  0,
+                );
 
                 showMenu<MonthEnum>(
                   context: context,
-                  position: RelativeRect.fill,
-                  items: availableMonths.map((e) {
-                    return PopupMenuItem(
-                      value: e,
-                      child: Text(e.title),
-                      onTap: () {
-                        setState(() {
-                          _recurringMonths.add(e);
-                        });
-                      },
-                    );
-                  }).toList(),
+                  position: position,
+                  items: [
+                    PopupMenuItem(
+                      child: Text('select-all-text'.i18n()),
+                      onTap: () => setState(
+                          () => _recurringMonths.addAll(MonthEnum.values)),
+                    ),
+                    PopupMenuItem(
+                      child: Text('remove-all-text'.i18n()),
+                      onTap: () => setState(() => _recurringMonths.clear()),
+                    ),
+                    const PopupMenuDivider(),
+                    ...MonthEnum.values.map((e) {
+                      return PopupMenuItem(
+                        value: e,
+                        enabled: !_recurringMonths.contains(e),
+                        onTap: () {
+                          setState(() {
+                            _recurringMonths.add(e);
+                          });
+                        },
+                        child: Text(e.title),
+                      );
+                    }),
+                  ],
                 );
-              },
-            ),
-            IconButtonWidget(
-              tooltip: 'remove-all-text'.i18n(),
-              icon: CupertinoIcons.minus_circle,
-              onTap: () {
-                setState(() => _recurringMonths.clear());
               },
             ),
           ],
