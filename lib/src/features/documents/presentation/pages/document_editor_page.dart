@@ -195,6 +195,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     if (!controller.isMonthlyExpensesControl) return Container();
 
     return ListHeaderWidget(
+      hideDivider: true,
       title: controller.selectedMonth.title,
       subtitleContent: BalanceWidget(
         earnings: controller.selectedMonthEarnings,

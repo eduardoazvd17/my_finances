@@ -6,6 +6,7 @@ class ListHeaderWidget extends StatelessWidget {
   final Widget? action;
   final Widget? content;
   final bool expandedContent;
+  final bool hideDivider;
 
   const ListHeaderWidget({
     super.key,
@@ -14,6 +15,7 @@ class ListHeaderWidget extends StatelessWidget {
     this.action,
     this.content,
     this.expandedContent = false,
+    this.hideDivider = false,
   });
 
   @override
@@ -41,7 +43,7 @@ class ListHeaderWidget extends StatelessWidget {
           ),
         ),
         if (subtitleContent != null) subtitleContent!,
-        const Divider(),
+        if (hideDivider) const SizedBox(height: 16) else const Divider(),
         if (content != null)
           expandedContent ? Expanded(child: content!) : content!,
       ],
