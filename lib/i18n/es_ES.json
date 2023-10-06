@@ -233,7 +233,7 @@
     "value-name-hint": "Ingrese un nombre para el gasto...",
     "value-type-title-0": "Ganancia",
     "value-type-title-1": "Gasto",
-    "recurring-text": "Valor recurrente",
+    "recurring-expense-text": "Gasto recurrente",
     "recurring-description": "Habilitar visualización de valores en varios meses.",
     "value-category-label": "Seleccione categoría de destino:",
     "single-month-value-description": "Este gasto solo se insertará para el mes de %s, si desea mostrar este valor en varios meses, habilite la opción anterior.",

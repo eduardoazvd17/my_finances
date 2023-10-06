@@ -233,7 +233,7 @@
     "value-name-hint": "Enter a name for the expense...",
     "value-type-title-0": "Gain",
     "value-type-title-1": "Expense",
-    "recurring-text": "Recurring value",
+    "recurring-expense-text": "Recurring expense",
     "recurring-description": "Enable value display in multiple months.",
     "value-category-label": "Select target category:",
     "single-month-value-description": "This expense will only be inserted for the month of %s, if you want to display this value in multiple months, enable the previous option.",

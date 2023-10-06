@@ -133,7 +133,7 @@ class _AddOrEditItemBottomSheetModalState
       DocumentType.monthlyExpenseControl => [
           _valueNameTextFieldWidget(),
           _categorySelectionWidget(),
-          _toggleRecurringValueWidget(),
+          _toggleRecurringExpenseWidget(),
           _valuesWidget(),
           _buttonsWidget(() async => true),
         ],
@@ -445,10 +445,10 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _toggleRecurringValueWidget() {
+  Widget _toggleRecurringExpenseWidget() {
     return SwitchListTile(
       title: Text(
-        'recurring-text'.i18n(),
+        'recurring-expense-text'.i18n(),
         style: Theme.of(context)
             .textTheme
             .titleSmall
