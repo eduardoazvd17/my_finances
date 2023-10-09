@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import '../../../../core/data/utils/app_themes.dart';
 import '../../../../core/presentation/widgets/advise_message_widget.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_picker.dart';
 import '../../../../core/presentation/widgets/floating_bottom_menu_widget.dart';
@@ -114,6 +115,33 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
         children: [
           if (controller.documentModel.type ==
               DocumentType.monthlyExpenseControl) ...[
+            if (controller.itemsWithoutGroup.isNotEmpty) ...[
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  'earnings-text'.i18n(['']),
+                  style: const TextStyle(color: AppThemes.commonColor),
+                ),
+              ),
+              Obx(
+                () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: controller.itemsWithoutGroup.map((itemModel) {
+                    return ItemWidget(
+                      itemModel: itemModel,
+                      documentEditorController: controller,
+                    );
+                  }).toList(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 24, bottom: 16),
+                child: Text(
+                  'expenses-text'.i18n(['']),
+                  style: const TextStyle(color: AppThemes.commonColor),
+                ),
+              ),
+            ],
             Obx(
               () => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

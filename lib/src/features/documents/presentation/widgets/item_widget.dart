@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../data/enums/operation_type.dart';
+import '../../data/enums/value_type.dart';
 import '../controllers/document_editor_controller.dart';
 
 import '../../../../core/data/utils/app_themes.dart';
@@ -48,7 +49,7 @@ class ItemWidget extends StatelessWidget {
       context: context,
       trailing: Text(
         CurrencyUtils.format(itemModel.defaultValue),
-        style: TextStyle(color: Colors.red[300]),
+        style: TextStyle(color: itemModel.valueType.color),
       ),
       middleExpanded: Text(itemModel.name),
     );
