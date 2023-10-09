@@ -74,14 +74,21 @@ class DocumentEditorController extends GetxController {
           : [];
 
   double get selectedMonthEarnings {
-    if (!isMonthlyExpensesControl) return 0;
-    return 0;
+    final earningsItems =
+        selectedMonthItems.where((e) => e.valueType == ValueType.earning);
+    return earningsItems.isEmpty
+        ? 0.0
+        : earningsItems.map((e) {
+            return e.value(selectedMonth);
+          }).reduce((a, b) => a + b);
   }
 
   double get selectedMonthExpenses {
-    return selectedMonthItems.isEmpty
+    final expensesItems =
+        selectedMonthItems.where((e) => e.valueType == ValueType.expense);
+    return expensesItems.isEmpty
         ? 0.0
-        : selectedMonthItems.map((e) {
+        : expensesItems.map((e) {
             return e.value(selectedMonth);
           }).reduce((a, b) => a + b);
   }
