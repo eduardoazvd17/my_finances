@@ -67,7 +67,7 @@ class _ManageExpensesBottomSheetModalState
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: _createdCategoriesListWidget(context),
+              child: _addedExpensesListWidget(context),
             ),
             const Divider(height: 0),
             Padding(
@@ -97,7 +97,7 @@ class _ManageExpensesBottomSheetModalState
     );
   }
 
-  Widget _createdCategoriesListWidget(BuildContext context) {
+  Widget _addedExpensesListWidget(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 164),
       child: Obx(
@@ -171,7 +171,7 @@ class _ManageExpensesBottomSheetModalState
                 useSafeArea: true,
                 builder: (context) {
                   return AddOrEditItemBottomSheetModal(
-                    icon: Icons.post_add_rounded,
+                    icon: CupertinoIcons.pencil,
                     title: 'edit-expense-button'.i18n(),
                     controller: widget.controller,
                     itemModel: item,
