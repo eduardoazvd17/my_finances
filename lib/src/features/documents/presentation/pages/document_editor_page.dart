@@ -29,6 +29,7 @@ import '../../data/enums/document_type.dart';
 import '../../data/models/item_model.dart';
 import '../views/document_details_bottom_sheet_modal.dart';
 import '../views/add_or_edit_group_bottom_sheet_modal.dart';
+import '../widgets/monthly_expenses_total_content.dart';
 
 class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   const DocumentEditorPage({super.key});
@@ -191,7 +192,14 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     }
 
     return switch (controller.documentModel.type) {
-      DocumentType.monthlyExpenseControl => Container(),
+      DocumentType.monthlyExpenseControl => MonthlyExpensesTotalContent(
+          groups: controller.groups,
+          selectedMonthItems: controller.selectedMonthItems.toList(),
+          selectedMonth: controller.selectedMonth,
+          selectedMonthEarnings: controller.selectedMonthEarnings,
+          selectedMonthExpenses: controller.selectedMonthExpenses,
+          selectedMonthBalance: controller.selectedMonthBalance,
+        ),
       DocumentType.investmentControl => InvestimentControlTotalContent(
           groups: controller.groups,
           items: controller.items.cast<InvestimentControlItemModel>(),
