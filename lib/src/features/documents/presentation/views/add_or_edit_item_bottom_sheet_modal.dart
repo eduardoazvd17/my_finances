@@ -30,6 +30,7 @@ class AddOrEditItemBottomSheetModal extends StatefulWidget {
   final DocumentEditorController controller;
   final ItemModel? itemModel;
   final GroupingModel? groupingModel;
+  final ValueType monthlyExpensesValueType;
 
   const AddOrEditItemBottomSheetModal({
     super.key,
@@ -38,6 +39,7 @@ class AddOrEditItemBottomSheetModal extends StatefulWidget {
     required this.controller,
     this.itemModel,
     this.groupingModel,
+    this.monthlyExpensesValueType = ValueType.expense,
   });
 
   @override
@@ -137,9 +139,10 @@ class _AddOrEditItemBottomSheetModalState
   List<Widget> _buildLayoutByDocumentType() {
     return switch (widget.controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
-          _valueNameTextFieldWidget(),
+          _nameTextFieldWidget(),
           _categorySelectionWidget(),
-          _valuesWidget(),
+          _monthSelectionWidget(),
+          _valueTextFieldWidget(),
           _buttonsWidget(() async {
             return await widget.controller.addOrEditMonthlyControlItem(
               itemModel: widget.itemModel as MonthlyExpenseControlItemModel?,
@@ -257,8 +260,8 @@ class _AddOrEditItemBottomSheetModalState
 
   Widget _nameTextFieldWidget() {
     return TextFieldWidget(
-      label: isEditing ? 'item-rename-label'.i18n() : 'item-name-label'.i18n(),
-      hint: isEditing ? 'item-rename-hint'.i18n() : 'item-name-hint'.i18n(),
+      label: 'item-name-label'.i18n(),
+      hint: 'item-name-hint'.i18n(),
       controller: _nameController,
       textCapitalization: TextCapitalization.sentences,
       focusNode: FocusNode(),
@@ -451,44 +454,22 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _valueNameTextFieldWidget() {
-    return TextFieldWidget(
-      label: 'value-name-label'.i18n(),
-      hint: 'value-name-hint'.i18n(),
-      controller: _nameController,
-      textCapitalization: TextCapitalization.sentences,
-      focusNode: FocusNode(),
-    );
-  }
-
-  Widget _valuesWidget() {
+  Widget _valueTextFieldWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _monthSelectionWidget(),
-        if (isRecurring) ...[
-          TextFieldWidget(
-            label: 'expense-default-value-label'.i18n(),
-            hint: 'expense-default-value-hint'.i18n(),
-            controller: _priceController,
-            textCapitalization: TextCapitalization.none,
-            textInputType: const TextInputType.numberWithOptions(decimal: true),
-            focusNode: FocusNode(),
-          ),
-        ] else ...[
-          TextFieldWidget(
-            label: 'expense-value-label'.i18n(),
-            hint: 'expense-value-hint'.i18n(),
-            controller: _priceController,
-            textCapitalization: TextCapitalization.none,
-            textInputType: const TextInputType.numberWithOptions(decimal: true),
-            focusNode: FocusNode(),
-          ),
-        ],
+        TextFieldWidget(
+          label: 'value-label'.i18n(),
+          hint: 'value-hint'.i18n(),
+          controller: _priceController,
+          textCapitalization: TextCapitalization.none,
+          textInputType: const TextInputType.numberWithOptions(decimal: true),
+          focusNode: FocusNode(),
+        ),
         Text(
           isRecurring
-              ? 'multiple-months-value-description'.i18n()
-              : 'single-month-value-description'
+              ? 'value-description'.i18n()
+              : 'value-description'
                   .i18n([widget.controller.selectedMonth.title]),
           style: const TextStyle(color: AppThemes.commonColor),
         ),
