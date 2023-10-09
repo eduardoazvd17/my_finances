@@ -249,7 +249,7 @@
     "organize-expenses-text": "Organize expenses",
     "empty-current-month-expenses-title": "There are no expenses this month",
     "empty-current-month-expenses-description": "You have not yet added expenses in this month of %s, add them using the flyout menu or change the selected month to view other months.",
-    "manage-earnings-button": "Manage earnings",
+    "manage-earnings-button": "Earnings management",
     "added-earnings-label": "Added earnings:",
     "new-earning-button": "New earning",
     "edit-earning-button": "Edit earning",
