@@ -399,7 +399,7 @@ class DocumentEditorController extends GetxController {
   }) async {
     try {
       if (newName.isEmpty) {
-        throw AppError(message: 'expense-name-validation'.i18n());
+        throw AppError(message: 'name-validation'.i18n());
       }
 
       if (newGroupingId == null) {

@@ -221,7 +221,7 @@ class _ManageExpensesBottomSheetModalState
             Get.dialog(
               CustomDialog(
                 title: 'delete-expense-button'.i18n(),
-                content: 'delete-expense-confirmation-text'.i18n(),
+                content: 'delete-value-confirmation-text'.i18n(),
                 invertButtonColor: true,
                 onConfirm: () {
                   widget.controller.deleteItem(item);
