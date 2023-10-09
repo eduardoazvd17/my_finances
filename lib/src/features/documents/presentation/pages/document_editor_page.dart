@@ -12,8 +12,10 @@ import '../../../../core/presentation/widgets/list_header_widget.dart';
 import '../../../../core/presentation/widgets/loading_widget.dart';
 import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../data/enums/month_enum.dart';
+import '../../data/enums/value_type.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
 import '../views/manage_categories_bottom_sheet_modal.dart';
+import '../views/manage_earnings_bottom_sheet_modal.dart';
 import '../views/manage_expenses_bottom_sheet_modal.dart';
 import '../widgets/annotation_total_content.dart';
 import '../widgets/balance_widget.dart';
@@ -310,7 +312,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       DocumentType.monthlyExpenseControl => [
           if (controller.groups.isNotEmpty)
             FloatingBottomMenuItem(
-              icon: CupertinoIcons.arrow_down_right,
+              icon: ValueType.expense.icon,
               tooltip: 'manage-expenses-button'.i18n(),
               showTooltip: true,
               onTap: () {
@@ -320,7 +322,7 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   useSafeArea: true,
                   builder: (context) {
                     return ManageExpensesBottomSheetModal(
-                      icon: CupertinoIcons.arrow_down_right,
+                      icon: ValueType.expense.icon,
                       title: 'manage-expenses-button'.i18n(),
                       controller: controller,
                     );
@@ -328,6 +330,25 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                 );
               },
             ),
+          FloatingBottomMenuItem(
+            icon: ValueType.earning.icon,
+            tooltip: 'manage-earnings-button'.i18n(),
+            showTooltip: true,
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (context) {
+                  return ManageEarningsBottomSheetModal(
+                    icon: ValueType.earning.icon,
+                    title: 'manage-earnings-button'.i18n(),
+                    controller: controller,
+                  );
+                },
+              );
+            },
+          ),
           FloatingBottomMenuItem(
             icon: Icons.list_alt_rounded,
             tooltip: 'manage-categories-button'.i18n(),

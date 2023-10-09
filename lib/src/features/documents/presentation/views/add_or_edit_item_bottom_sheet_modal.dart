@@ -61,6 +61,9 @@ class _AddOrEditItemBottomSheetModalState
   bool get isEditing => widget.itemModel != null;
   bool get isRecurring => _selectedMonths.length > 1;
 
+  bool get isExpense => widget.monthlyExpensesValueType == ValueType.expense;
+  bool get isEarning => widget.monthlyExpensesValueType == ValueType.earning;
+
   @override
   void initState() {
     _nameController = TextEditingController(text: widget.itemModel?.name ?? '');
@@ -140,7 +143,7 @@ class _AddOrEditItemBottomSheetModalState
     return switch (widget.controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
           _nameTextFieldWidget(),
-          _categorySelectionWidget(),
+          if (isExpense) _categorySelectionWidget(),
           _monthSelectionWidget(),
           _valueTextFieldWidget(),
           _buttonsWidget(() async {
@@ -148,7 +151,7 @@ class _AddOrEditItemBottomSheetModalState
               itemModel: widget.itemModel as MonthlyExpenseControlItemModel?,
               newName: _nameController.text.trim(),
               newGroupingId: _selectedGrouping?.id,
-              newValueType: ValueType.expense,
+              newValueType: widget.monthlyExpensesValueType,
               newDefaultValue: double.tryParse(
                 _priceController.text.trim().replaceAll(',', '.'),
               ),

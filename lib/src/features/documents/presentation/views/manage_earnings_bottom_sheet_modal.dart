@@ -14,11 +14,11 @@ import '../../data/models/item_model.dart';
 import '../controllers/document_editor_controller.dart';
 import 'add_or_edit_item_bottom_sheet_modal.dart';
 
-class ManageExpensesBottomSheetModal extends StatefulWidget {
+class ManageEarningsBottomSheetModal extends StatelessWidget {
   final IconData icon;
   final String title;
   final DocumentEditorController controller;
-  const ManageExpensesBottomSheetModal({
+  const ManageEarningsBottomSheetModal({
     super.key,
     required this.icon,
     required this.title,
@@ -26,19 +26,10 @@ class ManageExpensesBottomSheetModal extends StatefulWidget {
   });
 
   @override
-  State<ManageExpensesBottomSheetModal> createState() =>
-      _ManageExpensesBottomSheetModalState();
-}
-
-class _ManageExpensesBottomSheetModalState
-    extends State<ManageExpensesBottomSheetModal> {
-  bool _organizeByGroup = true;
-
-  @override
   Widget build(BuildContext context) {
     return BottomSheetModalWidget(
-      icon: widget.icon,
-      title: widget.title,
+      icon: icon,
+      title: title,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
@@ -49,32 +40,20 @@ class _ManageExpensesBottomSheetModalState
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('added-expenses-label'.i18n()),
-                  IconButtonWidget(
-                    tooltip: 'organize-expenses-text'.i18n(),
-                    icon: _organizeByGroup
-                        ? Icons.format_align_justify_rounded
-                        : Icons.format_align_left_rounded,
-                    compactMode: true,
-                    onTap: () {
-                      setState(() {
-                        _organizeByGroup = !_organizeByGroup;
-                      });
-                    },
-                  ),
+                  Text('added-earnings-label'.i18n()),
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: _addedExpensesListWidget(context),
+              child: _addedEarningsListWidget(context),
             ),
             const Divider(height: 0),
             Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: ButtonWidget(
                 icon: Icons.post_add_rounded,
-                text: 'new-expense-button'.i18n(),
+                text: 'new-earning-button'.i18n(),
                 onTap: () {
                   showModalBottomSheet(
                     context: context,
@@ -83,8 +62,9 @@ class _ManageExpensesBottomSheetModalState
                     builder: (context) {
                       return AddOrEditItemBottomSheetModal(
                         icon: Icons.post_add_rounded,
-                        title: 'new-expense-button'.i18n(),
-                        controller: widget.controller,
+                        title: 'new-earning-button'.i18n(),
+                        controller: controller,
+                        monthlyExpensesValueType: ValueType.earning,
                       );
                     },
                   );
@@ -97,68 +77,38 @@ class _ManageExpensesBottomSheetModalState
     );
   }
 
-  Widget _addedExpensesListWidget(BuildContext context) {
+  Widget _addedEarningsListWidget(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 164),
       child: Obx(
         () {
-          if (widget.controller.items
+          if (controller.items
               .cast<MonthlyExpenseControlItemModel>()
-              .where((e) => e.valueType == ValueType.expense)
+              .where((e) => e.valueType == ValueType.earning)
               .isEmpty) {
             return Center(
               child: AdviseMessageWidget(
-                icon: widget.icon,
-                message: 'empty-expenses-title'.i18n(),
-                description: 'empty-expenses-description'.i18n(),
+                icon: icon,
+                message: 'empty-earnings-title'.i18n(),
+                description: 'empty-earnings-description'.i18n(),
               ),
             );
           }
 
           return ListView(
-            children: _organizeByGroup
-                ? widget.controller.groups.map(
-                    (group) {
-                      final currentGroupItems = widget.controller
-                          .getItemsByGroup(group.id)
-                          .cast<MonthlyExpenseControlItemModel>()
-                          .where((e) => e.valueType == ValueType.expense);
-
-                      if (currentGroupItems.isEmpty) {
-                        return const SizedBox();
-                      }
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${group.name}:',
-                            style:
-                                const TextStyle(color: AppThemes.commonColor),
-                          ),
-                          ...currentGroupItems.map((item) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: _getItemWidget(item),
-                            );
-                          }),
-                          const SizedBox(height: 16),
-                        ],
-                      );
-                    },
-                  ).toList()
-                : widget.controller.items
-                    .cast<MonthlyExpenseControlItemModel>()
-                    .where((e) => e.valueType == ValueType.expense)
-                    .map((e) => _getItemWidget(e))
-                    .toList(),
+            children: controller.items
+                .cast<MonthlyExpenseControlItemModel>()
+                .where((e) => e.valueType == ValueType.earning)
+                .map((e) => _getItemWidget(context, e))
+                .toList(),
           );
         },
       ),
     );
   }
 
-  Widget _getItemWidget(MonthlyExpenseControlItemModel item) {
+  Widget _getItemWidget(
+      BuildContext context, MonthlyExpenseControlItemModel item) {
     return Row(
       children: [
         Expanded(
@@ -172,12 +122,10 @@ class _ManageExpensesBottomSheetModalState
                 builder: (context) {
                   return AddOrEditItemBottomSheetModal(
                     icon: CupertinoIcons.pencil,
-                    title: 'edit-expense-button'.i18n(),
-                    controller: widget.controller,
+                    title: 'edit-earning-button'.i18n(),
+                    controller: controller,
                     itemModel: item,
-                    groupingModel: widget.controller.groups
-                        .where((e) => e.id == item.groupingId)
-                        .first,
+                    monthlyExpensesValueType: ValueType.earning,
                   );
                 },
               );
@@ -224,7 +172,7 @@ class _ManageExpensesBottomSheetModalState
                 content: 'delete-value-confirmation-text'.i18n(),
                 invertButtonColor: true,
                 onConfirm: () {
-                  widget.controller.deleteItem(item);
+                  controller.deleteItem(item);
                 },
               ),
             );

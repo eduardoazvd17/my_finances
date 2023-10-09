@@ -309,7 +309,7 @@ class DocumentEditorService {
 
   Future<MonthlyExpenseControlItemModel> addMonthlyControlItem({
     required String name,
-    required String groupingId,
+    required String? groupingId,
     required ValueType valueType,
     required double defaultValue,
     required ValuesByMonthDTO valuesByMonth,
@@ -338,7 +338,7 @@ class DocumentEditorService {
   Future<MonthlyExpenseControlItemModel> editMonthlyControlItem({
     required MonthlyExpenseControlItemModel itemModel,
     required String newName,
-    required String newGroupingId,
+    required String? newGroupingId,
     required ValueType newValueType,
     required double newDefaultValue,
     required ValuesByMonthDTO newValuesByMonth,

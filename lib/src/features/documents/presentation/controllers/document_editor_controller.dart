@@ -402,16 +402,16 @@ class DocumentEditorController extends GetxController {
         throw AppError(message: 'name-validation'.i18n());
       }
 
-      if (newGroupingId == null) {
-        throw AppError(message: 'expense-category-validation'.i18n());
+      if (newGroupingId == null && newValueType == ValueType.expense) {
+        throw AppError(message: 'value-category-validation'.i18n());
       }
 
       if (newValuesByMonth.data.isEmpty) {
-        throw AppError(message: 'expense-months-validation'.i18n());
+        throw AppError(message: 'value-months-validation'.i18n());
       }
 
       if (newDefaultValue == null) {
-        throw AppError(message: 'expense-default-value-validation'.i18n());
+        throw AppError(message: 'default-value-validation'.i18n());
       }
 
       final MonthlyExpenseControlItemModel newItemModel;
