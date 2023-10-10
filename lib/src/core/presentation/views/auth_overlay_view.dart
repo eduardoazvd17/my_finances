@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,81 +40,86 @@ class _AuthOverlayViewState extends State<AuthOverlayView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 80),
-                  child: Column(
-                    children: [
-                      const Icon(CupertinoIcons.lock, size: 100),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text(
-                          'auth-required-text'.i18n(),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 80),
+                    child: Column(
+                      children: [
+                        const Icon(CupertinoIcons.lock, size: 100),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Text(
+                            'auth-required-text'.i18n(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ButtonWidget(
+                                icon: CupertinoIcons.lock_open,
+                                text: 'unlock-button'.i18n(),
+                                backgroundColor: Theme.of(context).primaryColor,
+                                foregroundColor: Colors.white,
+                                onTap: AppController.instance.closeAuthOverlay,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15,
+                          horizontal: 30,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ButtonWidget(
+                                icon: Icons.exit_to_app,
+                                text: 'logout-button'.i18n(),
+                                foregroundColor: Colors.red[300],
+                                borderColor: Colors.red[300],
+                                onTap: () {
+                                  Get.dialog(
+                                    CustomDialog(
+                                      title: 'logout-button'.i18n(),
+                                      content:
+                                          'logout-confirmation-text'.i18n(),
+                                      onConfirm: AppController.instance.logout,
+                                      invertButtonColor: true,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ButtonWidget(
-                              icon: CupertinoIcons.lock_open,
-                              text: 'unlock-button'.i18n(),
-                              backgroundColor: Theme.of(context).primaryColor,
-                              foregroundColor: Colors.white,
-                              onTap: AppController.instance.closeAuthOverlay,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 30,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ButtonWidget(
-                              icon: Icons.exit_to_app,
-                              text: 'logout-button'.i18n(),
-                              foregroundColor: Colors.red[300],
-                              borderColor: Colors.red[300],
-                              onTap: () {
-                                Get.dialog(
-                                  CustomDialog(
-                                    title: 'logout-button'.i18n(),
-                                    content: 'logout-confirmation-text'.i18n(),
-                                    onConfirm: AppController.instance.logout,
-                                    invertButtonColor: true,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
