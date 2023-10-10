@@ -339,10 +339,10 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
           if (controller.selectedGroup != null) ...[
-            //Selected group settings;
+            //TODO: Selected group settings;
           ],
           if (controller.selectedItem != null) ...[
-            //Selected item settings;
+            //TODO: Selected item settings;
           ],
           if (controller.selectedItem == null &&
               controller.selectedGroup == null) ...[
