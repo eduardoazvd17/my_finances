@@ -54,7 +54,11 @@ class _AuthOverlayViewState extends State<AuthOverlayView> {
                     padding: const EdgeInsets.only(bottom: 80),
                     child: Column(
                       children: [
-                        const Icon(CupertinoIcons.lock, size: 100),
+                        const Icon(
+                          CupertinoIcons.lock,
+                          size: 100,
+                          color: Colors.white,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: Text(
@@ -63,6 +67,7 @@ class _AuthOverlayViewState extends State<AuthOverlayView> {
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                         ),
