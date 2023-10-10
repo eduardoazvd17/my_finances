@@ -338,10 +338,37 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
   ) {
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
-          if (controller.groups.isNotEmpty)
+          if (controller.selectedGroup != null) ...[
+            //Selected group settings;
+          ],
+          if (controller.selectedItem != null) ...[
+            //Selected item settings;
+          ],
+          if (controller.selectedItem == null &&
+              controller.selectedGroup == null) ...[
+            if (controller.groups.isNotEmpty)
+              FloatingBottomMenuItem(
+                icon: ValueType.expense.icon,
+                tooltip: 'manage-expenses-button'.i18n(),
+                showTooltip: true,
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    useSafeArea: true,
+                    builder: (context) {
+                      return ManageExpensesBottomSheetModal(
+                        icon: ValueType.expense.icon,
+                        title: 'manage-expenses-button'.i18n(),
+                        controller: controller,
+                      );
+                    },
+                  );
+                },
+              ),
             FloatingBottomMenuItem(
-              icon: ValueType.expense.icon,
-              tooltip: 'manage-expenses-button'.i18n(),
+              icon: ValueType.earning.icon,
+              tooltip: 'manage-earnings-button'.i18n(),
               showTooltip: true,
               onTap: () {
                 showModalBottomSheet(
@@ -349,53 +376,35 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   isScrollControlled: true,
                   useSafeArea: true,
                   builder: (context) {
-                    return ManageExpensesBottomSheetModal(
-                      icon: ValueType.expense.icon,
-                      title: 'manage-expenses-button'.i18n(),
+                    return ManageEarningsBottomSheetModal(
+                      icon: ValueType.earning.icon,
+                      title: 'manage-earnings-button'.i18n(),
                       controller: controller,
                     );
                   },
                 );
               },
             ),
-          FloatingBottomMenuItem(
-            icon: ValueType.earning.icon,
-            tooltip: 'manage-earnings-button'.i18n(),
-            showTooltip: true,
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                useSafeArea: true,
-                builder: (context) {
-                  return ManageEarningsBottomSheetModal(
-                    icon: ValueType.earning.icon,
-                    title: 'manage-earnings-button'.i18n(),
-                    controller: controller,
-                  );
-                },
-              );
-            },
-          ),
-          FloatingBottomMenuItem(
-            icon: Icons.list_alt_rounded,
-            tooltip: 'manage-categories-button'.i18n(),
-            showTooltip: true,
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                useSafeArea: true,
-                builder: (context) {
-                  return ManageCategoriesBottomSheetModal(
-                    icon: Icons.list_alt_rounded,
-                    title: 'manage-categories-button'.i18n(),
-                    controller: controller,
-                  );
-                },
-              );
-            },
-          ),
+            FloatingBottomMenuItem(
+              icon: Icons.list_alt_rounded,
+              tooltip: 'manage-categories-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return ManageCategoriesBottomSheetModal(
+                      icon: Icons.list_alt_rounded,
+                      title: 'manage-categories-button'.i18n(),
+                      controller: controller,
+                    );
+                  },
+                );
+              },
+            ),
+          ],
         ],
       DocumentType.investmentControl => [
           if (controller.selectedGroup == null &&
