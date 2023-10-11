@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/models/user_model.dart';
 import '../views/auth_overlay_view.dart';
@@ -115,6 +116,7 @@ class AppController extends GetxController {
       Get.dialog(
         const AuthOverlayView(),
         barrierDismissible: false,
+        barrierColor: Colors.black38,
         useSafeArea: false,
       );
     }
