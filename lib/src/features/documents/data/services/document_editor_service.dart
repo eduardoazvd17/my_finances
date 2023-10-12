@@ -372,4 +372,28 @@ class DocumentEditorService {
       throw AppError.generic();
     }
   }
+
+  Future<bool> loadHideEarning() async {
+    if (documentModel.type != DocumentType.monthlyExpenseControl) {
+      return false;
+    }
+
+    try {
+      final prefs = await _database.sharedPreferences;
+      return prefs.getBool('HideEarnings-${documentModel.id}') ?? false;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<void> changeHideEarnings(bool hideEarnings) async {
+    if (documentModel.type != DocumentType.monthlyExpenseControl) {
+      return;
+    }
+
+    try {
+      final prefs = await _database.sharedPreferences;
+      prefs.setBool('HideEarnings-${documentModel.id}', hideEarnings);
+    } catch (_) {}
+  }
 }

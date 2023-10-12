@@ -254,5 +254,6 @@
     "new-earning-button": "Novo ganho",
     "edit-earning-button": "Editar ganho",
     "empty-earnings-title": "Não há ganhos",
-    "empty-earnings-description": "Você ainda não adicionou ganhos, utilize o botão abaixo para adicionar."
+    "empty-earnings-description": "Você ainda não adicionou ganhos, utilize o botão abaixo para adicionar.",
+    "show-or-hide-text": "Ocultar/Exibir"
 }

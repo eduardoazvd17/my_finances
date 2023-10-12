@@ -40,6 +40,8 @@ class DocumentEditorController extends GetxController {
 
       sortGroups();
       sortItems();
+
+      await loadHideEarnings();
     } on AppError catch (appError) {
       appError.showDialog();
     }
@@ -453,5 +455,22 @@ class DocumentEditorController extends GetxController {
       appError.showDialog();
       return false;
     }
+  }
+
+  final RxBool _hideEarnings = RxBool(false);
+  bool get hideEarnings => _hideEarnings.value;
+  Future<void> loadHideEarnings() async {
+    try {
+      _hideEarnings.value = await _documentEditorService.loadHideEarning();
+    } catch (_) {
+      _hideEarnings.value = false;
+    }
+  }
+
+  Future<void> toggleHideEarnings() async {
+    try {
+      _hideEarnings.value = !hideEarnings;
+      await _documentEditorService.changeHideEarnings(hideEarnings);
+    } catch (_) {}
   }
 }
