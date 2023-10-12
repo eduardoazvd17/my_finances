@@ -63,7 +63,9 @@ class GroupingWidget extends StatelessWidget {
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 18),
+                              horizontal: 10,
+                              vertical: 15,
+                            ),
                             child: Icon(
                               _controller.isExpanded
                                   ? CupertinoIcons.chevron_down
@@ -89,7 +91,7 @@ class GroupingWidget extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 5,
-                                    vertical: 18,
+                                    vertical: 15,
                                   ),
                                   child: Text(groupingModel.name),
                                 ),

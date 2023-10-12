@@ -143,40 +143,45 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 5),
-                child: Obx(
-                  () {
-                    if (controller.hideEarnings) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '........',
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            Text(
-                              '....',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(color: Colors.green),
-                            ),
-                          ],
-                        ),
-                      ).animate().fade();
-                    }
+                child: AnimatedSize(
+                  curve: Curves.ease,
+                  duration: const Duration(milliseconds: 350),
+                  alignment: Alignment.topLeft,
+                  child: Obx(
+                    () {
+                      if (controller.hideEarnings) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '........',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              Text(
+                                '....',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(color: Colors.green),
+                              ),
+                            ],
+                          ),
+                        ).animate().fade();
+                      }
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: controller.itemsWithoutGroup.map((itemModel) {
-                        return ItemWidget(
-                          itemModel: itemModel,
-                          documentEditorController: controller,
-                        );
-                      }).toList(),
-                    ).animate().fade();
-                  },
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: controller.itemsWithoutGroup.map((itemModel) {
+                          return ItemWidget(
+                            itemModel: itemModel,
+                            documentEditorController: controller,
+                          );
+                        }).toList(),
+                      ).animate().fade();
+                    },
+                  ),
                 ),
               ),
               Padding(
