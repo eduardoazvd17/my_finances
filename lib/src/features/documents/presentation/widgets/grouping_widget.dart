@@ -45,87 +45,84 @@ class GroupingWidget extends StatelessWidget {
                     : null,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Obx(
-                          () => InkWell(
-                            borderRadius: BorderRadius.circular(12),
-                            onTap: () {
-                              _controller.toggleIsExpanded();
-                              if (documentEditorController
-                                      .selectedItem?.groupingId ==
-                                  groupingModel.id) {
-                                documentEditorController.selectedItem = null;
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Icon(
-                                _controller.isExpanded
-                                    ? CupertinoIcons.chevron_down
-                                    : CupertinoIcons.chevron_right,
-                              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Obx(
+                        () => InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          onTap: () {
+                            _controller.toggleIsExpanded();
+                            if (documentEditorController
+                                    .selectedItem?.groupingId ==
+                                groupingModel.id) {
+                              documentEditorController.selectedItem = null;
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 18),
+                            child: Icon(
+                              _controller.isExpanded
+                                  ? CupertinoIcons.chevron_down
+                                  : CupertinoIcons.chevron_right,
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(12),
-                            onTap: () {
-                              if (isSelected) {
-                                documentEditorController.selectedGroup = null;
-                              } else {
-                                documentEditorController.selectedGroup =
-                                    groupingModel;
-                              }
-                            },
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 5,
-                                      vertical: 10,
-                                    ),
-                                    child: Text(groupingModel.name),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          onTap: () {
+                            if (isSelected) {
+                              documentEditorController.selectedGroup = null;
+                            } else {
+                              documentEditorController.selectedGroup =
+                                  groupingModel;
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 18,
                                   ),
+                                  child: Text(groupingModel.name),
                                 ),
-                                _trailingWidgetByDocumentType(),
-                              ],
-                            ),
+                              ),
+                              _trailingWidgetByDocumentType(),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    if (_controller.isExpanded)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 16,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: documentEditorController
-                              .getItemsByGroup(groupingModel.id,
-                                  month: documentEditorController.selectedMonth)
-                              .map((itemModel) {
-                            return ItemWidget(
-                              itemModel: itemModel,
-                              documentEditorController:
-                                  documentEditorController,
-                            );
-                          }).toList(),
-                        ),
-                      )
-                    else
-                      Container(),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  if (_controller.isExpanded)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 16,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: documentEditorController
+                            .getItemsByGroup(groupingModel.id,
+                                month: documentEditorController.selectedMonth)
+                            .map((itemModel) {
+                          return ItemWidget(
+                            itemModel: itemModel,
+                            documentEditorController: documentEditorController,
+                          );
+                        }).toList(),
+                      ),
+                    )
+                  else
+                    Container(),
+                ],
               ),
             ),
             const Divider(),
