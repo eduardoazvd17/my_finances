@@ -103,8 +103,9 @@ class _AuthOverlayViewState extends State<AuthOverlayView> {
                               child: ButtonWidget(
                                 icon: Icons.exit_to_app,
                                 text: 'logout-button'.i18n(),
-                                foregroundColor: Colors.red[300],
                                 borderColor: Colors.red[300],
+                                backgroundColor: Colors.red[300],
+                                foregroundColor: Colors.white,
                                 onTap: () {
                                   Get.dialog(
                                     CustomDialog(
