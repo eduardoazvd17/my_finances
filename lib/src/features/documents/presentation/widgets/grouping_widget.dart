@@ -106,7 +106,7 @@ class GroupingWidget extends StatelessWidget {
                   if (_controller.isExpanded)
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: 8,
+                        vertical: 5,
                         horizontal: 16,
                       ),
                       child: Column(
