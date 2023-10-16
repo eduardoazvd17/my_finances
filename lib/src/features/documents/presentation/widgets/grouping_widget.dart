@@ -64,7 +64,7 @@ class GroupingWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
-                              vertical: 15,
+                              vertical: 13,
                             ),
                             child: Icon(
                               _controller.isExpanded
@@ -91,7 +91,7 @@ class GroupingWidget extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 5,
-                                    vertical: 15,
+                                    vertical: 13,
                                   ),
                                   child: Text(groupingModel.name),
                                 ),
