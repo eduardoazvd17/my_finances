@@ -389,10 +389,42 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
     return switch (controller.documentModel.type) {
       DocumentType.monthlyExpenseControl => [
           if (controller.selectedGroup != null) ...[
-            //TODO: Selected group settings;
+            FloatingBottomMenuItem(
+              icon: Icons.close,
+              tooltip: 'delete-category-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                Get.dialog(
+                  CustomDialog(
+                    title: 'delete-category-button'.i18n(),
+                    content: 'delete-category-confirmation-text'.i18n(),
+                    invertButtonColor: true,
+                    onConfirm: () {
+                      controller.deleteGroup(controller.selectedGroup!);
+                    },
+                  ),
+                );
+              },
+            ),
           ],
           if (controller.selectedItem != null) ...[
-            //TODO: Selected item settings;
+            FloatingBottomMenuItem(
+              icon: Icons.close,
+              tooltip: 'delete-value-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                Get.dialog(
+                  CustomDialog(
+                    title: 'delete-value-button'.i18n(),
+                    content: 'delete-value-confirmation-text'.i18n(),
+                    invertButtonColor: true,
+                    onConfirm: () {
+                      controller.deleteItem(controller.selectedItem!);
+                    },
+                  ),
+                );
+              },
+            ),
           ],
           if (controller.selectedItem == null &&
               controller.selectedGroup == null) ...[

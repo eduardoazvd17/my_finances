@@ -170,8 +170,8 @@ class FloatingBottomMenuItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                height: 60,
-                width: 60,
+                height: 50,
+                width: 50,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(icon, color: foregroundColor),
