@@ -16,7 +16,7 @@ class GroupingModel extends Equatable {
     required this.creationDate,
   });
 
-  GroupingModel editAndCopy({
+  GroupingModel copyWith({
     String? name,
     bool? initializeExpanded,
     DateTime? creationDate,

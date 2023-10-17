@@ -63,7 +63,7 @@ class AnnotationItemModel extends ItemModel {
     );
   }
 
-  AnnotationItemModel editAndCopy({
+  AnnotationItemModel copyWith({
     String? name,
     required String? description,
     required String? groupingId,
@@ -149,7 +149,7 @@ class InvestimentControlItemModel extends ItemModel {
     required this.date,
   });
 
-  InvestimentControlItemModel editAndCopy({
+  InvestimentControlItemModel copyWith({
     required String? description,
     OperationType? operationType,
     int? quantity,
@@ -238,7 +238,7 @@ class MonthlyExpenseControlItemModel extends ItemModel {
     );
   }
 
-  MonthlyExpenseControlItemModel editAndCopy({
+  MonthlyExpenseControlItemModel copyWith({
     String? name,
     String? groupingId,
     ValueType? valueType,

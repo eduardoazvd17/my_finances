@@ -96,7 +96,7 @@ class MyProfileController extends GetxController {
       );
 
       if (result) {
-        final UserModel newUser = AppController.instance.user!.editAndCopy(
+        final UserModel newUser = AppController.instance.user!.copyWith(
           photoUrl: AppController.instance.user!.photoUrl,
           nickname: AppController.instance.user!.nickname,
           name: newName,
@@ -129,7 +129,7 @@ class MyProfileController extends GetxController {
       );
 
       if (result) {
-        final UserModel newUser = AppController.instance.user!.editAndCopy(
+        final UserModel newUser = AppController.instance.user!.copyWith(
           photoUrl: AppController.instance.user!.photoUrl,
           nickname: newNickname.isEmpty ? null : newNickname,
         );
@@ -183,7 +183,7 @@ class MyProfileController extends GetxController {
       );
 
       if (result) {
-        final UserModel newUser = AppController.instance.user!.editAndCopy(
+        final UserModel newUser = AppController.instance.user!.copyWith(
           photoUrl: AppController.instance.user!.photoUrl,
           nickname: AppController.instance.user!.nickname,
           password: _md5Hash(newPassword),
@@ -247,7 +247,7 @@ class MyProfileController extends GetxController {
           currentUserPhotoUrl: AppController.instance.user!.photoUrl,
         );
 
-        final UserModel newUser = AppController.instance.user!.editAndCopy(
+        final UserModel newUser = AppController.instance.user!.copyWith(
           photoUrl: photoUrl,
           nickname: AppController.instance.user!.nickname,
         );
@@ -272,7 +272,7 @@ class MyProfileController extends GetxController {
         currentUserPhotoUrl: AppController.instance.user!.photoUrl,
       );
 
-      final UserModel newUser = AppController.instance.user!.editAndCopy(
+      final UserModel newUser = AppController.instance.user!.copyWith(
         photoUrl: null,
         nickname: AppController.instance.user!.nickname,
       );

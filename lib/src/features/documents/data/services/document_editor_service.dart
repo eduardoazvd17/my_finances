@@ -90,7 +90,7 @@ class DocumentEditorService {
     }
 
     try {
-      final GroupingModel newGroupingModel = groupingModel.editAndCopy(
+      final GroupingModel newGroupingModel = groupingModel.copyWith(
         name: newName ?? groupingModel.name,
         initializeExpanded:
             newInitializeExpanded ?? groupingModel.initializeExpanded,
@@ -176,7 +176,7 @@ class DocumentEditorService {
     }
 
     try {
-      final AnnotationItemModel newItemModel = itemModel.editAndCopy(
+      final AnnotationItemModel newItemModel = itemModel.copyWith(
         name: newName ?? itemModel.name,
         description: newDescription,
         groupingId: newGroupingId,
@@ -286,7 +286,7 @@ class DocumentEditorService {
     }
 
     try {
-      final InvestimentControlItemModel newItemModel = itemModel.editAndCopy(
+      final InvestimentControlItemModel newItemModel = itemModel.copyWith(
         description: newDescription,
         operationType: newOperationType,
         quantity: newQuantity,
@@ -352,7 +352,7 @@ class DocumentEditorService {
     }
 
     try {
-      final MonthlyExpenseControlItemModel newItemModel = itemModel.editAndCopy(
+      final MonthlyExpenseControlItemModel newItemModel = itemModel.copyWith(
         name: newName,
         groupingId: newGroupingId,
         valueType: newValueType,

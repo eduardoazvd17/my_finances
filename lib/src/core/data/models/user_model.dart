@@ -20,7 +20,7 @@ class UserModel extends Equatable {
     String? nickname,
   }) : _nickname = nickname;
 
-  UserModel editAndCopy({
+  UserModel copyWith({
     String? name,
     String? password,
     required String? photoUrl,
