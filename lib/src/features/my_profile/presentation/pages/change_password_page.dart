@@ -19,50 +19,47 @@ class ChangePasswordPage extends GetWidget<MyProfileController> {
       ),
       body: Center(
         child: ScrollViewWidget(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                TextFieldWidget(
-                  autofocus: true,
-                  label: 'old-password-label'.i18n(),
-                  hint: 'old-password-hint'.i18n(),
-                  obscureText: true,
-                  controller: controller.oldPasswordController,
-                  focusNode: controller.oldPasswordFocus,
-                  onSubmitted: (_) => controller.passwordFocus.requestFocus(),
-                  textInputAction: TextInputAction.next,
+          child: Column(
+            children: [
+              TextFieldWidget(
+                autofocus: true,
+                label: 'old-password-label'.i18n(),
+                hint: 'old-password-hint'.i18n(),
+                obscureText: true,
+                controller: controller.oldPasswordController,
+                focusNode: controller.oldPasswordFocus,
+                onSubmitted: (_) => controller.passwordFocus.requestFocus(),
+                textInputAction: TextInputAction.next,
+              ),
+              TextFieldWidget(
+                label: 'new-password-label'.i18n(),
+                hint: 'new-password-hint'.i18n(),
+                obscureText: true,
+                controller: controller.passwordController,
+                focusNode: controller.passwordFocus,
+                onSubmitted: (_) => controller.password2Focus.requestFocus(),
+                textInputAction: TextInputAction.next,
+              ),
+              TextFieldWidget(
+                label: 'new-password2-label'.i18n(),
+                hint: 'new-password2-hint'.i18n(),
+                obscureText: true,
+                controller: controller.password2Controller,
+                focusNode: controller.password2Focus,
+                onSubmitted: (_) => controller.changePassword(),
+                textInputAction: TextInputAction.done,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0),
+                child: ButtonWidget(
+                  icon: Icons.lock_person_outlined,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  text: 'change-button'.i18n(),
+                  onTap: controller.changePassword,
                 ),
-                TextFieldWidget(
-                  label: 'new-password-label'.i18n(),
-                  hint: 'new-password-hint'.i18n(),
-                  obscureText: true,
-                  controller: controller.passwordController,
-                  focusNode: controller.passwordFocus,
-                  onSubmitted: (_) => controller.password2Focus.requestFocus(),
-                  textInputAction: TextInputAction.next,
-                ),
-                TextFieldWidget(
-                  label: 'new-password2-label'.i18n(),
-                  hint: 'new-password2-hint'.i18n(),
-                  obscureText: true,
-                  controller: controller.password2Controller,
-                  focusNode: controller.password2Focus,
-                  onSubmitted: (_) => controller.changePassword(),
-                  textInputAction: TextInputAction.done,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
-                  child: ButtonWidget(
-                    icon: Icons.lock_person_outlined,
-                    foregroundColor: Colors.white,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    text: 'change-button'.i18n(),
-                    onTap: controller.changePassword,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
