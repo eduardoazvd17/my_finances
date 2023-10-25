@@ -43,7 +43,7 @@ class AppController extends GetxController {
       final PackageInfo packageInfo = await PackageInfo.fromPlatform();
       final String version = packageInfo.version;
       final String buildNumber = packageInfo.buildNumber;
-      _appVersion.value = 'v$version+$buildNumber (Alpha)';
+      _appVersion.value = 'v$version+$buildNumber (Beta)';
     } catch (_) {
       _appVersion.value = '';
     }
