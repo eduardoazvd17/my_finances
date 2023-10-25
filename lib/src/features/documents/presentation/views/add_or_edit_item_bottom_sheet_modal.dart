@@ -145,7 +145,7 @@ class _AddOrEditItemBottomSheetModalState
           _nameTextFieldWidget(),
           if (isExpense) _categorySelectionWidget(),
           _monthSelectionWidget(),
-          _valueTextFieldWidget(),
+          _defaultValueTextFieldWidget(),
           _buttonsWidget(() async {
             return await widget.controller.addOrEditMonthlyControlItem(
               itemModel: widget.itemModel as MonthlyExpenseControlItemModel?,
@@ -457,7 +457,7 @@ class _AddOrEditItemBottomSheetModalState
     );
   }
 
-  Widget _valueTextFieldWidget() {
+  Widget _defaultValueTextFieldWidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

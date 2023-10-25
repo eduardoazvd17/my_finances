@@ -232,7 +232,7 @@
     "recurring-value-text": "Valor recurrente",
     "value-category-label": "Seleccione categoría de destino:",
     "value-description": "Este valor se insertará para los meses seleccionados anteriormente. Puedes editar los valores de cada mes por separado accediendo a él en cada mes, a través del menú flotante.",
-    "value-label": "Valor:",
+    "value-label": "Valor estandar:",
     "value-hint": "Cantidad que se mostrará en los meses seleccionados...",
     "selected-months-label": "Meses seleccionados:",
     "empty-selected-months-text": "No hay meses seleccionados. Utilice el botón de arriba para seleccionar.",
@@ -255,5 +255,7 @@
     "edit-earning-button": "Editar ganancia",
     "empty-earnings-title": "Sin ganancias",
     "empty-earnings-description": "Aún no has agregado ganancias, usa el botón a continuación para agregarlas.",
-    "show-or-hide-text": "Ocultar/Mostrar"
+    "show-or-hide-text": "Ocultar/Mostrar",
+    "edit-value-in-this-month-button": "Editar valor en este mes",
+    "edit-value-button": "Editar propiedades de valor"
 }

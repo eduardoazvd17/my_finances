@@ -232,7 +232,7 @@
     "recurring-value-text": "Recurring value",
     "value-category-label": "Select target category:",
     "value-description": "This value will be inserted for the months selected above. You can edit the values for each month separately by accessing it in each month, through the floating menu.",
-    "value-label": "Value:",
+    "value-label": "Default value:",
     "value-hint": "Amount that will be displayed in the selected months...",
     "selected-months-label": "Selected months:",
     "empty-selected-months-text": "No months selected. Use the button above to select.",
@@ -255,5 +255,7 @@
     "edit-earning-button": "Edit earning",
     "empty-earnings-title": "No earnings",
     "empty-earnings-description": "You haven't added earnings yet, use the button below to add.",
-    "show-or-hide-text": "Hide/Show"
+    "show-or-hide-text": "Hide/Show",
+    "edit-value-in-this-month-button": "Edit value in this month",
+    "edit-value-button": "Edit value properties"
 }

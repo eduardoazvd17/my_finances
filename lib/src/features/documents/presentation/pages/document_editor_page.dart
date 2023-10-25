@@ -390,6 +390,26 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       DocumentType.monthlyExpenseControl => [
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
+              icon: CupertinoIcons.pencil,
+              tooltip: 'edit-category-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditGroupBottomSheetModal(
+                      icon: CupertinoIcons.pencil,
+                      title: 'edit-category-button'.i18n(),
+                      controller: controller,
+                      groupingModel: controller.selectedGroup,
+                    );
+                  },
+                );
+              },
+            ),
+            FloatingBottomMenuItem(
               icon: Icons.close,
               tooltip: 'delete-category-button'.i18n(),
               showTooltip: true,
@@ -408,6 +428,48 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
           ],
           if (controller.selectedItem != null) ...[
+            FloatingBottomMenuItem(
+              icon: CupertinoIcons.pencil_ellipsis_rectangle,
+              tooltip: 'edit-value-in-this-month-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                // showModalBottomSheet(
+                //   context: context,
+                //   isScrollControlled: true,
+                //   useSafeArea: true,
+                //   builder: (context) {
+                //     return AddOrEditGroupBottomSheetModal(
+                //       icon: CupertinoIcons.pencil,
+                //       title: 'edit-value-button'.i18n(),
+                //       controller: controller,
+                //       groupingModel: controller.selectedGroup,
+                //     );
+                //   },
+                // );
+              },
+            ),
+            FloatingBottomMenuItem(
+              icon: CupertinoIcons.pencil,
+              tooltip: 'edit-value-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      icon: CupertinoIcons.pencil,
+                      title: 'edit-value-button'.i18n(),
+                      controller: controller,
+                      itemModel: controller.selectedItem,
+                      groupingModel: controller.groups.firstWhereOrNull(
+                          (e) => e.id == controller.selectedItem!.groupingId),
+                    );
+                  },
+                );
+              },
+            ),
             FloatingBottomMenuItem(
               icon: Icons.close,
               tooltip: 'delete-value-button'.i18n(),
