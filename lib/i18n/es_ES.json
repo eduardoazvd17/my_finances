@@ -257,5 +257,8 @@
     "empty-earnings-description": "Aún no has agregado ganancias, usa el botón a continuación para agregarlas.",
     "show-or-hide-text": "Ocultar/Mostrar",
     "edit-value-in-this-month-button": "Editar valor en este mes",
-    "edit-value-button": "Editar propiedades de valor"
+    "edit-value-button": "Editar propiedades de valor",
+    "increment-value-button": "Incremento - inserta el valor que se agregará",
+    "overwrite-value-button": "Sobrescribir - insertar el valor exacto",
+    "decrement-value-button": "Decremento - inserta el valor a restar"
 }

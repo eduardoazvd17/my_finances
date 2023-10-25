@@ -15,6 +15,7 @@ import '../../../../core/presentation/widgets/responsive_builder.dart';
 import '../../data/enums/month_enum.dart';
 import '../../data/enums/value_type.dart';
 import '../views/add_or_edit_item_bottom_sheet_modal.dart';
+import '../views/edit_value_of_month_mode_selector_bottom_sheet_modal.dart';
 import '../views/manage_categories_bottom_sheet_modal.dart';
 import '../views/manage_earnings_bottom_sheet_modal.dart';
 import '../views/manage_expenses_bottom_sheet_modal.dart';
@@ -433,19 +434,19 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
               tooltip: 'edit-value-in-this-month-button'.i18n(),
               showTooltip: true,
               onTap: () {
-                // showModalBottomSheet(
-                //   context: context,
-                //   isScrollControlled: true,
-                //   useSafeArea: true,
-                //   builder: (context) {
-                //     return AddOrEditGroupBottomSheetModal(
-                //       icon: CupertinoIcons.pencil,
-                //       title: 'edit-value-button'.i18n(),
-                //       controller: controller,
-                //       groupingModel: controller.selectedGroup,
-                //     );
-                //   },
-                // );
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return EditValueOfMonthModeSelectorBottomSheetModal(
+                      icon: CupertinoIcons.pencil_ellipsis_rectangle,
+                      title: 'edit-value-in-this-month-button'.i18n(),
+                      controller: controller,
+                      itemModel: controller.selectedItem!,
+                    );
+                  },
+                );
               },
             ),
             FloatingBottomMenuItem(

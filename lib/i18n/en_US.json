@@ -257,5 +257,8 @@
     "empty-earnings-description": "You haven't added earnings yet, use the button below to add.",
     "show-or-hide-text": "Hide/Show",
     "edit-value-in-this-month-button": "Edit value in this month",
-    "edit-value-button": "Edit value properties"
+    "edit-value-button": "Edit value properties",
+    "increment-value-button": "Increment - insert value to be added",
+    "overwrite-value-button": "Overwrite - insert exact value",
+    "decrement-value-button": "Decrement - insert value to be subtracted"
 }
