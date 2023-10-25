@@ -467,6 +467,9 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       itemModel: controller.selectedItem,
                       groupingModel: controller.groups.firstWhereOrNull(
                           (e) => e.id == controller.selectedItem!.groupingId),
+                      monthlyExpensesValueType: (controller.selectedItem
+                              as MonthlyExpenseControlItemModel)
+                          .valueType,
                     );
                   },
                 );
