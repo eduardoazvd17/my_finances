@@ -473,4 +473,37 @@ class DocumentEditorController extends GetxController {
       await _documentEditorService.changeHideEarnings(hideEarnings);
     } catch (_) {}
   }
+
+  Future<bool?> changeItemMonthValue({
+    required MonthlyExpenseControlItemModel itemModel,
+    required MonthEnum selectedMonth,
+    required double? value,
+    String? operator,
+  }) async {
+    try {
+      if (value == null) {
+        throw AppError(message: 'default-value-validation'.i18n());
+      }
+
+      final MonthlyExpenseControlItemModel newItemModel =
+          await _documentEditorService.changeMonthValue(
+        itemModel: itemModel,
+        month: selectedMonth,
+        value: value,
+        operator: operator,
+      );
+
+      _items.remove(itemModel);
+      _items.add(newItemModel);
+
+      if (selectedItem?.id == itemModel.id) {
+        selectedItem = newItemModel;
+      }
+      sortItems();
+      return true;
+    } on AppError catch (appError) {
+      appError.showDialog();
+      return false;
+    }
+  }
 }

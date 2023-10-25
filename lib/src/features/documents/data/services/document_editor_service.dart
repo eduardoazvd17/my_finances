@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../enums/month_enum.dart';
 import '../enums/value_type.dart';
 import '../models/grouping_model.dart';
 import '../models/item_model.dart';
@@ -395,5 +396,39 @@ class DocumentEditorService {
       final prefs = await _database.sharedPreferences;
       prefs.setBool('HideEarnings-${documentModel.id}', hideEarnings);
     } catch (_) {}
+  }
+
+  Future<MonthlyExpenseControlItemModel> changeMonthValue({
+    required MonthlyExpenseControlItemModel itemModel,
+    required MonthEnum month,
+    required double value,
+    required String? operator,
+  }) async {
+    if (itemModel.value(month) == value) {
+      return itemModel;
+    }
+
+    try {
+      final double calculatedValue = operator == '+'
+          ? (itemModel.value(month) + value)
+          : (operator == '-' ? (itemModel.value(month) - value) : value);
+
+      final MonthlyExpenseControlItemModel newItemModel =
+          itemModel.changeMonthValue(
+        month: month,
+        value: calculatedValue,
+      );
+
+      await _database
+          .documentItemsCollection(documentModel.id)
+          .doc(newItemModel.id)
+          .set(newItemModel.toMap());
+
+      return newItemModel;
+    } on AppError catch (_) {
+      rethrow;
+    } catch (_) {
+      throw AppError.generic();
+    }
   }
 }

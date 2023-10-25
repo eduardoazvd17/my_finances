@@ -258,7 +258,12 @@
     "show-or-hide-text": "Ocultar/Exibir",
     "edit-value-in-this-month-button": "Editar valor neste mês",
     "edit-value-button": "Editar propriedades do valor",
-    "increment-value-button": "Incrementar - inserir valor a ser somado",
-    "overwrite-value-button": "Substituir - inserir valor exato",
-    "decrement-value-button": "Decrementar - inserir valor a ser subtraído"
+    "increment-value-button": "Incrementar\ninserir valor a ser somado",
+    "overwrite-value-button": "Substituir\ninserir valor exato",
+    "decrement-value-button": "Decrementar\ninserir valor a ser subtraído",
+    "increment-dialog-description-text": "O valor inserido acima será somado ao valor atual, resultando em: %s",
+    "overwrite-dialog-description-text": "O valor atual será alterado pelo valor exato inserido acima.",
+    "decrement-dialog-description-text": "O valor inserido acima será subtraído do valor atual, resultando em: %s",
+    "changing-value-of-label": "Alterando valor de:",
+    "selected-month-label": "Mês selecionado:"
 }

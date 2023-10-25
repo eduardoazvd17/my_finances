@@ -258,7 +258,12 @@
     "show-or-hide-text": "Hide/Show",
     "edit-value-in-this-month-button": "Edit value in this month",
     "edit-value-button": "Edit value properties",
-    "increment-value-button": "Increment - insert value to be added",
-    "overwrite-value-button": "Overwrite - insert exact value",
-    "decrement-value-button": "Decrement - insert value to be subtracted"
+    "increment-value-button": "Increment\ninsert value to be added",
+    "overwrite-value-button": "Overwrite\ninsert exact value",
+    "decrement-value-button": "Decrement\ninsert value to be subtracted",
+    "increment-dialog-description-text": "The value entered above will be added to the current value, resulting in: %s",
+    "overwrite-dialog-description-text": "The current value will be changed by the exact value entered above.",
+    "decrement-dialog-description-text": "The value entered above will be subtracted from the current value, resulting in: %s",
+    "changing-value-of-label": "Changing value of:",
+    "selected-month-label": "Selected month:"
 }

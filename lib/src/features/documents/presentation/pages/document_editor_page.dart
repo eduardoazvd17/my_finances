@@ -443,7 +443,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                       icon: CupertinoIcons.pencil_ellipsis_rectangle,
                       title: 'edit-value-in-this-month-button'.i18n(),
                       controller: controller,
-                      itemModel: controller.selectedItem!,
+                      itemModel: controller.selectedItem!
+                          as MonthlyExpenseControlItemModel,
                     );
                   },
                 );
