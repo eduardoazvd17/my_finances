@@ -48,7 +48,9 @@ class ItemWidget extends StatelessWidget {
     return _itemBaseWidget(
       context: context,
       trailing: Text(
-        CurrencyUtils.format(itemModel.defaultValue),
+        CurrencyUtils.format(
+          itemModel.value(documentEditorController.selectedMonth),
+        ),
         style: TextStyle(color: itemModel.valueType.color),
       ),
       middleExpanded: Text(itemModel.name),
