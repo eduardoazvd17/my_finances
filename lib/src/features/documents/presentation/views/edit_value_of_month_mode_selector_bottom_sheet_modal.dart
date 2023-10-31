@@ -56,6 +56,15 @@ class EditValueOfMonthModeSelectorBottomSheetModal extends StatelessWidget {
               operator: '-',
             ),
           ),
+          _getIconTile(
+            icon: CupertinoIcons.minus_circle,
+            text: 'restore-default-value-button'.i18n(),
+            color: AppThemes.commonColor,
+            onTap: () => _showChangeValueDialog(
+              labelAndHint: 'restore-default-value-button'.i18n(),
+              operator: 'r',
+            ),
+          ),
         ],
       ),
     );
@@ -65,6 +74,16 @@ class EditValueOfMonthModeSelectorBottomSheetModal extends StatelessWidget {
     required String labelAndHint,
     String? operator,
   }) async {
+    if (operator == 'r') {
+      await controller.changeItemMonthValue(
+        itemModel: itemModel,
+        selectedMonth: controller.selectedMonth,
+        value: null,
+        operator: operator,
+      );
+      return;
+    }
+
     final split = labelAndHint.split('\n');
     final String buttonText = split.isEmpty ? '' : split.first;
     final String hintText = split.isEmpty ? '' : split.last;

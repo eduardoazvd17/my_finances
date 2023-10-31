@@ -261,6 +261,7 @@
     "increment-value-button": "Incremento\ninserta el valor que se agregará",
     "overwrite-value-button": "Sobrescribir\ninsertar el valor exacto",
     "decrement-value-button": "Decremento\ninserta el valor a restar",
+    "restore-default-value-button": "Restaurar\nrestaurar el valor predeterminado establecido al crear",
     "increment-dialog-description-text": "El valor ingresado arriba se agregará al valor actual, lo que resultará en: %s",
     "overwrite-dialog-description-text": "El valor actual será cambiado por el valor exacto ingresado arriba.",
     "decrement-dialog-description-text": "El valor ingresado arriba se restará del valor actual, resultando en: %s",

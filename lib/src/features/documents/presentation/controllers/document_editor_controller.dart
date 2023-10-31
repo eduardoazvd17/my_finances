@@ -481,7 +481,7 @@ class DocumentEditorController extends GetxController {
     String? operator,
   }) async {
     try {
-      if (value == null) {
+      if (value == null && operator != 'r') {
         throw AppError(message: 'default-value-validation'.i18n());
       }
 

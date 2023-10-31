@@ -401,7 +401,7 @@ class DocumentEditorService {
   Future<MonthlyExpenseControlItemModel> changeMonthValue({
     required MonthlyExpenseControlItemModel itemModel,
     required MonthEnum month,
-    required double value,
+    required double? value,
     required String? operator,
   }) async {
     if (itemModel.value(month) == value) {
@@ -409,9 +409,11 @@ class DocumentEditorService {
     }
 
     try {
-      final double calculatedValue = operator == '+'
-          ? (itemModel.value(month) + value)
-          : (operator == '-' ? (itemModel.value(month) - value) : value);
+      final double? calculatedValue = value == null
+          ? null
+          : operator == '+'
+              ? (itemModel.value(month) + value)
+              : (operator == '-' ? (itemModel.value(month) - value) : value);
 
       final MonthlyExpenseControlItemModel newItemModel =
           itemModel.changeMonthValue(

@@ -261,6 +261,7 @@
     "increment-value-button": "Increment\ninsert value to be added",
     "overwrite-value-button": "Overwrite\ninsert exact value",
     "decrement-value-button": "Decrement\ninsert value to be subtracted",
+    "restore-default-value-button": "Restore\nrestore default value set when creating",
     "increment-dialog-description-text": "The value entered above will be added to the current value, resulting in: %s",
     "overwrite-dialog-description-text": "The current value will be changed by the exact value entered above.",
     "decrement-dialog-description-text": "The value entered above will be subtracted from the current value, resulting in: %s",

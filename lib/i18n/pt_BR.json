@@ -261,6 +261,7 @@
     "increment-value-button": "Incrementar\ninserir valor a ser somado",
     "overwrite-value-button": "Substituir\ninserir valor exato",
     "decrement-value-button": "Decrementar\ninserir valor a ser subtraído",
+    "restore-default-value-button": "Restaurar\nrestaurar valor padrão definido ao criar",
     "increment-dialog-description-text": "O valor inserido acima será somado ao valor atual, resultando em: %s",
     "overwrite-dialog-description-text": "O valor atual será alterado pelo valor exato inserido acima.",
     "decrement-dialog-description-text": "O valor inserido acima será subtraído do valor atual, resultando em: %s",
