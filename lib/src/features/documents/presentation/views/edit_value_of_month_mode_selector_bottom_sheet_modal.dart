@@ -57,7 +57,7 @@ class EditValueOfMonthModeSelectorBottomSheetModal extends StatelessWidget {
             ),
           ),
           _getIconTile(
-            icon: CupertinoIcons.minus_circle,
+            icon: CupertinoIcons.refresh_circled,
             text: 'restore-default-value-button'.i18n(),
             color: AppThemes.commonColor,
             onTap: () => _showChangeValueDialog(
