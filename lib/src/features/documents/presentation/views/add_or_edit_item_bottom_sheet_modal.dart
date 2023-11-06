@@ -567,16 +567,17 @@ class _AddOrEditItemBottomSheetModalState
                             left: 5,
                           ),
                           child: Text(
-                            (widget.itemModel as MonthlyExpenseControlItemModel)
-                                        .valuesByMonth
+                            (widget.itemModel
+                                            as MonthlyExpenseControlItemModel?)
+                                        ?.valuesByMonth
                                         .value(e) !=
                                     null
                                 ? '${e.title} - ${CurrencyUtils.format((widget.itemModel as MonthlyExpenseControlItemModel).valuesByMonth.value(e)!)}'
                                 : e.title,
                             style: TextStyle(
                               color: (widget.itemModel
-                                              as MonthlyExpenseControlItemModel)
-                                          .valuesByMonth
+                                              as MonthlyExpenseControlItemModel?)
+                                          ?.valuesByMonth
                                           .value(e) !=
                                       null
                                   ? Theme.of(context).primaryColor
