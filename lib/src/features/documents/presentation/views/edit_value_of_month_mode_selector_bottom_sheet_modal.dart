@@ -102,7 +102,9 @@ class EditValueOfMonthModeSelectorBottomSheetModal extends StatelessWidget {
       final bool? result = await controller.changeItemMonthValue(
         itemModel: itemModel,
         selectedMonth: controller.selectedMonth,
-        value: double.tryParse(priceController.text.trim()),
+        value: double.tryParse(
+          priceController.text.trim().replaceAll(',', '.'),
+        ),
         operator: operator,
       );
       if (result == true) Get.close(1);
