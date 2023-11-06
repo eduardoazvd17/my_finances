@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import '../../../../core/data/utils/currency_utils.dart';
 import '../../../../core/data/utils/date_time_utils.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_modal_widget.dart';
 import '../../../../core/presentation/widgets/drop_down_button_widget.dart';
@@ -565,7 +566,23 @@ class _AddOrEditItemBottomSheetModalState
                             bottom: 5,
                             left: 5,
                           ),
-                          child: Text(e.title),
+                          child: Text(
+                            (widget.itemModel as MonthlyExpenseControlItemModel)
+                                        .valuesByMonth
+                                        .value(e) !=
+                                    null
+                                ? '${e.title} - ${CurrencyUtils.format((widget.itemModel as MonthlyExpenseControlItemModel).valuesByMonth.value(e)!)}'
+                                : e.title,
+                            style: TextStyle(
+                              color: (widget.itemModel
+                                              as MonthlyExpenseControlItemModel)
+                                          .valuesByMonth
+                                          .value(e) !=
+                                      null
+                                  ? Theme.of(context).primaryColor
+                                  : null,
+                            ),
+                          ),
                         ),
                         IconButtonWidget(
                           icon: Icons.close,
