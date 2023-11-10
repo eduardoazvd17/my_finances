@@ -452,7 +452,14 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
             ),
             FloatingBottomMenuItem(
               icon: CupertinoIcons.pencil,
-              tooltip: 'edit-value-button'.i18n(),
+              tooltip: 'edit-value-button'.i18n(
+                [
+                  (controller.selectedItem as MonthlyExpenseControlItemModel)
+                      .valueType
+                      .title
+                      .toLowerCase(),
+                ],
+              ),
               showTooltip: true,
               onTap: () {
                 showModalBottomSheet(
@@ -462,7 +469,15 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
                   builder: (context) {
                     return AddOrEditItemBottomSheetModal(
                       icon: CupertinoIcons.pencil,
-                      title: 'edit-value-button'.i18n(),
+                      title: 'edit-value-button'.i18n(
+                        [
+                          (controller.selectedItem
+                                  as MonthlyExpenseControlItemModel)
+                              .valueType
+                              .title
+                              .toLowerCase(),
+                        ],
+                      ),
                       controller: controller,
                       itemModel: controller.selectedItem,
                       groupingModel: controller.groups.firstWhereOrNull(
