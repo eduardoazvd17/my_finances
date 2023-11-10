@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
@@ -19,8 +20,8 @@ extension OperationTypeExtension on OperationType {
 
   IconData get icon {
     return switch (this) {
-      OperationType.purchase => Icons.arrow_upward_rounded,
-      OperationType.sell => Icons.arrow_downward_rounded,
+      OperationType.purchase => Icons.arrow_drop_up,
+      OperationType.sell => Icons.arrow_drop_down,
     };
   }
 }
