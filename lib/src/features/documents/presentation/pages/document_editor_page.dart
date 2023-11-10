@@ -391,6 +391,27 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
       DocumentType.monthlyExpenseControl => [
           if (controller.selectedGroup != null) ...[
             FloatingBottomMenuItem(
+              icon: CupertinoIcons.add,
+              tooltip: 'new-expense-button'.i18n(),
+              showTooltip: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) {
+                    return AddOrEditItemBottomSheetModal(
+                      icon: CupertinoIcons.add,
+                      title: 'new-expense-button'.i18n(),
+                      controller: controller,
+                      groupingModel: controller.selectedGroup,
+                      monthlyExpensesValueType: ValueType.expense,
+                    );
+                  },
+                );
+              },
+            ),
+            FloatingBottomMenuItem(
               icon: CupertinoIcons.pencil,
               tooltip: 'edit-category-button'.i18n(),
               showTooltip: true,
