@@ -19,8 +19,8 @@ extension OperationTypeExtension on OperationType {
 
   IconData get icon {
     return switch (this) {
-      OperationType.purchase => Icons.attach_money,
-      OperationType.sell => Icons.money_off,
+      OperationType.purchase => Icons.arrow_upward_rounded,
+      OperationType.sell => Icons.arrow_downward_rounded,
     };
   }
 }
