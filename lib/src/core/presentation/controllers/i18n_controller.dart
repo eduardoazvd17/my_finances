@@ -69,9 +69,13 @@ class I18nController extends GetxController {
 
     _selectedLanguage.value = value;
     if (value != null) {
-      Get.updateLocale(value.locale);
+      Get.updateLocale(value.locale).then((_) {
+        Get.updateLocale(value.locale);
+      });
     } else if (Get.deviceLocale != null) {
-      Get.updateLocale(Get.deviceLocale!);
+      Get.updateLocale(Get.deviceLocale!).then((_) {
+        Get.updateLocale(Get.deviceLocale!);
+      });
     }
 
     if (!withoutSaving) {
