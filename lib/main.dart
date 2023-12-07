@@ -45,16 +45,13 @@ class MyFinancesApp extends GetWidget<I18nController> {
       final themeController = Get.find<ThemeController>();
       return GetMaterialApp(
         builder: (context, child) {
-          final MediaQueryData mediaQueryData = MediaQuery.of(context);
-
-          double textScaleFactor = mediaQueryData.textScaleFactor;
-          const double min = 0.5;
-          if (textScaleFactor < min) textScaleFactor = min;
-          const double max = 1.5;
-          if (textScaleFactor > max) textScaleFactor = max;
-
+          final MediaQueryData data = MediaQuery.of(context);
+          final textScaler = data.textScaler.clamp(
+            minScaleFactor: 0.5,
+            maxScaleFactor: 1.5,
+          );
           return MediaQuery(
-            data: mediaQueryData.copyWith(textScaleFactor: textScaleFactor),
+            data: data.copyWith(textScaler: textScaler),
             child: LifecycleHandler(child: child!),
           );
         },

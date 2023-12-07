@@ -59,7 +59,7 @@ class DocumentTileWidget extends StatelessWidget {
                     children: [
                       Icon(
                         documentModel.type.icon,
-                        size: 70 * MediaQuery.of(context).textScaleFactor,
+                        size: MediaQuery.of(context).textScaler.scale(70),
                       ),
                       if (documentModel.isFavorite)
                         Positioned(
@@ -159,7 +159,7 @@ class DocumentTileWidget extends StatelessWidget {
             children: [
               Icon(
                 documentModel.type.icon,
-                size: 40 * MediaQuery.of(context).textScaleFactor,
+                size: MediaQuery.of(context).textScaler.scale(40),
               ),
               if (documentModel.isFavorite)
                 Positioned(

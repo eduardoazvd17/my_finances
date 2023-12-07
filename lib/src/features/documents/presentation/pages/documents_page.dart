@@ -83,7 +83,7 @@ class DocumentsPage extends GetWidget<DocumentsController> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 0,
                 crossAxisSpacing: 5,
-                mainAxisExtent: 145 * MediaQuery.of(context).textScaleFactor,
+                mainAxisExtent: MediaQuery.of(context).textScaler.scale(145),
               ),
               itemCount: nonEmptyDocs.length,
               itemBuilder: (BuildContext context, int index) {

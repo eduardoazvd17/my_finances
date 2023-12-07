@@ -65,7 +65,7 @@ class ItemWidget extends StatelessWidget {
         context: context,
         leading: Icon(
           itemModel.operationType.icon,
-          size: 40 * MediaQuery.of(context).textScaleFactor,
+          size: MediaQuery.of(context).textScaler.scale(40),
           color: itemModel.operationType.color,
         ),
         middleExpanded: Text(itemModel.mobileName),
@@ -78,7 +78,7 @@ class ItemWidget extends StatelessWidget {
         context: context,
         leading: Icon(
           itemModel.operationType.icon,
-          size: 40 * MediaQuery.of(context).textScaleFactor,
+          size: MediaQuery.of(context).textScaler.scale(40),
           color: itemModel.operationType.color,
         ),
         middleExpanded: Text(itemModel.desktopName),

@@ -95,7 +95,7 @@ class BottomSheetModalWidget extends StatelessWidget {
   Widget _headerIcon(BuildContext context) {
     return Icon(
       icon,
-      size: 25 * MediaQuery.of(context).textScaleFactor,
+      size: MediaQuery.of(context).textScaler.scale(25),
     );
   }
 }

@@ -21,8 +21,8 @@ class _MyProfilePicturePageState extends State<MyProfilePicturePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Stack(

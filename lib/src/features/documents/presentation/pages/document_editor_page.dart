@@ -40,8 +40,8 @@ class DocumentEditorPage extends GetWidget<DocumentEditorController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: ScaffoldWidget(
         appBar: AppBar(
           title: Text(controller.documentModel.name),

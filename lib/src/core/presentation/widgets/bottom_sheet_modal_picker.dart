@@ -29,7 +29,7 @@ class BottomSheetModalPicker extends StatelessWidget {
             height: 200,
             child: CupertinoPicker(
               squeeze: 1,
-              itemExtent: 30 * MediaQuery.of(context).textScaleFactor,
+              itemExtent: MediaQuery.of(context).textScaler.scale(30),
               useMagnifier: true,
               magnification: 1.22,
               selectionOverlay: Stack(
@@ -55,7 +55,7 @@ class BottomSheetModalPicker extends StatelessWidget {
               children: itemsWidget
                   .map((e) => Padding(
                         padding: EdgeInsets.all(
-                          4 * MediaQuery.of(context).textScaleFactor,
+                          MediaQuery.of(context).textScaler.scale(4),
                         ),
                         child: FittedBox(
                           child: Center(

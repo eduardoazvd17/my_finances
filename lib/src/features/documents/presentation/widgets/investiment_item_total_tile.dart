@@ -96,7 +96,7 @@ class InvestimentItemTotalTile extends StatelessWidget {
   Widget _verticalDivider(BuildContext context) {
     return Container(
       width: 0.5,
-      height: 70 * MediaQuery.of(context).textScaleFactor,
+      height: MediaQuery.of(context).textScaler.scale(70),
       color: Theme.of(context).dividerColor,
     );
   }
