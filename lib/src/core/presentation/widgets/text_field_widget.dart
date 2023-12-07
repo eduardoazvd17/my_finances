@@ -77,58 +77,62 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(widget.label),
-          TextField(
-            autofocus: widget.autofocus,
-            autofillHints: widget.autofillHints,
-            controller: widget.controller,
-            decoration: InputDecoration(
-              hintText: widget.hint,
-              suffixIcon: _hasFocus && _hasText
-                  ? Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        if (widget.obscureText)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(50),
-                              child: Icon(
-                                _showPassword
-                                    ? CupertinoIcons.eye_slash
-                                    : CupertinoIcons.eye,
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  _showPassword = !_showPassword;
-                                });
-                              },
-                            ),
-                          ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(50),
-                            child: const Icon(Icons.close),
-                            onTap: () => widget.controller.clear(),
-                          ),
-                        ),
-                      ],
-                    )
-                  : (widget.icon != null)
-                      ? Icon(widget.icon)
-                      : null,
-            ),
-            focusNode: widget.focusNode,
-            keyboardType: widget.textInputType,
-            onSubmitted: widget.onSubmitted,
-            textInputAction: widget.textInputAction,
-            obscureText: widget.obscureText && !_showPassword,
-            textCapitalization: widget.textCapitalization,
-            maxLength: widget.maxLength,
-          ),
+          _textField,
         ],
       ),
+    );
+  }
+
+  TextField get _textField {
+    return TextField(
+      autofocus: widget.autofocus,
+      autofillHints: widget.autofillHints,
+      controller: widget.controller,
+      decoration: InputDecoration(
+        hintText: widget.hint,
+        suffixIcon: _hasFocus && _hasText
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (widget.obscureText)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(50),
+                        child: Icon(
+                          _showPassword
+                              ? CupertinoIcons.eye_slash
+                              : CupertinoIcons.eye,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            _showPassword = !_showPassword;
+                          });
+                        },
+                      ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(50),
+                      child: const Icon(Icons.close),
+                      onTap: () => widget.controller.clear(),
+                    ),
+                  ),
+                ],
+              )
+            : (widget.icon != null)
+                ? Icon(widget.icon)
+                : null,
+      ),
+      focusNode: widget.focusNode,
+      keyboardType: widget.textInputType,
+      onSubmitted: widget.onSubmitted,
+      textInputAction: widget.textInputAction,
+      obscureText: widget.obscureText && !_showPassword,
+      textCapitalization: widget.textCapitalization,
+      maxLength: widget.maxLength,
     );
   }
 }
