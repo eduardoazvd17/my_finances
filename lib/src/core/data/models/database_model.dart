@@ -22,20 +22,8 @@ class DatabaseModel {
     return _firestore.collection('users');
   }
 
-  CollectionReference<Map<String, dynamic>> get documentsCollection {
-    return _firestore.collection('documents');
-  }
-
-  CollectionReference<Map<String, dynamic>> documentGroupsCollection(
-    String documentId,
-  ) {
-    return documentsCollection.doc(documentId).collection('groups');
-  }
-
-  CollectionReference<Map<String, dynamic>> documentItemsCollection(
-    String documentId,
-  ) {
-    return documentsCollection.doc(documentId).collection('items');
+  DocumentReference<Map<String, dynamic>> userDataCollection(String userId) {
+    return _firestore.collection('finances').doc(userId);
   }
 
   Reference userProfilePictureStorageReference(String userId) {
