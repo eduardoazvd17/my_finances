@@ -1,7 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:get/get.dart';
-
-import '../../presentation/widgets/grouping_widget.dart';
 
 class GroupingModel extends Equatable {
   final String id;
@@ -27,17 +24,6 @@ class GroupingModel extends Equatable {
       initializeExpanded: initializeExpanded ?? this.initializeExpanded,
       creationDate: creationDate ?? this.creationDate,
     );
-  }
-
-  GroupingWidgetController getController() {
-    if (Get.isRegistered<GroupingWidgetController>(tag: id)) {
-      return Get.find<GroupingWidgetController>(tag: id);
-    } else {
-      return Get.put(
-        GroupingWidgetController(initializeExpanded: initializeExpanded),
-        tag: id,
-      );
-    }
   }
 
   Map<String, dynamic> toMap() {
