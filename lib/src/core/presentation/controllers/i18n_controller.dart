@@ -11,7 +11,7 @@ import '../../data/enums/app_date_format.dart';
 
 class I18nController extends GetxController {
   i18nController() {
-    LocalJsonLocalization.delegate.directories = ['lib/i18n'];
+    LocalJsonLocalization.delegate.directories = ['lib/src/core/i18n'];
   }
 
   @override

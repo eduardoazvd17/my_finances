@@ -46,7 +46,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - lib/i18n/
+    - lib/src/core/i18n/
 
 flutter_launcher_icons:
   ios: true
